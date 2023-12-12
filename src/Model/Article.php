@@ -16,4 +16,5 @@ final class Article
     public string $slug;
     public string $body;
     public string $image;
+    public bool $draft = false;
 }
