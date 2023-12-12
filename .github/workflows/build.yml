@@ -25,7 +25,7 @@ jobs:
             -   name: Setup Pages
                 id: pages
                 uses: actions/configure-pages@v4
-            -   name: Install dependnecies
+            -   name: Install dependencies
                 run: make composer/install
             -   name: Build with YASSG
                 env:

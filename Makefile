@@ -4,7 +4,9 @@ APP_ROOT := $(abspath $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST
 
 include vendor/sigwin/infra/resources/YASSG/default.mk
 
-build/docker:
+build/docker/imgproxy:
+	docker compose up imgproxy -d
+build/docker: build/docker/imgproxy
 	docker compose run webpack npm ci
 	docker compose run webpack npx encore production
 	docker compose run --env IMGPROXY_URL=http://imgproxy:8080 app vendor/sigwin/yassg/bin/yassg yassg:generate --env prod "$(BASE_URL)"
