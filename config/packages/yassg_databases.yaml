@@ -1,4 +1,8 @@
+parameters:
+    env(IMGPROXY_URL): http://localhost:8090
+
 sigwin_yassg:
+    imgproxy_url: "%env(IMGPROXY_URL)%"
     databases:
         pages:
             storage: memory

@@ -7,7 +7,7 @@ include vendor/sigwin/infra/resources/YASSG/default.mk
 build/docker:
 	docker compose run webpack npm ci
 	docker compose run webpack npx encore production
-	docker compose run app vendor/sigwin/yassg/bin/yassg yassg:generate --env prod "$(BASE_URL)"
+	docker compose run --env IMGPROXY_URL=http://imgproxy:8080 app vendor/sigwin/yassg/bin/yassg yassg:generate --env prod "$(BASE_URL)"
 
 vendor/sigwin/infra/resources/YASSG/default.mk:
 	mv composer.json composer.json~ && rm -f composer.lock
