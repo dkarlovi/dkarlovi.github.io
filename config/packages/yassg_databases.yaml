@@ -9,3 +9,9 @@ sigwin_yassg:
                         slug: demo-page
                         title: YASSG starter page
                         image: assets/images/sigwin.svg
+        articles:
+            storage: filesystem
+            class: App\Model\Article
+            options:
+                root: content/articles
+                names: ["*.md"]

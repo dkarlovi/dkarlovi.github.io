@@ -1,4 +1,10 @@
 sigwin_yassg:
     routes:
-        demo:
+        home:
             path: /
+        article:
+            path: /{slug}
+            catalog:
+                slug: "yassg_find_all('articles').column('slug')"
+
+

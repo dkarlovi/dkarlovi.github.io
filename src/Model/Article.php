@@ -10,9 +10,10 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-final class Page
+final class Article
 {
-    public string $slug;
     public string $title;
+    public string $slug;
+    public string $body;
     public string $image;
 }
