@@ -2,6 +2,9 @@ sigwin_yassg:
     routes:
         home:
             path: /
+            defaults:
+                index: 1
+                _template: "pages/articles.html.twig"
         articles:
             path: /articles/{index}
             defaults:

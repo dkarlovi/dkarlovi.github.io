@@ -1,23 +1,48 @@
 {% extends 'layout.html.twig' %}
 
-{% set page = yassg_find_one_by('pages', {condition: {'item.slug': 'articles'}}) %}
+{% set page = yassg_find_one_by('pages', {condition: {'item.slug': _route}}) %}
 {% set condition = app.environment == 'dev' ? null : 'item.draft == false' %}
-{% set items = yassg_paginate('articles', index, {condition, sort: {'item.date': 'desc'}}) %}
+{% set items = yassg_paginate('articles', index, {condition, sort: {'item.publishedAt': 'desc'}}) %}
+{% set pages = yassg_pages('articles', condition) %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block body %}
-    <main>
-        <h1>{{ page.title }}</h1>
+    <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <h1 class="text-center text-3xl font-extrabold text-gray-900">
+                {{ page.title }}
+            </h1>
+            {{ page.body|raw }}
+        </div>
         <ul>
             {% for item in items %}
                 <li>
                     <a href="{{ url('article', {slug: item.slug}) }}">
-                        <img src="{{ yassg_thumbnail(item.image, {width: 600, height: 300}) }}"/>
+                        <img src="{{ yassg_thumbnail(item.image, {width: 300, height: 300, self: item}) }}"/>
                         {{ item.title }}
+                        {{ item.publishedAt|date('d/m/Y') }}
                     </a>
                 </li>
             {% endfor %}
         </ul>
+
+        {% if pages|length > 0 %}
+        <ul>
+            {% for index in pages %}
+                <li>
+                    {% if index == 1 %}
+                        <a href="{{ url('home') }}">
+                            {{ index }}
+                        </a>
+                    {% else %}
+                        <a href="{{ url('articles', {index}) }}">
+                            {{ index }}
+                        </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     </main>
 {% endblock %}

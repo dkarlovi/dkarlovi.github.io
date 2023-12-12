@@ -2,6 +2,7 @@
 title: Hello World
 slug: hello-world
 image: ./hello-world.webp
+publishedAt: "2023-12-12"
 ---
 
 ![Image]({{ yassg_thumbnail(item.image, {width: 800}) }})

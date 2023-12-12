@@ -12,7 +12,8 @@ namespace App\Model;
 
 final class Page
 {
-    public string $slug;
     public string $title;
+    public string $slug;
+    public string $body;
     public string $image;
 }

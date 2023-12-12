@@ -17,4 +17,6 @@ final class Article
     public string $body;
     public string $image;
     public bool $draft = false;
+
+    public \DateTimeInterface $publishedAt;
 }
