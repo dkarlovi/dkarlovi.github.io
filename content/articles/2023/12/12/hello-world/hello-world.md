@@ -1,7 +1,7 @@
 ---
 title: Hello World
 slug: hello-world
-image: ./hello-world.jpg
+image: ./hello-world.webp
 ---
 
 Ahoy hoy!

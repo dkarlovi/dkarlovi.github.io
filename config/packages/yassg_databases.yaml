@@ -9,6 +9,10 @@ sigwin_yassg:
                         slug: demo-page
                         title: YASSG starter page
                         image: assets/images/sigwin.svg
+                    articles:
+                        slug: articles
+                        title: Articles && essays
+                        image: assets/images/sigwin.svg
         articles:
             storage: filesystem
             class: App\Model\Article

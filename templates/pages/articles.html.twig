@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% set page = yassg_find_one_by('pages', {condition: {'item.slug': 'articles'}}) %}
+{% set condition = app.environment == 'dev' ? null : 'item.draft == false' %}
+{% set items = yassg_paginate('articles', index, {condition, sort: {'item.date': 'desc'}}) %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>{{ page.title }}</h1>
+        <ul>
+            {% for item in items %}
+                <li>
+                    <a href="{{ url('article', {slug: item.slug}) }}">
+                        <img src="{{ yassg_thumbnail(item.image, {width: 600, height: 300}) }}"/>
+                        {{ item.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+{% endblock %}
