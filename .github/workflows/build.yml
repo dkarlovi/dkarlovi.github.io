@@ -1,6 +1,6 @@
 on:
     push:
-        branches: [ "main", "yassg" ]
+        branches: [ "main" ]
     workflow_dispatch:
 
 permissions:
@@ -8,20 +8,16 @@ permissions:
     pages: write
     id-token: write
 
-concurrency:
-    group: "pages"
-    cancel-in-progress: false
-
-defaults:
-    run:
-        shell: bash
-
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout repository
                 uses: actions/checkout@v3
+                with:
+                    lfs: true
+            -   name: Checkout LFS objects
+                run: git lfs checkout
             -   name: Setup Pages
                 id: pages
                 uses: actions/configure-pages@v4
