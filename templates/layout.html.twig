@@ -12,6 +12,35 @@
 
 {% block body %}{% endblock %}
 
+<footer class="footer" style="background-image: url('{{ asset('assets/images/footer-bg-shape.svg') }}');">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 text-center">
+                <a class="footer-brand mb-4 d-block" href="{{ url('home') }}">
+                    { { partial "logo.html" }}
+                </a>
+                <p class="text-light mb-4">{ {site.Params.footer_content | markdownify}}</p>
+                <ul class="list-unstyled mb-5 footer-menu">
+                    {% for link in yassg_get('menus', "footer").items %}
+                    <li class="list-inline-item">
+                        <a href="#">{{ link.title }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <ul class="list-unstyled social-icons">
+                    {% for link in yassg_find_all('socials') %}
+                    <li class="list-inline-item">
+                        <a href="{{ link.url }}" title="{{ link.title }}"><i class="{{ link.icon }}"></i></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <p>&copy; {{ yassg_get('pages', '/home.md').title }} | Theme by <a target="_blank" rel="noopener noreferrer" href="https://statichunt.com/" class="text-muted text-decoration-underline">statichunt</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
 {{ encore_entry_script_tags('app') }}
 </body>
 </html>
