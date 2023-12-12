@@ -1,9 +1,10 @@
 {
     "require": {
-        "sigwin\/yassg": "^0.13.3"
+        "php": "^8.2",
+        "sigwin/yassg": "^0.13.3"
     },
     "require-dev": {
-        "sigwin\/infra": "~1.8.0"
+        "sigwin/infra": "~1.8.0"
     },
     "autoload": {
         "psr-4": {
@@ -12,7 +13,7 @@
     },
     "config": {
         "allow-plugins": {
-            "symfony\/runtime": true
+            "symfony/runtime": true
         }
     }
 }
