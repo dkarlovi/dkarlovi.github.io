@@ -1,0 +1,25 @@
+parameters:
+    env(IMGPROXY_URL): http://localhost:8090
+
+sigwin_yassg:
+    imgproxy_url: "%env(IMGPROXY_URL)%"
+    databases:
+        pages:
+            storage: memory
+            class: App\Model\Page
+            options:
+                values:
+                    demo_page:
+                        slug: demo-page
+                        title: YASSG starter page
+                        image: assets/images/sigwin.svg
+                    articles:
+                        slug: articles
+                        title: Articles && essays
+                        image: assets/images/sigwin.svg
+        articles:
+            storage: filesystem
+            class: App\Model\Article
+            options:
+                root: content/articles
+                names: ["*.md"]

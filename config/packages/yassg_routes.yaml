@@ -1,0 +1,16 @@
+sigwin_yassg:
+    routes:
+        home:
+            path: /
+        articles:
+            path: /articles/{index}
+            defaults:
+                index: 1
+            catalog:
+                index: "yassg_pages('articles')"
+        article:
+            path: /{slug}
+            catalog:
+                slug: "yassg_find_all('articles').column('slug')"
+
+
