@@ -19,11 +19,11 @@
                 <a class="footer-brand mb-4 d-block" href="{{ url('home') }}">
                     <img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="100">
                 </a>
-                <p class="text-light mb-4">Hello.</p>
+                <p class="text-light mb-4">TODO: put smart here</p>
                 <ul class="list-unstyled mb-5 footer-menu">
                     {% for link in yassg_get('menus', "footer").items %}
                     <li class="list-inline-item">
-                        <a href="{{ link.url }}" class="fa-solid fa-user">{{ link.title }}</a>
+                        <a href="{{ link.url }}">{{ link.title }}</a>
                     </li>
                     {% endfor %}
                 </ul>

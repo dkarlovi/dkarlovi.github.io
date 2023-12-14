@@ -11,12 +11,13 @@ $light: rgb(237, 246, 245);
 // Font Variables
 $font-size: 16;
 $font-scale: 1.25;
-$font-primary: "sans-serif";
-$font-secondary: "sans-serif";
+$font-primary: "Raleway, sans-serif";
+$font-secondary: "Raleway, sans-serif";
 $font-icon: "Font Awesome 5 Free";
 
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/brands';
+@import "@fontsource/raleway";
 
 // import bootstrap
 @import 'bootstrap';
