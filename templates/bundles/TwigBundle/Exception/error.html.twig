@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+
+{% set label = '404 Not found' %}
+{% block title %}{{ label }}{% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center">
+                <h1>{{ label }}</h1>
+                <a href="{{ url('home') }}" class="btn btn-primary">Go back home</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

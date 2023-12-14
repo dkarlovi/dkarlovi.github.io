@@ -4,6 +4,40 @@ parameters:
 sigwin_yassg:
     imgproxy_url: "%env(IMGPROXY_URL)%"
     databases:
+        socials:
+            storage: memory
+            class: App\Model\Link
+            options:
+                values:
+                    github:
+                        title: Github
+                        url: https://github.com/dkarlovi
+                        icon: fab fa-github
+                    twitter:
+                        title: Twitter
+                        url: https://twitter.com/dkarlovi
+                        icon: fab fa-twitter
+                    linkedin:
+                        title: Github
+                        url: https://www.linkedin.com/in/dkarlovi/
+                        icon: fab fa-linkedin
+        menus:
+            storage: memory
+            class: App\Model\Menu
+            options:
+                values:
+                    footer:
+                        title: Footer
+                        items:
+                            home:
+                                title: Home
+                                url: /
+                            articles:
+                                title: Articles
+                                url: /
+                            about:
+                                title: About
+                                url: /
         pages:
             storage: filesystem
             class: App\Model\Page
