@@ -23,21 +23,15 @@ sigwin_yassg:
                         icon: fab fa-linkedin
         menus:
             storage: memory
-            class: App\Model\Menu
+            class: App\Model\MenuItem
             options:
                 values:
-                    footer:
-                        title: Footer
+                    main:
                         items:
                             home:
-                                title: Home
-                                url: /
+                                page: "@=yassg_get('pages', '/home.md')"
                             articles:
-                                title: Articles
-                                url: /
-                            about:
-                                title: About
-                                url: /
+                                page: "@=yassg_get('pages', '/articles.md')"
         pages:
             storage: filesystem
             class: App\Model\Page

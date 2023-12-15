@@ -13,7 +13,7 @@ namespace App\Model;
 final class Page
 {
     public string $title;
-    public string $slug;
+    public string $route;
     public string $body;
     public string $image;
 }

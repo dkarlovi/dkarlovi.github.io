@@ -1,5 +1,5 @@
 ---
-slug: articles
+route: articles
 title: Articles
 image: assets/images/sigwin.svg
 ---
