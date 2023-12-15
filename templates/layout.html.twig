@@ -18,17 +18,13 @@
                     <a class="navbar-brand" href="{{ url('home') }}">
                         <img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="180">
                     </a>
-
                     <div class="d-flex d-lg-none">
                         <ul class="list-unstyled search me-3">
                             <li class="list-inline-item">
-                                <a href="#" class="toggle-search" data-target="#search-wrap"><i
-                                        class="fab fa-search"></i></a>
+                                <a href="#" class="toggle-search" data-target="#search-wrap"><i class="fas fa-search"></i></a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="#" class="toggle-side-nav" data-bs-toggle="offcanvas"
-                                   data-bs-target="#offcanvasRight"
-                                   aria-controls="offcanvasRight"><i class="fab fa-bars"></i></a>
+                                <a href="#" class="toggle-side-nav" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-bars"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -66,68 +62,54 @@
 
                         <ul class="list-unstyled search d-none d-lg-block">
                             <li class="list-inline-item">
-                                <button class="toggle-search" data-target="#search-wrap"><i class="fab fa-search"></i>
+                                <button class="toggle-search" data-target="#search-wrap"><i class="fas fa-search"></i>
                                 </button>
                             </li>
                         </ul>
                     </div>
                 </nav>
 
-                {#
-                <!-- search -->
-                {{ if site.Params.search }}
                 <div class="search-wrap" id="search-wrap">
-                    <form action="{{ `search`| relLangURL }}"
-                          class="search-bar d-flex align-items-center justify-content-center">
-                        <input class="search-input w-100 border-0 h-100" id="search-query" name="s" type="search"
-                               placeholder="Search..."/>
-                        <span class="close-search toggle-search" data-target="#search-wrap">
-              <i class="fas fa-times"></i>
-            </span>
+                    <form action="#" class="search-bar d-flex align-items-center justify-content-center">
+                        <input class="search-input w-100 border-0 h-100" id="search-query" name="s" type="search" placeholder="Search..."/>
+                        <span class="close-search toggle-search" data-target="#search-wrap"><i class="fas fa-times"></i></span>
                     </form>
                 </div>
-                {{ end }}
 
                 <!-- mobile menu -->
-                <div class="side-nav offcanvas offcanvas-end p-4" tabindex="-1" id="offcanvasRight"
-                     aria-labelledby="offcanvasRightLabel">
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"><i
-                            class="fas fa-times"></i></button>
+                <div class="side-nav offcanvas offcanvas-end p-4" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fas fa-times"></i></button>
                     <div class="navbar mt-3 flex-column align-items-start">
                         <ul class="navbar-nav my-4 my-lg-0 me-3 w-100">
-                            {{ range site.Menus.main }}
-                            {{ if .HasChildren }}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    {{ .Name }}
-                                </a>
-                                <div class="dropdown-menu">
-                                    {{ range .Children }}
-                                    <a class="dropdown-item" {{if findRE `^http` .URL}}target="_blank"
-                                       rel="noopener" {{end}}
-                                       href="{{if findRE `^#` .URL}}{{if not $.IsHome}}{{ site.BaseURL | relLangURL }}{{ end }}{{ .URL }}{{ else }}{{ .URL | relLangURL }}{{ end }}">{{ .Name }}</a>
-                                    {{ end }}
-                                </div>
-                            </li>
-                            {{ else }}
-                            <li class="nav-item">
-                                <a class="nav-link" {{if findRE `^http` .URL}}target="_blank" rel="noopener" {{end}}
-                                   href="{{if findRE `^#` .URL}}{{if not $.IsHome}}{{ site.BaseURL | relLangURL }}{{ end }}{{ .URL }}{{ else }}{{ .URL | relLangURL }}{{ end }}">{{ .Name }}</a>
-                            </li>
-                            {{ end }}
-                            {{ end }}
+                            {% for item in main_menu.items %}
+                                {% if item.items %}
+                                    {# item is active if it itself or any of the children is active #}
+                                    {% set active = (_route == item.page.route) %}{% for child_item in item.items %}{% if _route == child_item.page.route %}{% set active = true %}{% endif %}{% endfor %}
+                                    <li class="nav-item dropdown{% if active %} active{% endif %}">
+                                        <a class="nav-link dropdown-toggle" href="{{ url(item.page.route) }}" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ item.title ?? item.page.title }}</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                            {% for child_item in item.items %}
+                                                <li><a class="dropdown-item{% if _route == child_item.page.route%} active{% endif %}" href="{{ url(child_item.page.route) }}">{{ child_item.title ?? child_item.page.title }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item{% if _route == item.page.route %} active{% endif %}">
+                                        <a class="nav-link" href="{{ url(item.page.route) }}">{{ item.page.title }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+
                         </ul>
                         <ul class="list-unstyled social-icons">
-                            {{ range site.Params.social }}
-                            <li class="list-inline-item">
-                                <a href="{{ .link | safeURL }}"><i class="{{ .icon }}"></i></a>
-                            </li>
-                            {{ end }}
+                            {% for link in yassg_find_all('socials') %}
+                                <li class="list-inline-item">
+                                    <a href="{{ link.url }}" title="{{ link.title }}"><i class="{{ link.icon }}"></i></a>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
-                #}
             </div>
         </div>
     </div>
