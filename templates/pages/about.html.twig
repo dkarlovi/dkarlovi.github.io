@@ -1,0 +1,5 @@
+{% extends 'layout.html.twig' %}
+
+{% set page = yassg_find_one_by('pages', {condition: {'item.route': _route}}) %}
+
+{% block title %}{{ page.title }}{% endblock %}

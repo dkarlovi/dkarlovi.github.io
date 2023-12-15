@@ -5,6 +5,8 @@ sigwin_yassg:
             defaults:
                 index: 1
                 _template: "pages/articles.html.twig"
+        about:
+            path: /about
         articles:
             path: /articles/{index}
             defaults:
@@ -15,5 +17,3 @@ sigwin_yassg:
             path: /{slug}
             catalog:
                 slug: "yassg_find_all('articles').column('slug')"
-
-

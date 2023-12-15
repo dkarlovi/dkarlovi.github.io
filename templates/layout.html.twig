@@ -1,4 +1,4 @@
-{% set home = yassg_get('pages', '/home.md') %}<!DOCTYPE html>
+{% set home = yassg_get('pages', '/home.md') %}{% set main_menu = yassg_get('menus', 'main') %}<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -19,7 +19,6 @@
                         <img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="180">
                     </a>
 
-                    {#
                     <div class="d-flex d-lg-none">
                         <ul class="list-unstyled search me-3">
                             <li class="list-inline-item">
@@ -33,66 +32,44 @@
                             </li>
                         </ul>
                     </div>
-                    #}
 
                     <div class="collapse navbar-collapse" id="navbarScroll">
-                        {#
                         <ul class="navbar-nav ms-auto my-4 my-lg-0 me-3">
-                            <!-- menu active -->
-                            {{ $currentPage := . }}
-                            {{ range site.Menus.main }}
-                            {{ $menuURL := .URL | absLangURL }}
-                            {{ $pageURL:= $currentPage.Permalink | absLangURL }}
-                            {{ $active := eq $menuURL $pageURL }}
-                            {{ if .HasChildren }}
-                            <li class="nav-item dropdown
-                              {{ range .Children }}
-                              {{ $childURL := .URL | absLangURL }}
-                              {{ $active := eq $childURL $pageURL }}
-                              {{ if $active }}active{{ end }}
-                            {{ end }}">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">{{ .Name }}
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                    {{ range .Children }}
-                                    {{ $childURL := .URL | absLangURL }}
-                                    {{ $active := eq $childURL $pageURL }}
-                                    <li><a class="dropdown-item {{ if $active }}active{{ end }}" {{if findRE `^http`
-                                           .URL}}target="_blank"
-                                           rel="noopener" {{end}}
-                                           href="{{if findRE `^#` .URL}}{{if not $.IsHome}}{{ site.BaseURL | relLangURL }}{{ end }}{{ .URL }}{{ else }}{{ .URL | relLangURL }}{{ end }}">{{ .Name }}</a>
+                            {% for item in main_menu.items %}
+                                {% if item.items %}
+                                    {# item is active if it itself or any of the children is active #}
+                                    {% set active = (_route == item.page.route) %}{% for child_item in item.items %}{% if _route == child_item.page.route %}{% set active = true %}{% endif %}{% endfor %}
+                                    <li class="nav-item dropdown{% if active %} active{% endif %}">
+                                        <a class="nav-link dropdown-toggle" href="{{ url(item.page.route) }}" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ item.title ?? item.page.title }}</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                            {% for child_item in item.items %}
+                                                <li><a class="dropdown-item{% if _route == child_item.page.route%} active{% endif %}" href="{{ url(child_item.page.route) }}">{{ child_item.title ?? child_item.page.title }}</a></li>
+                                            {% endfor %}
+                                        </ul>
                                     </li>
-                                    {{ end }}
-                                </ul>
-                            </li>
-                            {{ else }}
-                            <li class="nav-item {{ if $active }}active{{ end }}">
-                                <a class="nav-link" {{if findRE `^http` .URL}}target="_blank" rel="noopener" {{end}}
-                                   href="{{if findRE `^#` .URL}}{{if not $.IsHome}}{{ site.BaseURL | relLangURL }}{{ end }}{{ .URL }}{{ else }}{{ .URL | relLangURL }}{{ end }}">{{ .Name }}</a>
-                            </li>
-                            {{ end }}
-                            {{ end }}
+                                {% else %}
+                                    <li class="nav-item{% if _route == item.page.route %} active{% endif %}">
+                                        <a class="nav-link" href="{{ url(item.page.route) }}">{{ item.page.title }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
                         </ul>
 
                         <!-- social -->
                         <ul class="list-unstyled social-icons">
                             {% for link in yassg_find_all('socials') %}
                                 <li class="list-inline-item">
-                                    <a href="{{ link.url }}" title="{{ link.title }}"><i
-                                            class="{{ link.icon }}"></i></a>
+                                    <a href="{{ link.url }}" title="{{ link.title }}"><i class="{{ link.icon }}"></i></a>
                                 </li>
                             {% endfor %}
                         </ul>
 
-                        {#
                         <ul class="list-unstyled search d-none d-lg-block">
                             <li class="list-inline-item">
                                 <button class="toggle-search" data-target="#search-wrap"><i class="fab fa-search"></i>
                                 </button>
                             </li>
                         </ul>
-                        #}
                     </div>
                 </nav>
 
@@ -171,7 +148,7 @@
                     </code>
                 </p>
                 <ul class="list-unstyled mb-5 footer-menu">
-                    {% for item in yassg_get('menus', "main").items %}
+                    {% for item in main_menu.items %}
                         {% if item.link %}
                             <li class="list-inline-item">
                                 <a href="{{ item.link.url }}">{{ item.link.title }}</a>
@@ -191,9 +168,9 @@
                     {% endfor %}
                 </ul>
                 <p class="text-muted">&copy; {{ home.title }} | Theme by <a target="_blank"
-                                                                         rel="noopener noreferrer"
-                                                                         href="https://statichunt.com/"
-                                                                         class="text-muted text-decoration-underline">statichunt</a>
+                                                                            rel="noopener noreferrer"
+                                                                            href="https://statichunt.com/"
+                                                                            class="text-muted text-decoration-underline">statichunt</a>
                 </p>
             </div>
         </div>

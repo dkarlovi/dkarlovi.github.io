@@ -32,6 +32,13 @@ sigwin_yassg:
                                 page: "@=yassg_get('pages', '/home.md')"
                             articles:
                                 page: "@=yassg_get('pages', '/articles.md')"
+                                items:
+                                    categories:
+                                        page: "@=yassg_get('pages', '/articles.md')"
+                                    tags:
+                                        page: "@=yassg_get('pages', '/articles.md')"
+                            about:
+                                page: "@=yassg_get('pages', '/about.md')"
         pages:
             storage: filesystem
             class: App\Model\Page
