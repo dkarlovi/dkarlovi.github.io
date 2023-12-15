@@ -3,3 +3,37 @@
 {% set page = yassg_find_one_by('pages', {condition: {'item.route': _route}}) %}
 
 {% block title %}{{ page.title }}{% endblock %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <img src="{{ yassg_thumbnail(page.image) }}" alt="{{ page.title }}" class="img-fluid mb-5 w-100 rounded-4"/>
+                    <h2 class="mb-3">{{ page.title }}</h2>
+                    <div class="content">
+                        {{ page.body|raw }}
+                    </div>
+                </div>
+            </div>
+            {#
+            <div class="row">
+                {{ with .Params.experience }}
+                {{ if .enable }}
+                <div class="col-md-6">
+                    <div class="border rounded p-4">
+                        <h2 class="mb-5 h4 title-border">{{ .title | markdownify }}</h2>
+                        <ul class="list-styled" style="columns:2">
+                            {{ range .experience_list }}
+                            <li>{{ . | markdownify}}</li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+                {{ end }}
+                {{ end }}
+            </div>
+            #}
+        </div>
+    </section>
+{% endblock %}

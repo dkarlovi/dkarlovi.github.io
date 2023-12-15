@@ -1,6 +1,5 @@
 ---
 route: home
-title: Home
-image: assets/images/sigwin.svg
+title: dkarlovi.github.io
 ---
 This is some default content which ends up on the homepage.

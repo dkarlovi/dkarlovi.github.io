@@ -4,13 +4,24 @@ sigwin_yassg:
             path: /
             defaults:
                 index: 1
-                _template: "pages/articles.html.twig"
+                _template: "pages/listing.html.twig"
         about:
             path: /about
+        categories:
+            path: /categories/{index}
+            defaults:
+                index: 1
+                _template: "pages/listing.html.twig"
+        tags:
+            path: /tags/{index}
+            defaults:
+                index: 1
+                _template: "pages/listing.html.twig"
         articles:
             path: /articles/{index}
             defaults:
                 index: 1
+                _template: "pages/listing.html.twig"
             catalog:
                 index: "yassg_pages('articles')"
         article:

@@ -29,15 +29,17 @@ sigwin_yassg:
                     main:
                         items:
                             home:
+                                title: Home
                                 page: "@=yassg_get('pages', '/home.md')"
                             articles:
                                 page: "@=yassg_get('pages', '/articles.md')"
                                 items:
                                     categories:
-                                        page: "@=yassg_get('pages', '/articles.md')"
+                                        page: "@=yassg_get('pages', '/categories.md')"
                                     tags:
-                                        page: "@=yassg_get('pages', '/articles.md')"
+                                        page: "@=yassg_get('pages', '/tags.md')"
                             about:
+                                title: About
                                 page: "@=yassg_get('pages', '/about.md')"
         pages:
             storage: filesystem

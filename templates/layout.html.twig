@@ -45,7 +45,7 @@
                                     </li>
                                 {% else %}
                                     <li class="nav-item{% if _route == item.page.route %} active{% endif %}">
-                                        <a class="nav-link" href="{{ url(item.page.route) }}">{{ item.page.title }}</a>
+                                        <a class="nav-link" href="{{ url(item.page.route) }}">{{ item.title ?? item.page.title }}</a>
                                     </li>
                                 {% endif %}
                             {% endfor %}
@@ -133,11 +133,11 @@
                     {% for item in main_menu.items %}
                         {% if item.link %}
                             <li class="list-inline-item">
-                                <a href="{{ item.link.url }}">{{ item.link.title }}</a>
+                                <a href="{{ item.link.url }}">{{ item.title ?? item.link.title }}</a>
                             </li>
                         {% elseif item.page %}
                             <li class="list-inline-item">
-                                <a href="{{ url(item.page.route) }}">{{ item.page.title }}</a>
+                                <a href="{{ url(item.page.route) }}">{{ item.title ?? item.page.title }}</a>
                             </li>
                         {% endif %}
                     {% endfor %}

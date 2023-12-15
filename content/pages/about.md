@@ -1,6 +1,8 @@
 ---
 route: about
-title: About
-image: assets/images/sigwin.svg
+title: About Dalibor
+image: assets/images/self.jpeg
 ---
-This is some default content which ends up on the homepage.
+A bit about me.
+
+A bit more.

@@ -1,28 +1,24 @@
-$color-primary: rgb(43, 162, 131);
-$text-color: rgb(119, 119, 119);
-$text-dark: rgb(34, 34, 34);
-$text-light: rgb(153, 153, 153);
-$body-color: rgb(255, 255, 255);
-$border-color: rgb(236, 236, 236);
-$black: rgb(0, 0, 0);
-$white: rgb(255, 255, 255);
-$light: rgb(237, 246, 245);
-
-// Font Variables
-$font-size: 16;
-$font-scale: 1.25;
-$font-primary: 'Raleway', 'sansa-serif';
-$font-secondary: 'Merriweather Sans', 'sansa-serif';
-$font-icon: 'Font Awesome 6 Free';
-
+@import 'bootstrap';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import '@fortawesome/fontawesome-free/scss/solid';
 @import "@fontsource/raleway/latin.css";
 @import "@fontsource/merriweather-sans/latin.css";
 
-// import bootstrap
-@import 'bootstrap';
+$color-primary: $green-500;
+$text-color: $gray-600;
+$text-dark: $gray-900;
+$text-light: $gray-500;
+$body-color: $gray-100;
+$border-color: $gray-300;
+$light: $gray-100;
+
+// Font Variables
+$font-size: 16;
+$font-scale: 1.20;
+$font-primary: 'Raleway', 'sansa-serif';
+$font-secondary: 'Merriweather Sans', 'sansa-serif';
+$font-icon: 'Font Awesome 6 Free';
 
 // import theme style
 @import 'mixins';
