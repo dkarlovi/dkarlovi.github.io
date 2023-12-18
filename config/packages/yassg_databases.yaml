@@ -36,8 +36,8 @@ sigwin_yassg:
                                 items:
                                     categories:
                                         page: "@=yassg_get('pages', '/categories.md')"
-                                    tags:
-                                        page: "@=yassg_get('pages', '/tags.md')"
+                                    #series:
+                                    #    page: "@=yassg_get('pages', '/series.md')"
                             about:
                                 title: About
                                 page: "@=yassg_get('pages', '/about.md')"
@@ -52,4 +52,16 @@ sigwin_yassg:
             class: App\Model\Article
             options:
                 root: content/articles
+                names: ["*.md"]
+        categories:
+            storage: filesystem
+            class: App\Model\ArticleCategory
+            options:
+                root: content/categories
+                names: ["*.md"]
+        series:
+            storage: filesystem
+            class: App\Model\ArticleSeries
+            options:
+                root: content/series
                 names: ["*.md"]

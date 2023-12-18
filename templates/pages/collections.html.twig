@@ -1,0 +1,49 @@
+{% extends 'layout.html.twig' %}
+
+{% set page = yassg_find_one_by('pages', {condition: {'item.route': _route}}) %}
+{% set condition = null %}
+{% set sort = {'item.title': 'asc'} %}
+{% set type = _route %}
+{% set items = yassg_paginate(type, index, {condition, sort}) %}
+{% set pages = yassg_pages(type, condition) %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block body %}
+    <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <h1 class="text-center text-3xl font-extrabold text-gray-900">
+                {{ page.title }}
+            </h1>
+            {{ page.body|raw }}
+        </div>
+        <ul>
+            {% for item in items %}
+                <li>
+                    <a href="{{ url('category', {slug: item.slug}) }}">
+                        <img src="{{ yassg_thumbnail(item.image, {width: 300, height: 300, self: item}) }}"/>
+                        {{ item.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if pages|length > 0 %}
+            <ul>
+                {% for index in pages %}
+                    <li>
+                        {% if index == 1 %}
+                            <a href="{{ url('home') }}">
+                                {{ index }}
+                            </a>
+                        {% else %}
+                            <a href="{{ url('articles', {index}) }}">
+                                {{ index }}
+                            </a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </main>
+{% endblock %}

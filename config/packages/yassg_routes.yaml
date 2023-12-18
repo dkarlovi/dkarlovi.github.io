@@ -2,26 +2,25 @@ sigwin_yassg:
     routes:
         home:
             path: /
-            defaults:
-                index: 1
-                _template: "pages/listing.html.twig"
         about:
             path: /about
         categories:
             path: /categories/{index}
             defaults:
                 index: 1
-                _template: "pages/listing.html.twig"
-        tags:
-            path: /tags/{index}
+                _template: pages/collections.html.twig
+            catalog:
+                index: "yassg_pages('categories')"
+        category:
+            path: /category/{slug}
             defaults:
                 index: 1
-                _template: "pages/listing.html.twig"
+            catalog:
+                slug: "yassg_find_all('category').column('slug')"
         articles:
             path: /articles/{index}
             defaults:
                 index: 1
-                _template: "pages/listing.html.twig"
             catalog:
                 index: "yassg_pages('articles')"
         article:

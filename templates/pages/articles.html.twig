@@ -2,8 +2,10 @@
 
 {% set page = yassg_find_one_by('pages', {condition: {'item.route': _route}}) %}
 {% set condition = app.environment == 'dev' ? null : 'item.draft == false' %}
-{% set items = yassg_paginate('articles', index, {condition, sort: {'item.publishedAt': 'desc'}}) %}
-{% set pages = yassg_pages('articles', condition) %}
+{% set sort = {'item.publishedAt': 'desc'} %}
+{% set type = 'articles' %}
+{% set items = yassg_paginate(type, index, {condition, sort}) %}
+{% set pages = yassg_pages(type, condition) %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
