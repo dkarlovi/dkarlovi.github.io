@@ -38,7 +38,8 @@ sigwin_yassg:
                 route: category_collection
                 _template: pages/collection.html.twig
             catalog:
-                slug: "yassg_find_all('category').column('slug')"
+                slug: "yassg_find_all('categories').column('slug')"
+                index: "yassg_pages('articles')"
         series:
             path: /series/{slug}/{index}
             defaults:
@@ -48,6 +49,7 @@ sigwin_yassg:
                 _template: pages/collection.html.twig
             catalog:
                 slug: "yassg_find_all('series').column('slug')"
+                index: "yassg_pages('articles')"
         article:
             path: /{slug}
             catalog:
