@@ -4,7 +4,7 @@ slug: hello-world-again
 summary: This is another summary
 image: assets/images/self.jpeg
 publishedAt: "2023-12-18"
-draft: true
+draft: false
 categories:
     - "@=yassg_get('categories', '/devops.md')"
     - "@=yassg_get('categories', '/engineering.md')"

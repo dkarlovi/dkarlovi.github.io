@@ -87,25 +87,40 @@
                             {% endfor %}
                         </div>
                     </div>
-                </div>
 
-                {% if pages|length > 0 %}
-                    <ul>
-                        {% for index in pages %}
-                            <li>
+                    {% if pages|length > 0 %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination align-items-center justify-content-center">
+                            <li class="page-item prev d-flex align-items-center{% if index == 1 %}disabled{% endif %}">
                                 {% if index == 1 %}
-                                    <a href="{{ url(_route, parameters|merge({index})) }}">
-                                        {{ index }}
-                                    </a>
+                                <span class="page-link disabled" aria-label="Pagination Arrow"><i class="fas fa-arrow-left me-3"></i><span class="d-none d-sm-inline">Previous</span></span>
                                 {% else %}
-                                    <a href="{{ url(_route, parameters|merge({index})) }}">
-                                        {{ index }}
-                                    </a>
+                                <a class="page-link" href="{{ url(_route, parameters|merge({index: index - 1})) }}" aria-label="Pagination Arrow"><i class="fas fa-arrow-left me-3"></i><span class="d-none d-sm-inline">Previous</span></a>
                                 {% endif %}
                             </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+                            {% for page in pages %}
+                            <li class="page-item">
+                                <a href="{{ url(_route, parameters|merge({index: page})) }}" class="page-link{% if index == loop.index %} active{% endif %}">{{ page }}</a>
+                            </li>
+                            {% endfor %}
+                            <li class="page-item next d-flex align-items-center">
+                                {% if index == pages|length %}
+                                    <span class="page-link disabled" aria-label="Pagination Arrow"><i class="fas fa-arrow-right me-3"></i><span class="d-none d-sm-inline">Next</span></span>
+                                {% else %}
+                                    <a class="page-link arrow" href="{{ url(_route, parameters|merge({index: index + 1})) }}" aria-label="Pagination"><span class="d-none d-sm-inline">Next</span><i class="fas fa-arrow-right ms-3"></i></a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+
+                <aside class="col-lg-4">
+                    <div class="widget bg-center"></div>
+                    <div class="widget category-widget"></div>
+                    <div class="widget featured-widget "></div>
+                    <div class="widget newsletter-widget"></div>
+                </aside>
             </div>
         </div>
     </section>

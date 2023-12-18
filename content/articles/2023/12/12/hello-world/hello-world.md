@@ -4,7 +4,7 @@ slug: hello-world
 summary: This is a summary
 image: ./hello-world.webp
 publishedAt: "2023-12-12"
-draft: true
+draft: false
 categories:
     - "@=yassg_get('categories', '/devops.md')"
 series:
