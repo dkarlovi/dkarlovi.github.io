@@ -9,14 +9,16 @@ sigwin_yassg:
             defaults:
                 index: 1
                 type: categories
+                route: category
                 _template: pages/collections.html.twig
             catalog:
                 index: "yassg_pages('categories')"
         series_collection:
-            path: /series/{index}
+            path: /series-collection/{index}
             defaults:
                 index: 1
                 type: series
+                route: series
                 _template: pages/collections.html.twig
             catalog:
                 index: "yassg_pages('series')"
