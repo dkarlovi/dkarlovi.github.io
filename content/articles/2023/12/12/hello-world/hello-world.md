@@ -1,6 +1,7 @@
 ---
 title: Hello World
 slug: hello-world
+summary: This is a summary
 image: ./hello-world.webp
 publishedAt: "2023-12-12"
 draft: true

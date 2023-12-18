@@ -24,7 +24,7 @@
                         {% if collection is defined %}
                         <div>{{ page.title }}</div>
                         <h2 class="h4">
-                            {{ collection.title }}
+                            Articles in <span class="title-border">{{ collection.title }}</span>
                         </h2>
                         {{ collection.body|raw }}
                         {% else %}
@@ -35,34 +35,76 @@
                         {% endif %}
                     </div>
                 </div>
-                <ul>
-                    {% for item in items %}
-                        <li>
-                            <a href="{{ url('article', {slug: item.slug}) }}">
-                                <img src="{{ yassg_thumbnail(item.image, {width: 300, height: 300, self: item}) }}"/>
-                                {{ item.title }}
-                                {{ item.publishedAt|date('d/m/Y') }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="border mb-5 pt-4 rounded">
+                        <div class="row mx-0 g-5">
+                            {% for item in items %}
+                            <div class="col-sm-6 mb-4">
+                                <div class="card">
+                                    {% if item.image %}
+                                    <div class="mb-4 position-relative">
+                                        <a class="title-linked" href="{{ url('article', {slug: item.slug}) }}">
+                                            <img src="{{ yassg_thumbnail(item.image, {width: 500, height: 500, self: item}) }}" class="img-fluid w-100 rounded-4" alt="{{ item.title }}"/>
+                                        </a>
+                                        {% if item.categories %}
+                                        <ul class="list-inline card-badge">
+                                            {% for category in item.categories %}
+                                            <li class="list-inline-item">
+                                                <a href="{{ url('category', {slug: category.slug}) }}" class="badge badge-primary py-1">{{ category.title }}</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                        {% endif %}
+                                    </div>
+                                    {% else %}
+                                    <div class="mb-4">
+                                        {% for category in item.categories %}
+                                            <a href="{{ url('category', {slug: category.slug}) }}" class="badge badge-primary d-inline-block">{{ category.title }}</a>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h3 class="h6">
+                                            <a class="title-linked" href="{{ url('article', {slug: item.slug}) }}">{{ item.title }}</a>
+                                        </h3>
+                                        <ul class="list-inline card-meta d-flex align-items-center mb-3">
+                                            <li class="list-inline-item d-flex align-items-center">
+                                                <i class="fas fa-user me-2"></i>
+                                                <a href="{{ url('about') }}">dkarlovi</a>
+                                            </li>
+                                            <li class="list-inline-item d-flex align-items-center">
+                                                <i class="fas fa-calendar me-2"></i>
+                                                <span>{{ item.publishedAt|date('d/m/Y') }}</span>
+                                            </li>
+                                        </ul>
+                                        <p class="card-text mb-4">{{ item.summary }}</p>
+                                        <a href="{{ url('article', {slug: item.slug}) }}" class="btn btn-outline-primary btn-sm">Read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
 
                 {% if pages|length > 0 %}
-                <ul>
-                    {% for index in pages %}
-                        <li>
-                            {% if index == 1 %}
-                                <a href="{{ url(_route, parameters|merge({index})) }}">
-                                    {{ index }}
-                                </a>
-                            {% else %}
-                                <a href="{{ url(_route, parameters|merge({index})) }}">
-                                    {{ index }}
-                                </a>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
+                    <ul>
+                        {% for index in pages %}
+                            <li>
+                                {% if index == 1 %}
+                                    <a href="{{ url(_route, parameters|merge({index})) }}">
+                                        {{ index }}
+                                    </a>
+                                {% else %}
+                                    <a href="{{ url(_route, parameters|merge({index})) }}">
+                                        {{ index }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
                 {% endif %}
             </div>
         </div>
