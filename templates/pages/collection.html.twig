@@ -2,6 +2,14 @@
 
 {% set page = yassg_find_one_by('pages', {condition: {'item.route': route}}) %}
 {% set condition = app.environment == 'dev' ? null : 'item.draft == false' %}
+{% if route == 'article_collection' %}
+    {% set parameters = {} %}
+{% else %}
+    {% set parameters = {slug} %}
+    {% set collection = yassg_find_one_by(type, {condition: {'item.slug': slug}}) %}
+    {% set condition = condition ~ (condition ? ' and ' : null) ~ '\''~ collection.slug ~'\' in item.'~type~'.column("slug")' %}
+{% endif %}
+
 {% set items = yassg_paginate('articles', index, {condition, sort: {'item.publishedAt': 'desc'}}) %}
 {% set pages = yassg_pages('articles', condition) %}
 
@@ -32,11 +40,11 @@
             {% for index in pages %}
                 <li>
                     {% if index == 1 %}
-                        <a href="{{ url(_route) }}">
+                        <a href="{{ url(_route, parameters|merge({index})) }}">
                             {{ index }}
                         </a>
                     {% else %}
-                        <a href="{{ url(_route, {index}) }}">
+                        <a href="{{ url(_route, parameters|merge({index})) }}">
                             {{ index }}
                         </a>
                     {% endif %}
