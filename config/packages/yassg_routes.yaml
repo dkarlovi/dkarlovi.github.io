@@ -4,20 +4,35 @@ sigwin_yassg:
             path: /
         about:
             path: /about
-        categories:
+        category_collection:
             path: /categories/{index}
             defaults:
                 index: 1
+                type: categories
                 _template: pages/collections.html.twig
             catalog:
                 index: "yassg_pages('categories')"
+        series_collection:
+            path: /series/{index}
+            defaults:
+                index: 1
+                type: series
+                _template: pages/collections.html.twig
+            catalog:
+                index: "yassg_pages('series')"
         category:
             path: /category/{slug}
             defaults:
                 index: 1
             catalog:
                 slug: "yassg_find_all('category').column('slug')"
-        articles:
+        series:
+            path: /series/{slug}
+            defaults:
+                index: 1
+            catalog:
+                slug: "yassg_find_all('series').column('slug')"
+        article_collection:
             path: /articles/{index}
             defaults:
                 index: 1

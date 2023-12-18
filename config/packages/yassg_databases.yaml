@@ -32,12 +32,12 @@ sigwin_yassg:
                                 title: Home
                                 page: "@=yassg_get('pages', '/home.md')"
                             articles:
-                                page: "@=yassg_get('pages', '/articles.md')"
+                                page: "@=yassg_get('pages', '/article_collection.md')"
                                 items:
                                     categories:
-                                        page: "@=yassg_get('pages', '/categories.md')"
-                                    #series:
-                                    #    page: "@=yassg_get('pages', '/series.md')"
+                                        page: "@=yassg_get('pages', '/category_collection.md')"
+                                    series:
+                                        page: "@=yassg_get('pages', '/series_collection.md')"
                             about:
                                 title: About
                                 page: "@=yassg_get('pages', '/about.md')"

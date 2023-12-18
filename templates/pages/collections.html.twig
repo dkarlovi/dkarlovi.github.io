@@ -3,7 +3,7 @@
 {% set page = yassg_find_one_by('pages', {condition: {'item.route': _route}}) %}
 {% set condition = null %}
 {% set sort = {'item.title': 'asc'} %}
-{% set type = _route %}
+{% set route = 'category' %}
 {% set items = yassg_paginate(type, index, {condition, sort}) %}
 {% set pages = yassg_pages(type, condition) %}
 
@@ -20,7 +20,7 @@
         <ul>
             {% for item in items %}
                 <li>
-                    <a href="{{ url('category', {slug: item.slug}) }}">
+                    <a href="{{ url(route, {slug: item.slug}) }}">
                         <img src="{{ yassg_thumbnail(item.image, {width: 300, height: 300, self: item}) }}"/>
                         {{ item.title }}
                     </a>
@@ -37,7 +37,7 @@
                                 {{ index }}
                             </a>
                         {% else %}
-                            <a href="{{ url('articles', {index}) }}">
+                            <a href="{{ url(_route, {index}) }}">
                                 {{ index }}
                             </a>
                         {% endif %}
