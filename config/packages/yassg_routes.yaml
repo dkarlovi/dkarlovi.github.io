@@ -13,6 +13,14 @@ sigwin_yassg:
                 _template: pages/collections.html.twig
             catalog:
                 index: "yassg_pages('categories')"
+        category:
+            path: /category/{slug}/{index}
+            defaults:
+                index: 1
+                route: category_collection
+                _template: pages/collection.html.twig
+            catalog:
+                slug: "yassg_find_all('category').column('slug')"
         series_collection:
             path: /series-collection/{index}
             defaults:
@@ -22,22 +30,20 @@ sigwin_yassg:
                 _template: pages/collections.html.twig
             catalog:
                 index: "yassg_pages('series')"
-        category:
-            path: /category/{slug}
-            defaults:
-                index: 1
-            catalog:
-                slug: "yassg_find_all('category').column('slug')"
         series:
-            path: /series/{slug}
+            path: /series/{slug}/{index}
             defaults:
                 index: 1
+                route: series_collection
+                _template: pages/collection.html.twig
             catalog:
                 slug: "yassg_find_all('series').column('slug')"
         article_collection:
             path: /articles/{index}
             defaults:
                 index: 1
+                route: article_collection
+                _template: pages/collection.html.twig
             catalog:
                 index: "yassg_pages('articles')"
         article:

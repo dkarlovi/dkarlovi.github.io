@@ -1,11 +1,9 @@
 {% extends 'layout.html.twig' %}
 
-{% set page = yassg_find_one_by('pages', {condition: {'item.route': _route}}) %}
+{% set page = yassg_find_one_by('pages', {condition: {'item.route': route}}) %}
 {% set condition = app.environment == 'dev' ? null : 'item.draft == false' %}
-{% set sort = {'item.publishedAt': 'desc'} %}
-{% set type = 'articles' %}
-{% set items = yassg_paginate(type, index, {condition, sort}) %}
-{% set pages = yassg_pages(type, condition) %}
+{% set items = yassg_paginate('articles', index, {condition, sort: {'item.publishedAt': 'desc'}}) %}
+{% set pages = yassg_pages('articles', condition) %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
@@ -34,11 +32,11 @@
             {% for index in pages %}
                 <li>
                     {% if index == 1 %}
-                        <a href="{{ url('home') }}">
+                        <a href="{{ url(_route) }}">
                             {{ index }}
                         </a>
                     {% else %}
-                        <a href="{{ url('article_collection', {index}) }}">
+                        <a href="{{ url(_route, {index}) }}">
                             {{ index }}
                         </a>
                     {% endif %}
