@@ -2,27 +2,53 @@ sigwin_yassg:
     routes:
         home:
             path: /
-            defaults:
-                index: 1
-                _template: "pages/listing.html.twig"
         about:
             path: /about
-        categories:
+        category_collection:
             path: /categories/{index}
             defaults:
                 index: 1
-                _template: "pages/listing.html.twig"
-        tags:
-            path: /tags/{index}
+                type: categories
+                route: category
+                _template: pages/collections.html.twig
+            catalog:
+                index: "yassg_pages('categories')"
+        series_collection:
+            path: /series-collection/{index}
             defaults:
                 index: 1
-                _template: "pages/listing.html.twig"
-        articles:
+                type: series
+                route: series
+                _template: pages/collections.html.twig
+            catalog:
+                index: "yassg_pages('series')"
+        article_collection:
             path: /articles/{index}
             defaults:
                 index: 1
-                _template: "pages/listing.html.twig"
+                route: article_collection
+                _template: pages/collection.html.twig
             catalog:
+                index: "yassg_pages('articles')"
+        category:
+            path: /category/{slug}/{index}
+            defaults:
+                index: 1
+                type: categories
+                route: category_collection
+                _template: pages/collection.html.twig
+            catalog:
+                slug: "yassg_find_all('categories').column('slug')"
+                index: "yassg_pages('articles')"
+        series:
+            path: /series/{slug}/{index}
+            defaults:
+                index: 1
+                type: series
+                route: series_collection
+                _template: pages/collection.html.twig
+            catalog:
+                slug: "yassg_find_all('series').column('slug')"
                 index: "yassg_pages('articles')"
         article:
             path: /{slug}

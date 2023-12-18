@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% set page = yassg_find_one_by('pages', {condition: {'item.route': _route}}) %}
+
+{% block body %}
+    <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <h1 class="text-center text-3xl font-extrabold text-gray-900">
+                {{ page.title }}
+            </h1>
+            {{ page.body|raw }}
+        </div>
+    </main>
+{% endblock %}
