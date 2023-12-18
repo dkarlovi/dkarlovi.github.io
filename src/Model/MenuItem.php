@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the dkarlovi.github.io project.
  *
- * (c) sigwin.hr
+ * (c) Dalibor Karlović
  */
 
 namespace App\Model;

@@ -4,6 +4,7 @@
        checkForThrowsInGlobalScope="true"
        ensureArrayIntOffsetsExist="true"
        ensureArrayStringOffsetsExist="true"
+       errorBaseline="psalm.baseline.xml"
        errorLevel="1"
        findUnusedBaselineEntry="true"
        findUnusedCode="true"
@@ -20,6 +21,19 @@
             <directory name="vendor/"/>
         </ignoreFiles>
     </projectFiles>
+
+    <issueHandlers>
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <directory name="src/Model"/>
+            </errorLevel>
+        </MissingConstructor>
+        <PossiblyUnusedProperty>
+            <errorLevel type="suppress">
+                <directory name="src/Model"/>
+            </errorLevel>
+        </PossiblyUnusedProperty>
+    </issueHandlers>
 
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>

@@ -10,10 +10,11 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-final class Page
+final class ArticleCategory
 {
     public string $title;
-    public string $route;
+    public string $slug;
+
     public string $body;
     public string $image;
 }
