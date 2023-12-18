@@ -7,7 +7,7 @@ draft: true
 categories:
     - "@=yassg_get('categories', '/devops.md')"
 series:
-    - "@=yassg_get('series', '/devops.md')"
+    - "@=yassg_get('series', '/a_specific_series.md')"
 ---
 
 ![Image]({{ yassg_thumbnail(item.image, {width: 800}) }})
