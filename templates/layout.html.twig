@@ -10,13 +10,13 @@
 </head>
 <body>
 
-<header class="header bg-white border-bottom position-relative">
+<header class="header bg-white border-bottom position-relative pt-1 pb-1">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <a class="navbar-brand" href="{{ url('home') }}">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="180">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="140">
                     </a>
                     <div class="d-flex d-lg-none">
                         <ul class="list-unstyled search me-3">
@@ -95,7 +95,7 @@
                                     </li>
                                 {% else %}
                                     <li class="nav-item{% if _route == item.page.route %} active{% endif %}">
-                                        <a class="nav-link" href="{{ url(item.page.route) }}">{{ item.page.title }}</a>
+                                        <a class="nav-link" href="{{ url(item.page.route) }}">{{ item.title ?? item.page.title }}</a>
                                     </li>
                                 {% endif %}
                             {% endfor %}
