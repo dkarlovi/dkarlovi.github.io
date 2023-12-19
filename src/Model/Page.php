@@ -14,6 +14,7 @@ final class Page
 {
     public string $title;
     public string $route;
+    public string $summary;
     public string $body;
     public string $image;
 }
