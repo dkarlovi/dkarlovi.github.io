@@ -15,7 +15,7 @@
                     <h2 class="h2 fw-normal mb-4">{{ about.summary }}</h2>
                     {{ page.body|raw }}
                     <div class="text-center mt-4">
-                        <a href="{{ url(about.route) }}" class="btn btn-primary">{{ about.title }}</a>
+                        <a href="{{ url(about.route) }}" class="btn btn-outline-primary">{{ about.title }}</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-6 col-9 mx-auto mb-5 mb-lg-0">
@@ -48,7 +48,7 @@
                         </div>
                     {% endif %}
                     <div class="text-center">
-                        <a href="{{ url('article_collection') }}" class="btn btn-primary">More</a>
+                        <a href="{{ url('article_collection') }}" class="btn btn-outline-secondary">More</a>
                     </div>
                 </div>
 
