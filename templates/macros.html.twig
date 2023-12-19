@@ -47,21 +47,11 @@
                 <a class="title-linked" href="{{ url('article', {slug: article.slug}) }}">
                     <img src="{{ yassg_thumbnail(article.image, {width: 500, height: 500, self: article}) }}" class="img-fluid w-100 rounded-4" alt="{{ article.title }}"/>
                 </a>
-                {% if article.categories %}
-                    <ul class="list-inline card-badge">
-                        {% for category in article.categories %}
-                            <li class="list-inline-item">
-                                <a href="{{ url('category', {slug: category.slug}) }}" class="badge badge-primary py-1">{{ category.title }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+                {{ _self.categories(article.categories) }}
             </div>
         {% else %}
             <div class="mb-4">
-                {% for category in article.categories %}
-                    <a href="{{ url('category', {slug: category.slug}) }}" class="badge badge-primary d-inline-block">{{ category.title }}</a>
-                {% endfor %}
+                {{ _self.categories_badges(article.categories) }}
             </div>
         {% endif %}
         <div class="card-body">
@@ -75,13 +65,35 @@
                 </li>
                 <li class="list-inline-item d-flex align-items-center">
                     <i class="fas fa-calendar me-2"></i>
-                    <span class="date-container" title="{{ article.publishedAt|date('Y-m-d') }}">{{ article.publishedAt|date('Y-m-d') }}</span>
+                    {{ _self.date(article.publishedAt) }}
                 </li>
             </ul>
             <p class="card-text mb-4">{{ article.summary }}</p>
             <a href="{{ url('article', {slug: article.slug}) }}" class="btn btn-outline-primary btn-sm">Read more</a>
         </div>
     </div>
+{% endmacro %}
+
+{% macro categories(categories) %}
+    {% if categories %}
+        <ul class="list-inline card-badge">
+            {% for category in categories %}
+                <li class="list-inline-item">
+                    <a href="{{ url('category', {slug: category.slug}) }}" class="badge badge-primary py-1">{{ category.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
+{% macro categories_badges(categories) %}
+    {% for category in categories %}
+        <a href="{{ url('category', {slug: category.slug}) }}" class="badge badge-primary d-inline-block">{{ category.title }}</a>
+    {% endfor %}
+{% endmacro %}
+
+{% macro date(date) %}
+    <span class="date-container" title="{{ date|date('Y-m-d') }}">{{ date|date('Y-m-d') }}</span>
 {% endmacro %}
 
 {% macro pagination(pages, index, route) %}
