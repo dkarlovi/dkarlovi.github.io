@@ -5,8 +5,6 @@
 {% set items = yassg_paginate(type, index, {sort: {'item.title': 'asc'}}) %}
 {% set pages = yassg_pages(type) %}
 
-{% block title %}{{ page.title }}{% endblock %}
-
 {% block body %}
     <section class="py-5 bg-light">
         <div class="container">
@@ -32,9 +30,9 @@
                     </div>
                     {% endfor %}
                 {% else %}
-                <div class="col-12 text-center">
-                    <h2 class="h4">Nothing found.</h2>
-                </div>
+                    <div class="col-12 text-center">
+                        <h2 class="h4">Nothing here.</h2>
+                    </div>
                 {% endif %}
             </div>
         </div>

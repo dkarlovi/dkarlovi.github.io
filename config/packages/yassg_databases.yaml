@@ -49,7 +49,6 @@ sigwin_yassg:
                 names: ["*.md"]
         articles:
             storage: filesystem
-            page_limit: 1
             class: App\Model\Article
             options:
                 root: content/articles

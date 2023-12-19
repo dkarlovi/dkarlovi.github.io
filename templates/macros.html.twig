@@ -1,0 +1,113 @@
+{% macro head(breadcrumbs) %}
+    {% set home = yassg_get('pages', '/home.md') %}
+    {% set title = [] %}{% for breadcrumb in breadcrumbs %}{% if breadcrumb.title != home.title %}{% set title = title|merge([breadcrumb.title]) %}{% endif %}{% endfor %}{% set title = title|merge([home.title]) %}
+
+    <title>{{ title|join(' - ') }}</title>
+{% endmacro %}
+
+{% macro socials() %}
+    <ul class="list-unstyled social-icons">
+        {% for link in yassg_find_all('socials') %}
+            <li class="list-inline-item">
+                <a href="{{ link.url }}" title="{{ link.title }}"><i class="{{ link.icon }}"></i></a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% macro menu(menu, _route) %}
+    {% for item in menu.items %}
+        {% if item.items %}
+            {# item is active if it itself or any of the children is active #}
+            {% set active = (_route == item.page.route) %}{% for child_item in item.items %}{% if _route == child_item.page.route %}{% set active = true %}{% endif %}{% endfor %}
+            <li class="nav-item dropdown{% if active %} active{% endif %}">
+                <a class="nav-link dropdown-toggle" href="{{ url(item.page.route) }}" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ item.title ?? item.page.title }}</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                    {% for child_item in item.items %}
+                        <li><a class="dropdown-item{% if _route == child_item.page.route%} active{% endif %}" href="{{ url(child_item.page.route) }}">{{ child_item.title ?? child_item.page.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% else %}
+            <li class="nav-item{% if _route == item.page.route %} active{% endif %}">
+                <a class="nav-link" href="{{ url(item.page.route) }}">{{ item.title ?? item.page.title }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro logo(width) %}
+<img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="{{ width|default(150) }}">
+{% endmacro %}
+
+{% macro card(article) %}
+    <div class="card">
+        {% if article.image %}
+            <div class="mb-4 position-relative">
+                <a class="title-linked" href="{{ url('article', {slug: article.slug}) }}">
+                    <img src="{{ yassg_thumbnail(article.image, {width: 500, height: 500, self: article}) }}" class="img-fluid w-100 rounded-4" alt="{{ article.title }}"/>
+                </a>
+                {% if article.categories %}
+                    <ul class="list-inline card-badge">
+                        {% for category in article.categories %}
+                            <li class="list-inline-item">
+                                <a href="{{ url('category', {slug: category.slug}) }}" class="badge badge-primary py-1">{{ category.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="mb-4">
+                {% for category in article.categories %}
+                    <a href="{{ url('category', {slug: category.slug}) }}" class="badge badge-primary d-inline-block">{{ category.title }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="card-body">
+            <h3 class="h6">
+                <a class="title-linked" href="{{ url('article', {slug: article.slug}) }}">{{ article.title }}</a>
+            </h3>
+            <ul class="list-inline card-meta d-flex align-items-center mb-3">
+                <li class="list-inline-item d-flex align-items-center">
+                    <i class="fas fa-user me-2"></i>
+                    <a href="{{ url('about') }}">dkarlovi</a>
+                </li>
+                <li class="list-inline-item d-flex align-items-center">
+                    <i class="fas fa-calendar me-2"></i>
+                    <span class="date-container" title="{{ article.publishedAt|date('Y-m-d') }}">{{ article.publishedAt|date('Y-m-d') }}</span>
+                </li>
+            </ul>
+            <p class="card-text mb-4">{{ article.summary }}</p>
+            <a href="{{ url('article', {slug: article.slug}) }}" class="btn btn-outline-primary btn-sm">Read more</a>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro pagination(pages, index, route) %}
+    {% if pages|length > 1 %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination align-items-center justify-content-center">
+                <li class="page-item prev d-flex align-items-center{% if index == 1 %}disabled{% endif %}">
+                    {% if index == 1 %}
+                        <span class="page-link disabled" aria-label="Pagination Arrow"><i class="fas fa-arrow-left me-3"></i><span class="d-none d-sm-inline">Previous</span></span>
+                    {% else %}
+                        <a class="page-link" href="{{ url(route.name, route.parameters|merge({index: index - 1})) }}" aria-label="Pagination Arrow"><i class="fas fa-arrow-left me-3"></i><span class="d-none d-sm-inline">Previous</span></a>
+                    {% endif %}
+                </li>
+                {% for page in pages %}
+                    <li class="page-item">
+                        <a href="{{ url(route.name, route.parameters|merge({index: page})) }}" class="page-link{% if index == loop.index %} active{% endif %}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+                <li class="page-item next d-flex align-items-center">
+                    {% if index == pages|length %}
+                        <span class="page-link disabled" aria-label="Pagination Arrow"><i class="fas fa-arrow-right me-3"></i><span class="d-none d-sm-inline">Next</span></span>
+                    {% else %}
+                        <a class="page-link arrow" href="{{ url(route.name, route.parameters|merge({index: index + 1})) }}" aria-label="Pagination"><span class="d-none d-sm-inline">Next</span><i class="fas fa-arrow-right ms-3"></i></a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
+{% endmacro %}

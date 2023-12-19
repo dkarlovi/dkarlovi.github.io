@@ -1,10 +1,18 @@
-{% set home = yassg_get('pages', '/home.md') %}{% set main_menu = yassg_get('menus', 'main') %}<!DOCTYPE html>
+{% set home = yassg_get('pages', '/home.md') %}{% set main_menu = yassg_get('menus', 'main') %}{% import 'macros.html.twig' as macro %}<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}dkarlovi.github.io{% endblock %}</title>
+    {% block head %}
+        {% if breadcrumbs is defined %}
+            {{ macro.head(breadcrumbs) }}
+        {% elseif page is defined %}
+            {{ macro.head([page]) }}
+        {% else %}
+            <title>{{ home.title }}</title>
+        {% endif %}
+    {% endblock %}
 
     {{ encore_entry_link_tags('app') }}
 </head>
@@ -16,7 +24,7 @@
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <a class="navbar-brand" href="{{ url('home') }}">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="140">
+                        {{ macro.logo() }}
                     </a>
                     <div class="d-flex d-lg-none">
                         <ul class="list-unstyled search me-3">
@@ -30,35 +38,10 @@
                     </div>
 
                     <div class="collapse navbar-collapse" id="navbarScroll">
-                        <ul class="navbar-nav ms-auto my-4 my-lg-0 me-3">
-                            {% for item in main_menu.items %}
-                                {% if item.items %}
-                                    {# item is active if it itself or any of the children is active #}
-                                    {% set active = (_route == item.page.route) %}{% for child_item in item.items %}{% if _route == child_item.page.route %}{% set active = true %}{% endif %}{% endfor %}
-                                    <li class="nav-item dropdown{% if active %} active{% endif %}">
-                                        <a class="nav-link dropdown-toggle" href="{{ url(item.page.route) }}" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ item.title ?? item.page.title }}</a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                            {% for child_item in item.items %}
-                                                <li><a class="dropdown-item{% if _route == child_item.page.route%} active{% endif %}" href="{{ url(child_item.page.route) }}">{{ child_item.title ?? child_item.page.title }}</a></li>
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                {% else %}
-                                    <li class="nav-item{% if _route == item.page.route %} active{% endif %}">
-                                        <a class="nav-link" href="{{ url(item.page.route) }}">{{ item.title ?? item.page.title }}</a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
+                        <ul class="navbar-nav ms-auto my-4 my-lg-0 me-3">{{ macro.menu(main_menu, _route) }}</ul>
 
                         <!-- social -->
-                        <ul class="list-unstyled social-icons">
-                            {% for link in yassg_find_all('socials') %}
-                                <li class="list-inline-item">
-                                    <a href="{{ link.url }}" title="{{ link.title }}"><i class="{{ link.icon }}"></i></a>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                        {{ macro.socials() }}
 
                         <ul class="list-unstyled search d-none d-lg-block">
                             <li class="list-inline-item">
@@ -80,34 +63,8 @@
                 <div class="side-nav offcanvas offcanvas-end p-4" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fas fa-times"></i></button>
                     <div class="navbar mt-3 flex-column align-items-start">
-                        <ul class="navbar-nav my-4 my-lg-0 me-3 w-100">
-                            {% for item in main_menu.items %}
-                                {% if item.items %}
-                                    {# item is active if it itself or any of the children is active #}
-                                    {% set active = (_route == item.page.route) %}{% for child_item in item.items %}{% if _route == child_item.page.route %}{% set active = true %}{% endif %}{% endfor %}
-                                    <li class="nav-item dropdown{% if active %} active{% endif %}">
-                                        <a class="nav-link dropdown-toggle" href="{{ url(item.page.route) }}" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ item.title ?? item.page.title }}</a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                            {% for child_item in item.items %}
-                                                <li><a class="dropdown-item{% if _route == child_item.page.route%} active{% endif %}" href="{{ url(child_item.page.route) }}">{{ child_item.title ?? child_item.page.title }}</a></li>
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                {% else %}
-                                    <li class="nav-item{% if _route == item.page.route %} active{% endif %}">
-                                        <a class="nav-link" href="{{ url(item.page.route) }}">{{ item.title ?? item.page.title }}</a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-
-                        </ul>
-                        <ul class="list-unstyled social-icons">
-                            {% for link in yassg_find_all('socials') %}
-                                <li class="list-inline-item">
-                                    <a href="{{ link.url }}" title="{{ link.title }}"><i class="{{ link.icon }}"></i></a>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                        <ul class="navbar-nav my-4 my-lg-0 me-3 w-100">{{ macro.menu(main_menu, _route) }}</ul>
+                        {{ macro.socials() }}
                     </div>
                 </div>
             </div>
@@ -122,7 +79,7 @@
         <div class="row justify-content-center">
             <div class="col-xl-6 text-center">
                 <a class="footer-brand mb-4 d-block" href="{{ url('home') }}">
-                    <img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="150">
+                    {{ macro.logo(120) }}
                 </a>
                 <p class="text-light mb-4">
                     <code>
@@ -142,13 +99,7 @@
                         {% endif %}
                     {% endfor %}
                 </ul>
-                <ul class="list-unstyled social-icons">
-                    {% for link in yassg_find_all('socials') %}
-                        <li class="list-inline-item">
-                            <a href="{{ link.url }}" title="{{ link.title }}"><i class="{{ link.icon }}"></i></a>
-                        </li>
-                    {% endfor %}
-                </ul>
+                {{ macro.socials() }}
                 <p>&copy; {{ home.title }} | Theme by <a target="_blank" rel="noopener noreferrer" href="https://statichunt.com/" class="text-muted text-decoration-underline">statichunt</a>
                 </p>
             </div>
