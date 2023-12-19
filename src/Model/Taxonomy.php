@@ -14,6 +14,7 @@ final class Taxonomy
 {
     public string $title;
     public string $slug;
+    public string $summary;
     public string $body;
     public string $image;
 }

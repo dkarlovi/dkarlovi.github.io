@@ -2,6 +2,7 @@
 {% import 'macros.html.twig' as macro %}
 
 {% set article = yassg_find_one_by('articles', {condition: {'item.slug': slug}}) %}
+{% set base_condition = app.environment == 'dev' ? null : 'item.draft == false' %}
 
 {% block body %}
     <section class="section-sm">
@@ -27,6 +28,35 @@
                             {{ macro.date(article.publishedAt) }}
                         </li>
                     </ul>
+                    {% if article.series %}
+                        <div class="alert alert-info mx-2">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>This article is part of a series:</strong>
+                            <ul class="list-unstyled mt-2">
+                                {% for series in article.series %}
+                                    <li>
+                                        <a href="{{ url('series', {slug: series.slug}) }}" class="h6">{{ series.title }}</a>
+                                        {% if series.body %}
+                                            <p>{{ series.summary }}</p>
+                                        {% endif %}
+                                        {% set condition = base_condition ~ (base_condition ? ' and ' : null) ~ '\''~ series.slug ~'\' in item.series.column("slug")' %}
+                                        {% set siblings = yassg_find_all('articles', {condition, sort: {'item.publishedAt': 'asc'}}) %}
+                                        <ol class="mx-3">
+                                        {% for sibling in siblings %}
+                                            <li class="mb-0">
+                                                {% if sibling.slug == article.slug %}
+                                                    <span>{{ sibling.title }}</span>
+                                                {% else %}
+                                                    <a href="{{ url('article', {slug: sibling.slug}) }}">{{ sibling.title }}</a>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                        </ol>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                     <div class="content drop-cap">
                         {{ article.body|raw }}
                     </div>
@@ -39,7 +69,7 @@
                 </div>
 
                 <aside class="col-lg-4">
-                    {{ macro.widget_categories() }}
+                    {{ macro.widget_categories(base_condition) }}
                 </aside>
             </div>
         </div>
