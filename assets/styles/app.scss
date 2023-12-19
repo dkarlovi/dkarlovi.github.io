@@ -4,6 +4,7 @@
 @import '@fortawesome/fontawesome-free/scss/solid';
 @import "@fontsource/raleway/latin.css";
 @import "@fontsource/merriweather-sans/latin.css";
+@import "../../vendor/scrivo/highlight.php/styles/a11y-dark.css";
 
 $color-primary: $blue-600;
 $text-color: $gray-600;
@@ -27,3 +28,39 @@ $font-icon: 'Font Awesome 6 Free';
 @import 'common';
 @import 'templates/navigation.scss';
 @import 'templates/main.scss';
+
+ul.table-of-contents {
+    display: none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    a.heading-permalink {
+        text-decoration: none;
+        transform: translateX(-0.8em);
+        position: absolute;
+        color: inherit;
+        opacity: 0;
+    }
+    a.heading-permalink:hover {
+        opacity: 0.5;
+    }
+    &:hover {
+        a.heading-permalink {
+            opacity: 0.5;
+        }
+    }
+}
+
+.content blockquote>blockquote {
+    background-color: $gray-200;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.content blockquote>blockquote>blockquote {
+    background-color: $gray-300;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.content table {
+}
