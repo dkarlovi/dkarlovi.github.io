@@ -3,6 +3,7 @@
 
 {% set page = yassg_find_one_by('pages', {condition: {'item.route': route}}) %}
 {% set condition = app.environment == 'dev' ? null : 'item.draft == false' %}
+{% set baseline_condition = condition %}
 {% if route == 'article_collection' %}
     {% set parameters = {} %}
     {% set breadcrumbs = [page] %}
@@ -59,7 +60,7 @@
                 </div>
 
                 <aside class="col-lg-4">
-                    {{ macro.widget_categories(condition) }}
+                    {{ macro.widget_categories(baseline_condition) }}
                 </aside>
             </div>
         </div>
