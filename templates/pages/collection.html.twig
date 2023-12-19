@@ -39,6 +39,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 mb-5 mb-lg-0">
+                    {% if items|length > 0 %}
                     <div class="border mb-5 pt-4 rounded">
                         <div class="row mx-0 g-5">
                             {% for item in items %}
@@ -50,13 +51,15 @@
                     </div>
 
                     {{ macro.pagination(pages, index, {name: _route, parameters}) }}
+                    {% else %}
+                        <div class="alert alert-warning">
+                            No articles found here.
+                        </div>
+                    {% endif %}
                 </div>
 
                 <aside class="col-lg-4">
-                    <div class="widget bg-center"></div>
-                    <div class="widget category-widget"></div>
-                    <div class="widget featured-widget "></div>
-                    <div class="widget newsletter-widget"></div>
+                    {{ macro.widget_categories(condition) }}
                 </aside>
             </div>
         </div>

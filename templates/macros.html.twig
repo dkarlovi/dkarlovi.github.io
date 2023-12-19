@@ -111,3 +111,22 @@
         </nav>
     {% endif %}
 {% endmacro %}
+
+{% macro widget_categories(condition) %}
+    <div class="widget category-widget">
+        <div class="widget-title">
+            <h3 class="h5 title-border">Categories</h3>
+        </div>
+
+        <ul class="list-group list-unstyled">
+            {% for category in yassg_find_all('categories') %}
+                <li>
+                    <a href="{{ url('category', {slug: category.slug}) }}" class="d-flex">
+                        {% set count = yassg_find_all('articles', {condition: condition ~ (condition ? ' and ' : null) ~ '\''~ category.slug ~'\' in item.categories.column("slug")'})|length %}
+                        {{ category.title }} <small class="ms-auto">{{ count }}</small>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endmacro %}
