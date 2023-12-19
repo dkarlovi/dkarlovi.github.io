@@ -22,12 +22,12 @@ final class Article
     public bool $draft = false;
 
     /**
-     * @var Collection<string, ArticleCategory>
+     * @var Collection<string, Taxonomy>
      */
     public Collection $categories;
 
     /**
-     * @var Collection<string, ArticleSeries>
+     * @var Collection<string, Taxonomy>
      */
     public Collection $series;
 

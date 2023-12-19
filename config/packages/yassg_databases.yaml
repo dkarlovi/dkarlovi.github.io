@@ -55,13 +55,13 @@ sigwin_yassg:
                 names: ["*.md"]
         categories:
             storage: filesystem
-            class: App\Model\ArticleCategory
+            class: App\Model\Taxonomy
             options:
                 root: content/categories
                 names: ["*.md"]
         series:
             storage: filesystem
-            class: App\Model\ArticleSeries
+            class: App\Model\Taxonomy
             options:
                 root: content/series
                 names: ["*.md"]

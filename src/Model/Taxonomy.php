@@ -10,11 +10,10 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-final class ArticleCategory
+final class Taxonomy
 {
     public string $title;
     public string $slug;
-
     public string $body;
     public string $image;
 }
