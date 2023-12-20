@@ -1,5 +1,5 @@
 ---
 route: article_collection
-title: Articles
+title: All articles
 ---
-All the published articles.
+All the published articles in chronological order.

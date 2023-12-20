@@ -47,8 +47,9 @@
                             No articles found here.
                         </div>
                     {% endif %}
+                    {% set articles = yassg_find_one_by('pages', {condition: {'item.route': 'article_collection'}}) %}
                     <div class="text-center">
-                        <a href="{{ url('article_collection') }}" class="btn btn-outline-secondary">More</a>
+                        <a href="{{ url(articles.route) }}" class="btn btn-outline-secondary">{{ articles.title }}</a>
                     </div>
                 </div>
 

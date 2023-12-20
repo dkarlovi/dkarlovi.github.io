@@ -32,6 +32,7 @@ sigwin_yassg:
                                 title: Home
                                 page: "@=yassg_get('pages', '/home.md')"
                             articles:
+                                title: Articles
                                 page: "@=yassg_get('pages', '/article_collection.md')"
                                 items:
                                     categories:
