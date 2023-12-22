@@ -173,6 +173,55 @@
             "time": "2023-09-27T20:04:15+00:00"
         },
         {
+            "name": "jsw/commonmark-figure-extension",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JanStanleyWatt/commonmark-figure-extension.git",
+                "reference": "f6c8f8ed420cda5deb3eaffc7b3c11bb95c514cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JanStanleyWatt/commonmark-figure-extension/zipball/f6c8f8ed420cda5deb3eaffc7b3c11bb95c514cd",
+                "reference": "f6c8f8ed420cda5deb3eaffc7b3c11bb95c514cd",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.14",
+                "league/commonmark": "^2.3",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "commonmark-extension",
+            "autoload": {
+                "psr-4": {
+                    "JSW\\Figure\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Stanley Watt",
+                    "email": "github@mail.whojinn.com"
+                }
+            ],
+            "description": "League/commonmark extension for HTML figure and caption.",
+            "keywords": [
+                "commonmark",
+                "extension",
+                "markdown",
+                "md"
+            ],
+            "support": {
+                "email": "github@mail.whojinn.com",
+                "issues": "https://github.com/JanStanleyWatt/commonmark-figure-extension/issues",
+                "source": "https://github.com/JanStanleyWatt/commonmark-figure-extension/tree/1.1.0"
+            },
+            "time": "2023-03-13T11:47:10+00:00"
+        },
+        {
             "name": "league/commonmark",
             "version": "2.4.1",
             "source": {
@@ -1016,21 +1065,22 @@
         },
         {
             "name": "sigwin/yassg",
-            "version": "0.13.4",
+            "version": "0.13.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sigwinhq/yassg.git",
-                "reference": "e4523430cadf2f77f26bcb8d56bf88649e4fd719"
+                "reference": "006e29e94d5f86e99d09051f07b7598f0f551541"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sigwinhq/yassg/zipball/e4523430cadf2f77f26bcb8d56bf88649e4fd719",
-                "reference": "e4523430cadf2f77f26bcb8d56bf88649e4fd719",
+                "url": "https://api.github.com/repos/sigwinhq/yassg/zipball/006e29e94d5f86e99d09051f07b7598f0f551541",
+                "reference": "006e29e94d5f86e99d09051f07b7598f0f551541",
                 "shasum": ""
             },
             "require": {
                 "bentools/cartesian-product": "^1.4",
                 "ext-zlib": "*",
+                "jsw/commonmark-figure-extension": "^1.1",
                 "league/commonmark": "^2.3",
                 "php": "^8.2",
                 "phpdocumentor/type-resolver": "^1.0",
@@ -1078,9 +1128,9 @@
             "description": "Yet Another Static Site Generator",
             "support": {
                 "issues": "https://github.com/sigwinhq/yassg/issues",
-                "source": "https://github.com/sigwinhq/yassg/tree/0.13.4"
+                "source": "https://github.com/sigwinhq/yassg/tree/0.13.5"
             },
-            "time": "2023-12-12T13:47:01+00:00"
+            "time": "2023-12-22T09:49:15+00:00"
         },
         {
             "name": "spatie/commonmark-highlighter",
@@ -5052,16 +5102,16 @@
     "packages-dev": [
         {
             "name": "sigwin/infra",
-            "version": "1.8.0",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sigwinhq/infra.git",
-                "reference": "92be586826125073227ab53dcf8368e977db4a20"
+                "reference": "11a5372cab6ecb993dd6403af888bb91cbec3f38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sigwinhq/infra/zipball/92be586826125073227ab53dcf8368e977db4a20",
-                "reference": "92be586826125073227ab53dcf8368e977db4a20",
+                "url": "https://api.github.com/repos/sigwinhq/infra/zipball/11a5372cab6ecb993dd6403af888bb91cbec3f38",
+                "reference": "11a5372cab6ecb993dd6403af888bb91cbec3f38",
                 "shasum": ""
             },
             "require-dev": {
@@ -5077,9 +5127,9 @@
             "description": "Sigwin's default per-project infra",
             "support": {
                 "issues": "https://github.com/sigwinhq/infra/issues",
-                "source": "https://github.com/sigwinhq/infra/tree/1.8.0"
+                "source": "https://github.com/sigwinhq/infra/tree/1.8.2"
             },
-            "time": "2023-12-12T09:25:40+00:00"
+            "time": "2023-12-22T09:35:57+00:00"
         }
     ],
     "aliases": [],

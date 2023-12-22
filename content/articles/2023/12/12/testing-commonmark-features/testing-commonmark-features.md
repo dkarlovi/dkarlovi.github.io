@@ -2,7 +2,7 @@
 title: Testing Commonmark features
 slug: testing-commonmark-features
 summary: We are testing the Commonmark features
-image: ./hello-world.webp
+image: ./ar-sofa.webp
 publishedAt: "2023-12-12"
 draft: false
 categories:
@@ -101,6 +101,7 @@ namespace MyApplication
 }
 ```
 
+^^^
 ```css
 @font-face {
   font-family: Chunkfive; src: url('Chunkfive.otf');
@@ -118,6 +119,7 @@ body, .usertext {
   }
 }
 ```
+^^^ A bit of CSS never hurt anyone
 
 ```javascript
 function $initHighlight(block, cls) {
