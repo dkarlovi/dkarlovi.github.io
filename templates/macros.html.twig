@@ -10,7 +10,6 @@
     {% if item.summary is defined %}
     <meta property="og:description" content="{{ item.summary|e('html_attr') }}">
     {% endif %}
-    <meta property="og:url" content="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
     {% if item.image is defined %}
     <meta property="og:image" content="{{ absolute_url(yassg_thumbnail(item.image, {width: 1200, height: 600, self: item})) }}">
     {% else  %}
