@@ -31,5 +31,7 @@ final class Article
      */
     public Collection $series;
 
+    public array $keywords = [];
+
     public \DateTimeInterface $publishedAt;
 }
