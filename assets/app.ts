@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     dateContainers.forEach(function(container) {
         const days = (Date.now() - new Date(container.title).getTime()) / 86400000;
         const unit = [{unit: 'year', threshold: 365}, {unit: 'month', threshold: 30}, {unit: 'week', threshold: 7}, {unit: 'day', threshold: 1}].find(unit => days >= unit.threshold);
+        if (unit === undefined) {
+            container.innerText = 'Today';
+            return;
+        }
         const relativeTimeValue= -1 * Math.floor(days / unit.threshold);
         container.innerText = new Intl.RelativeTimeFormat('en', { numeric: 'auto' }).format(relativeTimeValue, unit.unit);
     });

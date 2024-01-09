@@ -3,6 +3,7 @@
 
 {% set article = yassg_find_one_by('articles', {condition: {'item.slug': slug}}) %}
 {% set base_condition = app.environment == 'dev' ? null : 'item.draft == false' %}
+{% set breadcrumbs = [article] %}
 
 {% block body %}
     <section class="section-sm">
@@ -17,7 +18,7 @@
                     {% else %}
                         {{ macro.categories_badges(article.categories) }}
                     {% endif %}
-                    <h1 class="h3 mb-4">{{ article.title }}</h1>
+                    <h1 class="mb-4">{{ article.title }}</h1>
                     <ul class="list-inline card-meta d-flex align-items-center mb-4">
                         <li class="list-inline-item d-flex align-items-center">
                             <i class="fas fa-user me-2"></i>
@@ -28,7 +29,10 @@
                             {{ macro.date(article.publishedAt) }}
                         </li>
                     </ul>
-                    {% if article.series %}
+                    {% if article.summary %}
+                        <p class="lead mb-4">{{ article.summary }}</p>
+                    {% endif %}
+                    {% if article.series is defined and article.series|length > 0 %}
                         <div class="alert alert-secondary mx-2">
                             <i class="fas fa-info-circle me-2"></i>
                             <strong>This article is part of a series:</strong>
