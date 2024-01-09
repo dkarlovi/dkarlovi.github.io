@@ -3,6 +3,19 @@
     {% set title = [] %}{% for breadcrumb in breadcrumbs %}{% if breadcrumb.title != home.title %}{% set title = title|merge([breadcrumb.title]) %}{% endif %}{% endfor %}{% set title = title|merge([home.title]) %}
 
     <title>{{ title|join(' - ') }}</title>
+
+    {% set item = breadcrumbs|first %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ title|join(' - ')|e('html_attr') }}">
+    {% if item.summary is defined %}
+    <meta property="og:description" content="{{ item.summary|e('html_attr') }}">
+    {% endif %}
+    <meta property="og:url" content="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
+    {% if item.image is defined %}
+    <meta property="og:image" content="{{ absolute_url(yassg_thumbnail(item.image, {width: 1200, height: 600, self: item})) }}">
+    {% else  %}
+    <meta property="og:image" content="{{ absolute_url(yassg_thumbnail(home.image, {width: 1200, height: 600, self: home})) }}">
+    {% endif %}
 {% endmacro %}
 
 {% macro socials() %}
