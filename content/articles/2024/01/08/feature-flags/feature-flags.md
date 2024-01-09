@@ -79,7 +79,7 @@ Until Symfony introduces native [feature](https://github.com/symfony/symfony/pul
    ^^^ [Image]: The feature flag configuration button 
 3. [configure the bundle](https://github.com/Unleash/unleash-client-symfony/tree/main?tab=readme-ov-file#basic-usage) with the configuration from previous step:
    ```yaml
-   unleash_client:
+   unleash_symfony_client:
        # these values are provided by Gitlab in the previous step
        app_url: 'https://gitlab.com/api/v4/feature_flags/unleash/12345678'
        instance_id: 'your-instance-id'
