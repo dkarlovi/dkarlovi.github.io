@@ -6,3 +6,5 @@
 /composer.lock export-ignore
 /Makefile export-ignore
 content/**/*.webp filter=lfs diff=lfs merge=lfs -text
+content/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+content/**/*.png filter=lfs diff=lfs merge=lfs -text
