@@ -142,14 +142,14 @@
         <div class="container-fluid">
             <span class="navbar-brand">Discuss this article</span>
             <div class="collapse navbar-collapse">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 btn-group-xs">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if article.discussReddit %}
-                    <li class="nav-item btn btn-outline-reddit mx-1">
+                    <li class="nav-item btn btn-outline-reddit btn-icon-link mx-1">
                         <a href="https://www.reddit.com/comments/{{ article.discussReddit }}/" class="nav-link" target="_blank" title="Discuss this article on Reddit"><i class="fab fa-reddit-alien fa-align-center"></i></a>
                     </li>
                     {% endif %}
                     {% if article.discussHackerNews %}
-                    <li class="nav-item btn btn-outline-hacker-news mx-1">
+                    <li class="nav-item btn btn-outline-hacker-news btn-icon-link mx-1">
                         <a href="https://news.ycombinator.com/item?id={{ article.discussHackerNews }}" class="nav-link" target="_blank" title="Discuss this article on HackerNews"><i class="fab fa-hacker-news fa-align-center"></i></a>
                     </li>
                     {% endif %}
