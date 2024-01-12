@@ -64,3 +64,46 @@ h1,h2,h3,h4,h5,h6 {
 
 .content table {
 }
+
+.btn-group-xs > .btn, .btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.btn-outline-reddit {
+    color: #ff4500;
+    background-color: transparent;
+    background-image: none;
+    border-color: #ff4500;
+}
+.btn-outline-reddit .nav-link {
+    color: #ff4500;
+}
+.btn-outline-reddit:hover {
+    color: #fff;
+    background-color: #ff4500;
+    border-color: #ff4500;
+}
+.btn-outline-reddit:hover .nav-link {
+    color: #fff;
+}
+
+.btn-outline-hacker-news {
+    color: #ff6600;
+    background-color: transparent;
+    background-image: none;
+    border-color: #ff6600;
+}
+.btn-outline-hacker-news .nav-link {
+    color: #ff6600;
+}
+.btn-outline-hacker-news:hover {
+    color: #fff;
+    background-color: #ff6600;
+    border-color: #ff6600;
+}
+.btn-outline-hacker-news:hover .nav-link {
+    color: #fff;
+}

@@ -34,4 +34,7 @@ final class Article
     public array $keywords = [];
 
     public \DateTimeInterface $publishedAt;
+
+    public ?string $discussReddit = null;
+    public ?int $discussHackerNews = null;
 }
