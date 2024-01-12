@@ -11,5 +11,8 @@
         "ts-loader": "^9.2.6",
         "typescript": "^5.3.3",
         "webpack-notifier": "^1.15.0"
+    },
+    "dependencies": {
+        "vanilla-cookieconsent": "^2.9.2"
     }
 }
