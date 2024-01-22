@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c67a04ca567282ca368697ddc22c014c",
+    "content-hash": "a65d5c9bfc23baadd00e11599fc2052f",
     "packages": [
         {
             "name": "bentools/cartesian-product",
@@ -1065,16 +1065,16 @@
         },
         {
             "name": "sigwin/yassg",
-            "version": "0.13.5",
+            "version": "0.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sigwinhq/yassg.git",
-                "reference": "006e29e94d5f86e99d09051f07b7598f0f551541"
+                "reference": "10f65a89cffe1c4ea25e7d42cc48a2535daaf314"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sigwinhq/yassg/zipball/006e29e94d5f86e99d09051f07b7598f0f551541",
-                "reference": "006e29e94d5f86e99d09051f07b7598f0f551541",
+                "url": "https://api.github.com/repos/sigwinhq/yassg/zipball/10f65a89cffe1c4ea25e7d42cc48a2535daaf314",
+                "reference": "10f65a89cffe1c4ea25e7d42cc48a2535daaf314",
                 "shasum": ""
             },
             "require": {
@@ -1128,9 +1128,9 @@
             "description": "Yet Another Static Site Generator",
             "support": {
                 "issues": "https://github.com/sigwinhq/yassg/issues",
-                "source": "https://github.com/sigwinhq/yassg/tree/0.13.5"
+                "source": "https://github.com/sigwinhq/yassg/tree/0.14.0"
             },
-            "time": "2023-12-22T09:49:15+00:00"
+            "time": "2024-01-22T14:50:40+00:00"
         },
         {
             "name": "spatie/commonmark-highlighter",
