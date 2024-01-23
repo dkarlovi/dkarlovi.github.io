@@ -1,9 +1,9 @@
 ---
-title: Embrace the boring
+title: Chooseplea boring and flexible, not malleable
 slug: embrace-the-boring
-summary: Working with boring tools, systems and processes is the only way to achieve innovation and creativity.
+summary: Using simple and flexible tools doesn't make your work boring. In fact, it can lead to more exciting results.
 publishedAt: "2024-01-22"
-image: ./gummy-bolt.jpeg
+image: ./melting.jpeg
 # discussReddit: 192j9s9
 # discussHackerNews: 38965854
 categories:
@@ -18,19 +18,20 @@ keywords:
 - boring
 ---
 
-Were you ever crossing a large bridge and, while crossing, tried to freeze-frame yourself there and erase the whole bridge in your mind?
-You're suspended in midair, and you're trying to imagine what would happen if the bridge wasn't there.
+Have you ever imagined what would happen if the bridge you were crossing suddenly disappeared?
+You're suspended in midair, and you're trying to imagine what would happen if the bridge was not there.
 
 You'd fall, of course.
 
 But you don't. The bridge is there, it was there yesterday, and it will almost 100% be there tomorrow, with cars, trucks and trains crossing it safely, even in the worst weather conditions. 
-That's so **outrageously impressive** it should make you want to get out as soon as you cross the bridge, turn around and clap your palms off to the majesty that is that bridge's existence.
+That's so impressive it should make you want to get out as soon as you cross any bridge, turn around and applaud your palms off to the majesty of its existence.
 
-The bridge also really wants to fall down! It wants to fall down all by itself, and it **especially** wants to fall down when you use it, doubly so after the holiday season. 
+It takes a lot of effort to keep a bridge standing!
+It wants to fall down all by itself, and it **especially** wants to fall down when you use it, doubly so after the holiday season. 
 
-Yet, there it stands, we just use it and move on like it's nothing, except we basically levitated across a river.
+Yet, there it stands, we just use it and move on like it's nothing, except we basically levitated across a river. Bridges are magic.
 
-## A bridge too far gone
+## What is this, a bolt for ants?
 
 This is a stainless steel bolt.
 
@@ -38,36 +39,36 @@ This is a stainless steel bolt.
 ![A stainless steel bolt]({{ yassg_thumbnail('./bolt.jpeg', {width: 400}) }})
 ^^^ [Image]: A stainless steel bolt
 
-It does a single thing and does it well: when you tighten it, it stays tight. It doesn't do anything else, it doesn't want to do anything else.
+It has one job: when you tighten it, it stays tight. It doesn't do anything else, it doesn't want to do anything else.
 We use them to build bridges which cross vast distances, submarines which go into deep water, spaceships which go into space, and roller coasters which go into your stomach.
 All those things are amazing, without the bolt being anything more than a bolt.
 
-This is a stainless steel bolt which turns into a gummy bear at random.
+Here's a bolt made of gummy bear.
 
 ^^^
 ![A gummy bear bolt]({{ yassg_thumbnail('./gummy-bolt.jpeg', {width: 400}) }})
 ^^^ [Image]: A gummy bear bolt, yummy!
 
-It's kind of fun how it turns into a gummy bear, but you can't put your weight on it and know what will happen. It only sometimes works as a bolt.
+It's kind of fun how it's a gummy bear, you can also bend it any way you like and make interesting shapes. But you can't put your weight on it and know what will happen. It only somewhat looks as a bolt.
 Would you ride in a submarine using them? Would you cross a bridge made with them?
 
 Why then use them in your software?
 
-## Flexible vs malleable
+## Flexible versus malleable
 
-It is a surprisingly common misconception, especially between junior developers, that the more complex and intricate the tools and languages we use, the more innovative and creative we get to be.
+Many people, especially new engineers, mistakenly think that using complex tools and languages makes us more innovative and creative.
 
-However, the opposite is true. The most effective production components are the mundane, predictable, and boring. The boring is what grants us the safe footing we need to reach for a software equivalent of blasting a person into outer space. The resulting solution gets to be exciting, the tools do not.
+However, the opposite is true. The most effective components are simple, predictable, and boring. The boring is what grants us the bedrock we need to reach for a software equivalent of blasting a person into outer space. **The "into outer space" part is meant to be the exciting part, the tools are not.** You don't need your bolts to be gummy bears to make an interesting bridge, you need them to be bolts while you're designing your crazy bridge within the constraints of still being a safe bridge.
 
-We want **flexible** tools, not **malleable** ones.
+We need flexible tools, not malleable ones.
 
-The main difference is flexible tools provide options, but we stay within the constraints:
-- we add or remove bolts in a bridge
-- we make a 6x6 LEGO plate from smaller plates
+Flexible tools provide options within their constraints. For example, to make a 6x6 LEGO plate, we can combine a 4x6 and 2x6 plate. That's flexibility.
 
-Malleable is when we can change the constraints themselves:
-- change the properties of the bolts themselves to allow making the bridge a different shape
-- melt down a 8x8 LEGO plate and make a 6x6 one
+Malleable means we can change the constraints. For example, to make a 6x6 LEGO plate, we could melt an 8x8 plate with a lighter and pliers.
+
+^^^
+![A lighter melting a blue LEGO plate]({{ yassg_thumbnail('./melting.jpeg', {width: 400}) }})
+^^^ [Image]: Making a 6x6 LEGO plate the malleable way
 
 > The boring is (what) we need to reach for a software equivalent of blasting a person into outer space
 
@@ -77,4 +78,4 @@ We want tools and languages that are boring and predictable. The stack we use mu
 
 ## Conclusion
 
-The boredom of production components is a crucial aspect of the creative and innovative process. Whether in the physical world or not, predictability is the key to unlocking the potential for groundbreaking solutions. Embracing the inherent predictability of production components enables us to build, create, and innovate with confidence, knowing that the foundations we lay are steadfast and dependable.
+Using simple, boring but flexible components is crucial for creativity and innovation. Whether in the physical world or not, predictability is the key to unlocking the potential for groundbreaking solutions. Embracing the inherent predictability of production components enables us to build, create, and innovate with confidence, knowing that we're standing on rock while doing it.
