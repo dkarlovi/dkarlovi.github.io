@@ -4,8 +4,8 @@ slug: choose-boring
 summary: Using simple and flexible tools doesn't make your work boring. In fact, it can lead to more exciting results.
 publishedAt: "2024-01-22"
 image: ./melting.jpeg
-# discussReddit: 192j9s9
-# discussHackerNews: 38965854
+discussReddit: 19dlzl0
+discussHackerNews: 39101887
 categories:
 - "@=yassg_get('categories', '/devops.md')"
 - "@=yassg_get('categories', '/engineering.md')"
