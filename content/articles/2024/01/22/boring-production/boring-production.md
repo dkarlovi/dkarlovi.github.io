@@ -1,6 +1,6 @@
 ---
-title: Chooseplea boring and flexible, not malleable
-slug: embrace-the-boring
+title: Choose boring and flexible, not malleable
+slug: choose-boring
 summary: Using simple and flexible tools doesn't make your work boring. In fact, it can lead to more exciting results.
 publishedAt: "2024-01-22"
 image: ./melting.jpeg
@@ -64,7 +64,7 @@ We need flexible tools, not malleable ones.
 
 Flexible tools provide options within their constraints. For example, to make a 6x6 LEGO plate, we can combine a 4x6 and 2x6 plate. That's flexibility.
 
-Malleable means we can change the constraints. For example, to make a 6x6 LEGO plate, we could melt an 8x8 plate with a lighter and pliers.
+Malleable means we can change the constraints. For example, to make a 6x6 LEGO plate, we could melt a 8x8 plate with a lighter and pliers.
 
 ^^^
 ![A lighter melting a blue LEGO plate]({{ yassg_thumbnail('./melting.jpeg', {width: 400}) }})
