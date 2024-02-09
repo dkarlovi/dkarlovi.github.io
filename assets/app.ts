@@ -1,5 +1,5 @@
 import './styles/app.scss';
-import "vanilla-cookieconsent";
+import * as CookieConsent from "vanilla-cookieconsent";
 
 document.addEventListener('DOMContentLoaded', function () {
     const dateContainers = document.querySelectorAll('.date-container');
@@ -17,115 +17,68 @@ document.addEventListener('DOMContentLoaded', function () {
         container.innerText = new Intl.RelativeTimeFormat('en', {numeric: 'auto'}).format(relativeTimeValue, unit.unit);
     });
 
-    const cc = window.initCookieConsent();
-    cc.run({
-        revision: 1,
-        current_lang: "en",
-        autoclear_cookies: true,
-        page_scripts: true,
-
-        gui_options: {
-            consent_modal: {
+    CookieConsent.run({
+        guiOptions: {
+            consentModal: {
                 layout: "bar",
-                position: "bottom center",
-                transition: "zoom",
-                swap_buttons: true,
+                position: "bottom",
+                equalWeightButtons: true,
+                flipButtons: true
             },
-            settings_modal: {
-                layout: "box", // box/bar
-                position: "left", // left/right
-                transition: "zoom", // zoom/slide
-            },
+            preferencesModal: {
+                layout: "box",
+                position: "right",
+                equalWeightButtons: true,
+                flipButtons: false
+            }
         },
-        languages: {
-            en: {
-                consent_modal: {
-                    title: "We use cookies",
-                    description:
-                        'We use essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent. <button type="button" data-cc="c-settings" class="cc-link">Let me choose</button>',
-                    primary_btn: {
-                        text: "Accept all",
-                        role: "accept_all", // 'accept_selected' or 'accept_all'
-                    },
-                    secondary_btn: {
-                        text: "Reject all",
-                        role: "accept_necessary", // 'settings' or 'accept_necessary'
-                    },
-                },
-                settings_modal: {
-                    title: "Cookie preferences",
-                    save_settings_btn: "Save settings",
-                    accept_all_btn: "Accept all",
-                    reject_all_btn: "Reject all",
-                    close_btn_label: "Close",
-                    cookie_table_headers: [
-                        { col1: "Name" },
-                        { col2: "Domain" },
-                        { col3: "Expiration" },
-                        { col4: "Description" },
-                    ],
-                    blocks: [
-                        {
-                            title: "Cookie usage 📢",
-                            description:
-                                'I use cookies to ensure the basic functionalities of the website and to enhance your online experience. You can choose for each category to opt-in/out whenever you want. For more details relative to cookies and other sensitive data, please read the full <a href="/cookie-policy" class="cc-link">Cookie Policy</a>.',
-                        },
-                        {
-                            title: "Strictly necessary cookies",
-                            description:
-                                "These cookies are essential for the proper functioning of this website",
-                            toggle: {
-                                value: "necessary",
-                                enabled: true,
-                                readonly: true, // cookie categories with readonly=true are all treated as "necessary cookies"
-                            },
-                        },
-                        {
-                            title: "Performance and Analytics cookies",
-                            description:
-                                "These cookies allow the website to remember the choices you have made in the past",
-                            toggle: {
-                                value: "analytics", // your cookie category
-                                enabled: false,
-                                readonly: false,
-                            },
-                            cookie_table: [
-                                // list of all expected cookies
-                                {
-                                    col1: "^_ga", // match all cookies starting with "_ga"
-                                    col2: "google.com",
-                                    col3: "2 years",
-                                    col4: "Google Analytics",
-                                    is_regex: true,
-                                },
-                                {
-                                    col1: "_gid",
-                                    col2: "google.com",
-                                    col3: "1 day",
-                                    col4: "Google Analytics",
-                                },
-                            ],
-                        },
-                        {
-                            title: "Advertisement and Targeting cookies",
-                            description:
-                                "These cookies collect information about how you use the website, which pages you visited and which links you clicked on. All of the data is anonymized and cannot be used to identify you",
-                            toggle: {
-                                value: "targeting",
-                                enabled: false,
-                                readonly: false,
-                            },
-                        },
-                        {
-                            title: "More information",
-                            description:
-                                'For any queries in relation to our policy on cookies and your choices, please <a class="cc-link" href="mailto:dalibor.karlovic@sigwin.company?subject=Cookies+query">contact us</a>.',
-                        },
-                    ],
-                },
+        categories: {
+            necessary: {
+                readOnly: true
             },
+            analytics: {}
         },
-    })
+        language: {
+            default: "en",
+            autoDetect: "browser",
+            translations: {
+                en: {
+                    consentModal: {
+                        title: "Hello traveller, it's cookie time!",
+                        description: "You know what this is about.",
+                        acceptAllBtn: "Accept all",
+                        acceptNecessaryBtn: "Reject all",
+                        showPreferencesBtn: "Manage preferences",
+                    },
+                    preferencesModal: {
+                        title: "Consent Preferences Center",
+                        acceptAllBtn: "Accept all",
+                        acceptNecessaryBtn: "Reject all",
+                        savePreferencesBtn: "Save preferences",
+                        closeIconLabel: "Close modal",
+                        serviceCounterLabel: "Service|Services",
+                        sections: [
+                            {
+                                title: "Cookie Usage",
+                                description: "Cookies for all sorts of things, like remembering your login, your preferences, and what you like to look at.",
+                            },
+                            {
+                                title: "Strictly Necessary Cookies <span class=\"pm__badge\">Always Enabled</span>",
+                                description: "These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms. You can set your browser to block or alert you about these cookies, but some parts of the site will not then work. These cookies do not store any personally identifiable information.",
+                                linkedCategory: "necessary"
+                            },
+                            {
+                                title: "Analytics Cookies",
+                                description: "These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site. All information these cookies collect is aggregated and therefore anonymous. If you do not allow these cookies we will not know when you have visited our site, and will not be able to monitor its performance.",
+                                linkedCategory: "analytics"
+                            },
+                        ]
+                    }
+                }
+            }
+        },
+        disablePageInteraction: true
+    });
 });
 
 // import Collapse from "bootstrap/js/src/collapse";

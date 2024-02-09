@@ -1,7 +1,7 @@
 {
     "require": {
         "php": "^8.2",
-        "sigwin/yassg": "^0.14"
+        "sigwin/yassg": "^1.0"
     },
     "require-dev": {
         "sigwin/infra": "~1.9.0"
