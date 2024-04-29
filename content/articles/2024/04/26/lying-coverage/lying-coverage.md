@@ -4,7 +4,7 @@ slug: lying-coverage
 summary: Code coverage is a metric which does NOT represent how much or how well our code is tested. 
 publishedAt: "2024-04-26"
 image: ./greenwashing.jpeg
-# discussReddit: 19dlzl0
+discussReddit: 1cg0fbz
 # discussHackerNews: 39101887
 categories:
 - "@=yassg_get('categories', '/engineering.md')"
