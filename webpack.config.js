@@ -20,7 +20,10 @@ Encore
         options.hot = true;
         options.watchFiles = [
             './templates/**/*',
-        ]
+        ];
+        options.setupMiddlewares = (middlewares) => {
+            return middlewares.filter(middleware => middleware.name !== "cross-origin-header-check");
+        }
     })
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
@@ -29,7 +32,12 @@ Encore
         config.useBuiltIns = 'usage';
         config.corejs = 3;
     })
-    .enableSassLoader()
+    .enableSassLoader((options) => {
+        options.sassOptions = {
+            silenceDeprecations: ['import'],
+            quietDeps: true,
+        };
+    })
     // .enableTypeScriptLoader()
     .enableIntegrityHashes(Encore.isProduction())
 ;
