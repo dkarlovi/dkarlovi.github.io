@@ -28,7 +28,7 @@ jobs:
                     BASE_URL: ${{ steps.pages.outputs.base_url }}
                 run: make build/docker
             -   name: Upload artifact
-                uses: actions/upload-pages-artifact@v2
+                uses: actions/upload-pages-artifact@v3
                 with:
                     path: ./public
     deploy:
