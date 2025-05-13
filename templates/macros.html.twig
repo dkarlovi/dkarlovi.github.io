@@ -53,6 +53,8 @@
 {% endmacro %}
 
 {% macro card(article) %}
+    {% set about = yassg_find_one_by('pages', {condition: {'item.route':'about'}}) %}
+
     <div class="card">
         {% if article.image %}
             <div class="mb-4 position-relative">
@@ -71,9 +73,11 @@
                 <a class="title-linked" href="{{ url('article', {slug: article.slug}) }}">{{ article.title }}</a>
             </h3>
             <ul class="list-inline card-meta d-flex align-items-center mb-3">
-                <li class="list-inline-item d-flex align-items-center">
-                    <i class="fas fa-user me-2"></i>
-                    <a href="{{ url('about') }}">dkarlovi</a>
+                <li class="list-inline-item me-3">
+                    <a href="{{ url('about') }}" class="d-flex align-items-center text-decoration-none">
+                        <img src="{{ yassg_thumbnail(about.image, {self: article, width: 100, height: 100}) }}" alt="{{ about.title }}" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;" />
+                        <span>dkarlovi</span>
+                    </a>
                 </li>
                 <li class="list-inline-item d-flex align-items-center">
                     <i class="fas fa-calendar me-2"></i>

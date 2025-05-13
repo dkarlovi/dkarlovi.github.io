@@ -2,6 +2,7 @@
 {% import 'macros.html.twig' as macro %}
 
 {% set article = yassg_find_one_by('articles', {condition: {'item.slug': slug}}) %}
+{% set about = yassg_find_one_by('pages', {condition: {'item.route':'about'}}) %}
 {% set base_condition = app.environment == 'dev' ? null : 'item.draft == false' %}
 {% set breadcrumbs = [article] %}
 
@@ -21,9 +22,11 @@
                     <h1 class="mb-4">{{ article.title }}</h1>
                     {{ macro.discuss(article) }}
                     <ul class="list-inline card-meta d-flex align-items-center mb-4">
-                        <li class="list-inline-item d-flex align-items-center">
-                            <i class="fas fa-user me-2"></i>
-                            <a href="{{ url('about') }}">dkarlovi</a>
+                        <li class="list-inline-item me-3">
+                            <a href="{{ url('about') }}" class="d-flex align-items-center text-decoration-none">
+                                <img src="{{ yassg_thumbnail(about.image, {self: article, width: 100, height: 100}) }}" alt="{{ about.title }}" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;" />
+                                <span>dkarlovi</span>
+                            </a>
                         </li>
                         <li class="list-inline-item d-flex align-items-center">
                             <i class="fas fa-calendar me-2"></i>
