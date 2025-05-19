@@ -16,7 +16,6 @@ final class MenuItem
 {
     public ?string $title = null;
     public ?Link $link = null;
-
     public ?Page $page = null;
 
     /**

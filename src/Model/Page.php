@@ -10,11 +10,15 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 final class Page
 {
+    #[Assert\NotBlank]
     public string $title;
+    #[Assert\NotBlank]
     public string $route;
-    public string $summary;
-    public string $body;
-    public string $image;
+    public ?string $summary = null;
+    public ?string $body = null;
+    public ?string $image = null;
 }
