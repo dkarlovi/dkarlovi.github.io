@@ -1,10 +1,12 @@
+@use "sass:color";
+
 body {
   background-color: $body-color;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: lighten($color: $color-primary, $amount: 10);
+  background: color.adjust($color-primary, $lightness: 10%);
   color: $white;
 }
 

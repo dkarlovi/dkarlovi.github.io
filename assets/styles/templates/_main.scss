@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // banner
 .banner {
   background-repeat: no-repeat;
@@ -125,7 +127,7 @@
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: darken($color: $light, $amount: 20);
+      background: color.adjust($light, $lightness: -20%);
   }
 }
 
