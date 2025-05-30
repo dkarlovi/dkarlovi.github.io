@@ -26,7 +26,7 @@ Code coverage measures the percentage of code that has been executed during test
 In fact, misusing code coverage can lead to a false sense of security where developers (and their managers) see magic number get bigger and red checkmarks becoming green, a greenwashing effect which is easy to put on a chart and show to stakeholders, but doesn't actually represent the quality of the codebase.
 
 ^^^
-![Greenwashing]({{ yassg_thumbnail('./greenwashing.jpeg', {width: 600}) }})
+{{ yassg_picture('./greenwashing.jpeg', {width: 600}) }}
 ^^^ [Image]: Greenwashing
 
 ## What is code coverage then?

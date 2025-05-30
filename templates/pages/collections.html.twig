@@ -24,7 +24,7 @@
                     {% for item in items %}
                     <div class="col-sm-3">
                         {# TODO: this is a bit rough, improve support in YASSG #}
-                        {% set count = yassg_find_all('articles', {condition: condition ~ (condition ? ' and ' : null) ~ '\''~ item.slug ~'\' in item.'~type~'.column("slug")'})|length %}
+                        {% set count = yassg_find_all('articles', {condition: condition ~ (condition ? ' and ' : null) ~ '\'' ~ item.slug ~ '\' in item.' ~ type ~ '.column("slug")'})|length %}
 
                         <a class="text-dark fw-bold px-4 py-3 rounded bg-light d-block text-capitalize" href="{{ url(route, {slug: item.slug}) }}"><i class="fas fa-folder me-1"></i> {{ item.title }} ({{ count }})</a>
                     </div>

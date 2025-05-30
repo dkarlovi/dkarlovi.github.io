@@ -36,7 +36,7 @@ Yet, there it stands, we just use it and move on like it's nothing, except we ba
 This is a stainless steel bolt.
 
 ^^^
-![A stainless steel bolt]({{ yassg_thumbnail('./bolt.jpeg', {width: 400}) }})
+{{ yassg_picture('./bolt.jpeg', {width: 400, attrs: {alt: "A stainless steel bolt"}}) }}
 ^^^ [Image]: A stainless steel bolt
 
 It has one job: when you tighten it, it stays tight. It doesn't do anything else, it doesn't want to do anything else.
@@ -46,7 +46,7 @@ All those things are amazing, without the bolt being anything more than a bolt.
 Here's a bolt made of gummy bear.
 
 ^^^
-![A gummy bear bolt]({{ yassg_thumbnail('./gummy-bolt.jpeg', {width: 400}) }})
+{{ yassg_picture('./gummy-bolt.jpeg', {width: 400, attrs: {alt: "A gummy bear bolt"}}) }}
 ^^^ [Image]: A gummy bear bolt, yummy!
 
 It's kind of fun how it's a gummy bear, you can also bend it any way you like and make interesting shapes. But you can't put your weight on it and know what will happen. It only somewhat looks as a bolt.
@@ -67,7 +67,7 @@ Flexible tools provide options within their constraints. For example, to make a 
 Malleable means we can change the constraints. For example, to make a 6x6 LEGO plate, we could melt a 8x8 plate with a lighter and pliers.
 
 ^^^
-![A lighter melting a blue LEGO plate]({{ yassg_thumbnail('./melting.jpeg', {width: 400}) }})
+{{ yassg_picture('./melting.jpeg', {width: 400, attrs: {alt: "A lighter melting a blue LEGO plate"}}) }}
 ^^^ [Image]: Making a 6x6 LEGO plate the malleable way
 
 > The boring is (what) we need to reach for a software equivalent of blasting a person into outer space
