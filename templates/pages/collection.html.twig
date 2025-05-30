@@ -10,7 +10,7 @@
 {% else %}
     {% set parameters = {slug} %}
     {% set collection = yassg_find_one_by(type, {condition: {'item.slug': slug}}) %}
-    {% set condition = condition ~ (condition ? ' and ' : null) ~ '\''~ collection.slug ~'\' in item.'~type~'.column("slug")' %}
+    {% set condition = condition ~ (condition ? ' and ' : null) ~ '\'' ~ collection.slug ~ '\' in item.' ~ type ~ '.column("slug")' %}
     {% set breadcrumbs = [collection, page] %}
 {% endif %}
 

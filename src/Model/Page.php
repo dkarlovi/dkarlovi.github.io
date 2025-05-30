@@ -10,9 +10,10 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use Sigwin\YASSG\Linkable;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class Page
+final class Page implements Linkable
 {
     #[Assert\NotBlank]
     public string $title;
@@ -21,4 +22,14 @@ final class Page
     public ?string $summary = null;
     public ?string $body = null;
     public ?string $image = null;
+
+    public function getLinkRouteName(): string
+    {
+        return $this->route;
+    }
+
+    public function getLinkRouteParameters(): array
+    {
+        return [];
+    }
 }

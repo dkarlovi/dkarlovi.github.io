@@ -2,7 +2,7 @@
 {% import 'macros.html.twig' as macro %}
 
 {% set article = yassg_find_one_by('articles', {condition: {'item.slug': slug}}) %}
-{% set about = yassg_find_one_by('pages', {condition: {'item.route':'about'}}) %}
+{% set about = yassg_find_one_by('pages', {condition: {'item.route': 'about'}}) %}
 {% set base_condition = app.environment == 'dev' ? null : 'item.draft == false' %}
 {% set breadcrumbs = [article] %}
 
@@ -13,7 +13,7 @@
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     {% if article.image %}
                         <div class="position-relative">
-                            <img src="{{ yassg_thumbnail(article.image, {self: article, width: 855, height: 250}) }}" alt="{{ article.title }}" class="img-fluid mb-5 w-100 rounded-4" />
+                            {{ yassg_picture(article.image, {self: article, width: 855, height: 150, attrs: {alt: article.title}, img_attrs: {class: "img-fluid mb-5 w-100 rounded-4"}}) }}
                             {{ macro.categories(article.categories) }}
                         </div>
                     {% else %}
@@ -22,12 +22,7 @@
                     <h1 class="mb-4">{{ article.title }}</h1>
                     {{ macro.discuss(article) }}
                     <ul class="list-inline card-meta d-flex align-items-center mb-4">
-                        <li class="list-inline-item me-3">
-                            <a href="{{ url('about') }}" class="d-flex align-items-center text-decoration-none">
-                                <img src="{{ yassg_thumbnail(about.image, {self: article, width: 100, height: 100}) }}" alt="{{ about.title }}" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;" />
-                                <span>dkarlovi</span>
-                            </a>
-                        </li>
+                        {{ macro.author(about) }}
                         <li class="list-inline-item d-flex align-items-center">
                             <i class="fas fa-calendar me-2"></i>
                             {{ macro.date(article.publishedAt) }}
@@ -47,7 +42,7 @@
                                         {% if series.body %}
                                             <p>{{ series.summary }}</p>
                                         {% endif %}
-                                        {% set condition = base_condition ~ (base_condition ? ' and ' : null) ~ '\''~ series.slug ~'\' in item.series.column("slug")' %}
+                                        {% set condition = base_condition ~ (base_condition ? ' and ' : null) ~ '\'' ~ series.slug ~ '\' in item.series.column("slug")' %}
                                         {% set siblings = yassg_find_all('articles', {condition, sort: {'item.publishedAt': 'asc'}}) %}
                                         <ol class="mx-3">
                                         {% for sibling in siblings %}

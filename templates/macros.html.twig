@@ -12,7 +12,7 @@
     {% endif %}
     {% if item.image is defined and item.image is not null %}
     <meta property="og:image" content="{{ absolute_url(yassg_thumbnail(item.image, {width: 1200, height: 600, self: item})) }}">
-    {% else  %}
+    {% else %}
     <meta property="og:image" content="{{ absolute_url(yassg_thumbnail(home.image, {width: 1200, height: 600, self: home})) }}">
     {% endif %}
 {% endmacro %}
@@ -53,13 +53,13 @@
 {% endmacro %}
 
 {% macro card(article) %}
-    {% set about = yassg_find_one_by('pages', {condition: {'item.route':'about'}}) %}
+    {% set about = yassg_find_one_by('pages', {condition: {'item.route': 'about'}}) %}
 
     <div class="card">
         {% if article.image %}
             <div class="mb-4 position-relative">
                 <a class="title-linked" href="{{ url('article', {slug: article.slug}) }}">
-                    <img src="{{ yassg_thumbnail(article.image, {width: 500, height: 500, self: article}) }}" class="img-fluid w-100 rounded-4" alt="{{ article.title }}"/>
+                    {{ yassg_picture(article.image, {width: 500, height: 500, self: article, attrs: {alt: article.title}, img_attrs: {class: "img-fluid w-100 rounded-4"}}) }}
                 </a>
                 {{ _self.categories(article.categories) }}
             </div>
@@ -73,12 +73,7 @@
                 <a class="title-linked" href="{{ url('article', {slug: article.slug}) }}">{{ article.title }}</a>
             </h3>
             <ul class="list-inline card-meta d-flex align-items-center mb-3">
-                <li class="list-inline-item me-3">
-                    <a href="{{ url('about') }}" class="d-flex align-items-center text-decoration-none">
-                        <img src="{{ yassg_thumbnail(about.image, {self: article, width: 100, height: 100}) }}" alt="{{ about.title }}" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;" />
-                        <span>dkarlovi</span>
-                    </a>
-                </li>
+                {{ _self.author(about) }}
                 <li class="list-inline-item d-flex align-items-center">
                     <i class="fas fa-calendar me-2"></i>
                     {{ _self.date(article.publishedAt) }}
@@ -88,6 +83,15 @@
             <a href="{{ url('article', {slug: article.slug}) }}" class="btn btn-outline-primary btn-sm float-end">Read more</a>
         </div>
     </div>
+{% endmacro %}
+
+{% macro author(page) %}
+    <li class="list-inline-item me-3">
+        <a href="{{ yassg_url(page) }}" class="d-flex align-items-center text-decoration-none">
+            {{ yassg_picture(page.image, {self: page, width: 40, height: 40, attrs: {alt: page.title}, img_attrs: {class: "img-fluid rounded-circle me-2", style: "object-fit: cover"}}) }}
+            <span>dkarlovi</span>
+        </a>
+    </li>
 {% endmacro %}
 
 {% macro categories(categories) %}
@@ -174,7 +178,7 @@
             {% for category in yassg_find_all('categories') %}
                 <li>
                     <a href="{{ url('category', {slug: category.slug}) }}" class="d-flex">
-                        {% set count = yassg_find_all('articles', {condition: condition ~ (condition ? ' and ' : null) ~ '\''~ category.slug ~'\' in item.categories.column("slug")'})|length %}
+                        {% set count = yassg_find_all('articles', {condition: condition ~ (condition ? ' and ' : null) ~ '\'' ~ category.slug ~ '\' in item.categories.column("slug")'})|length %}
                         {{ category.title }} <small class="ms-auto">{{ count }}</small>
                     </a>
                 </li>

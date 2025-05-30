@@ -245,15 +245,15 @@ With a reference later in the document defining the URL location:
 
 No processing:
 
-![Image]({{ yassg_thumbnail(item.image) }})
+{{ yassg_picture(item.image, {attrs: {alt: "image"}}) }}
 
 Max width 300px:
 
-![Image]({{ yassg_thumbnail(item.image, {width: 300}) }})
+{{ yassg_picture(item.image, {width: 300, attrs: {alt: "image"}}) }}
 
 Max dimensions 300x500:
 
-![Image]({{ yassg_thumbnail(item.image, {width: 300, height: 500}) }})
+{{ yassg_picture(item.image, {width: 300, height: 500, attrs: {alt: "image"}}) }}
 
 # Footnotes
 

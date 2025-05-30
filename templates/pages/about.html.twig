@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-12">
-                    <img src="{{ yassg_thumbnail(page.image) }}" alt="{{ page.title }}" class="img-fluid mb-5 w-100 rounded-4"/>
+                    {{ yassg_picture(page.image, {width: 1200, height: 800, attrs: {alt: page.title}, img_attrs: {class: "img-fluid mb-5 w-100 rounded-4"}}) }}
                     <h2 class="mb-3">{{ page.title }}</h2>
                     <div class="content">
                         {{ page.body|raw }}
