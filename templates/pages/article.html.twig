@@ -13,7 +13,7 @@
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     {% if article.image %}
                         <div class="position-relative">
-                            {{ yassg_picture(article.image, {self: article, width: 855, height: 200, attrs: {alt: article.title}, img_attrs: {class: "img-fluid mb-5 w-100 rounded-4"}}) }}
+                            {{ yassg_picture(article.image, {self: article, width: 855, height: 150, attrs: {alt: article.title}, img_attrs: {class: "img-fluid mb-5 w-100 rounded-4"}}) }}
                             {{ macro.categories(article.categories) }}
                         </div>
                     {% else %}
