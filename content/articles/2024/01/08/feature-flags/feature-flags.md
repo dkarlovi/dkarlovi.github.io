@@ -63,7 +63,7 @@ In this case, Gitlab acts as an Unleash server, and your app acts as an Unleash 
 In our Gitlab project, we use **Deploy / Feature flags** to create a new feature flag `waitlist`:
 
 ^^^
-{{ yassg_picture('./screenshot1.png', {width: 800}) }}
+{{ yassg_picture('./screenshot1.png', {width: 800, attrs: {alt: "The feature flag from within Gitlab"}}) }}
 ^^^ [Image]: The feature flag from within Gitlab
 
 This is already enough to start using the feature flag in our app. 
@@ -83,7 +83,7 @@ Until Symfony introduces native [feature](https://github.com/symfony/symfony/pul
    Bundle is either enabled by Flex or enable it manually, see [The Bundle System](https://symfony.com/doc/current/bundles.html).
 2. collect the server API URL and instance ID from Gitlab UI:
    ^^^
-   {{ yassg_picture('./screenshot2.png', {width: 800}) }}
+   {{ yassg_picture('./screenshot2.png', {width: 800, attrs: {alt: "The feature flag configuration button"}}) }}
    ^^^ [Image]: The feature flag configuration button 
 3. [configure the bundle](https://github.com/Unleash/unleash-client-symfony/tree/main?tab=readme-ov-file#basic-usage) with the configuration from previous step:
    ^^^
