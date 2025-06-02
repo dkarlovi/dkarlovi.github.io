@@ -1067,16 +1067,16 @@
         },
         {
             "name": "sigwin/yassg",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sigwinhq/yassg.git",
-                "reference": "3d8d21b0c7b1e9e455e01ec74809c85f24386406"
+                "reference": "e693b393e1a1fcedf15c79b80b142667779af4a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sigwinhq/yassg/zipball/3d8d21b0c7b1e9e455e01ec74809c85f24386406",
-                "reference": "3d8d21b0c7b1e9e455e01ec74809c85f24386406",
+                "url": "https://api.github.com/repos/sigwinhq/yassg/zipball/e693b393e1a1fcedf15c79b80b142667779af4a3",
+                "reference": "e693b393e1a1fcedf15c79b80b142667779af4a3",
                 "shasum": ""
             },
             "require": {
@@ -1128,9 +1128,9 @@
             "description": "Yet Another Static Site Generator",
             "support": {
                 "issues": "https://github.com/sigwinhq/yassg/issues",
-                "source": "https://github.com/sigwinhq/yassg/tree/1.2.3"
+                "source": "https://github.com/sigwinhq/yassg/tree/1.2.4"
             },
-            "time": "2025-05-30T10:13:48+00:00"
+            "time": "2025-06-02T09:26:13+00:00"
         },
         {
             "name": "spatie/commonmark-highlighter",
