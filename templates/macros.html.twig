@@ -49,7 +49,7 @@
 {% endmacro %}
 
 {% macro logo(width) %}
-<img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="{{ width|default(150) }}">
+    {{ yassg_picture('assets/images/logo.png', {width: width|default(150), attrs: {alt: 'logo'}, img_attrs: {class: 'img-fluid'}}) }}
 {% endmacro %}
 
 {% macro card(article) %}
