@@ -59,7 +59,7 @@
         {% if article.image %}
             <div class="mb-4 position-relative">
                 <a class="title-linked" href="{{ url('article', {slug: article.slug}) }}">
-                    {{ yassg_picture(article.image, {width: 500, height: 500, self: article, attrs: {alt: article.title}, img_attrs: {class: "img-fluid w-100 rounded-4"}}) }}
+                    {{ yassg_picture(article.image, {width: 377, height: 377, self: article, attrs: {alt: article.title}, img_attrs: {class: "img-fluid w-100 rounded-4"}}) }}
                 </a>
                 {{ _self.categories(article.categories) }}
             </div>
