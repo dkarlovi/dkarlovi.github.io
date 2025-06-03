@@ -6,12 +6,14 @@
 {% set pages = yassg_pages(type) %}
 
 {% block body %}
-    <section class="py-5 bg-light">
+    <section class="py-5" style="background-image: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.8)), url({{ yassg_thumbnail(page.image, {self: page, width: 1200}) }}); background-size: cover; background-repeat: no-repeat; background-position: center;">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 mx-auto text-center">
-                    <h1 class="h2 mb-0">{{ page.title }}</h1>
+                    <h1 class="h2 mb-0" style="color: white; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;">{{ page.title }}</h1>
+                    <div style="color: white; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;">
                     {{ page.body|raw }}
+                    </div>
                 </div>
             </div>
         </div>
