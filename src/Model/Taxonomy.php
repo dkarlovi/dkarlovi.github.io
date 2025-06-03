@@ -18,7 +18,8 @@ final class Taxonomy
     public string $title;
     #[Assert\NotBlank]
     public string $slug;
-    public ?string $summary = null;
+    #[Assert\NotBlank]
+    public string $summary;
     public ?string $body = null;
     public ?string $image = null;
 }

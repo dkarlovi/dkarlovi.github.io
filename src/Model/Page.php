@@ -19,7 +19,8 @@ final class Page implements Linkable
     public string $title;
     #[Assert\NotBlank]
     public string $route;
-    public ?string $summary = null;
+    #[Assert\NotBlank]
+    public string $summary;
     public ?string $body = null;
     public ?string $image = null;
 
