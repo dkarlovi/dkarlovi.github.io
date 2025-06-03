@@ -2,12 +2,16 @@
 
 {% set page = yassg_find_one_by('pages', {condition: {'item.route': _route}}) %}
 {% block body %}
-    <section class="section">
+    <section class="mt-4">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-12">
-                    {{ yassg_picture(page.image, {width: 1200, height: 800, attrs: {alt: page.title}, img_attrs: {class: "img-fluid mb-5 w-100 rounded-4"}}) }}
-                    <h2 class="mb-3">{{ page.title }}</h2>
+                    <div class="position-relative mb-5">
+                        {{ yassg_picture(page.image, {width: 1200, height: 800, attrs: {alt: page.title}, img_attrs: {fetchpriority: "high", loading: "eager", class: "img-fluid w-100 rounded-4"}}) }}
+                        <div class="position-absolute bottom-0 start-0 w-100 p-4" style="background: rgba(0,0,0,0.6);">
+                            <h2 class="mb-0 text-white">{{ page.title }}</h2>
+                        </div>
+                    </div>
                     <div class="content">
                         {{ page.body|raw }}
                     </div>
