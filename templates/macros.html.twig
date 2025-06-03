@@ -6,8 +6,10 @@
 
     {% set item = breadcrumbs|first %}
     <meta property="og:type" content="website">
+    <meta property="title" content="{{ title|join(' - ')|e('html_attr') }}">
     <meta property="og:title" content="{{ title|join(' - ')|e('html_attr') }}">
     {% if item.summary is defined %}
+    <meta property="description" content="{{ item.summary|e('html_attr') }}">
     <meta property="og:description" content="{{ item.summary|e('html_attr') }}">
     {% endif %}
     {% if item.image is defined and item.image is not null %}
