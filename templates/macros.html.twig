@@ -54,14 +54,18 @@
     {{ yassg_picture('assets/images/logo.png', {width: width|default(150), attrs: {alt: 'logo'}, img_attrs: {class: 'img-fluid'}}) }}
 {% endmacro %}
 
-{% macro card(article) %}
+{% macro card(article, priority) %}
     {% set about = yassg_find_one_by('pages', {condition: {'item.route': 'about'}}) %}
 
     <div class="card">
         {% if article.image %}
             <div class="mb-4 position-relative">
                 <a class="title-linked" href="{{ url('article', {slug: article.slug}) }}">
-                    {{ yassg_picture(article.image, {width: 377, height: 377, self: article, attrs: {alt: article.title}, img_attrs: {class: "img-fluid w-100 rounded-4"}}) }}
+                    {% set img_attrs = {class: "img-fluid w-100 rounded-4"} %}
+                    {% if priority %}
+                        {% set img_attrs = img_attrs|merge({fetchpriority: "high", loading: 'eager'}) %}
+                    {% endif %}
+                    {{ yassg_picture(article.image, {width: 377, height: 377, self: article, attrs: {alt: article.title}, img_attrs}) }}
                 </a>
                 {{ _self.categories(article.categories) }}
             </div>
