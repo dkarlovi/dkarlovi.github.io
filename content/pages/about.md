@@ -1,8 +1,8 @@
 ---
 route: about
 title: About Dalibor
-summary: A little about Dalibor
 image: assets/images/self.jpeg
+summary: A little about Dalibor
 ---
 A bit about me.
 
