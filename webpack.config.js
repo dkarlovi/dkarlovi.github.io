@@ -16,14 +16,12 @@ Encore
         to: 'images/[path][name].[hash:8].[ext]',
     })
     .configureDevServerOptions((options) => {
+        options.allowedHosts = 'all';
         options.liveReload = true;
         options.hot = true;
         options.watchFiles = [
             './templates/**/*',
         ];
-        options.setupMiddlewares = (middlewares) => {
-            return middlewares.filter(middleware => middleware.name !== "cross-origin-header-check");
-        }
     })
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
