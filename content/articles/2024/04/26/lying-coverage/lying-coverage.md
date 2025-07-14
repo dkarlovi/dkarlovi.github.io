@@ -19,6 +19,8 @@ keywords:
 - mutation testing
 ---
 
+https://www.youtube.com/watch?v=oGcLClv_IFU
+
 Many developers (and their managers) mistakenly believe that code coverage measures the percentage of code that has been (thoroughly) tested. Unfortunately, this is not the case.
 
 Code coverage measures the percentage of code that has been executed during testing. This subtle distinction is crucial, as it highlights a significant gap between what developers think they're measuring and what they're actually measuring.

@@ -13,6 +13,10 @@ sigwin_yassg:
                         title: Github
                         url: https://github.com/dkarlovi
                         icon: fab fa-github
+                    youtube:
+                        title: YouTube
+                        url: https://www.youtube.com/@QuickPonderingRocks
+                        icon: fab fa-youtube
                     twitter:
                         title: Twitter
                         url: https://twitter.com/dkarlovi
