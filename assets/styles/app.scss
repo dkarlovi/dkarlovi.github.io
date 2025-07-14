@@ -1,9 +1,9 @@
 $fa-font-display: swap;
 
 @import "bootstrap/scss/bootstrap";
-@import '@fortawesome/fontawesome-free/scss/fontawesome';
-@import '@fortawesome/fontawesome-free/scss/brands';
-@import '@fortawesome/fontawesome-free/scss/solid';
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/brands";
+@import "@fortawesome/fontawesome-free/scss/solid";
 @import "@fontsource/raleway/latin.css";
 @import "@fontsource/merriweather-sans/latin.css";
 @import "../../vendor/scrivo/highlight.php/styles/a11y-dark.css";
@@ -20,23 +20,28 @@ $light: $gray-100;
 // Font Variables
 $font-size: 16.5px;
 $font-scale: 1.25;
-$font-primary: 'Raleway', 'sansa-serif';
-$font-secondary: 'Merriweather Sans', 'sansa-serif';
-$font-icon: 'Font Awesome 6 Free';
+$font-primary: "Raleway", "sansa-serif";
+$font-secondary: "Merriweather Sans", "sansa-serif";
+$font-icon: "Font Awesome 6 Free";
 
 // import theme style
-@import 'mixins';
-@import 'typography';
-@import 'buttons';
-@import 'common';
-@import 'templates/navigation.scss';
-@import 'templates/main.scss';
+@import "mixins";
+@import "typography";
+@import "buttons";
+@import "common";
+@import "templates/navigation.scss";
+@import "templates/main.scss";
 
 ul.table-of-contents {
     display: none;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     a.heading-permalink {
         text-decoration: none;
         transform: translateX(-0.8em);
@@ -54,12 +59,12 @@ h1,h2,h3,h4,h5,h6 {
     }
 }
 
-.content blockquote>blockquote {
+.content blockquote > blockquote {
     background-color: $gray-200;
     margin-top: 0;
     margin-bottom: 0;
 }
-.content blockquote>blockquote>blockquote {
+.content blockquote > blockquote > blockquote {
     background-color: $gray-300;
     margin-top: 0;
     margin-bottom: 0;
@@ -116,6 +121,7 @@ figure p img {
     margin-right: auto;
 }
 
-.content figure p, .content figure blockquote {
+.content figure p,
+.content figure blockquote {
     margin-bottom: 0.5em;
 }
