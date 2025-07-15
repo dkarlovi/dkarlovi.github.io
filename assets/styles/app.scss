@@ -125,3 +125,17 @@ figure p img {
 .content figure blockquote {
     margin-bottom: 0.5em;
 }
+
+.embedded-content {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    margin-bottom: 2em;
+}
+.embedded-content iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
