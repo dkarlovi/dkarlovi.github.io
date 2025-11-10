@@ -2,7 +2,7 @@
     "devDependencies": {
         "@fontsource/merriweather-sans": "^5.0.8",
         "@fontsource/raleway": "^5.0.16",
-        "@fortawesome/fontawesome-free": "^6.5.1",
+        "@fortawesome/fontawesome-free": "^7.1.0",
         "@symfony/webpack-encore": "^5.1.0",
         "bootstrap": "^5.3.2",
         "file-loader": "^6.2.0",
