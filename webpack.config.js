@@ -21,6 +21,7 @@ Encore
         options.hot = true;
         options.watchFiles = [
             './templates/**/*',
+            './content/**/*',
         ];
     })
     .cleanupOutputBeforeBuild()
