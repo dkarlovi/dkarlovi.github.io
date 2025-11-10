@@ -192,6 +192,80 @@ async function decodeFlacToWav(
 ^^^ [Example]: decode FLAC to WAV before tests run, use your imagination for the missing functions
 </aside>
 
+## Full example of `playwright.config.js`
+
+^^^
+```javascript
+async function generateSpeechProjects() {
+    const fixturesDir = join(__dirname, "tests/fixtures");
+
+    try {
+        const files = readdirSync(fixturesDir);
+
+        // Find all FLAC files and decode them to WAV if needed
+        const flacFiles = files.filter(
+            (file) => parse(file).ext.toLowerCase() === ".flac",
+        );
+
+        for (const flacFile of flacFiles) {
+            const { name } = parse(flacFile);
+            const flacPath = join(fixturesDir, flacFile);
+            const wavPath = join(fixturesDir, `${name}.wav`);
+
+            await decodeFlacToWav(flacPath, wavPath);
+        }
+
+        // Now find all WAV files (including newly decoded ones)
+        const updatedFiles = readdirSync(fixturesDir);
+        const wavFiles = updatedFiles.filter(
+            (file) => parse(file).ext.toLowerCase() === ".wav",
+        );
+
+        return wavFiles.map((file) => {
+            const { name } = parse(file);
+            const filePath = join(fixturesDir, file);
+
+            return {
+                name: name,
+                use: {
+                    ...devices["Desktop Chrome"],
+                    channel: "chrome",
+                    launchOptions: {
+                        args: [
+                            "--disable-audio-input",
+                            "--use-fake-device-for-media-stream",
+                            "--use-fake-ui-for-media-stream",
+                            `--use-file-for-fake-audio-capture=${filePath}`,
+                        ],
+                    },
+                },
+                grep: new RegExp(`@${name}`),
+            };
+        });
+    } catch (error) {
+        console.warn(
+            `Warning: Could not process fixtures: ${error instanceof Error ? error.message : String(error)}`,
+        );
+        return [];
+    }
+}
+
+export default defineConfig({
+    projects: [
+        // regular tests
+        {
+            name: "Chrome",
+            use: { ...devices["Desktop Chrome"], channel: "chrome" },
+            grepInvert: /@speech/,
+        },
+        // audio tests
+        ...await generateSpeechProjects(),
+    ],
+});
+
+```
+^^^ [Example]: Full Playwright config for speech recognition testing
+
 That's it, now we're able to add new speech recognition tests by just adding as many new fixture files as we need 
 and asserting against them.
 
