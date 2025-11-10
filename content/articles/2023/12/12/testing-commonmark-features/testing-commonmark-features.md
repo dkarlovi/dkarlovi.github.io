@@ -327,3 +327,30 @@ Quote break.
 > Blockquotes can also be nested...
 >> ...by using additional greater-than signs right next to each other...
 > > > ...or with spaces between arrows.
+
+# Collapsible Asides
+
+You can create collapsible asides by using HTML `<aside>` tags with a `title` attribute:
+
+<aside title="Click to expand this aside">
+
+This is the content inside the aside. It starts collapsed and expands when you click the title.
+
+You can include **any markdown** or HTML content here:
+
+- Lists
+- Code blocks
+- Images
+- Whatever you need!
+
+</aside>
+
+<aside title="Another example aside">
+
+Multiple asides work independently. Each one can be expanded or collapsed separately.
+
+```javascript
+console.log('Code works too!');
+```
+
+</aside>

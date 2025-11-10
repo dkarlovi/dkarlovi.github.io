@@ -25,6 +25,31 @@ document.addEventListener("DOMContentLoaded", function () {
         }).format(relativeTimeValue, unit.unit);
     });
 
+    // Initialize collapsible asides
+    document.querySelectorAll("aside[title]").forEach((aside, index) => {
+        const title = aside.getAttribute("title");
+        const content = aside.innerHTML;
+        const id = `aside-${index}`;
+
+        aside.classList.add("collapsible-aside", "mb-4");
+        aside.innerHTML = `
+            <button class="collapsible-aside-toggle btn-link text-start w-100 d-flex justify-content-between align-items-center p-3 text-decoration-none"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#${id}"
+                    aria-expanded="false"
+                    aria-controls="${id}">
+                <strong>${title}</strong>
+                <i class="fas fa-chevron-down collapsible-aside-icon"></i>
+            </button>
+            <div class="collapse" id="${id}">
+                <div class="collapsible-aside-content p-3">
+                    ${content}
+                </div>
+            </div>
+        `;
+    });
+
     CookieConsent.run({
         guiOptions: {
             consentModal: {
@@ -92,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// import Collapse from "bootstrap/js/src/collapse";
+import Collapse from "bootstrap/js/src/collapse";
 import Dropdown from "bootstrap/js/src/dropdown";
 // import Modal from "bootstrap/js/src/modal";
 import Offcanvas from "bootstrap/js/src/offcanvas";

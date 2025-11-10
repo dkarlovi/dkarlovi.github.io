@@ -139,3 +139,40 @@ figure p img {
     border: 0;
     display: block;
 }
+
+.collapsible-aside {
+    border: 1px solid $border-color;
+    background-color: $body-color;
+}
+
+.collapsible-aside-toggle {
+    border: none;
+    background: none;
+    color: $text-dark;
+    border-radius: 0;
+    transition: none;
+
+    &:hover {
+        background-color: transparent;
+        transition: none;
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+
+    &[aria-expanded="true"] .collapsible-aside-icon {
+        transform: rotate(180deg);
+    }
+}
+
+.collapsible-aside-icon {
+    transition: transform 0.02s ease;
+    font-size: 0.875rem;
+    color: $text-light;
+}
+
+.collapsible-aside-content {
+    border-top: 1px solid $border-color;
+    background-color: $light;
+}
