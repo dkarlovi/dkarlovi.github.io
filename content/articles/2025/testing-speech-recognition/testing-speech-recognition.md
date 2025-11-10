@@ -4,8 +4,7 @@ slug: testing-speech-recognition
 summary: How to automate testing in-browser speech recognition, so you can stop talking to the computer and go back mumbling to yourself.
 publishedAt: "2025-11-10"
 image: ./robot.png
-# discussReddit: 1cg0fbz
-# discussHackerNews: 39101887
+discussReddit: 1otb42r
 categories:
 - "@=yassg_get('categories', '/engineering.md')"
 - "@=yassg_get('categories', '/programming.md')"
