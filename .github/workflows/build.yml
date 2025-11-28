@@ -13,14 +13,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout repository
-                uses: actions/checkout@v3
+                uses: actions/checkout@v6
                 with:
                     lfs: true
             -   name: Checkout LFS objects
                 run: git lfs checkout
             -   name: Setup Pages
                 id: pages
-                uses: actions/configure-pages@v4
+                uses: actions/configure-pages@v5
             -   name: Install dependencies
                 run: make composer/install
             -   name: Build with YASSG
@@ -28,7 +28,7 @@ jobs:
                     BASE_URL: ${{ steps.pages.outputs.base_url }}
                 run: make build/docker
             -   name: Upload artifact
-                uses: actions/upload-pages-artifact@v3
+                uses: actions/upload-pages-artifact@v4
                 with:
                     path: ./public
     deploy:
