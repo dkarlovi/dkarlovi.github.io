@@ -1,6 +1,6 @@
 ---
 route: home
-title: dkarlovi.github.io
+title: Dalibor Karlović
 image: assets/images/self.jpeg
 summary: A web site for Dalibor Karlović, a software engineer and consultant from Croatia.
 ---
