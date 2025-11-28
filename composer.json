@@ -11,6 +11,9 @@
             "App\\": "src"
         }
     },
+    "conflict": {
+        "symfony/dependency-injection": ">= 8.0"
+    },
     "config": {
         "allow-plugins": {
             "symfony/runtime": true
