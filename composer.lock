@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "67b966825ce4a2c73f60e1d40416c5dd",
+    "content-hash": "3cb9d961cbe58610f4c226a3feab3af2",
     "packages": [
         {
             "name": "bentools/cartesian-product",
@@ -6173,16 +6173,16 @@
     "packages-dev": [
         {
             "name": "sigwin/infra",
-            "version": "1.21.0",
+            "version": "1.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sigwinhq/infra.git",
-                "reference": "0c819883db2300585873bc8feea496cb91a9314f"
+                "reference": "4570450a31edd24031539a55829b193f6b5ffa1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sigwinhq/infra/zipball/0c819883db2300585873bc8feea496cb91a9314f",
-                "reference": "0c819883db2300585873bc8feea496cb91a9314f",
+                "url": "https://api.github.com/repos/sigwinhq/infra/zipball/4570450a31edd24031539a55829b193f6b5ffa1e",
+                "reference": "4570450a31edd24031539a55829b193f6b5ffa1e",
                 "shasum": ""
             },
             "require-dev": {
@@ -6198,9 +6198,9 @@
             "description": "Sigwin's default per-project infra",
             "support": {
                 "issues": "https://github.com/sigwinhq/infra/issues",
-                "source": "https://github.com/sigwinhq/infra/tree/1.21.0"
+                "source": "https://github.com/sigwinhq/infra/tree/1.22.0"
             },
-            "time": "2025-10-31T08:54:14+00:00"
+            "time": "2025-11-28T09:26:02+00:00"
         }
     ],
     "aliases": [],
