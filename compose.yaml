@@ -1,6 +1,6 @@
 services:
     app:
-        image: php:8.5.5-alpine
+        image: php:8.5.6-alpine
         environment:
             BASE_URL: ${BASE_URL}
         working_dir: /app
@@ -9,7 +9,7 @@ services:
         tmpfs:
             - /tmp
     webpack:
-        image: node:25-alpine
+        image: node:26-alpine
         environment:
             BASE_URL: ${BASE_URL}
         working_dir: /app
