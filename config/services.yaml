@@ -1,6 +1,0 @@
-services:
-    _defaults:
-        autoconfigure: true
-        autowire: true
-    App\:
-        resource: ../src

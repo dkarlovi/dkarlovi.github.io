@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ArticleMeta from './ArticleMeta.astro';
+import CategoryBadges from './CategoryBadges.astro';
+import { sitePath } from '../lib/urls';
+interface Props { article: CollectionEntry<'articles'>; priority?: boolean; loading?: 'eager' | 'lazy' }
+const { article, priority = false, loading = priority ? 'eager' : 'lazy' } = Astro.props;
+const href = sitePath(`/${article.data.slug ?? article.id}`);
+---
+<div class="card">
+  {article.data.image ? <div class="mb-4 position-relative">
+    <a class="title-linked" href={href}><Image src={article.data.image} width={377} height={377} fit="cover" class="img-fluid w-100 rounded-4 article-card-image" alt={article.data.title} loading={loading} fetchpriority={priority ? 'high' : undefined} decoding="async" /></a>
+    <CategoryBadges references={article.data.categories} overlay />
+  </div> : <CategoryBadges references={article.data.categories} />}
+  <div class="card-body"><h3 class="h4"><a class="title-linked" href={href}>{article.data.title}</a></h3><ArticleMeta article={article} loading={loading} /><p class="card-text mb-4">{article.data.summary}</p><a href={href} class="btn btn-outline-primary btn-sm float-end">Read more <span class="visually-hidden">about {article.data.title}</span></a></div>
+</div>

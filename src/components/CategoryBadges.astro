@@ -1,0 +1,10 @@
+---
+import { getEntries, type CollectionEntry } from 'astro:content';
+import { sitePath } from '../lib/urls';
+interface Props { references: CollectionEntry<'articles'>['data']['categories']; overlay?: boolean }
+const { references, overlay = false } = Astro.props;
+const categories = await getEntries(references);
+---
+<ul class:list={['list-inline', { 'card-badge': overlay }]}>
+  {categories.map(category => <li class="list-inline-item"><a href={sitePath(`/category/${category.id}`)} class="badge badge-primary py-1">{category.data.title}</a></li>)}
+</ul>

@@ -1,0 +1,12 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import { getArticles } from '../../../lib/articles';
+import ArticleCollection from '../../../components/ArticleCollection.astro';
+export const getStaticPaths = (async ({ paginate }) => {
+  const articles = await getArticles();
+  return (await getCollection('categories')).flatMap(intro => paginate(articles.filter(article => article.data.categories.some(ref => ref.id === intro.id)), { pageSize: 20, params: { slug: intro.id }, props: { intro } }));
+}) satisfies GetStaticPaths;
+const { page, intro } = Astro.props;
+---
+<ArticleCollection page={page} intro={intro} parentTitle="Categories" />

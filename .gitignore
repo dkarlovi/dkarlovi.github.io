@@ -1,5 +1,8 @@
 /node_modules/
-/public/
 /var/
 /vendor/
 /index.php
+/dist/
+/.astro/
+/test-results/
+/.yassg-node-modules-backup/

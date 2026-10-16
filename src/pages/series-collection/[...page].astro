@@ -1,0 +1,9 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, getEntry } from 'astro:content';
+import TaxonomyCollection from '../../components/TaxonomyCollection.astro';
+export const getStaticPaths = (async ({ paginate }) => paginate((await getCollection('series')).sort((a,b) => a.data.title.localeCompare(b.data.title)), { pageSize: 20 })) satisfies GetStaticPaths;
+const { page } = Astro.props;
+const intro = (await getEntry('pages', 'series-collection'))!;
+---
+<TaxonomyCollection page={page} intro={intro} kind="series" />

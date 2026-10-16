@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+import { getEntry, render } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import CategorySidebar from '../components/CategorySidebar.astro';
+import banner from '../assets/banner-bg-shape.svg';
+import { getArticles } from '../lib/articles';
+import { sitePath } from '../lib/urls';
+const home = (await getEntry('pages', 'home'))!;
+const about = (await getEntry('pages', 'about'))!;
+const { Content } = await render(home);
+const articles = (await getArticles()).slice(0, 4);
+---
+<SiteLayout>
+<section class="banner text-center text-lg-start" style={`background-image: url('${banner.src}');`}><div class="container"><div class="row align-items-center flex-column-reverse flex-lg-row">
+  <div class="col-lg-6 mb-5 mb-lg-0"><h1 class="banner-title mb-0">{home.data.title}</h1><h2 class="h2 fw-normal mb-4">{about.data.summary}</h2><Content /><div class="text-center mt-4"><a href={sitePath('/about')} class="btn btn-outline-primary">{about.data.title}</a></div></div>
+  {about.data.image && <div class="col-lg-6 col-sm-6 col-9 mx-auto mb-5 mb-lg-0"><Image src={about.data.image!} width={400} height={400} alt={about.data.title} fetchpriority="high" loading="eager" fit="cover" class="img-fluid portrait" /></div>}
+</div></div></section>
+<section class="mt-4 pt-4 pb-4"><div class="container"><div class="section-title"><h2 class="h4 title-border">Recent</h2></div><div class="row"><div class="col-lg-8 mb-5 mb-lg-0">
+  <div class="border mb-5 pt-4 rounded"><div class="row mx-0 g-5">{articles.map((article, i) => <div class="col-sm-6 mb-4"><ArticleCard article={article} loading={i < 2 ? 'eager' : 'lazy'} /></div>)}</div></div>
+  <div class="text-center"><a href={sitePath('/articles')} class="btn btn-outline-secondary">All articles</a></div>
+</div><aside class="col-lg-4"><CategorySidebar /></aside></div></div></section>
+</SiteLayout>
