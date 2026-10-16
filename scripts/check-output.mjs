@@ -37,6 +37,26 @@ const get = (path) => {
     assert.ok(pages.has(file), `Missing route: ${path}`);
     return pages.get(file);
 };
+// A selected section must remain selected on its child routes.
+for (const [path, title] of [
+    ["/articles", "Writing"],
+    ["/about", "About"],
+    ["/categories", "Categories"],
+    ["/category/devops", "Categories"],
+    ["/series-collection", "Series"],
+    ["/series/a-specific-series", "Series"],
+]) {
+    const $ = get(path);
+    for (const nav of $(".site-nav").toArray()) {
+        assert.equal($(nav).find("a[aria-current]").text(), title, `Active navigation: ${path}`);
+    }
+}
+{
+    const $ = get("/category/devops");
+    assert.equal($(".subject-link[aria-current]").length, 1);
+    assert.equal($(".subject-link[aria-current]").attr("href"), base + "/category/devops");
+    assert.equal(get("/articles")(".subject-link[aria-current]").length, 0);
+}
 const knownIllustrativeLinks = new Set(["/blob/master/LICENSE"]);
 let checkedLinks = 0;
 for (const [file, $] of pages) {

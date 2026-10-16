@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import { render, type CollectionEntry } from 'astro:content';
+import PhotoPalette from './PhotoPalette.astro';
+import type { ArticlePalette } from '../lib/palette';
+interface Props {
+    intro: CollectionEntry<'pages'> | CollectionEntry<'categories'> | CollectionEntry<'series'>;
+    palette: ArticlePalette;
+    title?: string;
+    eyebrow?: string;
+}
+const { intro, palette, title = intro.data.title, eyebrow = 'Explore the writing' } = Astro.props;
+const { Content } = await render(intro);
+---
+<section class={intro.data.image ? 'collection-hero' : 'collection-heading'}>
+    {intro.data.image && <figure class="collection-cover">
+        <Image src={intro.data.image} width={1920} alt={intro.data.title} loading="eager" fetchpriority="high" />
+        <PhotoPalette palette={palette} credit={intro.data.imageCredit} />
+    </figure>}
+    <div><p class="eyebrow">{eyebrow}</p><h1>{title}</h1><div class="content"><Content /></div></div>
+</section>

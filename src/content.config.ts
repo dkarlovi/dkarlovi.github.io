@@ -4,6 +4,7 @@ import { z } from "astro/zod";
 // Keep native entry IDs tied to filenames; URL overrides remain separate data.
 const generateId = ({ entry }: { entry: string }) => entry.replace(/\.md$/, "");
 const copy = z.object({ title: z.string(), summary: z.string() });
+const headerCopy = copy.extend({ imageCredit: z.string().optional() });
 const experience = z
     .object({
         accent: z
@@ -51,7 +52,7 @@ const articles = defineCollection({
 });
 const pages = defineCollection({
     loader: glob({ pattern: "*.md", generateId, base: "./src/content/pages" }),
-    schema: ({ image }) => copy.extend({ image: image().optional() }),
+    schema: ({ image }) => headerCopy.extend({ image: image().optional() }),
 });
 
 const categories = defineCollection({
@@ -60,10 +61,10 @@ const categories = defineCollection({
         generateId,
         base: "./src/content/categories",
     }),
-    schema: ({ image }) => copy.extend({ slug: z.string(), image: image().optional() }),
+    schema: ({ image }) => headerCopy.extend({ slug: z.string(), image: image().optional() }),
 });
 const series = defineCollection({
     loader: glob({ pattern: "*.md", generateId, base: "./src/content/series" }),
-    schema: ({ image }) => copy.extend({ slug: z.string(), image: image().optional() }),
+    schema: ({ image }) => headerCopy.extend({ slug: z.string(), image: image().optional() }),
 });
 export const collections = { articles, pages, categories, series };

@@ -42,6 +42,16 @@ try {
     assert.ok(!existsSync(media));
     copyFileSync("src/assets/uploads/testing-speech-recognition-robot.png", media);
     created.push(media);
+    const headerFields =
+        "image: ../../assets/uploads/cms-fixture.png\nimageCredit: CMS header attribution\n";
+    writeFileSync(
+        category,
+        readFileSync(category, "utf8").replace("summary:", headerFields + "summary:"),
+    );
+    write(
+        "src/content/series/cms-fixture.md",
+        `---\ntitle: CMS series\nslug: cms-fixture\nsummary: A series with its own photograph\n${headerFields}---\n`,
+    );
     write(
         "src/content/articles/cms-fixture-plain.md",
         "---\ntitle: Plain CMS article\nsummary: Optional fields omitted\npublishedAt: 2026-01-01\n---\nPlain article body\n",
@@ -67,7 +77,11 @@ try {
             'categories: [programming]\nexperience:\n    headingExperiment: terrain\n    stylesheet: terrain\n    accent: "#006b65"\n    imagePosition: 60% 35%\n    imageCredit: CMS image attribution',
         ),
     );
+    const aboutPath = 'src/content/pages/about.md';
+    originals.set(aboutPath, readFileSync(aboutPath, 'utf8'));
+    writeFileSync(aboutPath, originals.get(aboutPath).replace(/^image:.*$/m, 'image: ../../assets/uploads/cms-fixture.png'));
     build();
+    assert.match(html('cms-fixture-0')('.author img').attr('src'), /cms-fixture/, 'Author avatar follows the About image');
     assert.equal(html("cms-fixture-0")("[data-heading-experiment]").length, 1);
     assert.equal(html("cms-fixture-0")('link[href*="terrain"]').length, 1);
     assert.equal(
@@ -79,6 +93,21 @@ try {
     assert.ok(!existsSync("dist/cms-fixture-draft/index.html"), "No draft route");
     assert.equal(html("articles")(".card").length, 20);
     assert.equal(html(`articles/${lastPage}`)(".card").length, 1);
+    assert.equal(
+        html(`articles/${lastPage}`)(".desktop-navigation a[aria-current]").text(),
+        "Writing",
+    );
+    assert.equal(html("cms-fixture-0")(".desktop-navigation a[aria-current]").text(), "Writing");
+    for (const route of ["category/cms-fixture", "series/cms-fixture"]) {
+        const $ = html(route);
+        assert.match($(".collection-cover img").attr("src"), /cms-fixture/);
+        assert.match($(".collection-cover .photo-credit").text(), /CMS header attribution/);
+        assert.equal($(".collection-cover .photo-palette span").length, 4);
+    }
+    assert.ok(
+        html("articles")(".collection-cover img").length,
+        "All articles uses its content photo",
+    );
     assert.ok(!existsSync(`dist/articles/${lastPage + 1}/index.html`));
     assert.ok(html("articles")('a[href$="/articles/2"]').length > 0);
     assert.ok(
@@ -102,12 +131,36 @@ try {
     );
     assert.equal(sourceTests.status, 0, sourceTests.stdout + sourceTests.stderr);
     // Images are editable/optional; removing one must not break unrelated pages.
-    for (const name of ["home", "about", "category-collection", "series-collection"]) {
+    for (const name of [
+        "home",
+        "about",
+        "article-collection",
+        "category-collection",
+        "series-collection",
+    ]) {
         const path = `src/content/pages/${name}.md`;
+        if (!originals.has(path)) originals.set(path, readFileSync(path, "utf8"));
+        writeFileSync(path, originals.get(path).replace(/^image:.*\n/m, ""));
+    }
+    for (const path of [category, "src/content/series/cms-fixture.md"]) {
         originals.set(path, readFileSync(path, "utf8"));
         writeFileSync(path, originals.get(path).replace(/^image:.*\n/m, ""));
     }
     build();
+    assert.equal(html('cms-fixture-0')('.author img').length, 0, 'Optional About image leaves a text author link');
+    assert.equal(html('cms-fixture-0')('.author strong').text(), 'Dalibor Karlović');
+    for (const route of [
+        "articles",
+        "categories",
+        "series-collection",
+        "category/cms-fixture",
+        "series/cms-fixture",
+    ]) {
+        const $ = html(route);
+        assert.equal($(".collection-cover").length, 0, `Optional header image: ${route}`);
+        assert.equal($(".collection-heading h1").length, 1, `Heading fallback: ${route}`);
+        assert.equal($("body").hasClass("has-hero"), false, `Normal header placement: ${route}`);
+    }
     assert.ok(
         html("")("body").hasClass("without-portrait"),
         "Readable fallback without optional page images",

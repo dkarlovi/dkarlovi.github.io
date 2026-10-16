@@ -1,5 +1,7 @@
 ---
 import Brand from './Brand.astro';
 import Navigation from './Navigation.astro';
+interface Props { isArticle?: boolean }
+const { isArticle = false } = Astro.props;
 ---
-<header class="site-header"><Brand /><details class="mobile-navigation"><summary aria-label="Navigation menu"><span>Menu</span><span class="menu-icon" aria-hidden="true">☰</span></summary><Navigation /></details><div class="desktop-navigation"><Navigation /></div></header>
+<header class="site-header"><Brand /><details class="mobile-navigation"><summary aria-label="Navigation menu"><span>Menu</span><span class="menu-icon" aria-hidden="true">☰</span></summary><Navigation isArticle={isArticle} /></details><div class="desktop-navigation"><Navigation isArticle={isArticle} /></div></header>

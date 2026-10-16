@@ -227,7 +227,7 @@ main {
     list-style: none;
 }
 .site-nav a:not(.icon-link):hover,
-.site-nav a[aria-current="page"] {
+.site-nav a[aria-current] {
     text-decoration: underline;
     text-underline-offset: 6px;
 }
@@ -526,7 +526,6 @@ main {
 }
 .home-actions .secondary {
     color: var(--muted);
-    border: 0;
     font-weight: 400;
 }
 .hero-footnote {
@@ -902,7 +901,7 @@ main {
         gap: 1.5rem;
         margin-top: 1.25rem;
     }
-    .home-actions .text-link {
+    .home-actions .button-link {
         font-size: 0.75rem;
         gap: 1.625rem;
     }
@@ -1170,4 +1169,14 @@ a.icon-link[data-brand]:active {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
+}
+
+.button-link[aria-current] {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+}
+.home-actions .secondary:hover,
+.home-actions .secondary:focus-visible {
+    color: var(--paper);
 }

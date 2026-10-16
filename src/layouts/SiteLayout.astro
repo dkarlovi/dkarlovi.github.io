@@ -35,7 +35,7 @@ const socialImage = new URL(ogImage.src, Astro.site);
 <meta name="theme-color" content="#f7eddd" /><link rel="sitemap" href={sitePath('/sitemap-index.xml')} />
 {stylesheet && <link rel="stylesheet" href={stylesheet} />}
 </head><body class={pageClass} style={palette} data-article={articleId}>
-<a class="skip-link" href="#main">Skip to content</a><SiteHeader /><main id="main"><slot /></main><SiteFooter />
+<a class="skip-link" href="#main">Skip to content</a><SiteHeader isArticle={Boolean(articleId)} /><main id="main"><slot /></main><SiteFooter />
 <script>import '../scripts/app';</script>
 <script is:inline type="text/plain" data-category="analytics" data-src="https://www.googletagmanager.com/gtag/js?id=G-ZYF0F5VGJR" async></script>
 <script is:inline type="text/plain" data-category="analytics">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-ZYF0F5VGJR');</script>

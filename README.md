@@ -43,6 +43,15 @@ Ordinary Markdown, including images:
 
 The filename supplies the article ID and URL (`an-example-article.md` → `/an-example-article`). An optional `slug` frontmatter field overrides its URL. Categories and series contain native collection IDs: `engineering` refers to `src/content/categories/engineering.md`. New articles and images need no generated imports or template changes.
 
+Listing headers use the `image` and optional `imageCredit` frontmatter fields. Set them in `src/content/pages/article-collection.md`, `category-collection.md`, or `series-collection.md` for the main listings, and in each category or series file for its own article listing. For example:
+
+```yaml
+image: ../../assets/uploads/puzzle.jpeg
+imageCredit: Photograph by Dalibor Karlović
+```
+
+The photo supplies the page’s light/dark palette. Omit `image` for a plain heading. Both fields are available in Pages CMS.
+
 Drafts appear in `npm run dev` and are excluded from production article routes, listings, counts, and sitemap. Articles are sorted newest first; series contents are oldest first. Listings use Astro's native pagination with 20 records per page.
 
 Content uses Astro's normal Markdown rendering, GFM, footnotes, and Shiki highlighting. Native heading IDs are the default. Explicit HTML aliases in migrated articles keep old `#content-...` links working. Captions use standard `<figure>`/`<figcaption>` HTML; expandable notes use `<details>`/`<summary>`. Put blank lines around Markdown inside HTML blocks. No custom YASSG syntax or compatibility parser remains.

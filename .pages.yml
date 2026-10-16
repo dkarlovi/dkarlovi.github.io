@@ -98,6 +98,10 @@ content:
             description: Canonical ID; must match the filename without .md.
           - *id002
           - *id003
+          - &headerCredit
+            name: imageCredit
+            type: string
+            label: Header image attribution
           - *id004
     - name: series
       type: collection
@@ -114,6 +118,7 @@ content:
             description: Canonical ID; must match the filename without .md.
           - *id002
           - *id003
+          - *headerCredit
           - *id004
     - name: home
       label: Homepage
@@ -123,6 +128,7 @@ content:
           - *id001
           - *id002
           - *id003
+          - *headerCredit
           - *id004
     - name: about
       label: About
