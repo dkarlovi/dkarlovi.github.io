@@ -1,0 +1,7 @@
+---
+import type { ArticlePalette } from '../lib/palette';
+interface Props { palette: ArticlePalette; credit?: string }
+const { palette, credit } = Astro.props;
+const roles = ['paper', 'ink', 'accent', 'panel'] as const;
+---
+<figcaption class="photo-credit"><ul class="photo-palette" role="list" aria-label="Palette inspired by this image">{roles.map(role => <li><span style={`background:var(--${role})`} role="img" aria-label={`${role}: light ${palette.light[role]}, dark ${palette.dark[role]}`} title={`${role} · Light ${palette.light[role]} / Dark ${palette.dark[role]}`}></span></li>)}</ul><span>{credit ?? 'Image palette'}</span></figcaption>

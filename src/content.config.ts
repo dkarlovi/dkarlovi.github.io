@@ -4,8 +4,37 @@ import { z } from "astro/zod";
 // Keep native entry IDs tied to filenames; URL overrides remain separate data.
 const generateId = ({ entry }: { entry: string }) => entry.replace(/\.md$/, "");
 const copy = z.object({ title: z.string(), summary: z.string() });
+const experience = z
+    .object({
+        accent: z
+            .string()
+            .regex(/^#[a-fA-F0-9]{6}$/, "Use a six-digit hex colour")
+            .optional(),
+        imagePosition: z
+            .string()
+            .regex(/^\d{1,3}% \d{1,3}%$/, "Use two percentage coordinates")
+            .refine(
+                (value) => value.split(" ").every((v) => parseInt(v) <= 100),
+                "Image coordinates must be between 0% and 100%",
+            )
+            .default("50% 45%"),
+        imageCredit: z.string().optional(),
+        stylesheet: z
+            .string()
+            .regex(
+                /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+                "Use a stylesheet name from src/styles/experiences",
+            )
+            .optional(),
+        headingExperiment: z.enum(["none", "terrain"]).default("none"),
+    })
+    .default({ imagePosition: "50% 45%", headingExperiment: "none" });
 const articles = defineCollection({
-    loader: glob({ pattern: "*.md", generateId, base: "./src/content/articles" }),
+    loader: glob({
+        pattern: "*.md",
+        generateId,
+        base: "./src/content/articles",
+    }),
     schema: ({ image }) =>
         copy.extend({
             image: image().optional(),
@@ -15,6 +44,7 @@ const articles = defineCollection({
             categories: z.array(reference("categories")).default([]),
             series: z.array(reference("series")).default([]),
             keywords: z.array(z.string()).default([]),
+            experience,
             discussReddit: z.string().optional(),
             discussHackerNews: z.number().int().optional(),
         }),
@@ -25,7 +55,11 @@ const pages = defineCollection({
 });
 
 const categories = defineCollection({
-    loader: glob({ pattern: "*.md", generateId, base: "./src/content/categories" }),
+    loader: glob({
+        pattern: "*.md",
+        generateId,
+        base: "./src/content/categories",
+    }),
     schema: ({ image }) => copy.extend({ slug: z.string(), image: image().optional() }),
 });
 const series = defineCollection({

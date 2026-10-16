@@ -2,10 +2,8 @@
 import { Image } from 'astro:assets';
 import { getEntry, render } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
-const page = (await getEntry('pages', 'about'))!;
+import SocialLinks from '../components/SocialLinks.astro';
+const page = (await getEntry('pages','about'))!;
 const { Content } = await render(page);
 ---
-<SiteLayout {...page.data}><section class="mt-4"><div class="container"><div class="row mb-5"><div class="col-12">
-  {page.data.image ? <div class="position-relative mb-5"><Image src={page.data.image!} width={1200} height={800} fit="cover" class="img-fluid w-100 rounded-4 about-image" alt={page.data.title} fetchpriority="high" loading="eager" /><div class="position-absolute bottom-0 start-0 w-100 p-4" style="background: rgba(0,0,0,0.6);"><h1 class="h2 mb-0 text-white">{page.data.title}</h1></div></div> : <h1 class="mb-4">{page.data.title}</h1>}
-  <div class="content"><Content /></div>
-</div></div></div></section></SiteLayout>
+<SiteLayout {...page.data} pageClass="about-page"><section class="page-section"><p class="eyebrow">A little about me</p><h1>{page.data.title}</h1>{page.data.image&&<Image src={page.data.image} width={1600} height={1000} fit="cover" class="about-portrait" alt="Dalibor Karlović" loading="eager" fetchpriority="high" />}<div class="content simple-content"><Content /><SocialLinks /></div></section></SiteLayout>

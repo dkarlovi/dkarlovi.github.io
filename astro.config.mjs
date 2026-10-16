@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 const url = new URL(process.env.BASE_URL || "https://dkarlovi.github.io");
 export default defineConfig({
     site: url.origin,
@@ -9,19 +10,5 @@ export default defineConfig({
     trailingSlash: "never",
     integrations: [sitemap({ filter: (page) => !page.endsWith("/404") })],
     markdown: { shikiConfig: { theme: "github-dark" } },
-    vite: {
-        css: {
-            preprocessorOptions: {
-                scss: {
-                    silenceDeprecations: [
-                        "import",
-                        "global-builtin",
-                        "color-functions",
-                        "if-function",
-                    ],
-                    quietDeps: true,
-                },
-            },
-        },
-    },
+    vite: { plugins: [tailwindcss()] },
 });

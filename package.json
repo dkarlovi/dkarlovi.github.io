@@ -13,19 +13,18 @@
     },
     "dependencies": {
         "@astrojs/sitemap": "^3.7.4",
-        "@fontsource/merriweather-sans": "^5.0.8",
-        "@fontsource/raleway": "^5.0.16",
-        "@fortawesome/fontawesome-free": "^7.1.0",
+        "@fontsource/dm-sans": "^5.3.0",
+        "@fontsource/manrope": "^5.3.0",
+        "@tailwindcss/vite": "^4.3.3",
         "astro": "^7.4.0",
-        "bootstrap": "^5.3.2",
+        "sharp": "^0.35.5",
+        "tailwindcss": "^4.3.3",
         "vanilla-cookieconsent": "^3.1.0"
     },
     "devDependencies": {
         "@astrojs/check": "^0.9.10",
         "@playwright/test": "^1.56.0",
-        "@types/bootstrap": "^5.2.10",
         "cheerio": "^1.1.0",
-        "sass": "^1.45.2",
         "typescript": "^5.3.3",
         "yaml": "^2.8.0"
     },

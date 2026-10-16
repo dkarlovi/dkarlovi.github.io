@@ -3,8 +3,4 @@ import type { Page } from 'astro';
 interface Props { page: Page<unknown> }
 const { page } = Astro.props;
 ---
-{page.lastPage > 1 && <nav aria-label="Page navigation"><ul class="pagination align-items-center justify-content-center">
-  <li class="page-item">{page.url.prev ? <a class="page-link" href={page.url.prev}>Previous</a> : <span class="page-link disabled">Previous</span>}</li>
-  <li class="page-item"><span class="page-link active" aria-current="page">{page.currentPage} / {page.lastPage}</span></li>
-  <li class="page-item">{page.url.next ? <a class="page-link" href={page.url.next}>Next</a> : <span class="page-link disabled">Next</span>}</li>
-</ul></nav>}
+{page.lastPage > 1 && <nav aria-label="Page navigation"><ul class="pagination" role="list"><li>{page.url.prev ? <a href={page.url.prev} rel="prev">← Previous</a> : <span class="disabled">Previous</span>}</li><li><span aria-current="page">{page.currentPage} / {page.lastPage}</span></li><li>{page.url.next ? <a href={page.url.next} rel="next">Next →</a> : <span class="disabled">Next</span>}</li></ul></nav>}

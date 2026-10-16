@@ -59,7 +59,23 @@ try {
             `src/content/articles/cms-fixture-${i}.md`,
             `---\ntitle: CMS fixture ${i}\nsummary: A new article written by a CMS\npublishedAt: 2026-01-01\nimage: ../../assets/uploads/cms-fixture.png\ncategories: [programming]\n---\nNew Markdown image:\n\n![CMS upload](../../assets/uploads/cms-fixture.png)\n`,
         );
+    const themed = "src/content/articles/cms-fixture-0.md";
+    writeFileSync(
+        themed,
+        readFileSync(themed, "utf8").replace(
+            "categories: [programming]",
+            'categories: [programming]\nexperience:\n    headingExperiment: terrain\n    stylesheet: terrain\n    accent: "#006b65"\n    imagePosition: 60% 35%\n    imageCredit: CMS image attribution',
+        ),
+    );
     build();
+    assert.equal(html("cms-fixture-0")("[data-heading-experiment]").length, 1);
+    assert.equal(html("cms-fixture-0")('link[href*="terrain"]').length, 1);
+    assert.equal(
+        html("cms-fixture-plain")('[data-heading-experiment], link[href*="terrain"]').length,
+        0,
+    );
+    assert.equal(html("cms-fixture-0")(".photo-palette span").length, 4);
+    assert.match(html("cms-fixture-0")(".photo-credit").text(), /CMS image attribution/);
     assert.ok(!existsSync("dist/cms-fixture-draft/index.html"), "No draft route");
     assert.equal(html("articles")(".card").length, 20);
     assert.equal(html(`articles/${lastPage}`)(".card").length, 1);
@@ -92,6 +108,10 @@ try {
         writeFileSync(path, originals.get(path).replace(/^image:.*\n/m, ""));
     }
     build();
+    assert.ok(
+        html("")("body").hasClass("without-portrait"),
+        "Readable fallback without optional page images",
+    );
     assert.equal(
         html("about")("main h1").text(),
         parse(originals.get("src/content/pages/about.md").split("---")[1]).title,
@@ -127,13 +147,27 @@ try {
     assert.ok(build(false).includes(duplicateSlug));
     unlinkSync(bad);
     created.splice(created.indexOf(bad), 1);
+    for (const [setting, expected] of [
+        ["accent: red", /six-digit hex/],
+        ["imagePosition: 200% 45%", /coordinates/],
+        ["headingExperiment: unknown", /headingExperiment/],
+        ["stylesheet: missing-style", /unknown experience stylesheet/],
+    ]) {
+        write(
+            bad,
+            `---\ntitle: Invalid article experience\nsummary: Reject invalid author settings\npublishedAt: 2026-01-01\nexperience:\n    ${setting}\n---\nInvalid\n`,
+        );
+        assert.match(build(false), expected);
+        unlinkSync(bad);
+        created.splice(created.indexOf(bad), 1);
+    }
     writeFileSync(
         category,
         "---\ntitle: Mismatched taxonomy\nsummary: Invalid ID\nslug: wrong-id\n---\n",
     );
     assert.match(build(false), /cms-fixture.*wrong-id/);
     console.log(
-        "CMS fixture builds passed: native pagination boundary, optional fields/page images, image upload, draft exclusion, empty taxonomy, source tests, and invalid reference/media/slug rejection.",
+        "CMS fixture builds passed: native pagination boundary, optional fields/page images, image upload, draft exclusion, empty taxonomy, source tests, optional article experiences/palettes/stylesheets, and invalid reference/media/slug/experience rejection.",
     );
 } finally {
     for (const [path, source] of originals) writeFileSync(path, source);

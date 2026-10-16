@@ -1,6 +1,5 @@
 ---
 import { socials } from '../data/site';
+import SocialIcon from './SocialIcon.astro';
 ---
-<ul class="list-unstyled social-icons">
-  {socials.map(link => <li class="list-inline-item"><a href={link.url} title={link.title} aria-label={link.title}><i class={link.icon} aria-hidden="true"></i></a></li>)}
-</ul>
+<ul class="social-links flex flex-wrap gap-2" aria-label="Social profiles">{socials.map(link => <li><a class="icon-link" data-brand={link.icon} href={link.url} aria-label={link.title} title={link.title}><SocialIcon name={link.icon} /></a></li>)}</ul>

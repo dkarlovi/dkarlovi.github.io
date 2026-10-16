@@ -1,7 +1,7 @@
 {
     "extends": "astro/tsconfigs/strict",
     "include": [".astro/types.d.ts", "**/*"],
-    "exclude": ["dist", "node_modules", "vendor", "var", ".yassg-node-modules-backup"],
+    "exclude": ["dist", "node_modules"],
     "compilerOptions": {
         "allowImportingTsExtensions": true
     }

@@ -1,6 +1,6 @@
 {
-    "name": "dkarlovi.github.io",
-    "short_name": "dkarlovi.github.io",
+    "name": "Dalibor Karlović",
+    "short_name": "Dalibor",
     "icons": [
         {
             "src": "android-chrome-192x192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "theme_color": "#b7352d",
+    "background_color": "#f7eddd",
     "display": "standalone"
 }

@@ -1,25 +1,27 @@
 ---
-import { Image } from 'astro:assets';
 import { getEntries, render, type CollectionEntry } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import ArticleMeta from '../components/ArticleMeta.astro';
-import CategoryBadges from '../components/CategoryBadges.astro';
-import CategorySidebar from '../components/CategorySidebar.astro';
+import ArticleHero from '../components/ArticleHero.astro';
 import DiscussionLinks from '../components/DiscussionLinks.astro';
 import { getArticles } from '../lib/articles';
+import { imagePalette } from '../lib/image-palette';
+import { paletteStyle } from '../lib/palette';
 import { sitePath } from '../lib/urls';
-export async function getStaticPaths() {
-  return (await getArticles()).map(article => ({ params: { slug: article.data.slug ?? article.id }, props: { article } }));
-}
+export async function getStaticPaths() { return (await getArticles()).map(article => ({ params:{slug:article.data.slug??article.id},props:{article} })); }
 interface Props { article: CollectionEntry<'articles'> }
 const { article } = Astro.props;
 const { Content } = await render(article);
 const series = await getEntries(article.data.series);
 const articles = await getArticles();
+const stylesheets = import.meta.glob<string>('/src/styles/experiences/*.css', { query:'?url', import:'default', eager:true });
+const styleName = article.data.experience.stylesheet;
+const stylesheet = styleName ? stylesheets[`/src/styles/experiences/${styleName}.css`] : undefined;
+if (styleName && !stylesheet) throw new Error(`Article ${article.id}: unknown experience stylesheet "${styleName}"`);
+const palette = await imagePalette(article.data.image, article.data.experience.accent);
 ---
-<SiteLayout {...article.data}><section class="mt-4"><div class="container"><div class="row"><div class="col-lg-8 mb-5 mb-lg-0">
-  {article.data.image && <div class="position-relative"><Image src={article.data.image} width={855} height={150} fit="cover" class="img-fluid mb-5 w-100 rounded-4 article-banner" alt={article.data.title} fetchpriority="high" loading="eager" /><CategoryBadges references={article.data.categories} overlay /></div>}
-  <h1 class="mb-4">{article.data.title}</h1><DiscussionLinks article={article} /><ArticleMeta article={article} loading="eager" /><p class="lead mb-4">{article.data.summary}</p>
-  {series.length > 0 && <div class="alert alert-secondary mx-2"><strong>This article is part of a series:</strong><ul class="list-unstyled mt-2">{series.map(series => <li><a href={sitePath(`/series/${series.id}`)} class="h6">{series.data.title}</a><p>{series.data.summary}</p><ol class="mx-3">{articles.filter(a => a.data.series.some(ref => ref.id === series.id)).reverse().map(sibling => <li class="mb-0">{sibling.id === article.id ? <span>{sibling.data.title}</span> : <a href={sitePath(`/${sibling.data.slug ?? sibling.id}`)}>{sibling.data.title}</a>}</li>)}</ol></li>)}</ul></div>}
-  <div class="content drop-cap"><Content /></div><DiscussionLinks article={article} />
-</div><aside class="col-lg-4"><CategorySidebar /></aside></div></div></section></SiteLayout>
+<SiteLayout {...article.data} pageClass={`article-page ${article.data.image ? 'has-hero' : ''}`} palette={paletteStyle(palette)} stylesheet={stylesheet} articleId={article.id}>
+<ArticleHero article={article} palette={palette} />
+{series.length>0 && <aside class="series-notice"><p class="eyebrow">Part of a series</p>{series.map(entry => <div><h2><a href={sitePath(`/series/${entry.id}`)}>{entry.data.title}</a></h2><p>{entry.data.summary}</p><ol>{articles.filter(a=>a.data.series.some(ref=>ref.id===entry.id)).reverse().map(sibling=><li>{sibling.id===article.id?<span aria-current="page">{sibling.data.title}</span>:<a href={sitePath(`/${sibling.data.slug??sibling.id}`)}>{sibling.data.title}</a>}</li>)}</ol></div>)}</aside>}
+<div class="content article-content"><Content /></div>
+<div class="article-end"><p>Words by <a href={sitePath('/about')}>Dalibor Karlović</a></p><DiscussionLinks article={article} /><a class="text-link" href={sitePath('/articles')}>More to think about <span class="arrow" aria-hidden="true">↗</span></a></div>
+</SiteLayout>

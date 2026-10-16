@@ -61,7 +61,13 @@ for (const [file, $] of pages) {
         "soyKXJT1zDtOEO_En0NAjPTu58_HXX5stvmF5MnVrEA",
     );
     assert.equal($('[data-category="analytics"][data-src]').length, 1);
-    assert.match($("footer").text(), /statichunt/);
+    assert.match($("footer").text(), /Stay curious/);
+    assert.equal($('meta[name="color-scheme"]').attr("content"), "light dark");
+    assert.equal(
+        $("[data-bs-toggle], .navbar, .offcanvas").length,
+        0,
+        `${file}: no Bootstrap controls`,
+    );
     $(".card").each((index, card) => {
         for (const image of $(card).find("img").toArray()) {
             assert.equal(
@@ -129,6 +135,10 @@ for (const article of content.articles) {
     );
     assert.ok($("main").text().includes(article.summary), article.slug ?? article.id);
     assert.ok($(".content").text().trim().length > 0, article.slug ?? article.id);
+    if (article.image) {
+        assert.equal($(".photo-palette span").length, 4, "visible image-derived palette");
+        assert.match($("body").attr("style"), /--paper-dark:#[a-f0-9]{6}/);
+    }
     assert.ok(
         $("time").attr("datetime") === new Date(article.publishedAt).toISOString().slice(0, 10),
     );

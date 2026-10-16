@@ -1,0 +1,11 @@
+---
+import GitHub from '../assets/icons/github.svg';
+import Twitter from '../assets/icons/twitter.svg';
+import YouTube from '../assets/icons/youtube.svg';
+import LinkedIn from '../assets/icons/linkedin.svg';
+const icons = { github: GitHub, twitter: Twitter, youtube: YouTube, linkedin: LinkedIn };
+interface Props { name: keyof typeof icons }
+const { name } = Astro.props;
+const Icon = icons[name];
+---
+<Icon width={20} height={20} aria-hidden="true" focusable="false" />

@@ -1,19 +1,7 @@
 ---
-import { navigation } from '../data/site';
 import { sitePath } from '../lib/urls';
-interface Props { id: string }
-const { id } = Astro.props;
+import SocialLinks from './SocialLinks.astro';
 const current = Astro.url.pathname;
-// Explicit names also work while Bootstrap hides dropdown/offcanvas text.
+const links = [{title:'Writing',path:'/articles'},{title:'Categories',path:'/categories'},{title:'Series',path:'/series-collection'},{title:'About',path:'/about'}];
 ---
-<ul class="navbar-nav my-4 my-lg-0 me-3">
-  {navigation.map(item => <li class:list={['nav-item', { dropdown: item.children, active: current === sitePath(item.path) }]}>
-    {item.children ? <>
-      <button class="nav-link dropdown-toggle" id={`${id}-articles`} data-bs-toggle="dropdown" aria-expanded="false">{item.title}</button>
-      <ul class="dropdown-menu" aria-labelledby={`${id}-articles`}>
-        <li><a class="dropdown-item" href={sitePath(item.path)} aria-label="All articles">All articles</a></li>
-        {item.children.map(child => <li><a class="dropdown-item" href={sitePath(child.path)} aria-label={child.title}>{child.title}</a></li>)}
-      </ul>
-    </> : <a class="nav-link" href={sitePath(item.path)} aria-label={item.title} aria-current={current === sitePath(item.path) ? 'page' : undefined}>{item.title}</a>}
-  </li>)}
-</ul>
+<nav class="site-nav" aria-label="Main navigation"><ul class="flex flex-wrap items-center gap-x-6 gap-y-3">{links.map(link => <li><a href={sitePath(link.path)} aria-current={current === sitePath(link.path) ? 'page' : undefined}>{link.title}</a></li>)}<li><SocialLinks /></li></ul></nav>

@@ -1,0 +1,650 @@
+.has-hero .site-header {
+    color: var(--ink-dark);
+}
+.article-page .brand {
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+.article-page .brand-mark {
+    background: transparent;
+    color: inherit;
+    border: 1px solid currentColor;
+    width: 1.875rem;
+    height: 1.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+.has-hero .site-header :focus-visible {
+    outline-color: currentColor;
+}
+.has-hero .mobile-navigation .site-nav {
+    color: var(--ink);
+}
+.article-hero {
+    position: relative;
+    isolation: isolate;
+    min-height: max(48.75rem, 100svh);
+    color: var(--ink-dark);
+    background: var(--paper-dark);
+}
+.article-cover {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+}
+.article-cover .hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-position: var(--photo-position, 50% 45%);
+}
+.article-hero:not(.without-photo)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            0deg,
+            color-mix(in oklab, var(--paper-dark) 96%, transparent) 0%,
+            color-mix(in oklab, var(--paper-dark) 80%, transparent) 35%,
+            transparent 85%
+        ),
+        linear-gradient(
+            180deg,
+            color-mix(in oklab, var(--paper-dark) 90%, transparent) 0%,
+            color-mix(in oklab, var(--paper-dark) 75%, transparent) 6rem,
+            transparent 18rem
+        );
+}
+.article-heading {
+    position: relative;
+    z-index: 2;
+    min-height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    gap: 1.75rem;
+    padding: 10rem var(--space) 8.5rem;
+}
+.back-link {
+    font-size: 0.6875rem;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 0.4rem;
+}
+.article-heading-copy {
+    width: 100%;
+}
+.article-heading .category-badges {
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+}
+.article-heading h1 {
+    font-size: clamp(3rem, 6vw, 6.5rem);
+    max-width: 19ch;
+    margin: 1.25rem 0 1.5rem;
+    line-height: 1.02;
+    text-shadow: 0 3px 25px #0002;
+}
+.article-summary {
+    font-size: 1.125rem;
+    line-height: 1.65;
+    max-width: 49ch;
+    text-wrap: pretty;
+}
+.hero-author {
+    position: absolute;
+    left: var(--space);
+    bottom: 1.5rem;
+    z-index: 3;
+    color: inherit;
+    gap: 1.5rem;
+    font-size: 0.625rem;
+}
+.hero-author .author {
+    gap: 0.75rem;
+}
+.hero-author img {
+    width: 2.625rem;
+    height: 2.625rem;
+    border: 1px solid #fff5e466;
+}
+.hero-author .author > span {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+.hero-author strong {
+    font-size: 0.75rem;
+}
+.hero-author .author > span > span {
+    font-size: 0.625rem;
+}
+.hero-author time {
+    font-size: 0.625rem;
+}
+.photo-credit {
+    position: absolute;
+    right: var(--space);
+    bottom: 1.7rem;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 0.8rem;
+    font-size: 0.625rem;
+    color: var(--ink-dark);
+    max-width: 48%;
+    text-align: right;
+    text-shadow: 0 1px 8px #0008;
+}
+.photo-palette {
+    display: flex;
+    gap: 3px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    flex-shrink: 0;
+}
+.photo-palette span {
+    display: block;
+    width: 1.0625rem;
+    height: 1.0625rem;
+    border: 1px solid #fff5e499;
+    border-radius: 1px;
+}
+.without-photo {
+    min-height: 33rem;
+    background: var(--panel);
+    color: var(--ink);
+}
+.without-photo .article-heading {
+    padding-top: 4rem;
+}
+.without-photo .hero-author {
+    color: var(--muted);
+}
+/* All prose shares a measure; rich blocks can use the full canvas. */
+.article-content {
+    padding: 4.5rem var(--space);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) min(var(--reading), 100%) minmax(0, 1fr);
+    gap: 1.5rem 0;
+    container-type: inline-size;
+}
+.article-content > * {
+    grid-column: 2;
+    min-width: 0;
+    max-width: 100%;
+}
+.content p,
+.content li {
+    font-size: 1.125rem;
+    line-height: 1.85;
+}
+.content p {
+    text-wrap: pretty;
+}
+.content a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.content a:hover {
+    text-decoration-thickness: 2px;
+}
+.content h1,
+.content h2 {
+    font-size: clamp(2rem, 3vw, 2.625rem);
+    margin-top: 2rem;
+    scroll-margin-top: 2rem;
+}
+.content h3 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+}
+.content h4,
+.content h5,
+.content h6 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+}
+.content ul,
+.content ol {
+    padding-left: 1.6rem;
+    list-style: revert;
+}
+.content li + li {
+    margin-top: 0.6rem;
+}
+.content li > p {
+    margin-block: 1rem;
+}
+.content blockquote {
+    font:
+        italic 1.75rem/1.5 Georgia,
+        serif;
+    border-left: 3px solid var(--accent);
+    padding-left: 1.75rem;
+    margin-block: 1rem;
+}
+.content blockquote p {
+    font: inherit;
+}
+.content blockquote blockquote {
+    margin-top: 1.5rem;
+    font-size: 0.85em;
+}
+.content :not(pre) > code {
+    font-size: 0.85em;
+    background: var(--panel);
+    padding: 0.15rem 0.3rem;
+    border-radius: 0.15rem;
+    overflow-wrap: anywhere;
+}
+.content pre {
+    font:
+        0.875rem/1.9 "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+    padding: 1.75rem 2rem;
+    overflow: auto;
+    max-width: 100%;
+    white-space: pre;
+    border: 1px solid #59636e;
+    border-radius: 3px;
+    background: #24292e !important;
+    color: #e1e4e8;
+    color-scheme: dark;
+    tab-size: 2;
+}
+.content pre code {
+    font: inherit;
+}
+.content pre:focus-visible {
+    outline-offset: -4px;
+}
+.article-content > :is(figure, pre, table, video, iframe, details),
+.article-content > p:has(img) {
+    grid-column: 1/-1;
+    width: 100%;
+    max-width: var(--wide);
+    justify-self: center;
+}
+.content figure {
+    margin-block: 1.5rem;
+    min-width: 0;
+}
+.content figure > pre {
+    width: 100%;
+}
+.content figure img,
+.content p > img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+.content figcaption {
+    font-size: 0.6875rem;
+    text-align: center;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-top: 0.875rem;
+    padding-inline: 0.5rem;
+}
+.content li > figure {
+    width: min(var(--wide), calc(100cqi - 3rem));
+    max-width: none;
+    margin-inline: calc((100% - min(var(--wide), calc(100cqi - 3rem))) / 2);
+}
+.content video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: contain;
+    background: var(--paper-dark);
+}
+.content iframe {
+    max-width: 100%;
+    aspect-ratio: 16/9;
+    height: auto;
+    border: 0;
+}
+.content figure iframe {
+    width: 100%;
+}
+.content table {
+    display: block;
+    overflow: auto;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+}
+.content th,
+.content td {
+    padding: 0.875rem 1.125rem;
+    border: 1px solid var(--line);
+    text-align: start;
+}
+.content th {
+    background: var(--panel);
+    font-weight: 600;
+}
+.content hr {
+    border: 0;
+    border-top: 1px solid var(--line);
+    width: 100%;
+    margin-block: 1.5rem;
+}
+.content details {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 1.5rem;
+}
+.content details > summary {
+    font-weight: 600;
+    font-size: 1rem;
+}
+.content details[open] > summary {
+    margin-bottom: 1.5rem;
+}
+.content details > :not(summary):not(pre):not(figure) {
+    max-width: var(--reading);
+    margin-inline: auto;
+}
+.content details p {
+    margin-block: 1.25rem;
+}
+.content details pre {
+    margin-block: 1.5rem;
+}
+.content .footnotes {
+    font-size: 0.875rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+}
+.content .footnotes p {
+    font-size: inherit;
+}
+.series-notice,
+.article-end {
+    max-width: var(--reading);
+    margin: 3rem auto;
+    padding: 1.5rem;
+    border-top: 1px solid var(--line);
+}
+.series-notice {
+    background: var(--panel);
+    border: 0;
+}
+.series-notice h2 {
+    font-size: 1.25rem;
+    margin: 1rem 0;
+}
+.series-notice p,
+.series-notice li {
+    font-size: 0.875rem;
+}
+.series-notice ol {
+    padding-left: 1.5rem;
+    list-style: decimal;
+}
+.series-notice a {
+    text-decoration: underline;
+}
+.article-end {
+    margin-top: 0;
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.5rem;
+    font-size: 0.8125rem;
+}
+.article-end > p a {
+    font-weight: 600;
+}
+.discussion-links {
+    font-size: 0.8125rem;
+}
+/* Optional article-specific heading experiment. */
+.article-hero.with-experiment {
+    min-height: max(60rem, 100svh);
+}
+.with-experiment .article-heading {
+    padding-top: 8rem;
+    padding-bottom: 8.5rem;
+    gap: 1.375rem;
+}
+.with-experiment .back-link {
+    position: absolute;
+    top: 8.5rem;
+    left: var(--space);
+}
+.with-experiment h1 {
+    font-size: clamp(2.75rem, 4.6vw, 5.25rem);
+    max-width: 23ch;
+    margin-top: 1rem;
+    margin-bottom: 1.125rem;
+}
+.with-experiment .article-summary {
+    font-size: 1rem;
+    max-width: 58ch;
+}
+.heading-experiment {
+    width: min(100%, 40rem);
+    aspect-ratio: 16/9;
+    position: relative;
+    align-self: center;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid #fff5e45c;
+    border-radius: 4px;
+    background: var(--paper-dark);
+    color: var(--ink-dark);
+    box-shadow: 0 1.5rem 4rem #0002;
+}
+.heading-experiment canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+.experiment-topbar {
+    position: absolute;
+    top: 0.9375rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+.experiment-topbar .eyebrow {
+    font-size: 0.5625rem;
+}
+.experiment-topbar button {
+    border: 1px solid currentColor;
+    border-radius: 2rem;
+    padding: 0.3rem 0.8rem;
+    background: var(--paper-dark);
+    font-size: 0.625rem;
+}
+.heading-experiment figcaption {
+    position: absolute;
+    bottom: 0.875rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.5625rem;
+}
+.heading-experiment label {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.625rem;
+}
+.heading-experiment input {
+    width: 5.625rem;
+    accent-color: var(--accent-dark);
+    cursor: pointer;
+}
+.heading-experiment :focus-visible {
+    outline-color: currentColor;
+    outline-offset: 4px;
+}
+@media (max-width: 1000px) {
+    .with-experiment .back-link {
+        position: static;
+    }
+    .heading-experiment {
+        width: min(100%, 37.5rem);
+    }
+    .with-experiment .article-heading {
+        gap: 1.25rem;
+    }
+    .article-hero.with-experiment {
+        min-height: max(63rem, 100svh);
+    }
+}
+@media (max-width: 540px) {
+    .article-page .brand {
+        font-size: 0.75rem;
+        gap: 0.6rem;
+    }
+    .article-page .brand-mark {
+        width: 1.6875rem;
+        height: 1.6875rem;
+        font-size: 0.75rem;
+    }
+    .article-hero {
+        min-height: max(46rem, 100svh);
+    }
+    .article-heading {
+        padding: 8.125rem var(--space) 9.5rem;
+        gap: 1.375rem;
+    }
+    .article-heading h1 {
+        font-size: clamp(2.625rem, 11vw, 3.75rem);
+        max-width: 15ch;
+        margin: 1.125rem 0 1.5rem;
+    }
+    .article-summary {
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+    .article-heading .category-badges {
+        font-size: 0.5625rem;
+    }
+    .hero-author {
+        bottom: 4.25rem;
+        gap: 1rem;
+        font-size: 0.5625rem;
+        max-width: calc(100% - 2 * var(--space));
+    }
+    .hero-author img {
+        width: 2.125rem;
+        height: 2.125rem;
+    }
+    .hero-author strong {
+        font-size: 0.6875rem;
+    }
+    .hero-author .author > span > span,
+    .hero-author time {
+        font-size: 0.5625rem;
+    }
+    .photo-credit {
+        bottom: 1.5rem;
+        font-size: 0.5625rem;
+        max-width: calc(100% - 2 * var(--space));
+        gap: 0.6rem;
+    }
+    .photo-palette span {
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+    .article-content {
+        padding-block: 3rem;
+        row-gap: 1.25rem;
+    }
+    .content p,
+    .content li {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+    .content h1,
+    .content h2 {
+        font-size: 2rem;
+    }
+    .content pre {
+        padding: 1.375rem;
+        font-size: 0.75rem;
+    }
+    .content blockquote {
+        font-size: 1.5rem;
+        padding-left: 1.25rem;
+    }
+    .content figcaption {
+        font-size: 0.625rem;
+    }
+    .content details {
+        padding: 1.25rem;
+    }
+    .series-notice,
+    .article-end {
+        margin-inline: var(--space);
+        padding: 1.25rem 0;
+    }
+    .series-notice {
+        padding: 1.25rem;
+    }
+    .with-experiment .article-heading {
+        padding-top: 7rem;
+        padding-bottom: 9.5rem;
+        gap: 1.3125rem;
+    }
+    .article-hero.with-experiment {
+        min-height: max(55rem, 100svh);
+    }
+    .with-experiment h1 {
+        font-size: clamp(2.375rem, 10vw, 3.375rem);
+        max-width: 17ch;
+    }
+    .with-experiment .article-summary {
+        font-size: 0.9375rem;
+    }
+    .heading-experiment figcaption > span {
+        display: none;
+    }
+    .heading-experiment figcaption {
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: 0.5rem;
+    }
+    .heading-experiment label {
+        font-size: 0.5625rem;
+    }
+    .heading-experiment input {
+        width: 6rem;
+    }
+    .experiment-topbar {
+        top: 0.625rem;
+        left: 0.75rem;
+        right: 0.75rem;
+    }
+    .experiment-topbar button {
+        font-size: 0.5625rem;
+    }
+    .without-photo {
+        min-height: 35rem;
+    }
+    .without-photo .article-heading {
+        padding-top: 3rem;
+    }
+}
