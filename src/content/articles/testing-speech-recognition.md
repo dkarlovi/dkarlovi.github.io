@@ -1,10 +1,11 @@
 ---
 title: Testing speech recognition with Playwright
 slug: testing-speech-recognition
-summary: How to automate testing in-browser speech recognition, so you can stop talking
-    to the computer and go back mumbling to yourself.
-publishedAt: "2025-11-10"
-image: ../../assets/uploads/testing-speech-recognition-robot.png
+summary: How to automate testing in-browser speech recognition, so you can stop talking to the
+    computer and go back mumbling to yourself.
+publishedAt: 2025-11-10
+image:
+    url: ../../assets/uploads/testing-speech-recognition-robot.png
 discussReddit: 1ou4q0b
 categories:
     - engineering

@@ -5,6 +5,7 @@ import { load } from "cheerio";
 import { parse } from "yaml";
 const site = new URL(process.env.BASE_URL || "https://dkarlovi.github.io");
 const base = site.pathname.replace(/\/$/, "");
+const homeData = parse(readFileSync("src/content/pages/home.md", "utf8").split("---")[1]);
 const content = {};
 for (const kind of ["articles", "categories", "series"]) {
     content[kind] = readdirSync(`src/content/${kind}`)
@@ -37,12 +38,51 @@ const get = (path) => {
     assert.ok(pages.has(file), `Missing route: ${path}`);
     return pages.get(file);
 };
+// A selected section must remain selected on its child routes.
+for (const [path, title] of [
+    ["/articles", "Writing"],
+    ["/about", "About"],
+    ["/categories", "Categories"],
+    ["/category/devops", "Categories"],
+    ["/series-collection", "Series"],
+    ["/series/a-specific-series", "Series"],
+]) {
+    const $ = get(path);
+    for (const nav of $(".site-nav").toArray()) {
+        assert.equal($(nav).find("a[aria-current]").text(), title, `Active navigation: ${path}`);
+    }
+}
+{
+    const $ = get("/category/devops");
+    assert.equal($(".subject-link[aria-current]").length, 1);
+    assert.equal($(".subject-link[aria-current]").attr("href"), base + "/category/devops");
+    assert.equal(get("/articles")(".subject-link[aria-current]").length, 0);
+}
 const knownIllustrativeLinks = new Set(["/blob/master/LICENSE"]);
 let checkedLinks = 0;
 for (const [file, $] of pages) {
     if ($('meta[http-equiv="refresh"]').length) continue;
+    assert.ok($("a[data-target-palette]").length > 0, `${file}: destination palettes available`);
+    for (const link of $("a[data-target-palette]").toArray()) {
+        const destination = pages.get(fileFor($(link).attr("data-target-palette")));
+        assert.ok(destination, `${file}: palette target exists`);
+        const roles = Object.fromEntries(
+            (destination("body").attr("style") ?? "").split(";").map((rule) => rule.split(":")),
+        );
+        const target = Object.fromEntries(
+            ($(link).attr("style") ?? "").split(";").map((rule) => rule.split(":")),
+        );
+        for (const [role, value] of Object.entries(roles)) {
+            if (/^--.+-(light|dark)$/.test(role))
+                assert.equal(
+                    target[role.replace("--", "--target-")],
+                    value,
+                    `${file}: target palette matches destination`,
+                );
+        }
+    }
     assert.equal($("html").attr("lang"), "en", file);
-    assert.ok($("title").text().includes("Dalibor Karlović"), file);
+    assert.ok($("title").text().includes(homeData.title), file);
     assert.ok($('meta[name="description"]').attr("content"), file);
     assert.ok(
         $('link[rel="canonical"]')
@@ -61,7 +101,11 @@ for (const [file, $] of pages) {
         "soyKXJT1zDtOEO_En0NAjPTu58_HXX5stvmF5MnVrEA",
     );
     assert.equal($('[data-category="analytics"][data-src]').length, 1);
-    assert.match($("footer").text(), /Stay curious/);
+    if (homeData.footer) {
+        assert.equal($("footer .eyebrow").text(), homeData.footer.eyebrow);
+        assert.equal($("footer h2").text(), homeData.footer.title);
+        assert.ok($("footer").text().includes(homeData.footer.tagline));
+    }
     assert.equal($('meta[name="color-scheme"]').attr("content"), "light dark");
     assert.equal(
         $("[data-bs-toggle], .navbar, .offcanvas").length,
@@ -69,6 +113,21 @@ for (const [file, $] of pages) {
         `${file}: no Bootstrap controls`,
     );
     $(".card").each((index, card) => {
+        assert.equal(
+            $(card).find("h3 a").attr("data-palette-appearance"),
+            "text",
+            "Article titles stay text links",
+        );
+        assert.equal(
+            $(card).children("a").first().attr("data-palette-appearance"),
+            "text",
+            "Article images have no hover surface",
+        );
+        assert.equal(
+            $(card).find(".read-more").attr("data-palette-appearance"),
+            "surface",
+            "Only article buttons get a hover surface",
+        );
         for (const image of $(card).find("img").toArray()) {
             assert.equal(
                 $(image).attr("loading"),
@@ -127,6 +186,26 @@ assert.deepEqual(
 assert.equal(get("/articles")(".card").length, Math.min(content.articles.length, 20));
 for (const article of content.articles) {
     const $ = get(`/${article.slug ?? article.id}`);
+    assert.equal($(".article-end .author").attr("href"), base + "/about");
+    assert.equal($(".article-end .author strong").text(), homeData.title);
+    assert.equal(
+        $(".article-end .author img").attr("src"),
+        $(".hero-author .author img").attr("src"),
+    );
+    for (const [key, brand] of [
+        ["discussReddit", "reddit"],
+        ["discussHackerNews", "hacker-news"],
+    ]) {
+        assert.equal(
+            $(`.discussion-links .icon-link[data-brand="${brand}"] svg`).length,
+            article[key] ? 1 : 0,
+        );
+    }
+    const archiveData = parse(
+        readFileSync("src/content/pages/article-collection.md", "utf8").split("---")[1],
+    );
+    assert.ok($(".article-end > .button-link").text().includes(archiveData.linkLabel));
+    assert.equal($(".article-end > .button-link").attr("href"), base + "/articles");
     assert.equal($("main h1").first().text(), article.title);
     assert.equal(
         $("main .card-meta img").attr("loading"),
@@ -145,6 +224,13 @@ for (const article of content.articles) {
 }
 for (const kind of ["categories", "series"]) {
     for (const taxonomy of content[kind]) {
+        assert.equal(
+            get(`/${kind === "categories" ? "category" : "series"}/${taxonomy.slug}`)(
+                ".category-widget",
+            ).length,
+            kind === "categories" ? 1 : 0,
+            `${kind}: subject navigation belongs only on category listings`,
+        );
         const members = content.articles.filter(
             (a) => !a.draft && (a[kind] ?? []).includes(taxonomy.id),
         );

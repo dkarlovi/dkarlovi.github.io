@@ -1,0 +1,15 @@
+---
+import DestinationLink from './DestinationLink.astro';
+import '../styles/read-more.css';
+interface Props { href: string; title: string }
+const { href, title } = Astro.props;
+---
+<DestinationLink href={href} class="button-link read-more" data-read-disco>
+    <span class="sr-only">Just read it! about {title}</span>
+    <span class="read-more-idle" aria-hidden="true">Just read it! <span class="arrow">↗</span></span>
+    <span class="read-more-stage" aria-hidden="true"><span class="read-more-beam first"></span><span class="read-more-beam second"></span><span class="read-more-floor"></span></span>
+    <span class="read-more-chorus" aria-hidden="true"></span>
+</DestinationLink>
+<script>
+    import '../scripts/read-more';
+</script>

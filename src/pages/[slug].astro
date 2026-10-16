@@ -1,7 +1,9 @@
 ---
-import { getEntries, render, type CollectionEntry } from 'astro:content';
+import DestinationLink from '../components/DestinationLink.astro';
+import { getEntry, getEntries, render, type CollectionEntry } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ArticleHero from '../components/ArticleHero.astro';
+import AuthorLink from '../components/AuthorLink.astro';
 import DiscussionLinks from '../components/DiscussionLinks.astro';
 import { getArticles } from '../lib/articles';
 import { imagePalette } from '../lib/image-palette';
@@ -10,6 +12,7 @@ import { sitePath } from '../lib/urls';
 export async function getStaticPaths() { return (await getArticles()).map(article => ({ params:{slug:article.data.slug??article.id},props:{article} })); }
 interface Props { article: CollectionEntry<'articles'> }
 const { article } = Astro.props;
+const archive = (await getEntry('pages', 'article-collection'))!;
 const { Content } = await render(article);
 const series = await getEntries(article.data.series);
 const articles = await getArticles();
@@ -17,11 +20,11 @@ const stylesheets = import.meta.glob<string>('/src/styles/experiences/*.css', { 
 const styleName = article.data.experience.stylesheet;
 const stylesheet = styleName ? stylesheets[`/src/styles/experiences/${styleName}.css`] : undefined;
 if (styleName && !stylesheet) throw new Error(`Article ${article.id}: unknown experience stylesheet "${styleName}"`);
-const palette = await imagePalette(article.data.image, article.data.experience.accent);
+const palette = await imagePalette(article.data.image?.url, article.data.experience.accent);
 ---
 <SiteLayout {...article.data} pageClass={`article-page ${article.data.image ? 'has-hero' : ''}`} palette={paletteStyle(palette)} stylesheet={stylesheet} articleId={article.id}>
 <ArticleHero article={article} palette={palette} />
-{series.length>0 && <aside class="series-notice"><p class="eyebrow">Part of a series</p>{series.map(entry => <div><h2><a href={sitePath(`/series/${entry.id}`)}>{entry.data.title}</a></h2><p>{entry.data.summary}</p><ol>{articles.filter(a=>a.data.series.some(ref=>ref.id===entry.id)).reverse().map(sibling=><li>{sibling.id===article.id?<span aria-current="page">{sibling.data.title}</span>:<a href={sitePath(`/${sibling.data.slug??sibling.id}`)}>{sibling.data.title}</a>}</li>)}</ol></div>)}</aside>}
+{series.length>0 && <aside class="series-notice"><p class="eyebrow">Part of a series</p>{series.map(entry => <div><h2><DestinationLink href={sitePath(`/series/${entry.id}`)}>{entry.data.title}</DestinationLink></h2><p>{entry.data.summary}</p><ol>{articles.filter(a=>a.data.series.some(ref=>ref.id===entry.id)).reverse().map(sibling=><li>{sibling.id===article.id?<span aria-current="page">{sibling.data.title}</span>:<DestinationLink href={sitePath(`/${sibling.data.slug??sibling.id}`)}>{sibling.data.title}</DestinationLink>}</li>)}</ol></div>)}</aside>}
 <div class="content article-content"><Content /></div>
-<div class="article-end"><p>Words by <a href={sitePath('/about')}>Dalibor Karlović</a></p><DiscussionLinks article={article} /><a class="text-link" href={sitePath('/articles')}>More to think about <span class="arrow" aria-hidden="true">↗</span></a></div>
+<div class="article-end"><div class="article-end-row"><AuthorLink /><DiscussionLinks article={article} /></div>{archive.data.linkLabel && <DestinationLink class="button-link" href={sitePath('/articles')}>{archive.data.linkLabel} <span class="arrow" aria-hidden="true">↗</span></DestinationLink>}</div>
 </SiteLayout>

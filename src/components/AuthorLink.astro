@@ -1,0 +1,14 @@
+---
+import DestinationLink from './DestinationLink.astro';
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { sitePath } from '../lib/urls';
+interface Props { loading?: 'eager' | 'lazy'; size?: number; minutes?: number }
+const { loading = 'lazy', size = 44, minutes } = Astro.props;
+const about = await getEntry('pages', 'about');
+const home = (await getEntry('pages', 'home'))!;
+---
+<DestinationLink appearance="identity" href={sitePath('/about')} class="author">
+    {about?.data.image && <Image src={about.data.image.url} width={size} height={size} fit="cover" style={about.data.image.position ? `object-position:${about.data.image.position}` : undefined} alt="" loading={loading} />}
+    <span><strong class="identity-name">{home.data.title}</strong>{minutes !== undefined && <span>{minutes} min read</span>}</span>
+</DestinationLink>

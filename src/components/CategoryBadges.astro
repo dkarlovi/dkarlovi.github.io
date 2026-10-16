@@ -1,8 +1,9 @@
 ---
+import DestinationLink from './DestinationLink.astro';
 import { getEntries, type CollectionEntry } from 'astro:content';
 import { sitePath } from '../lib/urls';
 interface Props { references: CollectionEntry<'articles'>['data']['categories'] }
 const { references } = Astro.props;
 const categories = await getEntries(references);
 ---
-<ul class="category-badges" role="list">{categories.map(category => <li><a href={sitePath(`/category/${category.id}`)}>{category.data.title}</a></li>)}</ul>
+<ul class="category-badges" role="list">{categories.map(category => <li><DestinationLink href={sitePath(`/category/${category.id}`)}>{category.data.title}</DestinationLink></li>)}</ul>

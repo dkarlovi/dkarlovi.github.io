@@ -1,4 +1,6 @@
 ---
+import DestinationLink from './DestinationLink.astro';
+import ReadMoreLink from './ReadMoreLink.astro';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import CategoryBadges from './CategoryBadges.astro';
@@ -9,6 +11,6 @@ const href = sitePath(`/${article.data.slug ?? article.id}`);
 const date = article.data.publishedAt.toISOString().slice(0,10);
 ---
 <article class="card">
-<a href={href} aria-label={article.data.title}>{article.data.image ? <Image src={article.data.image} width={720} height={460} fit="cover" class="article-card-image" alt={article.data.title} loading={loading} fetchpriority={priority ? 'high' : undefined} /> : <div class="article-card-placeholder" aria-hidden="true">Aa↗</div>}</a>
-<CategoryBadges references={article.data.categories} /><h3><a href={href}>{article.data.title}</a></h3><time class="meta date-container" datetime={date} title={date}>{date}</time><p class="card-text">{article.data.summary}</p><a href={href} class="button-link read-more">Read the article <span class="sr-only">about {article.data.title}</span><span aria-hidden="true" class="arrow">↗</span></a>
+<DestinationLink href={href} aria-label={article.data.title}>{article.data.image ? <Image src={article.data.image.url} width={720} height={460} fit="cover" class="article-card-image" style={article.data.image.position ? `object-position:${article.data.image.position}` : undefined} alt={article.data.image.alt ?? article.data.title} loading={loading} fetchpriority={priority ? 'high' : undefined} /> : <div class="article-card-placeholder" aria-hidden="true">Aa↗</div>}</DestinationLink>
+<CategoryBadges references={article.data.categories} /><h3><DestinationLink href={href}>{article.data.title}</DestinationLink></h3><time class="meta date-container" datetime={date} title={date}>{date}</time><p class="card-text">{article.data.summary}</p><ReadMoreLink href={href} title={article.data.title} />
 </article>

@@ -53,6 +53,10 @@ body {
     }
 }
 html {
+    /* Keep rem-based proportions at least as large as a 2560px-wide layout on 4K.
+       The percentage base preserves browser font preferences; scaling eases off
+       as browser/OS zoom reduces the CSS viewport. */
+    font-size: clamp(100%, calc(100% + 0.625vw - 16px), 150%);
     scroll-behavior: smooth;
 }
 * {
@@ -227,7 +231,7 @@ main {
     list-style: none;
 }
 .site-nav a:not(.icon-link):hover,
-.site-nav a[aria-current="page"] {
+.site-nav a[aria-current] {
     text-decoration: underline;
     text-underline-offset: 6px;
 }
@@ -254,8 +258,12 @@ main {
     margin-bottom: 1.125rem;
 }
 .footer-top h2 {
+    white-space: pre-line;
     font-size: clamp(2.25rem, 4vw, 4rem);
     max-width: 16ch;
+}
+.error-page h1 {
+    white-space: pre-line;
 }
 .footer-bottom {
     display: flex;
@@ -334,18 +342,18 @@ main {
     padding: 0;
     margin: 0;
 }
-.card-meta .author {
+.author {
     display: flex;
     align-items: center;
     gap: 0.7rem;
 }
-.card-meta img {
+.author img {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
     object-position: 50% 30%;
 }
-.card-meta strong {
+.author strong {
     display: block;
     font-weight: 500;
     font-size: 0.75rem;
@@ -388,6 +396,9 @@ main {
     grid-template-columns: minmax(0, 1fr) 13rem;
     gap: 4rem;
     padding: 2rem var(--space) 5rem;
+}
+.listing-layout.without-sidebar {
+    grid-template-columns: minmax(0, 1fr);
 }
 .category-widget {
     padding-top: 1rem;
@@ -526,7 +537,6 @@ main {
 }
 .home-actions .secondary {
     color: var(--muted);
-    border: 0;
     font-weight: 400;
 }
 .hero-footnote {
@@ -589,8 +599,9 @@ main {
     font-size: 0.875rem;
     max-width: 59ch;
 }
-.about-note .text-link {
-    margin-left: auto;
+.about-note > .button-link {
+    margin-inline-start: auto;
+    flex-shrink: 0;
     white-space: nowrap;
 }
 .visuals-section {
@@ -726,9 +737,6 @@ main {
     }
     .about-note {
         flex-wrap: wrap;
-    }
-    .about-note .text-link {
-        margin-left: 0;
     }
 }
 @media (max-width: 800px) {
@@ -902,7 +910,7 @@ main {
         gap: 1.5rem;
         margin-top: 1.25rem;
     }
-    .home-actions .text-link {
+    .home-actions .button-link {
         font-size: 0.75rem;
         gap: 1.625rem;
     }
@@ -1131,6 +1139,8 @@ main {
     --brand-twitter: #1da1f2;
     --brand-youtube: #ff0033;
     --brand-linkedin: #0a66c2;
+    --brand-reddit: #ff4500;
+    --brand-hacker-news: #ff6600;
     --brand-surface-light: #ffffff;
     --brand-surface-dark: #181717;
 }
@@ -1170,4 +1180,119 @@ a.icon-link[data-brand]:active {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
+}
+
+.button-link[aria-current] {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+}
+.home-actions .secondary:hover,
+.home-actions .secondary:focus-visible {
+    color: var(--paper);
+}
+
+.icon-link[data-brand="reddit"] {
+    --brand-color: var(--brand-reddit);
+}
+.icon-link[data-brand="hacker-news"] {
+    --brand-color: var(--brand-hacker-news);
+}
+
+/* Destination colours stay local to the link and appear only during interaction. */
+.destination-link {
+    --target-text-accent: var(--target-accent);
+    --target-paper: var(--target-paper-light);
+    --target-ink: var(--target-ink-light);
+    --target-muted: var(--target-muted-light);
+    --target-accent: var(--target-accent-light);
+    --target-accent-ink: var(--target-accent-ink-light);
+    --target-panel: var(--target-panel-light);
+    --target-line: var(--target-line-light);
+}
+@media (prefers-color-scheme: dark) {
+    .destination-link {
+        --target-paper: var(--target-paper-dark);
+        --target-ink: var(--target-ink-dark);
+        --target-muted: var(--target-muted-dark);
+        --target-accent: var(--target-accent-dark);
+        --target-accent-ink: var(--target-accent-ink-dark);
+        --target-panel: var(--target-panel-dark);
+        --target-line: var(--target-line-dark);
+    }
+}
+a.destination-link[data-target-palette][data-palette-appearance="surface"]:is(
+        :hover,
+        :focus-visible
+    ),
+a.destination-link[data-target-palette][data-palette-appearance="surface"][aria-current][data-current-target] {
+    background-color: var(--target-accent);
+    color: var(--target-accent-ink);
+    border-color: var(--target-accent);
+}
+
+a.destination-link[data-target-palette][data-palette-appearance="text"]:is(:hover, :focus-visible),
+a.destination-link[data-target-palette][data-palette-appearance="text"][aria-current][data-current-target] {
+    color: var(--target-text-accent);
+    text-decoration: underline;
+    text-decoration-color: var(--target-text-accent);
+    text-underline-offset: 6px;
+}
+
+/* Photo-backed headers use the destination's light accent for readable text. */
+.has-hero .site-header .destination-link,
+.article-hero .destination-link,
+.home-page .desktop-navigation .destination-link {
+    --target-text-accent: var(--target-accent-dark);
+}
+.has-hero .mobile-navigation .destination-link,
+.home-page.without-portrait .desktop-navigation .destination-link {
+    --target-text-accent: var(--target-accent);
+}
+@media (max-width: 540px) {
+    .home-page .brand.destination-link {
+        --target-text-accent: var(--target-accent-dark);
+    }
+    .home-page.without-portrait .brand.destination-link {
+        --target-text-accent: var(--target-accent);
+    }
+}
+
+a.destination-link[data-target-palette][data-palette-appearance="identity"]:is(
+        :hover,
+        :focus-visible
+    )
+    .identity-name {
+    color: var(--target-text-accent);
+    text-decoration: underline;
+    text-decoration-color: var(--target-text-accent);
+    text-underline-offset: 6px;
+}
+a.destination-link[data-target-palette][data-palette-appearance="identity"]:is(
+        :hover,
+        :focus-visible
+    )
+    .brand-mark {
+    background-color: var(--target-accent);
+    color: var(--target-accent-ink);
+}
+.article-page
+    a.destination-link[data-target-palette][data-palette-appearance="identity"]:is(
+        :hover,
+        :focus-visible
+    )
+    .brand-mark {
+    background-color: transparent;
+    color: var(--target-text-accent);
+    border-color: var(--target-text-accent);
+}
+
+/* A ring highlights the logo/avatar without changing its size or link surface. */
+a.destination-link[data-target-palette][data-palette-appearance="identity"]:is(
+        :hover,
+        :focus-visible
+    )
+    :is(.brand-mark, img) {
+    outline: 2px solid var(--target-text-accent);
+    outline-offset: 2px;
 }

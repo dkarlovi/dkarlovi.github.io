@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { destinationPalette, pagePalette } from '../lib/content-palettes';
+import { paletteStyle } from '../lib/palette';
+type Props = Omit<HTMLAttributes<'a'>, 'style'> & { style?: string; appearance?: 'text' | 'identity' };
+const { href, class: className, style, appearance, ...attributes } = Astro.props;
+const mode = appearance ?? (String(className ?? '').split(/\s+/).some(name => ['button-link', 'icon-link'].includes(name)) ? 'surface' : 'text');
+const target = href ? await destinationPalette(href, Astro.url) : undefined;
+const current = target ? await pagePalette(Astro.url.pathname) : undefined;
+const targetStyle = target ? paletteStyle(target.palette, 'target-') : undefined;
+---
+<a {...attributes} href={href} class:list={[className, { 'destination-link': Boolean(target) }]}
+    style={[style, targetStyle].filter(Boolean).join(';') || undefined}
+    data-target-palette={target?.path} data-palette-appearance={target ? mode : undefined}
+    data-current-target={target && current?.path === target.path ? true : undefined}><slot /></a>

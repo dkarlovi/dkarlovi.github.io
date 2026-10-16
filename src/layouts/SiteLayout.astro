@@ -1,6 +1,8 @@
 ---
 import { getEntry } from 'astro:content';
-import type { ImageMetadata } from 'astro';
+import { pagePalette } from '../lib/content-palettes';
+import { createPalette, paletteStyle } from '../lib/palette';
+import type { ContentImage } from '../lib/content-image';
 import { getImage } from 'astro:assets';
 import portrait from '../assets/uploads/self.jpeg';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -15,12 +17,13 @@ import '@fontsource/manrope/latin-600.css';
 import '../styles/global.css';
 import '../styles/article.css';
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
-interface Props { title?: string; summary?: string; image?: ImageMetadata; keywords?: string[]; pageClass?: string; palette?: string; stylesheet?: string; articleId?: string }
+interface Props { title?: string; summary?: string; image?: ContentImage; keywords?: string[]; pageClass?: string; palette?: string; stylesheet?: string; articleId?: string }
 const home = (await getEntry('pages', 'home'))!;
-const { title = home.data.title, summary = home.data.summary, image = home.data.image ?? portrait, keywords = [], pageClass = '', palette, stylesheet, articleId } = Astro.props;
+const { title = home.data.title, summary = home.data.summary, image = home.data.image ?? { url: portrait }, keywords = [], pageClass = '', palette, stylesheet, articleId } = Astro.props;
+const resolvedPalette = palette ?? paletteStyle((await pagePalette(Astro.url.pathname))?.palette ?? createPalette([]));
 const fullTitle = title === home.data.title ? title : `${title} - ${home.data.title}`;
 const canonical = new URL(Astro.url.pathname.endsWith('/404') ? sitePath('/404.html') : Astro.url.pathname, Astro.site);
-const ogImage = await getImage({ src: image, width: 1200, height: 600, fit: 'cover' });
+const ogImage = await getImage({ src: image.url, width: 1200, height: 600, fit: 'cover' });
 const socialImage = new URL(ogImage.src, Astro.site);
 ---
 <!doctype html>
@@ -34,8 +37,8 @@ const socialImage = new URL(ogImage.src, Astro.site);
 <link rel="icon" type="image/png" sizes="32x32" href={sitePath('/favicon-32x32.png')} /><link rel="manifest" href={sitePath('/site.webmanifest')} />
 <meta name="theme-color" content="#f7eddd" /><link rel="sitemap" href={sitePath('/sitemap-index.xml')} />
 {stylesheet && <link rel="stylesheet" href={stylesheet} />}
-</head><body class={pageClass} style={palette} data-article={articleId}>
-<a class="skip-link" href="#main">Skip to content</a><SiteHeader /><main id="main"><slot /></main><SiteFooter />
+</head><body class={pageClass} style={resolvedPalette} data-article={articleId}>
+<a class="skip-link" href="#main">Skip to content</a><SiteHeader isArticle={Boolean(articleId)} /><main id="main"><slot /></main><SiteFooter />
 <script>import '../scripts/app';</script>
 <script is:inline type="text/plain" data-category="analytics" data-src="https://www.googletagmanager.com/gtag/js?id=G-ZYF0F5VGJR" async></script>
 <script is:inline type="text/plain" data-category="analytics">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-ZYF0F5VGJR');</script>

@@ -28,7 +28,9 @@ title: An example article
 summary: A short description.
 publishedAt: 2026-10-16
 draft: false
-image: ../../assets/uploads/example.webp
+image:
+    url: ../../assets/uploads/example.webp
+    alt: A useful description
 categories: [engineering]
 series: []
 keywords: [engineering]
@@ -42,6 +44,28 @@ Ordinary Markdown, including images:
 ```
 
 The filename supplies the article ID and URL (`an-example-article.md` → `/an-example-article`). An optional `slug` frontmatter field overrides its URL. Categories and series contain native collection IDs: `engineering` refers to `src/content/categories/engineering.md`. New articles and images need no generated imports or template changes.
+
+Articles, pages, categories, series and gallery photos share one `image` object. Its `url` is required; `credit`, `alt` and `position` are optional. Listing headers read that same object. Set them in `src/content/pages/article-collection.md`, `category-collection.md`, or `series-collection.md` for the main listings, and in each category or series file for its own article listing. For example:
+
+```yaml
+image:
+    url: ../../assets/uploads/puzzle.jpeg
+    credit: Photograph by Dalibor Karlović
+    alt: Golden puzzle pieces against a dark background
+    position: 50% 45%
+```
+
+The photo supplies the page’s light/dark palette. Omit the whole `image` object for a plain heading. All image fields are available together in Pages CMS; `url` retains Astro’s native local-image validation and optimization. A supplied `alt` is used where the photo conveys content; decorative avatars keep empty alt text because the linked author name already identifies them. `position` accepts two percentages from 0% to 100%; omitted positions preserve each placement’s existing crop.
+
+The About entry also supplies the homepage’s introduction card through `homepageTeaser`: `title` and `summary` control its heading and paragraph. About’s top-level `eyebrow` supplies the label on the About page and homepage card; its `linkLabel` supplies both homepage About buttons. The card shares the About image. Edit the card under **About → Homepage introduction** in Pages CMS, or omit the group to hide it. Edit the shared label and button text directly under **About**.
+
+About’s `homepageHero.roles` and `homepageHero.introduction` supply the hero’s role line and introduction paragraph, editable under **About → Homepage hero**. The site-wide logo tagline comes from `brandTagline` in the Homepage entry.
+
+Homepage also owns the remaining homepage and footer content: `hero` (display name and footnote), `ticker`, `writing` (section heading), `gallery` (heading, credit, images, alt text and captions), and `footer` (eyebrow, multiline heading, description and copyright name/location). The footer adds the current year automatically. Homepage’s `title` supplies the shared brand and article author name. All groups are exposed in Pages CMS.
+
+The 404 page’s copy lives in `src/content/pages/not-found.md`, also editable in Pages CMS. Standard interface text remains in the theme: navigation and article controls, pagination, empty states, consent controls, image-palette labels and the optional interactive terrain demo. Social-profile URLs remain in `src/data/site.ts`.
+
+The Articles entry’s `linkLabel` supplies “Explore my writing” in the homepage hero, collection eyebrows and article-footer archive button. Its `title` supplies the homepage archive button (“All articles”), and `discussionHeading` sets the discussion prompt. These are editable under **Article listing** in Pages CMS. Article headings and footers share the same author link; Reddit and Hacker News discussions use branded icon buttons.
 
 Drafts appear in `npm run dev` and are excluded from production article routes, listings, counts, and sitemap. Articles are sorted newest first; series contents are oldest first. Listings use Astro's native pagination with 20 records per page.
 
@@ -90,15 +114,26 @@ The sitemap uses the official Astro integration at `/sitemap-index.xml`. Site pa
 
 ## Article experiences
 
+The theme keeps its normal scale through a 2560 CSS-pixel viewport, then smoothly enlarges rem-based text, spacing and content widths up to 150% at 3840 pixels. This gives unscaled 4K displays the proportions of a 150%-scaled desktop while leaving smaller viewports unchanged. Browser/OS scaling reduces the effective viewport, so the adjustment eases off automatically; browser font preferences remain the base size.
+
 Every article with an image gets a palette extracted by Sharp at build time. The generated light/dark roles colour the article, navigation and footer, with visible swatches beside the photo attribution. Neutral/absent images have a warm fallback. The site honors system theme changes live, without a switcher. No client-side colour extraction or external font requests are needed.
+
+Internal theme links use `DestinationLink.astro` to preview the destination’s palette on hover and keyboard focus. The build-time registry resolves content routes, article slug overrides and pagination, and shares the same light/dark roles with the destination page. Only button-styled links use a matched accent/text pair with a hover background. Ordinary links, including article titles and menu items, colour their text and underline; image links keep their appearance. The logo and article attribution colour the name and outline the mark/avatar, while the logo tagline and reading time stay unchanged. Current-page links stay highlighted, while active parent sections retain the current page’s colours. Home and About intentionally keep the original warm palette (`defaultPalette`), including their link previews. External social/discussion icons retain their brand colours. Use `DestinationLink` in new theme components; links inside ordinary Markdown retain their existing styling.
+
+Article listing buttons hide a silent “Pocket disco” easter egg. A one-second hover or keyboard focus starts four rhythmic “Read it!” phrases, followed by a final thud and 1.4-second hold. The spotlights fade out one at a time, then the stage and text ease back to idle before five seconds of calm. Leaving the button, pressing Escape, hiding the page or enabling reduced motion cancels the animation. The normal link destination and accessible name stay unchanged. The standalone comparison is in `docs/design/just-read-it.html`.
+
+Images in `src/assets/uploads` are processed by Astro’s native image pipeline into responsive variants. Larger replacements keep the component’s intended display sizes (for example, 720 × 460 article cards and 1920-wide hero requests); the browser selects a suitable generated variant. Palette extraction samples at most 80 × 60 pixels and is cached by image and accent. Images remain optional.
 
 Optional frontmatter:
 
 ```yaml
+image:
+    url: ../../assets/uploads/teambuilding.jpeg
+    credit: Photograph by Dalibor Karlović
+    alt: Sunlit meadow grasses
+    position: 50% 45% # focal point, each coordinate 0–100%
 experience:
     accent: "#006b65" # optional; adjusted if needed for legibility
-    imagePosition: 50% 45% # focal point, each coordinate 0–100%
-    imageCredit: Photograph by Dalibor Karlović
     headingExperiment: terrain # none (default) or terrain
     stylesheet: terrain # optional src/styles/experiences/terrain.css
 ```

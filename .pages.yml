@@ -24,7 +24,22 @@ content:
             required: true
           - &id003
             name: image
-            type: image
+            type: object
+            fields: &imageFields
+                - name: url
+                  label: Image
+                  type: image
+                  required: true
+                - name: credit
+                  label: Attribution
+                  type: string
+                - name: alt
+                  label: Alternative text
+                  type: text
+                - name: position
+                  label: Focal position
+                  type: string
+                  description: Two percentages from 0% to 100%, for example 50% 45%.
           - name: slug
             type: string
             description: Optional public URL override; otherwise the filename is used.
@@ -62,13 +77,6 @@ content:
                 - name: accent
                   type: string
                   description: Optional six-digit hex accent, for example "#006b65".
-                - name: imagePosition
-                  type: string
-                  default: 50% 45%
-                  description: Photo focal position as two percentages, from 0% to 100%.
-                - name: imageCredit
-                  type: string
-                  label: Image attribution
                 - name: stylesheet
                   type: string
                   description: Optional stylesheet name in src/styles/experiences, without .css.
@@ -119,28 +127,171 @@ content:
       label: Homepage
       type: file
       path: src/content/pages/home.md
-      fields: &id005
+      fields:
           - *id001
           - *id002
           - *id003
+          - name: brandTagline
+            label: Site logo tagline
+            type: string
+          - name: hero
+            label: Hero display
+            type: object
+            fields:
+                - name: firstLine
+                  label: Name, first line
+                  type: string
+                  required: true
+                - name: secondLine
+                  label: Name, second line
+                  type: string
+                  required: true
+                - name: footnote
+                  label: Footnote
+                  type: string
+                  required: true
+          - name: ticker
+            label: Ticker phrases
+            type: string
+            list: true
+          - name: writing
+            label: Writing section
+            type: object
+            fields:
+                - name: title
+                  label: Heading
+                  type: string
+                  required: true
+          - name: gallery
+            label: Photography section
+            type: object
+            fields:
+                - name: title
+                  label: Heading
+                  type: string
+                  required: true
+                - name: credit
+                  label: Attribution
+                  type: string
+                  required: true
+                - name: photos
+                  label: Photographs
+                  type: object
+                  list: true
+                  fields:
+                      - name: image
+                        type: object
+                        required: true
+                        fields: *imageFields
+                      - name: caption
+                        type: string
+                        required: true
+          - name: footer
+            label: Site footer
+            type: object
+            fields:
+                - name: eyebrow
+                  label: Section label
+                  type: string
+                  required: true
+                - name: title
+                  label: Heading
+                  type: text
+                  description: Use a new line to split the heading.
+                  required: true
+                - name: tagline
+                  label: Description
+                  type: text
+                  required: true
+                - name: copyright
+                  label: Copyright name and location
+                  type: string
+                  description: The copyright symbol and current year are added automatically.
+                  required: true
           - *id004
     - name: about
       label: About
       type: file
       path: src/content/pages/about.md
-      fields: *id005
+      fields:
+          - *id001
+          - *id002
+          - *id003
+          - name: eyebrow
+            label: About section label
+            type: string
+          - name: linkLabel
+            label: About button label
+            description: Shared by the homepage hero and About introduction card.
+            type: string
+          - name: homepageHero
+            label: Homepage hero
+            type: object
+            fields:
+                - name: roles
+                  label: Roles
+                  type: string
+                  required: true
+                - name: introduction
+                  label: Introduction
+                  type: text
+                  required: true
+          - name: homepageTeaser
+            label: Homepage introduction
+            type: object
+            fields:
+                - name: title
+                  label: Heading
+                  type: string
+                  required: true
+                - name: summary
+                  label: Introduction
+                  type: text
+                  required: true
+          - *id004
     - name: article-collection
       label: Article listing
       type: file
       path: src/content/pages/article-collection.md
-      fields: *id005
+      fields:
+          - *id001
+          - *id002
+          - *id003
+          - name: linkLabel
+            label: Writing call to action
+            description: Shared by the homepage hero, collection headings, and article archive button.
+            type: string
+          - name: discussionHeading
+            label: Article discussion heading
+            type: string
+          - *id004
     - name: category-collection
       label: Category listing
       type: file
       path: src/content/pages/category-collection.md
-      fields: *id005
+      fields: &id005
+          - *id001
+          - *id002
+          - *id003
+          - *id004
     - name: series-collection
       label: Series listing
       type: file
       path: src/content/pages/series-collection.md
       fields: *id005
+    - name: not-found
+      label: Page not found
+      type: file
+      path: src/content/pages/not-found.md
+      fields:
+          - *id001
+          - *id002
+          - name: eyebrow
+            label: Section label
+            type: string
+          - name: heading
+            type: text
+            description: Use a new line to split the heading.
+          - name: linkLabel
+            label: Home button text
+            type: string
