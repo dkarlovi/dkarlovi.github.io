@@ -1,0 +1,97 @@
+/* The hit area stays still; the party happens inside it. All colours belong
+   to the destination article, including the dark stage in either theme. */
+.read-more[data-read-disco] {
+    position: relative;
+    width: 12rem;
+    max-width: 100%;
+    height: 4rem;
+    padding: 0;
+    overflow: hidden;
+    isolation: isolate;
+}
+.read-more-idle,
+.read-more-chorus {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    pointer-events: none;
+}
+.read-more-idle {
+    z-index: 2;
+    gap: 1rem;
+    font-size: 0.8125rem;
+}
+.read-more-chorus {
+    z-index: 3;
+    gap: 0.3em;
+    opacity: 0;
+    color: var(--target-ink-dark);
+    font:
+        800 1.3125rem/1.2 "Manrope",
+        sans-serif;
+    letter-spacing: -0.05em;
+}
+.read-more-chorus > span {
+    display: inline-block;
+}
+.read-more-stage {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--target-paper-dark);
+}
+.read-more.is-dancing .read-more-stage,
+.read-more.is-dancing .read-more-chorus {
+    opacity: 1;
+}
+.read-more.is-dancing .read-more-idle {
+    opacity: 0;
+}
+.read-more.is-finale .read-more-chorus {
+    font-size: 1.1875rem;
+}
+.read-more-beam {
+    position: absolute;
+    top: -30%;
+    height: 160%;
+    width: 74%;
+    transform-origin: 50% 0;
+    opacity: 0.34;
+    background: linear-gradient(var(--target-accent-dark), transparent);
+    clip-path: polygon(47% 0, 53% 0, 100% 100%, 0 100%);
+}
+.read-more-beam.first {
+    left: -15%;
+}
+.read-more-beam.second {
+    right: -15%;
+    background: linear-gradient(var(--target-panel-light), transparent);
+}
+.read-more-floor {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.75rem;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0 1.125rem,
+        var(--target-accent-dark) 1.125rem 1.1875rem
+    );
+    opacity: 0.35;
+    transform: perspective(1.875rem) rotateX(24deg);
+}
+@media (prefers-reduced-motion: reduce) {
+    .read-more.is-dancing .read-more-stage,
+    .read-more.is-dancing .read-more-chorus {
+        display: none;
+    }
+    .read-more.is-dancing .read-more-idle {
+        opacity: 1;
+    }
+}
