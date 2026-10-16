@@ -69,7 +69,7 @@ The integration check temporarily creates CMS-style content/media, exercises nat
 
 ## Deployment
 
-Pushes to `main` run the GitHub Pages workflow: Git LFS checkout, Node/npm installation, checks, static build, and `dist/` deployment. No deployment is performed by local migration commands.
+Pushes to `main` run the GitHub Pages workflow: Git LFS checkout, Node/npm installation, checks, static build, and `dist/` deployment. Pull requests targeting `main` run the same checks and build without publishing. You can also select **Build and deploy Astro → Run workflow** in GitHub Actions; selecting `main` deploys, while other branches only validate the build. The repository's **Settings → Pages → Source** must be **GitHub Actions** (already configured for this repository). No deployment is performed by local migration commands.
 
 `BASE_URL` sets the production origin and optional path prefix (default `https://dkarlovi.github.io`). For example:
 
