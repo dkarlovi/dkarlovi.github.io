@@ -5,6 +5,7 @@ import { load } from "cheerio";
 import { parse } from "yaml";
 const site = new URL(process.env.BASE_URL || "https://dkarlovi.github.io");
 const base = site.pathname.replace(/\/$/, "");
+const homeData = parse(readFileSync('src/content/pages/home.md', 'utf8').split('---')[1]);
 const content = {};
 for (const kind of ["articles", "categories", "series"]) {
     content[kind] = readdirSync(`src/content/${kind}`)
@@ -62,7 +63,7 @@ let checkedLinks = 0;
 for (const [file, $] of pages) {
     if ($('meta[http-equiv="refresh"]').length) continue;
     assert.equal($("html").attr("lang"), "en", file);
-    assert.ok($("title").text().includes("Dalibor Karlović"), file);
+    assert.ok($("title").text().includes(homeData.title), file);
     assert.ok($('meta[name="description"]').attr("content"), file);
     assert.ok(
         $('link[rel="canonical"]')
@@ -81,7 +82,11 @@ for (const [file, $] of pages) {
         "soyKXJT1zDtOEO_En0NAjPTu58_HXX5stvmF5MnVrEA",
     );
     assert.equal($('[data-category="analytics"][data-src]').length, 1);
-    assert.match($("footer").text(), /Stay curious/);
+    if (homeData.footer) {
+        assert.equal($('footer .eyebrow').text(), homeData.footer.eyebrow);
+        assert.equal($('footer h2').text(), homeData.footer.title);
+        assert.ok($('footer').text().includes(homeData.footer.tagline));
+    }
     assert.equal($('meta[name="color-scheme"]').attr("content"), "light dark");
     assert.equal(
         $("[data-bs-toggle], .navbar, .offcanvas").length,

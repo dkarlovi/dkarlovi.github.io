@@ -132,6 +132,99 @@ content:
           - name: brandTagline
             label: Site logo tagline
             type: string
+          - name: hero
+            label: Hero display and buttons
+            type: object
+            fields:
+                - name: firstLine
+                  label: Name, first line
+                  type: string
+                  required: true
+                - name: secondLine
+                  label: Name, second line
+                  type: string
+                  required: true
+                - name: imageAlt
+                  label: Portrait alternative text
+                  type: string
+                  required: true
+                - name: writingLabel
+                  label: Writing button
+                  type: string
+                  required: true
+                - name: aboutLabel
+                  label: About button
+                  type: string
+                  required: true
+                - name: footnote
+                  label: Footnote
+                  type: string
+                  required: true
+          - name: ticker
+            label: Ticker phrases
+            type: string
+            list: true
+          - name: writing
+            label: Writing section
+            type: object
+            fields:
+                - name: title
+                  label: Heading
+                  type: string
+                  required: true
+                - name: linkLabel
+                  label: Button text
+                  type: string
+                  required: true
+          - name: gallery
+            label: Photography section
+            type: object
+            fields:
+                - name: title
+                  label: Heading
+                  type: string
+                  required: true
+                - name: credit
+                  label: Attribution
+                  type: string
+                  required: true
+                - name: photos
+                  label: Photographs
+                  type: object
+                  list: true
+                  fields:
+                      - name: image
+                        type: image
+                        required: true
+                      - name: alt
+                        label: Alternative text
+                        type: string
+                        required: true
+                      - name: caption
+                        type: string
+                        required: true
+          - name: footer
+            label: Site footer
+            type: object
+            fields:
+                - name: eyebrow
+                  label: Section label
+                  type: string
+                  required: true
+                - name: title
+                  label: Heading
+                  type: text
+                  description: Use a new line to split the heading.
+                  required: true
+                - name: tagline
+                  label: Description
+                  type: text
+                  required: true
+                - name: copyright
+                  label: Copyright name and location
+                  type: string
+                  description: The copyright symbol and current year are added automatically.
+                  required: true
           - *id004
     - name: about
       label: About
@@ -195,3 +288,19 @@ content:
       type: file
       path: src/content/pages/series-collection.md
       fields: *id005
+    - name: not-found
+      label: Page not found
+      type: file
+      path: src/content/pages/not-found.md
+      fields:
+          - *id001
+          - *id002
+          - name: eyebrow
+            label: Section label
+            type: string
+          - name: heading
+            type: text
+            description: Use a new line to split the heading.
+          - name: linkLabel
+            label: Home button text
+            type: string

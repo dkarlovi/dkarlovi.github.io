@@ -3,4 +3,4 @@ import { sitePath } from '../lib/urls';
 import { getEntry } from 'astro:content';
 const home = (await getEntry('pages', 'home'))!;
 ---
-<a class="brand" href={sitePath('/')} aria-label="Dalibor Karlović — home"><span class="brand-mark" aria-hidden="true">dk</span><span>Dalibor Karlović{home.data.brandTagline && <small>{home.data.brandTagline}</small>}</span></a>
+<a class="brand" href={sitePath('/')} aria-label={`${home.data.title} — home`}><span class="brand-mark" aria-hidden="true">dk</span><span>{home.data.title}{home.data.brandTagline && <small>{home.data.brandTagline}</small>}</span></a>

@@ -3,8 +3,6 @@ import { Image } from 'astro:assets';
 import { getEntry } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
-import meadow from '../assets/uploads/teambuilding.jpeg';
-import puzzle from '../assets/uploads/puzzle.jpeg';
 import { getArticles } from '../lib/articles';
 import { sitePath } from '../lib/urls';
 const home = (await getEntry('pages', 'home'))!;
@@ -13,11 +11,12 @@ const hero = about.data.homepageHero;
 const articles = (await getArticles()).slice(0,4);
 const portrait = home.data.image ?? about.data.image;
 const aboutTeaser = about.data.homepageTeaser;
+const { hero: heroCopy, ticker, writing, gallery } = home.data;
 ---
 <SiteLayout pageClass={`home-page ${portrait ? '' : 'without-portrait'}`}>
-<section class="home-hero"><div class="home-hero-copy">{hero && <span class="eyebrow">{hero.roles}</span>}<h1>Dalibor<br /><em>Karlović.</em></h1>{hero && <div class="home-introduction"><p>{hero.introduction}</p></div>}<div class="home-actions"><a class="button-link" href="#writing">Explore my writing <span class="arrow" aria-hidden="true">↗</span></a><a class="button-link secondary" href={sitePath('/about')}>More about me <span aria-hidden="true">↗</span></a></div></div>{portrait && <div class="home-photo"><Image src={portrait} width={1920} alt="Dalibor Karlović" loading="eager" fetchpriority="high" /></div>}<span class="hero-footnote">Based in Croatia. Curious about everywhere. ↓</span></section>
-<div class="ticker"><span>Engineering with perspective</span><span>Based in Croatia · Looking everywhere</span><span>Words / Images / Experiments</span></div>
-<section class="home-writing wrap" id="writing"><div class="section-heading"><h2>Worth thinking about.</h2><a class="button-link" href={sitePath('/articles')}>All writing <span class="arrow" aria-hidden="true">↗</span></a></div><div class="article-grid">{articles.map((article,i) => <ArticleCard article={article} loading={i<2?'eager':'lazy'} />)}</div></section>
-<section class="visuals-section" id="visuals"><div class="section-heading"><h2>Through my lens.</h2><span class="eyebrow muted">Photographs by Dalibor Karlović</span></div><div class="visuals-grid"><figure><Image src={meadow} width={1200} height={800} alt="Sunlight catching golden meadow grasses, with people softly out of focus beyond" loading="lazy" /><figcaption>A little light. A different perspective.</figcaption></figure><figure><Image src={puzzle} width={1200} height={800} alt="Golden puzzle pieces against a dark background, photographed with a shallow depth of field" loading="lazy" /><figcaption>Look a little closer.</figcaption></figure></div></section>
+<section class="home-hero"><div class="home-hero-copy">{hero && <span class="eyebrow">{hero.roles}</span>}<h1>{heroCopy?.firstLine ?? home.data.title}{heroCopy && <><br /><em>{heroCopy.secondLine}</em></>}</h1>{hero && <div class="home-introduction"><p>{hero.introduction}</p></div>}{heroCopy && <div class="home-actions"><a class="button-link" href="#writing">{heroCopy.writingLabel} <span class="arrow" aria-hidden="true">↗</span></a><a class="button-link secondary" href={sitePath('/about')}>{heroCopy.aboutLabel} <span aria-hidden="true">↗</span></a></div>}</div>{portrait && <div class="home-photo"><Image src={portrait} width={1920} alt={heroCopy?.imageAlt ?? home.data.title} loading="eager" fetchpriority="high" /></div>}{heroCopy && <span class="hero-footnote">{heroCopy.footnote}</span>}</section>
+{ticker.length > 0 && <div class="ticker">{ticker.map(text => <span>{text}</span>)}</div>}
+<section class="home-writing wrap" id="writing">{writing && <div class="section-heading"><h2>{writing.title}</h2><a class="button-link" href={sitePath('/articles')}>{writing.linkLabel} <span class="arrow" aria-hidden="true">↗</span></a></div>}<div class="article-grid">{articles.map((article,i) => <ArticleCard article={article} loading={i<2?'eager':'lazy'} />)}</div></section>
+{gallery && <section class="visuals-section" id="visuals"><div class="section-heading"><h2>{gallery.title}</h2><span class="eyebrow muted">{gallery.credit}</span></div><div class="visuals-grid">{gallery.photos.map(photo => <figure><Image src={photo.image} width={1200} height={800} alt={photo.alt} loading="lazy" /><figcaption>{photo.caption}</figcaption></figure>)}</div></section>}
 {aboutTeaser && <section class="about-note" id="about">{about.data.image && <Image src={about.data.image} width={100} height={100} fit="cover" alt="" loading="lazy" />}<div><p class="eyebrow">{aboutTeaser.eyebrow}</p><h2>{aboutTeaser.title}</h2><p class="about-note-summary">{aboutTeaser.summary}</p></div><a class="button-link" href={sitePath('/about')}>{aboutTeaser.linkLabel} <span class="arrow" aria-hidden="true">↗</span></a></section>}
 </SiteLayout>

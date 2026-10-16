@@ -79,38 +79,80 @@ try {
     );
     const aboutPath = "src/content/pages/about.md";
     originals.set(aboutPath, readFileSync(aboutPath, "utf8"));
-    const [, aboutFrontmatter, ...aboutBody] = originals.get(aboutPath).split('---');
+    const [, aboutFrontmatter, ...aboutBody] = originals.get(aboutPath).split("---");
     const aboutData = parse(aboutFrontmatter);
-    aboutData.image = '../../assets/uploads/cms-fixture.png';
+    aboutData.image = "../../assets/uploads/cms-fixture.png";
     aboutData.homepageHero = {
-        roles: 'Engineer · Writer',
-        introduction: 'An introduction edited in About content.',
+        roles: "Engineer · Writer",
+        introduction: "An introduction edited in About content.",
     };
     aboutData.homepageTeaser = {
-        eyebrow: 'Meet the author',
-        title: 'A CMS-edited introduction',
-        summary: 'This introduction comes from the About entry.',
-        linkLabel: 'Meet Dalibor',
+        eyebrow: "Meet the author",
+        title: "A CMS-edited introduction",
+        summary: "This introduction comes from the About entry.",
+        linkLabel: "Meet Dalibor",
     };
-    writeFileSync(
-        aboutPath,
-        `---\n${stringify(aboutData)}---${aboutBody.join('---')}`,
-    );
-    const homePath = 'src/content/pages/home.md';
-    originals.set(homePath, readFileSync(homePath, 'utf8'));
-    const [, homeFrontmatter, ...homeBody] = originals.get(homePath).split('---');
+    writeFileSync(aboutPath, `---\n${stringify(aboutData)}---${aboutBody.join("---")}`);
+    const homePath = "src/content/pages/home.md";
+    originals.set(homePath, readFileSync(homePath, "utf8"));
+    const [, homeFrontmatter, ...homeBody] = originals.get(homePath).split("---");
     const homeData = parse(homeFrontmatter);
-    homeData.brandTagline = 'Ideas and experiments';
-    writeFileSync(homePath, `---\n${stringify(homeData)}---${homeBody.join('---')}`);
+    homeData.brandTagline = "Ideas and experiments";
+    homeData.title = 'CMS Author';
+    homeData.footer = {
+        eyebrow: 'CMS footer eyebrow', title: 'Keep exploring.\nKeep making.',
+        tagline: 'CMS footer description', copyright: 'CMS author · Somewhere',
+    };
+    homeData.hero = {
+        firstLine: 'CMS', secondLine: 'Author.', imageAlt: 'CMS portrait',
+        writingLabel: 'Browse posts', aboutLabel: 'Meet the author', footnote: 'CMS hero footnote',
+    };
+    homeData.ticker = ['CMS ticker one', 'CMS ticker two'];
+    homeData.writing = { title: 'CMS writing heading', linkLabel: 'Browse the archive' };
+    homeData.gallery = {
+        title: 'CMS gallery', credit: 'CMS photographer',
+        photos: [{ image: '../../assets/uploads/cms-fixture.png', alt: 'CMS gallery photo', caption: 'CMS caption' }],
+    };
+    writeFileSync(homePath, `---\n${stringify(homeData)}---${homeBody.join("---")}`);
+    const notFoundPath = 'src/content/pages/not-found.md';
+    originals.set(notFoundPath, readFileSync(notFoundPath, 'utf8'));
+    writeFileSync(notFoundPath, `---\n${stringify({
+        title: 'CMS error page', summary: 'CMS missing page explanation',
+        eyebrow: 'CMS error label', heading: 'CMS missing page heading', linkLabel: 'CMS home link',
+    })}---\n`);
     build();
-    assert.equal(html('')('.home-hero-copy > .eyebrow').text(), 'Engineer · Writer');
-    assert.equal(html('')('.home-introduction').text(), 'An introduction edited in About content.');
-    assert.equal(html('')('.brand small').text(), 'Ideas and experiments');
-    assert.equal(html('about')('.brand small').text(), 'Ideas and experiments');
-    assert.equal(html('')('.about-note .eyebrow').text(), 'Meet the author');
-    assert.equal(html('')('.about-note h2').text(), 'A CMS-edited introduction');
-    assert.equal(html('')('.about-note .about-note-summary').text(), 'This introduction comes from the About entry.');
-    assert.match(html('')('.about-note .button-link').text(), /^Meet Dalibor/);
+    const notFound = load(readFileSync('dist/404.html', 'utf8'));
+    assert.equal(notFound('main h1').text(), 'CMS missing page heading');
+    assert.match(notFound('main').text(), /CMS missing page explanation/);
+    assert.match(notFound('main a').text(), /CMS home link/);
+    assert.match(html('')('.brand').text(), /CMS Author/);
+    assert.equal(html('cms-fixture-0')('.author strong').text(), 'CMS Author');
+    assert.equal(html("")(".home-hero-copy > .eyebrow").text(), "Engineer · Writer");
+    assert.equal(html("")(".home-introduction").text(), "An introduction edited in About content.");
+    assert.equal(html("")(".brand small").text(), "Ideas and experiments");
+    assert.equal(html('')('.home-hero h1').text(), 'CMSAuthor.');
+    assert.equal(html('')('.hero-footnote').text(), 'CMS hero footnote');
+    assert.equal(html('')('.ticker').text(), 'CMS ticker oneCMS ticker two');
+    assert.equal(html('')('.home-writing h2').text(), 'CMS writing heading');
+    assert.equal(html('')('.visuals-section h2').text(), 'CMS gallery');
+    assert.equal(html('')('.visuals-grid img').attr('alt'), 'CMS gallery photo');
+    assert.match(html('')('.visuals-grid img').attr('src'), /cms-fixture/);
+    assert.equal(html('')('.visuals-grid figcaption').text(), 'CMS caption');
+    for (const route of ['', 'about', 'cms-fixture-0']) {
+        const $ = html(route);
+        assert.equal($('footer .eyebrow').text(), 'CMS footer eyebrow');
+        assert.equal($('footer h2').text(), 'Keep exploring.\nKeep making.');
+        assert.match($('footer').text(), /CMS footer description/);
+        assert.match($('footer').text(), /CMS author · Somewhere/);
+    }
+    assert.equal(html("about")(".brand small").text(), "Ideas and experiments");
+    assert.equal(html("")(".about-note .eyebrow").text(), "Meet the author");
+    assert.equal(html("")(".about-note h2").text(), "A CMS-edited introduction");
+    assert.equal(
+        html("")(".about-note .about-note-summary").text(),
+        "This introduction comes from the About entry.",
+    );
+    assert.match(html("")(".about-note .button-link").text(), /^Meet Dalibor/);
     assert.match(
         html("cms-fixture-0")(".author img").attr("src"),
         /cms-fixture/,
@@ -186,7 +228,10 @@ try {
         0,
         "Optional About image leaves a text author link",
     );
-    assert.equal(html("cms-fixture-0")(".author strong").text(), "Dalibor Karlović");
+    assert.equal(
+        html("cms-fixture-0")(".author strong").text(),
+        parse(readFileSync('src/content/pages/home.md', 'utf8').split('---')[1]).title,
+    );
     for (const route of [
         "articles",
         "categories",

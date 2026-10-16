@@ -254,8 +254,12 @@ main {
     margin-bottom: 1.125rem;
 }
 .footer-top h2 {
+    white-space: pre-line;
     font-size: clamp(2.25rem, 4vw, 4rem);
     max-width: 16ch;
+}
+.error-page h1 {
+    white-space: pre-line;
 }
 .footer-bottom {
     display: flex;

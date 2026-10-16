@@ -5,11 +5,12 @@ import { sitePath } from '../lib/urls';
 interface Props { article: CollectionEntry<'articles'>; loading?: 'eager' | 'lazy'; prominent?: boolean }
 const { article, loading = 'lazy', prominent = false } = Astro.props;
 const about = await getEntry('pages', 'about');
+const home = (await getEntry('pages', 'home'))!;
 const portrait = about?.data.image;
 const date = article.data.publishedAt.toISOString().slice(0, 10);
 const minutes = Math.max(1, Math.ceil((article.body ?? '').split(/\s+/).length / 220));
 ---
 <ul class:list={['card-meta', { 'hero-author': prominent }]}>
-<li><a href={sitePath('/about')} class="author">{portrait && <Image src={portrait} width={prominent ? 44 : 36} height={prominent ? 44 : 36} fit="cover" alt="" loading={loading} />}<span><strong>Dalibor Karlović</strong>{prominent && <span>{minutes} min read</span>}</span></a></li>
+<li><a href={sitePath('/about')} class="author">{portrait && <Image src={portrait} width={prominent ? 44 : 36} height={prominent ? 44 : 36} fit="cover" alt="" loading={loading} />}<span><strong>{home.data.title}</strong>{prominent && <span>{minutes} min read</span>}</span></a></li>
 <li><time class="date-container" datetime={date} title={date}>{date}</time></li>
 </ul>

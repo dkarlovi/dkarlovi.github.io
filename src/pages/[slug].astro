@@ -1,5 +1,5 @@
 ---
-import { getEntries, render, type CollectionEntry } from 'astro:content';
+import { getEntry, getEntries, render, type CollectionEntry } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ArticleHero from '../components/ArticleHero.astro';
 import DiscussionLinks from '../components/DiscussionLinks.astro';
@@ -10,6 +10,7 @@ import { sitePath } from '../lib/urls';
 export async function getStaticPaths() { return (await getArticles()).map(article => ({ params:{slug:article.data.slug??article.id},props:{article} })); }
 interface Props { article: CollectionEntry<'articles'> }
 const { article } = Astro.props;
+const home = (await getEntry('pages', 'home'))!;
 const { Content } = await render(article);
 const series = await getEntries(article.data.series);
 const articles = await getArticles();
@@ -23,5 +24,5 @@ const palette = await imagePalette(article.data.image, article.data.experience.a
 <ArticleHero article={article} palette={palette} />
 {series.length>0 && <aside class="series-notice"><p class="eyebrow">Part of a series</p>{series.map(entry => <div><h2><a href={sitePath(`/series/${entry.id}`)}>{entry.data.title}</a></h2><p>{entry.data.summary}</p><ol>{articles.filter(a=>a.data.series.some(ref=>ref.id===entry.id)).reverse().map(sibling=><li>{sibling.id===article.id?<span aria-current="page">{sibling.data.title}</span>:<a href={sitePath(`/${sibling.data.slug??sibling.id}`)}>{sibling.data.title}</a>}</li>)}</ol></div>)}</aside>}
 <div class="content article-content"><Content /></div>
-<div class="article-end"><p>Words by <a href={sitePath('/about')}>Dalibor Karlović</a></p><DiscussionLinks article={article} /><a class="text-link" href={sitePath('/articles')}>More to think about <span class="arrow" aria-hidden="true">↗</span></a></div>
+<div class="article-end"><p>Words by <a href={sitePath('/about')}>{home.data.title}</a></p><DiscussionLinks article={article} /><a class="text-link" href={sitePath('/articles')}>More to think about <span class="arrow" aria-hidden="true">↗</span></a></div>
 </SiteLayout>
