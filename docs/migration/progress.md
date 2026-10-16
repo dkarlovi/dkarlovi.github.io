@@ -1,0 +1,27 @@
+# Execution ledger — docs/superpowers/plans/2026-10-16-astro-migration.md
+
+- User approved native Astro/CMS-first design and implementation.
+- Branch: migrate-to-astro (same workspace; Git metadata required escalation).
+- Baseline: deployed homepage fetched to /tmp/astro-baseline-home.html; source templates and routing inspected.
+- Preflight: collections feed pages and CMS configuration; all use standard collection IDs and public uploads. Native pagination and sitemap replace the old generic helper designs.
+- Task 1 started: publication/slug tests observed failing for missing module, then passing after implementation.
+- Ruling: work on dedicated branch in current workspace, as authorized direct-session implementation, to keep changes reviewable without extra worktree approvals.
+- Task 1 complete: Astro 7.4, native glob/reference schemas and typed article query; publication/slug tests passing.
+- Task 2 complete: standard Markdown/HTML, explicit legacy heading aliases, native details, original captions/list nesting; source checks passing.
+- Ruling: use src/assets/uploads with CMS output ../../assets/uploads instead of public/uploads. Official Astro image() schemas and Markdown resolve new CMS uploads automatically, optimizing them and handling deployment base paths without custom resolvers. This better meets the user's native Astro priority.
+- Task 3: native primary pages/components build, optimized cover/Markdown images generated; icon font import corrected after Vite exposed old Sass-relative URLs.
+- Task 4: native paginate() pages and official sitemap built successfully; fixture checks for boundaries/empty/draft cases next.
+- Ruling: use a tiny same-process Node test entrypoint. On this host Node 22's isolated test runner reported files without enumerating registered subtests; direct test execution confirms each assertion runs.
+- Task 4 complete: actual CMS fixture builds passed native pagination/empty-category/draft/reference/image checks.
+- Independent reviewer Franklin found three authoring regressions in tests/optional image handling. Added regressions and fixed: dynamic fixture counts; omitted image/category/series acceptance; missing page images use fallback OG art and conditional banners. Also validate taxonomy filename/slug consistency.
+- Expanded integration checks passed after fixes, including real source tests against newly authored records and removal of optional page images.
+- Root and /blog/ output checks passed (783 local targets each) before the authoring edge-case fixes; final rerun pending.
+- Browser check identified CookieConsent's deliberate webdriver suppression; test browser now disables that detection to exercise real-human consent UI. No product behavior changed for this.
+- Native loader regression observed RED: frontmatter slug overrides default glob IDs, silently collapsing duplicate public URLs before validation. Configure the built-in glob generateId option to use filenames so explicit URL slugs remain separate; expanded integration now tests duplicate article URLs and mismatched taxonomy IDs.
+- Desktop/mobile browser checks passed all 22 visits with no JS/local HTTP errors, including human consent UI, keyboard dropdowns, mobile offcanvas, details, lazy image loading, and no horizontal overflow. Screenshots captured under /tmp/astro-migration-browser and inspected against deployed homepage.
+- Clean npm ci passed (352 packages); final checks after the loader-ID correction pending.
+- Task 5 complete: old tracked PHP/Twig/Encore sources removed, GitHub Pages CI switched to npm/Astro/dist, README and Pages CMS configuration added.
+- Final independent followup: no important issue in filename-derived native loader IDs; duplicate URL and taxonomy-ID regression cases reviewed.
+- Final verification: clean install, five unit checks, zero Astro diagnostic errors/warnings/hints, full actual-build authoring/error integration, root/prefix static output checks, 22 successful browser page visits, screenshot inspection, and git diff whitespace validation.
+- Ongoing tests now derive expectations from editable content rather than pinning original sample prose/captions/article counts; historical parity evidence stays in baseline.json and validation.md.
+- Changes intentionally remain uncommitted on migrate-to-astro for user review. No merge, push, PR, deployment, or CMS account connection performed.

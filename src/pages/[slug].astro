@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import { getEntries, render, type CollectionEntry } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ArticleMeta from '../components/ArticleMeta.astro';
+import CategoryBadges from '../components/CategoryBadges.astro';
+import CategorySidebar from '../components/CategorySidebar.astro';
+import DiscussionLinks from '../components/DiscussionLinks.astro';
+import { getArticles } from '../lib/articles';
+import { sitePath } from '../lib/urls';
+export async function getStaticPaths() {
+  return (await getArticles()).map(article => ({ params: { slug: article.data.slug ?? article.id }, props: { article } }));
+}
+interface Props { article: CollectionEntry<'articles'> }
+const { article } = Astro.props;
+const { Content } = await render(article);
+const series = await getEntries(article.data.series);
+const articles = await getArticles();
+---
+<SiteLayout {...article.data}><section class="mt-4"><div class="container"><div class="row"><div class="col-lg-8 mb-5 mb-lg-0">
+  {article.data.image && <div class="position-relative"><Image src={article.data.image} width={855} height={150} fit="cover" class="img-fluid mb-5 w-100 rounded-4 article-banner" alt={article.data.title} fetchpriority="high" loading="eager" /><CategoryBadges references={article.data.categories} overlay /></div>}
+  <h1 class="mb-4">{article.data.title}</h1><DiscussionLinks article={article} /><ArticleMeta article={article} /><p class="lead mb-4">{article.data.summary}</p>
+  {series.length > 0 && <div class="alert alert-secondary mx-2"><strong>This article is part of a series:</strong><ul class="list-unstyled mt-2">{series.map(series => <li><a href={sitePath(`/series/${series.id}`)} class="h6">{series.data.title}</a><p>{series.data.summary}</p><ol class="mx-3">{articles.filter(a => a.data.series.some(ref => ref.id === series.id)).reverse().map(sibling => <li class="mb-0">{sibling.id === article.id ? <span>{sibling.data.title}</span> : <a href={sitePath(`/${sibling.data.slug ?? sibling.id}`)}>{sibling.data.title}</a>}</li>)}</ol></li>)}</ul></div>}
+  <div class="content drop-cap"><Content /></div><DiscussionLinks article={article} />
+</div><aside class="col-lg-4"><CategorySidebar /></aside></div></div></section></SiteLayout>

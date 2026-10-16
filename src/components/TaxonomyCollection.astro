@@ -1,0 +1,20 @@
+---
+import { getImage } from 'astro:assets';
+import type { Page } from 'astro';
+import { render, type CollectionEntry } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Pagination from './Pagination.astro';
+import { getArticles } from '../lib/articles';
+import { sitePath } from '../lib/urls';
+interface Props { page: Page<CollectionEntry<'categories'> | CollectionEntry<'series'>>; intro: CollectionEntry<'pages'>; kind: 'categories' | 'series' }
+const { page, intro, kind } = Astro.props;
+const { Content } = await render(intro);
+const articles = await getArticles();
+const background = intro.data.image ? await getImage({ src: intro.data.image, width: 1200 }) : undefined;
+---
+<SiteLayout {...intro.data}>
+<section class="py-5 taxonomy-banner" style={`background-image: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.8)), ${background ? `url('${background.src}')` : 'none'}`}><div class="container"><div class="row"><div class="col-md-8 mx-auto text-center"><h1 class="h2 mb-0">{intro.data.title}</h1><Content /></div></div></div></section>
+<section class="section"><div class="container"><div class="row g-3 justify-content-center text-center">
+  {page.data.map(item => <div class="col-sm-3"><a class="text-dark fw-bold px-4 py-3 rounded bg-light d-block text-capitalize" href={sitePath(`/${kind === 'categories' ? 'category' : 'series'}/${item.id}`)}><i class="fas fa-folder me-1" aria-hidden="true"></i> {item.data.title} ({articles.filter(article => article.data[kind].some(ref => ref.id === item.id)).length})</a></div>)}
+</div><Pagination page={page} /></div></section>
+</SiteLayout>

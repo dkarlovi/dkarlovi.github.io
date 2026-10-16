@@ -1,0 +1,10 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getEntry } from 'astro:content';
+import { getArticles } from '../../lib/articles';
+import ArticleCollection from '../../components/ArticleCollection.astro';
+export const getStaticPaths = (async ({ paginate }) => paginate(await getArticles(), { pageSize: 20 })) satisfies GetStaticPaths;
+const { page } = Astro.props;
+const intro = (await getEntry('pages', 'article-collection'))!;
+---
+<ArticleCollection page={page} intro={intro} />

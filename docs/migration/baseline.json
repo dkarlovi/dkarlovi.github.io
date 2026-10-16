@@ -1,0 +1,182 @@
+{
+  "articles": [
+    {
+      "title": "Adding feature flags to your Symfony app",
+      "slug": "symfony-feature-flags",
+      "summary": "Adding feature flags to your Symfony app was never easier than with Gitlab and Unleash Symfony bundle",
+      "publishedAt": "2024-01-08",
+      "image": "./checkmark.jpeg",
+      "discussReddit": "192j9s9",
+      "discussHackerNews": 38965854,
+      "categories": [
+        "@=yassg_get('categories', '/programming.md')"
+      ],
+      "series": [],
+      "keywords": [
+        "Symfony",
+        "Gitlab",
+        "Unleash"
+      ]
+    },
+    {
+      "title": "Choose boring and flexible, not malleable",
+      "slug": "choose-boring",
+      "summary": "Using simple and flexible tools doesn't make your work boring. In fact, it can lead to more exciting results.",
+      "publishedAt": "2024-01-22",
+      "image": "./melting.jpeg",
+      "discussReddit": "19dlzl0",
+      "discussHackerNews": 39101887,
+      "categories": [
+        "@=yassg_get('categories', '/devops.md')",
+        "@=yassg_get('categories', '/engineering.md')",
+        "@=yassg_get('categories', '/programming.md')"
+      ],
+      "series": [],
+      "keywords": [
+        "predictability",
+        "production",
+        "reliability",
+        "boring"
+      ]
+    },
+    {
+      "title": "Your code coverage is lying",
+      "slug": "lying-coverage",
+      "summary": "Code coverage is a metric which does NOT represent how much or how well our code is tested.",
+      "publishedAt": "2024-04-26",
+      "image": "./greenwashing.jpeg",
+      "discussReddit": "1cg0fbz",
+      "categories": [
+        "@=yassg_get('categories', '/engineering.md')",
+        "@=yassg_get('categories', '/programming.md')",
+        "@=yassg_get('categories', '/quality.md')"
+      ],
+      "series": [],
+      "keywords": [
+        "quality",
+        "testing",
+        "qa",
+        "code coverage",
+        "mutation testing"
+      ]
+    },
+    {
+      "title": "Testing speech recognition with Playwright",
+      "slug": "testing-speech-recognition",
+      "summary": "How to automate testing in-browser speech recognition, so you can stop talking to the computer and go back mumbling to yourself.",
+      "publishedAt": "2025-11-10",
+      "image": "./robot.png",
+      "discussReddit": "1ou4q0b",
+      "categories": [
+        "@=yassg_get('categories', '/engineering.md')",
+        "@=yassg_get('categories', '/programming.md')",
+        "@=yassg_get('categories', '/quality.md')"
+      ],
+      "series": [],
+      "keywords": [
+        "quality",
+        "testing",
+        "qa",
+        "speech",
+        "speech recognition",
+        "playwright"
+      ]
+    },
+    {
+      "title": "Hello World Again!",
+      "slug": "hello-world-again",
+      "summary": "This is another summary",
+      "image": "assets/images/self.jpeg",
+      "publishedAt": "2023-12-18",
+      "draft": false,
+      "categories": [
+        "@=yassg_get('categories', '/devops.md')",
+        "@=yassg_get('categories', '/engineering.md')"
+      ],
+      "series": [
+        "@=yassg_get('series', '/a_specific_series.md')"
+      ]
+    },
+    {
+      "title": "Testing Commonmark features",
+      "slug": "testing-commonmark-features",
+      "summary": "We are testing the Commonmark features",
+      "image": "./ar-sofa.webp",
+      "publishedAt": "2023-12-12",
+      "draft": false,
+      "categories": [
+        "@=yassg_get('categories', '/programming.md')"
+      ],
+      "series": [
+        "@=yassg_get('series', '/a_specific_series.md')"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "title": "Engineering",
+      "slug": "engineering",
+      "image": "assets/images/self.jpeg",
+      "summary": "On engineering and related topics."
+    },
+    {
+      "title": "Quality",
+      "slug": "quality",
+      "image": "assets/images/self.jpeg",
+      "summary": "On quality and related topics."
+    },
+    {
+      "title": "Programming",
+      "slug": "programming",
+      "image": "assets/images/self.jpeg",
+      "summary": "On programming and related topics."
+    },
+    {
+      "title": "Devops",
+      "slug": "devops",
+      "image": "assets/images/self.jpeg",
+      "summary": "On devops and related topics."
+    }
+  ],
+  "series": [
+    {
+      "title": "A specific series",
+      "slug": "a-specific-series",
+      "image": "assets/images/self.jpeg",
+      "summary": "About this specific series."
+    }
+  ],
+  "pages": [
+    {
+      "route": "about",
+      "title": "About Dalibor",
+      "image": "assets/images/self.jpeg",
+      "summary": "A little about Dalibor"
+    },
+    {
+      "route": "home",
+      "title": "Dalibor Karlović",
+      "image": "assets/images/self.jpeg",
+      "summary": "A web site for Dalibor Karlović, a software engineer and consultant from Croatia."
+    },
+    {
+      "route": "article_collection",
+      "title": "All articles",
+      "summary": "A collection of articles in chronological order."
+    },
+    {
+      "route": "series_collection",
+      "title": "Series",
+      "summary": "A collection of articles organized into series.",
+      "image": "./teambuilding.jpeg"
+    },
+    {
+      "route": "category_collection",
+      "title": "Categories",
+      "summary": "A collection of articles organized into categories.",
+      "image": "./puzzle.jpeg"
+    }
+  ],
+  "pageSize": 20,
+  "homeRecent": 4
+}

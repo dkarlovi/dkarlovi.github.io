@@ -1,0 +1,5 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { sitePath } from '../lib/urls';
+---
+<SiteLayout title="Page not found"><section class="section text-center"><div class="container"><h1>Page not found</h1><p>The page you're looking for isn't here.</p><a href={sitePath('/')} class="btn btn-outline-primary">Return home</a></div></section></SiteLayout>

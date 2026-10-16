@@ -1,0 +1,9 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { article: CollectionEntry<'articles'> }
+const { article: { data } } = Astro.props;
+---
+{(data.discussReddit || data.discussHackerNews) && <nav class="navbar navbar-expand bg-body-secondary rounded navbar-light mb-4" aria-label="Discuss this article"><div class="container-fluid"><span class="navbar-brand">Discuss this article</span><ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  {data.discussReddit && <li class="nav-item btn btn-outline-reddit btn-icon-link mx-1"><a href={`https://www.reddit.com/comments/${data.discussReddit}/`} class="nav-link" target="_blank" rel="noopener noreferrer" aria-label="Discuss this article on Reddit"><i class="fab fa-reddit-alien" aria-hidden="true"></i></a></li>}
+  {data.discussHackerNews && <li class="nav-item btn btn-outline-hacker-news btn-icon-link mx-1"><a href={`https://news.ycombinator.com/item?id=${data.discussHackerNews}`} class="nav-link" target="_blank" rel="noopener noreferrer" aria-label="Discuss this article on Hacker News"><i class="fab fa-hacker-news" aria-hidden="true"></i></a></li>}
+</ul></div></nav>}

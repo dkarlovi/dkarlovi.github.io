@@ -1,0 +1,18 @@
+---
+import type { Page } from 'astro';
+import { render, type CollectionEntry } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ArticleCard from './ArticleCard.astro';
+import CategorySidebar from './CategorySidebar.astro';
+import Pagination from './Pagination.astro';
+interface Props { page: Page<CollectionEntry<'articles'>>; intro: CollectionEntry<'pages'> | CollectionEntry<'categories'> | CollectionEntry<'series'>; parentTitle?: string }
+const { page, intro, parentTitle } = Astro.props;
+const { Content } = await render(intro);
+---
+<SiteLayout {...intro.data} title={parentTitle ? `${intro.data.title} - ${parentTitle}` : intro.data.title}>
+<section class="mt-5"><div class="container"><div class="section-title">{parentTitle && <div>{parentTitle}</div>}<h1 class="h4">{parentTitle ? <>Articles in <span class="title-border">{intro.data.title}</span></> : intro.data.title}</h1><Content /></div>
+<div class="row"><div class="col-lg-8 mb-5 mb-lg-0">
+  {page.data.length ? <div class="border mb-5 pt-4 rounded"><div class="row mx-0 g-5">{page.data.map((article, i) => <div class="col-sm-6 mb-4"><ArticleCard article={article} priority={i === 0} /></div>)}</div></div> : <div class="alert alert-warning">No articles found here.</div>}
+  <Pagination page={page} />
+</div><aside class="col-lg-4"><CategorySidebar /></aside></div></div></section>
+</SiteLayout>
