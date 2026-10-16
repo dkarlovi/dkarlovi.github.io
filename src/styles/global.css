@@ -588,8 +588,9 @@ main {
     font-size: 0.875rem;
     max-width: 59ch;
 }
-.about-note .text-link {
-    margin-left: auto;
+.about-note > .button-link {
+    margin-inline-start: auto;
+    flex-shrink: 0;
     white-space: nowrap;
 }
 .visuals-section {
@@ -725,9 +726,6 @@ main {
     }
     .about-note {
         flex-wrap: wrap;
-    }
-    .about-note .text-link {
-        margin-left: 0;
     }
 }
 @media (max-width: 800px) {

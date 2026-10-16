@@ -124,22 +124,67 @@ content:
       label: Homepage
       type: file
       path: src/content/pages/home.md
+      fields:
+          - *id001
+          - *id002
+          - *id003
+          - *headerCredit
+          - name: brandTagline
+            label: Site logo tagline
+            type: string
+          - *id004
+    - name: about
+      label: About
+      type: file
+      path: src/content/pages/about.md
+      fields:
+          - *id001
+          - *id002
+          - *id003
+          - *headerCredit
+          - name: homepageHero
+            label: Homepage hero
+            type: object
+            fields:
+                - name: roles
+                  label: Roles
+                  type: string
+                  required: true
+                - name: introduction
+                  label: Introduction
+                  type: text
+                  required: true
+          - name: homepageTeaser
+            label: Homepage introduction
+            type: object
+            fields:
+                - name: eyebrow
+                  label: Section label
+                  type: string
+                  required: true
+                - name: title
+                  label: Heading
+                  type: string
+                  required: true
+                - name: summary
+                  label: Introduction
+                  type: text
+                  required: true
+                - name: linkLabel
+                  label: Button text
+                  type: string
+                  required: true
+          - *id004
+    - name: article-collection
+      label: Article listing
+      type: file
+      path: src/content/pages/article-collection.md
       fields: &id005
           - *id001
           - *id002
           - *id003
           - *headerCredit
           - *id004
-    - name: about
-      label: About
-      type: file
-      path: src/content/pages/about.md
-      fields: *id005
-    - name: article-collection
-      label: Article listing
-      type: file
-      path: src/content/pages/article-collection.md
-      fields: *id005
     - name: category-collection
       label: Category listing
       type: file

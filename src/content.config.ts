@@ -52,7 +52,20 @@ const articles = defineCollection({
 });
 const pages = defineCollection({
     loader: glob({ pattern: "*.md", generateId, base: "./src/content/pages" }),
-    schema: ({ image }) => headerCopy.extend({ image: image().optional() }),
+    schema: ({ image }) => headerCopy.extend({
+        image: image().optional(),
+        brandTagline: z.string().optional(),
+        homepageHero: z.object({
+            roles: z.string(),
+            introduction: z.string(),
+        }).optional(),
+        homepageTeaser: z.object({
+            eyebrow: z.string(),
+            title: z.string(),
+            summary: z.string(),
+            linkLabel: z.string(),
+        }).optional(),
+    }),
 });
 
 const categories = defineCollection({

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { writeFileSync, readFileSync, existsSync, unlinkSync, copyFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { load } from "cheerio";
-import { parse } from "yaml";
+import { parse, stringify } from "yaml";
 import { readdirSync } from "node:fs";
 const created = [];
 const originals = new Map();
@@ -77,11 +77,45 @@ try {
             'categories: [programming]\nexperience:\n    headingExperiment: terrain\n    stylesheet: terrain\n    accent: "#006b65"\n    imagePosition: 60% 35%\n    imageCredit: CMS image attribution',
         ),
     );
-    const aboutPath = 'src/content/pages/about.md';
-    originals.set(aboutPath, readFileSync(aboutPath, 'utf8'));
-    writeFileSync(aboutPath, originals.get(aboutPath).replace(/^image:.*$/m, 'image: ../../assets/uploads/cms-fixture.png'));
+    const aboutPath = "src/content/pages/about.md";
+    originals.set(aboutPath, readFileSync(aboutPath, "utf8"));
+    const [, aboutFrontmatter, ...aboutBody] = originals.get(aboutPath).split('---');
+    const aboutData = parse(aboutFrontmatter);
+    aboutData.image = '../../assets/uploads/cms-fixture.png';
+    aboutData.homepageHero = {
+        roles: 'Engineer · Writer',
+        introduction: 'An introduction edited in About content.',
+    };
+    aboutData.homepageTeaser = {
+        eyebrow: 'Meet the author',
+        title: 'A CMS-edited introduction',
+        summary: 'This introduction comes from the About entry.',
+        linkLabel: 'Meet Dalibor',
+    };
+    writeFileSync(
+        aboutPath,
+        `---\n${stringify(aboutData)}---${aboutBody.join('---')}`,
+    );
+    const homePath = 'src/content/pages/home.md';
+    originals.set(homePath, readFileSync(homePath, 'utf8'));
+    const [, homeFrontmatter, ...homeBody] = originals.get(homePath).split('---');
+    const homeData = parse(homeFrontmatter);
+    homeData.brandTagline = 'Ideas and experiments';
+    writeFileSync(homePath, `---\n${stringify(homeData)}---${homeBody.join('---')}`);
     build();
-    assert.match(html('cms-fixture-0')('.author img').attr('src'), /cms-fixture/, 'Author avatar follows the About image');
+    assert.equal(html('')('.home-hero-copy > .eyebrow').text(), 'Engineer · Writer');
+    assert.equal(html('')('.home-introduction').text(), 'An introduction edited in About content.');
+    assert.equal(html('')('.brand small').text(), 'Ideas and experiments');
+    assert.equal(html('about')('.brand small').text(), 'Ideas and experiments');
+    assert.equal(html('')('.about-note .eyebrow').text(), 'Meet the author');
+    assert.equal(html('')('.about-note h2').text(), 'A CMS-edited introduction');
+    assert.equal(html('')('.about-note .about-note-summary').text(), 'This introduction comes from the About entry.');
+    assert.match(html('')('.about-note .button-link').text(), /^Meet Dalibor/);
+    assert.match(
+        html("cms-fixture-0")(".author img").attr("src"),
+        /cms-fixture/,
+        "Author avatar follows the About image",
+    );
     assert.equal(html("cms-fixture-0")("[data-heading-experiment]").length, 1);
     assert.equal(html("cms-fixture-0")('link[href*="terrain"]').length, 1);
     assert.equal(
@@ -147,8 +181,12 @@ try {
         writeFileSync(path, originals.get(path).replace(/^image:.*\n/m, ""));
     }
     build();
-    assert.equal(html('cms-fixture-0')('.author img').length, 0, 'Optional About image leaves a text author link');
-    assert.equal(html('cms-fixture-0')('.author strong').text(), 'Dalibor Karlović');
+    assert.equal(
+        html("cms-fixture-0")(".author img").length,
+        0,
+        "Optional About image leaves a text author link",
+    );
+    assert.equal(html("cms-fixture-0")(".author strong").text(), "Dalibor Karlović");
     for (const route of [
         "articles",
         "categories",

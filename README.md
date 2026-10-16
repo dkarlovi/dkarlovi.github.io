@@ -52,6 +52,10 @@ imageCredit: Photograph by Dalibor Karlović
 
 The photo supplies the page’s light/dark palette. Omit `image` for a plain heading. Both fields are available in Pages CMS.
 
+The About entry also supplies the homepage’s introduction card through `homepageTeaser`: `eyebrow`, `title`, `summary`, and `linkLabel` control its label, heading, paragraph, and button text. The card shares the About image. Edit these fields under **About → Homepage introduction** in Pages CMS, or omit the group to hide the card.
+
+About’s `homepageHero.roles` and `homepageHero.introduction` supply the hero’s role line and introduction paragraph, editable under **About → Homepage hero**. The site-wide logo tagline comes from `brandTagline` in the Homepage entry.
+
 Drafts appear in `npm run dev` and are excluded from production article routes, listings, counts, and sitemap. Articles are sorted newest first; series contents are oldest first. Listings use Astro's native pagination with 20 records per page.
 
 Content uses Astro's normal Markdown rendering, GFM, footnotes, and Shiki highlighting. Native heading IDs are the default. Explicit HTML aliases in migrated articles keep old `#content-...` links working. Captions use standard `<figure>`/`<figcaption>` HTML; expandable notes use `<details>`/`<summary>`. Put blank lines around Markdown inside HTML blocks. No custom YASSG syntax or compatibility parser remains.
