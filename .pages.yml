@@ -272,17 +272,28 @@ content:
       label: Article listing
       type: file
       path: src/content/pages/article-collection.md
+      fields:
+          - *id001
+          - *id002
+          - *id003
+          - *headerCredit
+          - name: linkLabel
+            label: Article archive button
+            type: string
+          - name: discussionHeading
+            label: Article discussion heading
+            type: string
+          - *id004
+    - name: category-collection
+      label: Category listing
+      type: file
+      path: src/content/pages/category-collection.md
       fields: &id005
           - *id001
           - *id002
           - *id003
           - *headerCredit
           - *id004
-    - name: category-collection
-      label: Category listing
-      type: file
-      path: src/content/pages/category-collection.md
-      fields: *id005
     - name: series-collection
       label: Series listing
       type: file

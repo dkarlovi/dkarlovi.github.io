@@ -98,52 +98,83 @@ try {
     const [, homeFrontmatter, ...homeBody] = originals.get(homePath).split("---");
     const homeData = parse(homeFrontmatter);
     homeData.brandTagline = "Ideas and experiments";
-    homeData.title = 'CMS Author';
+    homeData.title = "CMS Author";
     homeData.footer = {
-        eyebrow: 'CMS footer eyebrow', title: 'Keep exploring.\nKeep making.',
-        tagline: 'CMS footer description', copyright: 'CMS author · Somewhere',
+        eyebrow: "CMS footer eyebrow",
+        title: "Keep exploring.\nKeep making.",
+        tagline: "CMS footer description",
+        copyright: "CMS author · Somewhere",
     };
     homeData.hero = {
-        firstLine: 'CMS', secondLine: 'Author.', imageAlt: 'CMS portrait',
-        writingLabel: 'Browse posts', aboutLabel: 'Meet the author', footnote: 'CMS hero footnote',
+        firstLine: "CMS",
+        secondLine: "Author.",
+        imageAlt: "CMS portrait",
+        writingLabel: "Browse posts",
+        aboutLabel: "Meet the author",
+        footnote: "CMS hero footnote",
     };
-    homeData.ticker = ['CMS ticker one', 'CMS ticker two'];
-    homeData.writing = { title: 'CMS writing heading', linkLabel: 'Browse the archive' };
+    homeData.ticker = ["CMS ticker one", "CMS ticker two"];
+    homeData.writing = { title: "CMS writing heading", linkLabel: "Browse the archive" };
     homeData.gallery = {
-        title: 'CMS gallery', credit: 'CMS photographer',
-        photos: [{ image: '../../assets/uploads/cms-fixture.png', alt: 'CMS gallery photo', caption: 'CMS caption' }],
+        title: "CMS gallery",
+        credit: "CMS photographer",
+        photos: [
+            {
+                image: "../../assets/uploads/cms-fixture.png",
+                alt: "CMS gallery photo",
+                caption: "CMS caption",
+            },
+        ],
     };
     writeFileSync(homePath, `---\n${stringify(homeData)}---${homeBody.join("---")}`);
-    const notFoundPath = 'src/content/pages/not-found.md';
-    originals.set(notFoundPath, readFileSync(notFoundPath, 'utf8'));
-    writeFileSync(notFoundPath, `---\n${stringify({
-        title: 'CMS error page', summary: 'CMS missing page explanation',
-        eyebrow: 'CMS error label', heading: 'CMS missing page heading', linkLabel: 'CMS home link',
-    })}---\n`);
+    const notFoundPath = "src/content/pages/not-found.md";
+    originals.set(notFoundPath, readFileSync(notFoundPath, "utf8"));
+    writeFileSync(
+        notFoundPath,
+        `---\n${stringify({
+            title: "CMS error page",
+            summary: "CMS missing page explanation",
+            eyebrow: "CMS error label",
+            heading: "CMS missing page heading",
+            linkLabel: "CMS home link",
+        })}---\n`,
+    );
+    const archivePath = "src/content/pages/article-collection.md";
+    originals.set(archivePath, readFileSync(archivePath, "utf8"));
+    const [, archiveFrontmatter, ...archiveBody] = originals.get(archivePath).split("---");
+    const archiveData = parse(archiveFrontmatter);
+    archiveData.linkLabel = "CMS archive button";
+    archiveData.discussionHeading = "CMS discussion heading";
+    writeFileSync(archivePath, `---\n${stringify(archiveData)}---${archiveBody.join("---")}`);
     build();
-    const notFound = load(readFileSync('dist/404.html', 'utf8'));
-    assert.equal(notFound('main h1').text(), 'CMS missing page heading');
-    assert.match(notFound('main').text(), /CMS missing page explanation/);
-    assert.match(notFound('main a').text(), /CMS home link/);
-    assert.match(html('')('.brand').text(), /CMS Author/);
-    assert.equal(html('cms-fixture-0')('.author strong').text(), 'CMS Author');
+    assert.match(html("cms-fixture-0")(".article-end > .button-link").text(), /CMS archive button/);
+    assert.equal(
+        html("choose-boring")(".discussion-links .eyebrow").text(),
+        "CMS discussion heading",
+    );
+    const notFound = load(readFileSync("dist/404.html", "utf8"));
+    assert.equal(notFound("main h1").text(), "CMS missing page heading");
+    assert.match(notFound("main").text(), /CMS missing page explanation/);
+    assert.match(notFound("main a").text(), /CMS home link/);
+    assert.match(html("")(".brand").text(), /CMS Author/);
+    assert.equal(html("cms-fixture-0")(".hero-author .author strong").text(), "CMS Author");
     assert.equal(html("")(".home-hero-copy > .eyebrow").text(), "Engineer · Writer");
     assert.equal(html("")(".home-introduction").text(), "An introduction edited in About content.");
     assert.equal(html("")(".brand small").text(), "Ideas and experiments");
-    assert.equal(html('')('.home-hero h1').text(), 'CMSAuthor.');
-    assert.equal(html('')('.hero-footnote').text(), 'CMS hero footnote');
-    assert.equal(html('')('.ticker').text(), 'CMS ticker oneCMS ticker two');
-    assert.equal(html('')('.home-writing h2').text(), 'CMS writing heading');
-    assert.equal(html('')('.visuals-section h2').text(), 'CMS gallery');
-    assert.equal(html('')('.visuals-grid img').attr('alt'), 'CMS gallery photo');
-    assert.match(html('')('.visuals-grid img').attr('src'), /cms-fixture/);
-    assert.equal(html('')('.visuals-grid figcaption').text(), 'CMS caption');
-    for (const route of ['', 'about', 'cms-fixture-0']) {
+    assert.equal(html("")(".home-hero h1").text(), "CMSAuthor.");
+    assert.equal(html("")(".hero-footnote").text(), "CMS hero footnote");
+    assert.equal(html("")(".ticker").text(), "CMS ticker oneCMS ticker two");
+    assert.equal(html("")(".home-writing h2").text(), "CMS writing heading");
+    assert.equal(html("")(".visuals-section h2").text(), "CMS gallery");
+    assert.equal(html("")(".visuals-grid img").attr("alt"), "CMS gallery photo");
+    assert.match(html("")(".visuals-grid img").attr("src"), /cms-fixture/);
+    assert.equal(html("")(".visuals-grid figcaption").text(), "CMS caption");
+    for (const route of ["", "about", "cms-fixture-0"]) {
         const $ = html(route);
-        assert.equal($('footer .eyebrow').text(), 'CMS footer eyebrow');
-        assert.equal($('footer h2').text(), 'Keep exploring.\nKeep making.');
-        assert.match($('footer').text(), /CMS footer description/);
-        assert.match($('footer').text(), /CMS author · Somewhere/);
+        assert.equal($("footer .eyebrow").text(), "CMS footer eyebrow");
+        assert.equal($("footer h2").text(), "Keep exploring.\nKeep making.");
+        assert.match($("footer").text(), /CMS footer description/);
+        assert.match($("footer").text(), /CMS author · Somewhere/);
     }
     assert.equal(html("about")(".brand small").text(), "Ideas and experiments");
     assert.equal(html("")(".about-note .eyebrow").text(), "Meet the author");
@@ -229,8 +260,8 @@ try {
         "Optional About image leaves a text author link",
     );
     assert.equal(
-        html("cms-fixture-0")(".author strong").text(),
-        parse(readFileSync('src/content/pages/home.md', 'utf8').split('---')[1]).title,
+        html("cms-fixture-0")(".hero-author .author strong").text(),
+        parse(readFileSync("src/content/pages/home.md", "utf8").split("---")[1]).title,
     );
     for (const route of [
         "articles",

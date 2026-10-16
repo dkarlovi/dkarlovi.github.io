@@ -60,6 +60,8 @@ Homepage also owns the remaining homepage and footer content: `hero` (display na
 
 The 404 page’s copy lives in `src/content/pages/not-found.md`, also editable in Pages CMS. Standard interface text remains in the theme: navigation and article controls, pagination, empty states, consent controls, image-palette labels and the optional interactive terrain demo. Social-profile URLs remain in `src/data/site.ts`.
 
+The Articles entry’s `linkLabel` sets the article-footer archive button, and `discussionHeading` sets the discussion prompt. Both are editable under **Article listing** in Pages CMS. Article headings and footers share the same author link; Reddit and Hacker News discussions use branded icon buttons.
+
 Drafts appear in `npm run dev` and are excluded from production article routes, listings, counts, and sitemap. Articles are sorted newest first; series contents are oldest first. Listings use Astro's native pagination with 20 records per page.
 
 Content uses Astro's normal Markdown rendering, GFM, footnotes, and Shiki highlighting. Native heading IDs are the default. Explicit HTML aliases in migrated articles keep old `#content-...` links working. Captions use standard `<figure>`/`<figcaption>` HTML; expandable notes use `<details>`/`<summary>`. Put blank lines around Markdown inside HTML blocks. No custom YASSG syntax or compatibility parser remains.

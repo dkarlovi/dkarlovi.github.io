@@ -338,18 +338,18 @@ main {
     padding: 0;
     margin: 0;
 }
-.card-meta .author {
+.author {
     display: flex;
     align-items: center;
     gap: 0.7rem;
 }
-.card-meta img {
+.author img {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
     object-position: 50% 30%;
 }
-.card-meta strong {
+.author strong {
     display: block;
     font-weight: 500;
     font-size: 0.75rem;
@@ -1132,6 +1132,8 @@ main {
     --brand-twitter: #1da1f2;
     --brand-youtube: #ff0033;
     --brand-linkedin: #0a66c2;
+    --brand-reddit: #ff4500;
+    --brand-hacker-news: #ff6600;
     --brand-surface-light: #ffffff;
     --brand-surface-dark: #181717;
 }
@@ -1181,4 +1183,11 @@ a.icon-link[data-brand]:active {
 .home-actions .secondary:hover,
 .home-actions .secondary:focus-visible {
     color: var(--paper);
+}
+
+.icon-link[data-brand="reddit"] {
+    --brand-color: var(--brand-reddit);
+}
+.icon-link[data-brand="hacker-news"] {
+    --brand-color: var(--brand-hacker-news);
 }

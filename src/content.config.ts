@@ -59,19 +59,36 @@ const pages = defineCollection({
             eyebrow: z.string().optional(),
             heading: z.string().optional(),
             linkLabel: z.string().optional(),
-            hero: z.object({
-                firstLine: z.string(), secondLine: z.string(), imageAlt: z.string(),
-                writingLabel: z.string(), aboutLabel: z.string(), footnote: z.string(),
-            }).optional(),
+            discussionHeading: z.string().optional(),
+            hero: z
+                .object({
+                    firstLine: z.string(),
+                    secondLine: z.string(),
+                    imageAlt: z.string(),
+                    writingLabel: z.string(),
+                    aboutLabel: z.string(),
+                    footnote: z.string(),
+                })
+                .optional(),
             ticker: z.array(z.string()).default([]),
             writing: z.object({ title: z.string(), linkLabel: z.string() }).optional(),
-            gallery: z.object({
-                title: z.string(), credit: z.string(),
-                photos: z.array(z.object({ image: image(), alt: z.string(), caption: z.string() })).default([]),
-            }).optional(),
-            footer: z.object({
-                eyebrow: z.string(), title: z.string(), tagline: z.string(), copyright: z.string(),
-            }).optional(),
+            gallery: z
+                .object({
+                    title: z.string(),
+                    credit: z.string(),
+                    photos: z
+                        .array(z.object({ image: image(), alt: z.string(), caption: z.string() }))
+                        .default([]),
+                })
+                .optional(),
+            footer: z
+                .object({
+                    eyebrow: z.string(),
+                    title: z.string(),
+                    tagline: z.string(),
+                    copyright: z.string(),
+                })
+                .optional(),
             homepageHero: z
                 .object({
                     roles: z.string(),

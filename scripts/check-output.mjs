@@ -5,7 +5,7 @@ import { load } from "cheerio";
 import { parse } from "yaml";
 const site = new URL(process.env.BASE_URL || "https://dkarlovi.github.io");
 const base = site.pathname.replace(/\/$/, "");
-const homeData = parse(readFileSync('src/content/pages/home.md', 'utf8').split('---')[1]);
+const homeData = parse(readFileSync("src/content/pages/home.md", "utf8").split("---")[1]);
 const content = {};
 for (const kind of ["articles", "categories", "series"]) {
     content[kind] = readdirSync(`src/content/${kind}`)
@@ -83,9 +83,9 @@ for (const [file, $] of pages) {
     );
     assert.equal($('[data-category="analytics"][data-src]').length, 1);
     if (homeData.footer) {
-        assert.equal($('footer .eyebrow').text(), homeData.footer.eyebrow);
-        assert.equal($('footer h2').text(), homeData.footer.title);
-        assert.ok($('footer').text().includes(homeData.footer.tagline));
+        assert.equal($("footer .eyebrow").text(), homeData.footer.eyebrow);
+        assert.equal($("footer h2").text(), homeData.footer.title);
+        assert.ok($("footer").text().includes(homeData.footer.tagline));
     }
     assert.equal($('meta[name="color-scheme"]').attr("content"), "light dark");
     assert.equal(
@@ -152,6 +152,26 @@ assert.deepEqual(
 assert.equal(get("/articles")(".card").length, Math.min(content.articles.length, 20));
 for (const article of content.articles) {
     const $ = get(`/${article.slug ?? article.id}`);
+    assert.equal($(".article-end .author").attr("href"), base + "/about");
+    assert.equal($(".article-end .author strong").text(), homeData.title);
+    assert.equal(
+        $(".article-end .author img").attr("src"),
+        $(".hero-author .author img").attr("src"),
+    );
+    for (const [key, brand] of [
+        ["discussReddit", "reddit"],
+        ["discussHackerNews", "hacker-news"],
+    ]) {
+        assert.equal(
+            $(`.discussion-links .icon-link[data-brand="${brand}"] svg`).length,
+            article[key] ? 1 : 0,
+        );
+    }
+    const archiveData = parse(
+        readFileSync("src/content/pages/article-collection.md", "utf8").split("---")[1],
+    );
+    assert.ok($(".article-end > .button-link").text().includes(archiveData.linkLabel));
+    assert.equal($(".article-end > .button-link").attr("href"), base + "/articles");
     assert.equal($("main h1").first().text(), article.title);
     assert.equal(
         $("main .card-meta img").attr("loading"),
