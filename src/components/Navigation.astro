@@ -1,4 +1,5 @@
 ---
+import DestinationLink from './DestinationLink.astro';
 import { sitePath } from '../lib/urls';
 import SocialLinks from './SocialLinks.astro';
 interface Props { isArticle?: boolean }
@@ -7,4 +8,4 @@ const current = Astro.url.pathname.replace(/\/+$/, '');
 const inSection = (path: string) => current === sitePath(path) || current.startsWith(sitePath(path) + '/');
 const links = [{title:'Writing',path:'/articles',active:isArticle || inSection('/articles')},{title:'Categories',path:'/categories',active:inSection('/categories') || inSection('/category')},{title:'Series',path:'/series-collection',active:inSection('/series-collection') || inSection('/series')},{title:'About',path:'/about',active:inSection('/about')}];
 ---
-<nav class="site-nav" aria-label="Main navigation"><ul class="flex flex-wrap items-center gap-x-6 gap-y-3">{links.map(link => <li><a href={sitePath(link.path)} aria-current={link.active ? (current === sitePath(link.path) ? 'page' : 'location') : undefined}>{link.title}</a></li>)}<li><SocialLinks /></li></ul></nav>
+<nav class="site-nav" aria-label="Main navigation"><ul class="flex flex-wrap items-center gap-x-6 gap-y-3">{links.map(link => <li><DestinationLink appearance="text" href={sitePath(link.path)} aria-current={link.active ? (current === sitePath(link.path) ? 'page' : 'location') : undefined}>{link.title}</DestinationLink></li>)}<li><SocialLinks /></li></ul></nav>

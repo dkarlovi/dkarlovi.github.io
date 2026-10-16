@@ -1,8 +1,9 @@
 ---
+import DestinationLink from './DestinationLink.astro';
 import SocialLinks from './SocialLinks.astro';
 import { sitePath } from '../lib/urls';
 import { getEntry } from 'astro:content';
 const home = (await getEntry('pages', 'home'))!;
 const footer = home.data.footer;
 ---
-<footer class="site-footer"><div class="footer-top">{footer && <div><p class="eyebrow">{footer.eyebrow}</p><h2>{footer.title}</h2></div>}<SocialLinks /></div><div class="footer-bottom">{footer && <span>© {new Date().getFullYear()} {footer.copyright}</span>}<nav class="flex flex-wrap gap-5" aria-label="Footer navigation"><a href={sitePath('/articles')}>Writing</a><a href={sitePath('/categories')}>Categories</a><a href={sitePath('/series-collection')}>Series</a><a href={sitePath('/about')}>About</a><button type="button" data-cc="show-preferencesModal">Cookie preferences</button></nav>{footer && <span>{footer.tagline}</span>}</div></footer>
+<footer class="site-footer"><div class="footer-top">{footer && <div><p class="eyebrow">{footer.eyebrow}</p><h2>{footer.title}</h2></div>}<SocialLinks /></div><div class="footer-bottom">{footer && <span>© {new Date().getFullYear()} {footer.copyright}</span>}<nav class="flex flex-wrap gap-5" aria-label="Footer navigation"><DestinationLink href={sitePath('/articles')}>Writing</DestinationLink><DestinationLink href={sitePath('/categories')}>Categories</DestinationLink><DestinationLink href={sitePath('/series-collection')}>Series</DestinationLink><DestinationLink href={sitePath('/about')}>About</DestinationLink><button type="button" data-cc="show-preferencesModal">Cookie preferences</button></nav>{footer && <span>{footer.tagline}</span>}</div></footer>

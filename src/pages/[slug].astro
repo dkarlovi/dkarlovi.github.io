@@ -1,4 +1,5 @@
 ---
+import DestinationLink from '../components/DestinationLink.astro';
 import { getEntry, getEntries, render, type CollectionEntry } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ArticleHero from '../components/ArticleHero.astro';
@@ -23,7 +24,7 @@ const palette = await imagePalette(article.data.image?.url, article.data.experie
 ---
 <SiteLayout {...article.data} pageClass={`article-page ${article.data.image ? 'has-hero' : ''}`} palette={paletteStyle(palette)} stylesheet={stylesheet} articleId={article.id}>
 <ArticleHero article={article} palette={palette} />
-{series.length>0 && <aside class="series-notice"><p class="eyebrow">Part of a series</p>{series.map(entry => <div><h2><a href={sitePath(`/series/${entry.id}`)}>{entry.data.title}</a></h2><p>{entry.data.summary}</p><ol>{articles.filter(a=>a.data.series.some(ref=>ref.id===entry.id)).reverse().map(sibling=><li>{sibling.id===article.id?<span aria-current="page">{sibling.data.title}</span>:<a href={sitePath(`/${sibling.data.slug??sibling.id}`)}>{sibling.data.title}</a>}</li>)}</ol></div>)}</aside>}
+{series.length>0 && <aside class="series-notice"><p class="eyebrow">Part of a series</p>{series.map(entry => <div><h2><DestinationLink href={sitePath(`/series/${entry.id}`)}>{entry.data.title}</DestinationLink></h2><p>{entry.data.summary}</p><ol>{articles.filter(a=>a.data.series.some(ref=>ref.id===entry.id)).reverse().map(sibling=><li>{sibling.id===article.id?<span aria-current="page">{sibling.data.title}</span>:<DestinationLink href={sitePath(`/${sibling.data.slug??sibling.id}`)}>{sibling.data.title}</DestinationLink>}</li>)}</ol></div>)}</aside>}
 <div class="content article-content"><Content /></div>
-<div class="article-end"><div class="article-end-row"><AuthorLink /><DiscussionLinks article={article} /></div>{archive.data.linkLabel && <a class="button-link" href={sitePath('/articles')}>{archive.data.linkLabel} <span class="arrow" aria-hidden="true">↗</span></a>}</div>
+<div class="article-end"><div class="article-end-row"><AuthorLink /><DiscussionLinks article={article} /></div>{archive.data.linkLabel && <DestinationLink class="button-link" href={sitePath('/articles')}>{archive.data.linkLabel} <span class="arrow" aria-hidden="true">↗</span></DestinationLink>}</div>
 </SiteLayout>

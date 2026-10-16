@@ -7,7 +7,8 @@ eyebrow: A little about me
 linkLabel: More about me
 homepageHero:
     roles: Software engineer · Consultant · Photographer
-    introduction: I’m a software engineer and consultant from Croatia. I build thoughtful systems, make
+    introduction:
+        I’m a software engineer and consultant from Croatia. I build thoughtful systems, make
         photographs, and write about what I learn.
 homepageTeaser:
     title: Code is only part of the picture.

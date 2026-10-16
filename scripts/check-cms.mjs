@@ -1,10 +1,11 @@
 // Build real CMS-style files through Astro: no mocked collections or image resolver.
 import assert from "node:assert/strict";
-import { writeFileSync, readFileSync, existsSync, unlinkSync, copyFileSync } from "node:fs";
+import { writeFileSync, readFileSync, existsSync, unlinkSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { load } from "cheerio";
 import { parse, stringify } from "yaml";
 import { readdirSync } from "node:fs";
+import sharp from "sharp";
 const created = [];
 const originals = new Map();
 function write(path, text) {
@@ -46,7 +47,9 @@ try {
     );
     const media = "src/assets/uploads/cms-fixture.png";
     assert.ok(!existsSync(media));
-    copyFileSync("src/assets/uploads/testing-speech-recognition-robot.png", media);
+    await sharp({ create: { width: 4096, height: 3072, channels: 3, background: "#2679a1" } })
+        .png()
+        .toFile(media);
     created.push(media);
     const headerFields =
         "image:\n    url: ../../assets/uploads/cms-fixture.png\n    credit: CMS header attribution\n    alt: CMS header photo\n    position: 60% 35%\n";
@@ -83,9 +86,16 @@ try {
             'categories: [programming]\nexperience:\n    headingExperiment: terrain\n    stylesheet: terrain\n    accent: "#006b65"\n',
         ),
     );
-    writeFileSync(themed, updateFrontmatter(readFileSync(themed, 'utf8'), data => {
-        Object.assign(data.image, { credit: 'CMS image attribution', alt: 'CMS article photo', position: '60% 35%' });
-    }));
+    writeFileSync(
+        themed,
+        updateFrontmatter(readFileSync(themed, "utf8"), (data) => {
+            Object.assign(data.image, {
+                credit: "CMS image attribution",
+                alt: "CMS article photo",
+                position: "60% 35%",
+            });
+        }),
+    );
     const aboutPath = "src/content/pages/about.md";
     originals.set(aboutPath, readFileSync(aboutPath, "utf8"));
     const [, aboutFrontmatter, ...aboutBody] = originals.get(aboutPath).split("---");
@@ -95,8 +105,8 @@ try {
         roles: "Engineer · Writer",
         introduction: "An introduction edited in About content.",
     };
-    aboutData.linkLabel = 'Meet Dalibor';
-    aboutData.eyebrow = 'Meet the author';
+    aboutData.linkLabel = "Meet Dalibor";
+    aboutData.eyebrow = "Meet the author";
     aboutData.homepageTeaser = {
         title: "A CMS-edited introduction",
         summary: "This introduction comes from the About entry.",
@@ -127,7 +137,11 @@ try {
         credit: "CMS photographer",
         photos: [
             {
-                image: { url: "../../assets/uploads/cms-fixture.png", alt: "CMS gallery photo", credit: "CMS gallery credit" },
+                image: {
+                    url: "../../assets/uploads/cms-fixture.png",
+                    alt: "CMS gallery photo",
+                    credit: "CMS gallery credit",
+                },
                 caption: "CMS caption",
             },
         ],
@@ -153,11 +167,48 @@ try {
     archiveData.discussionHeading = "CMS discussion heading";
     writeFileSync(archivePath, `---\n${stringify(archiveData)}---${archiveBody.join("---")}`);
     build();
-    assert.match(html('')('.home-actions a').first().text(), /CMS archive button/);
-    assert.match(html('')('.home-actions a').last().text(), /Meet Dalibor/);
-    assert.ok(html('')('.home-writing .section-heading a').text().includes(archiveData.title));
-    assert.equal(html('articles')('.collection-hero .eyebrow').text(), 'CMS archive button');
-    assert.equal(html('categories')('.collection-hero .eyebrow').text(), 'CMS archive button');
+    assert.match(html("articles")(".article-card-image").first().attr("src"), /cms-fixture/);
+    const optimizedCard = await sharp(
+        `dist/_astro/${html("articles")(".article-card-image").first().attr("src").split("/").pop()}`,
+    ).metadata();
+    assert.equal(optimizedCard.width, 720, "4K source is resized for cards");
+    assert.equal(optimizedCard.height, 460);
+    assert.ok(
+        html("articles")(".article-card-image").first().attr("srcset"),
+        "Responsive variants retained",
+    );
+    const targetLink = html("articles")(".subject-link").filter((_, el) =>
+        html("articles")(el).attr("href").endsWith("/category/cms-fixture"),
+    );
+    const targetStyles = Object.fromEntries(
+        targetLink
+            .attr("style")
+            .split(";")
+            .map((rule) => rule.split(":")),
+    );
+    const destinationStyles = Object.fromEntries(
+        html("category/cms-fixture")("body")
+            .attr("style")
+            .split(";")
+            .map((rule) => rule.split(":")),
+    );
+    assert.equal(targetStyles["--target-accent-light"], destinationStyles["--accent-light"]);
+    assert.equal(targetStyles["--target-accent-dark"], destinationStyles["--accent-dark"]);
+    assert.notEqual(
+        targetStyles["--target-accent-light"],
+        Object.fromEntries(
+            html("category/devops")("body")
+                .attr("style")
+                .split(";")
+                .map((rule) => rule.split(":")),
+        )["--accent-light"],
+        "Distinct target photos produce distinct palettes",
+    );
+    assert.match(html("")(".home-actions a").first().text(), /CMS archive button/);
+    assert.match(html("")(".home-actions a").last().text(), /Meet Dalibor/);
+    assert.ok(html("")(".home-writing .section-heading a").text().includes(archiveData.title));
+    assert.equal(html("articles")(".collection-hero .eyebrow").text(), "CMS archive button");
+    assert.equal(html("categories")(".collection-hero .eyebrow").text(), "CMS archive button");
     assert.match(html("cms-fixture-0")(".article-end > .button-link").text(), /CMS archive button/);
     assert.equal(
         html("choose-boring")(".discussion-links .eyebrow").text(),
@@ -265,11 +316,21 @@ try {
     ]) {
         const path = `src/content/pages/${name}.md`;
         if (!originals.has(path)) originals.set(path, readFileSync(path, "utf8"));
-        writeFileSync(path, updateFrontmatter(originals.get(path), data => { delete data.image; }));
+        writeFileSync(
+            path,
+            updateFrontmatter(originals.get(path), (data) => {
+                delete data.image;
+            }),
+        );
     }
     for (const path of [category, "src/content/series/cms-fixture.md"]) {
         originals.set(path, readFileSync(path, "utf8"));
-        writeFileSync(path, updateFrontmatter(originals.get(path), data => { delete data.image; }));
+        writeFileSync(
+            path,
+            updateFrontmatter(originals.get(path), (data) => {
+                delete data.image;
+            }),
+        );
     }
     build();
     assert.equal(
@@ -346,10 +407,13 @@ try {
         created.splice(created.indexOf(bad), 1);
     }
     for (const [metadata, expected] of [
-        [{ url: '../../assets/uploads/cms-fixture.png', position: '200% 45%' }, /coordinates/],
-        [{ credit: 'A credit without a file' }, /image.url/],
+        [{ url: "../../assets/uploads/cms-fixture.png", position: "200% 45%" }, /coordinates/],
+        [{ credit: "A credit without a file" }, /image.url/],
     ]) {
-        write(bad, `---\n${stringify({ title: 'Invalid image', summary: 'Reject incomplete image metadata', publishedAt: '2026-01-01', image: metadata })}---\n`);
+        write(
+            bad,
+            `---\n${stringify({ title: "Invalid image", summary: "Reject incomplete image metadata", publishedAt: "2026-01-01", image: metadata })}---\n`,
+        );
         assert.match(build(false), expected);
         unlinkSync(bad);
         created.splice(created.indexOf(bad), 1);

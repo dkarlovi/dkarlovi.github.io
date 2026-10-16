@@ -1194,3 +1194,101 @@ a.icon-link[data-brand]:active {
 .icon-link[data-brand="hacker-news"] {
     --brand-color: var(--brand-hacker-news);
 }
+
+/* Destination colours stay local to the link and appear only during interaction. */
+.destination-link {
+    --target-text-accent: var(--target-accent);
+    --target-paper: var(--target-paper-light);
+    --target-ink: var(--target-ink-light);
+    --target-muted: var(--target-muted-light);
+    --target-accent: var(--target-accent-light);
+    --target-accent-ink: var(--target-accent-ink-light);
+    --target-panel: var(--target-panel-light);
+    --target-line: var(--target-line-light);
+}
+@media (prefers-color-scheme: dark) {
+    .destination-link {
+        --target-paper: var(--target-paper-dark);
+        --target-ink: var(--target-ink-dark);
+        --target-muted: var(--target-muted-dark);
+        --target-accent: var(--target-accent-dark);
+        --target-accent-ink: var(--target-accent-ink-dark);
+        --target-panel: var(--target-panel-dark);
+        --target-line: var(--target-line-dark);
+    }
+}
+a.destination-link[data-target-palette][data-palette-appearance="surface"]:is(
+        :hover,
+        :focus-visible
+    ),
+a.destination-link[data-target-palette][data-palette-appearance="surface"][aria-current][data-current-target] {
+    background-color: var(--target-accent);
+    color: var(--target-accent-ink);
+    border-color: var(--target-accent);
+}
+
+a.destination-link[data-target-palette][data-palette-appearance="text"]:is(:hover, :focus-visible),
+a.destination-link[data-target-palette][data-palette-appearance="text"][aria-current][data-current-target] {
+    color: var(--target-text-accent);
+    text-decoration: underline;
+    text-decoration-color: var(--target-text-accent);
+    text-underline-offset: 6px;
+}
+
+/* Photo-backed headers use the destination's light accent for readable text. */
+.has-hero .site-header .destination-link,
+.article-hero .destination-link,
+.home-page .desktop-navigation .destination-link {
+    --target-text-accent: var(--target-accent-dark);
+}
+.has-hero .mobile-navigation .destination-link,
+.home-page.without-portrait .desktop-navigation .destination-link {
+    --target-text-accent: var(--target-accent);
+}
+@media (max-width: 540px) {
+    .home-page .brand.destination-link {
+        --target-text-accent: var(--target-accent-dark);
+    }
+    .home-page.without-portrait .brand.destination-link {
+        --target-text-accent: var(--target-accent);
+    }
+}
+
+a.destination-link[data-target-palette][data-palette-appearance="identity"]:is(
+        :hover,
+        :focus-visible
+    )
+    .identity-name {
+    color: var(--target-text-accent);
+    text-decoration: underline;
+    text-decoration-color: var(--target-text-accent);
+    text-underline-offset: 6px;
+}
+a.destination-link[data-target-palette][data-palette-appearance="identity"]:is(
+        :hover,
+        :focus-visible
+    )
+    .brand-mark {
+    background-color: var(--target-accent);
+    color: var(--target-accent-ink);
+}
+.article-page
+    a.destination-link[data-target-palette][data-palette-appearance="identity"]:is(
+        :hover,
+        :focus-visible
+    )
+    .brand-mark {
+    background-color: transparent;
+    color: var(--target-text-accent);
+    border-color: var(--target-text-accent);
+}
+
+/* A ring highlights the logo/avatar without changing its size or link surface. */
+a.destination-link[data-target-palette][data-palette-appearance="identity"]:is(
+        :hover,
+        :focus-visible
+    )
+    :is(.brand-mark, img) {
+    outline: 2px solid var(--target-text-accent);
+    outline-offset: 2px;
+}

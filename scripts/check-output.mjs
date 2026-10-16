@@ -62,6 +62,25 @@ const knownIllustrativeLinks = new Set(["/blob/master/LICENSE"]);
 let checkedLinks = 0;
 for (const [file, $] of pages) {
     if ($('meta[http-equiv="refresh"]').length) continue;
+    assert.ok($("a[data-target-palette]").length > 0, `${file}: destination palettes available`);
+    for (const link of $("a[data-target-palette]").toArray()) {
+        const destination = pages.get(fileFor($(link).attr("data-target-palette")));
+        assert.ok(destination, `${file}: palette target exists`);
+        const roles = Object.fromEntries(
+            (destination("body").attr("style") ?? "").split(";").map((rule) => rule.split(":")),
+        );
+        const target = Object.fromEntries(
+            ($(link).attr("style") ?? "").split(";").map((rule) => rule.split(":")),
+        );
+        for (const [role, value] of Object.entries(roles)) {
+            if (/^--.+-(light|dark)$/.test(role))
+                assert.equal(
+                    target[role.replace("--", "--target-")],
+                    value,
+                    `${file}: target palette matches destination`,
+                );
+        }
+    }
     assert.equal($("html").attr("lang"), "en", file);
     assert.ok($("title").text().includes(homeData.title), file);
     assert.ok($('meta[name="description"]').attr("content"), file);
@@ -94,6 +113,21 @@ for (const [file, $] of pages) {
         `${file}: no Bootstrap controls`,
     );
     $(".card").each((index, card) => {
+        assert.equal(
+            $(card).find("h3 a").attr("data-palette-appearance"),
+            "text",
+            "Article titles stay text links",
+        );
+        assert.equal(
+            $(card).children("a").first().attr("data-palette-appearance"),
+            "text",
+            "Article images have no hover surface",
+        );
+        assert.equal(
+            $(card).find(".read-more").attr("data-palette-appearance"),
+            "surface",
+            "Only article buttons get a hover surface",
+        );
         for (const image of $(card).find("img").toArray()) {
             assert.equal(
                 $(image).attr("loading"),
@@ -191,8 +225,10 @@ for (const article of content.articles) {
 for (const kind of ["categories", "series"]) {
     for (const taxonomy of content[kind]) {
         assert.equal(
-            get(`/${kind === 'categories' ? 'category' : 'series'}/${taxonomy.slug}`)('.category-widget').length,
-            kind === 'categories' ? 1 : 0,
+            get(`/${kind === "categories" ? "category" : "series"}/${taxonomy.slug}`)(
+                ".category-widget",
+            ).length,
+            kind === "categories" ? 1 : 0,
             `${kind}: subject navigation belongs only on category listings`,
         );
         const members = content.articles.filter(

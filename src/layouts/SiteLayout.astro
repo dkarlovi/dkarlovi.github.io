@@ -1,5 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
+import { pagePalette } from '../lib/content-palettes';
+import { createPalette, paletteStyle } from '../lib/palette';
 import type { ContentImage } from '../lib/content-image';
 import { getImage } from 'astro:assets';
 import portrait from '../assets/uploads/self.jpeg';
@@ -18,6 +20,7 @@ import 'vanilla-cookieconsent/dist/cookieconsent.css';
 interface Props { title?: string; summary?: string; image?: ContentImage; keywords?: string[]; pageClass?: string; palette?: string; stylesheet?: string; articleId?: string }
 const home = (await getEntry('pages', 'home'))!;
 const { title = home.data.title, summary = home.data.summary, image = home.data.image ?? { url: portrait }, keywords = [], pageClass = '', palette, stylesheet, articleId } = Astro.props;
+const resolvedPalette = palette ?? paletteStyle((await pagePalette(Astro.url.pathname))?.palette ?? createPalette([]));
 const fullTitle = title === home.data.title ? title : `${title} - ${home.data.title}`;
 const canonical = new URL(Astro.url.pathname.endsWith('/404') ? sitePath('/404.html') : Astro.url.pathname, Astro.site);
 const ogImage = await getImage({ src: image.url, width: 1200, height: 600, fit: 'cover' });
@@ -34,7 +37,7 @@ const socialImage = new URL(ogImage.src, Astro.site);
 <link rel="icon" type="image/png" sizes="32x32" href={sitePath('/favicon-32x32.png')} /><link rel="manifest" href={sitePath('/site.webmanifest')} />
 <meta name="theme-color" content="#f7eddd" /><link rel="sitemap" href={sitePath('/sitemap-index.xml')} />
 {stylesheet && <link rel="stylesheet" href={stylesheet} />}
-</head><body class={pageClass} style={palette} data-article={articleId}>
+</head><body class={pageClass} style={resolvedPalette} data-article={articleId}>
 <a class="skip-link" href="#main">Skip to content</a><SiteHeader isArticle={Boolean(articleId)} /><main id="main"><slot /></main><SiteFooter />
 <script>import '../scripts/app';</script>
 <script is:inline type="text/plain" data-category="analytics" data-src="https://www.googletagmanager.com/gtag/js?id=G-ZYF0F5VGJR" async></script>

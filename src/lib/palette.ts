@@ -13,6 +13,27 @@ export interface ArticlePalette {
     light: PaletteRoles;
     dark: PaletteRoles;
 }
+/** The original warm site theme, retained for Home and About. */
+export const defaultPalette: ArticlePalette = {
+    light: {
+        paper: "#f7eddd",
+        ink: "#311c18",
+        muted: "#725c50",
+        accent: "#b7352d",
+        accentInk: "#fff8ec",
+        panel: "#eddfc6",
+        line: "#b29980",
+    },
+    dark: {
+        paper: "#311c18",
+        ink: "#f7eddd",
+        muted: "#c7aa98",
+        accent: "#ff9f85",
+        accentInk: "#311c18",
+        panel: "#432a22",
+        line: "#967361",
+    },
+};
 const hex = (rgb: readonly number[]) =>
     "#" + rgb.map((v) => Math.round(v).toString(16).padStart(2, "0")).join("");
 const rgb = (value: string): RGB =>
@@ -134,12 +155,12 @@ export function createPalette(pixels: readonly RGB[], accent?: string): ArticleP
     }
     return { light, dark };
 }
-export function paletteStyle(palette: ArticlePalette): string {
+export function paletteStyle(palette: ArticlePalette, prefix = ""): string {
     return Object.entries(palette)
         .flatMap(([mode, roles]) =>
             Object.entries(roles).map(
                 ([role, value]) =>
-                    `--${role.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase())}-${mode}:${value}`,
+                    `--${prefix}${role.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase())}-${mode}:${value}`,
             ),
         )
         .join(";");

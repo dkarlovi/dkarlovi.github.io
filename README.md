@@ -116,6 +116,10 @@ The sitemap uses the official Astro integration at `/sitemap-index.xml`. Site pa
 
 Every article with an image gets a palette extracted by Sharp at build time. The generated light/dark roles colour the article, navigation and footer, with visible swatches beside the photo attribution. Neutral/absent images have a warm fallback. The site honors system theme changes live, without a switcher. No client-side colour extraction or external font requests are needed.
 
+Internal theme links use `DestinationLink.astro` to preview the destination’s palette on hover and keyboard focus. The build-time registry resolves content routes, article slug overrides and pagination, and shares the same light/dark roles with the destination page. Only button-styled links use a matched accent/text pair with a hover background. Ordinary links, including article titles and menu items, colour their text and underline; image links keep their appearance. The logo and article attribution colour the name and outline the mark/avatar, while the logo tagline and reading time stay unchanged. Current-page links stay highlighted, while active parent sections retain the current page’s colours. Home and About intentionally keep the original warm palette (`defaultPalette`), including their link previews. External social/discussion icons retain their brand colours. Use `DestinationLink` in new theme components; links inside ordinary Markdown retain their existing styling.
+
+Images in `src/assets/uploads` are processed by Astro’s native image pipeline into responsive variants. Larger replacements keep the component’s intended display sizes (for example, 720 × 460 article cards and 1920-wide hero requests); the browser selects a suitable generated variant. Palette extraction samples at most 80 × 60 pixels and is cached by image and accent. Images remain optional.
+
 Optional frontmatter:
 
 ```yaml

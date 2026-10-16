@@ -13,7 +13,7 @@ test("native content is portable Markdown with valid local media and collection 
             const [, frontmatter] = source.split("---");
             const data = parse(frontmatter);
             if (data.image) {
-                assert.equal(typeof data.image, 'object', `${file}: structured image metadata`);
+                assert.equal(typeof data.image, "object", `${file}: structured image metadata`);
                 assert.ok(existsSync(resolve(root, data.image.url)), data.image.url);
             }
             for (const photo of data.gallery?.photos ?? []) {

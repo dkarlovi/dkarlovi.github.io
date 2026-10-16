@@ -1,4 +1,5 @@
 ---
+import DestinationLink from './DestinationLink.astro';
 import { getCollection } from 'astro:content';
 import { getArticles } from '../lib/articles';
 import { sitePath } from '../lib/urls';
@@ -10,4 +11,4 @@ const categoryState = (id: string) => {
     return current === path ? 'page' : current.startsWith(path + '/') ? 'location' : undefined;
 };
 ---
-<aside class="category-widget"><h2>Browse by subject</h2><ul role="list">{categories.sort((a,b) => a.data.title.localeCompare(b.data.title)).map(category => <li><a class="button-link subject-link" aria-current={categoryState(category.id)} href={sitePath(`/category/${category.id}`)}><span>{category.data.title}</span><span>{articles.filter(article => article.data.categories.some(ref => ref.id === category.id)).length}</span></a></li>)}</ul></aside>
+<aside class="category-widget"><h2>Browse by subject</h2><ul role="list">{categories.sort((a,b) => a.data.title.localeCompare(b.data.title)).map(category => <li><DestinationLink class="button-link subject-link" aria-current={categoryState(category.id)} href={sitePath(`/category/${category.id}`)}><span>{category.data.title}</span><span>{articles.filter(article => article.data.categories.some(ref => ref.id === category.id)).length}</span></DestinationLink></li>)}</ul></aside>
