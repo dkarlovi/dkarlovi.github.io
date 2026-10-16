@@ -18,7 +18,7 @@ const articles = (await getArticles()).slice(0, 4);
   {about.data.image && <div class="col-lg-6 col-sm-6 col-9 mx-auto mb-5 mb-lg-0"><Image src={about.data.image!} width={400} height={400} alt={about.data.title} fetchpriority="high" loading="eager" fit="cover" class="img-fluid portrait" /></div>}
 </div></div></section>
 <section class="mt-4 pt-4 pb-4"><div class="container"><div class="section-title"><h2 class="h4 title-border">Recent</h2></div><div class="row"><div class="col-lg-8 mb-5 mb-lg-0">
-  <div class="border mb-5 pt-4 rounded"><div class="row mx-0 g-5">{articles.map(article => <div class="col-sm-6 mb-4"><ArticleCard article={article} /></div>)}</div></div>
+  <div class="border mb-5 pt-4 rounded"><div class="row mx-0 g-5">{articles.map((article, i) => <div class="col-sm-6 mb-4"><ArticleCard article={article} loading={i < 2 ? 'eager' : 'lazy'} /></div>)}</div></div>
   <div class="text-center"><a href={sitePath('/articles')} class="btn btn-outline-secondary">All articles</a></div>
 </div><aside class="col-lg-4"><CategorySidebar /></aside></div></div></section>
 </SiteLayout>

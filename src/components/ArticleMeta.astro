@@ -3,11 +3,11 @@ import { Image } from 'astro:assets';
 import portrait from '../assets/uploads/self.jpeg';
 import type { CollectionEntry } from 'astro:content';
 import { sitePath } from '../lib/urls';
-interface Props { article: CollectionEntry<'articles'> }
-const { article } = Astro.props;
+interface Props { article: CollectionEntry<'articles'>; loading?: 'eager' | 'lazy' }
+const { article, loading = 'lazy' } = Astro.props;
 const date = article.data.publishedAt.toISOString().slice(0, 10);
 ---
 <ul class="list-inline card-meta d-flex align-items-center mb-3">
-  <li class="list-inline-item me-3"><a href={sitePath('/about')} class="d-flex align-items-center text-decoration-none"><Image src={portrait} width={40} height={40} fit="cover" class="img-fluid rounded-circle me-2" style="object-fit: cover" alt="About Dalibor" loading="lazy" /><span>dkarlovi</span></a></li>
+  <li class="list-inline-item me-3"><a href={sitePath('/about')} class="d-flex align-items-center text-decoration-none"><Image src={portrait} width={40} height={40} fit="cover" class="img-fluid rounded-circle me-2" style="object-fit: cover" alt="About Dalibor" loading={loading} /><span>dkarlovi</span></a></li>
   <li class="list-inline-item d-flex align-items-center"><i class="fas fa-calendar me-2" aria-hidden="true"></i><time class="date-container" datetime={date} title={date}>{date}</time></li>
 </ul>
