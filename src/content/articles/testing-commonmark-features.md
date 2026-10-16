@@ -2,8 +2,9 @@
 title: Testing Commonmark features
 slug: testing-commonmark-features
 summary: We are testing the Commonmark features
-image: ../../assets/uploads/testing-commonmark-features-ar-sofa.webp
-publishedAt: "2023-12-12"
+image:
+    url: ../../assets/uploads/testing-commonmark-features-ar-sofa.webp
+publishedAt: 2023-12-12
 draft: false
 categories:
     - programming

@@ -24,6 +24,12 @@ function build(expectSuccess = true) {
     else assert.notEqual(result.status, 0, "Build must reject invalid content");
     return output;
 }
+function updateFrontmatter(source, update) {
+    const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?=\r?\n|$)/);
+    const data = parse(match[1]);
+    update(data);
+    return `---\n${stringify(data)}---${source.slice(match[0].length)}`;
+}
 function html(path) {
     return load(readFileSync(`dist/${path ? path + "/" : ""}index.html`, "utf8"));
 }
@@ -43,7 +49,7 @@ try {
     copyFileSync("src/assets/uploads/testing-speech-recognition-robot.png", media);
     created.push(media);
     const headerFields =
-        "image: ../../assets/uploads/cms-fixture.png\nimageCredit: CMS header attribution\n";
+        "image:\n    url: ../../assets/uploads/cms-fixture.png\n    credit: CMS header attribution\n    alt: CMS header photo\n    position: 60% 35%\n";
     writeFileSync(
         category,
         readFileSync(category, "utf8").replace("summary:", headerFields + "summary:"),
@@ -67,21 +73,24 @@ try {
     for (let i = 0; i < fixtureCount; i++)
         write(
             `src/content/articles/cms-fixture-${i}.md`,
-            `---\ntitle: CMS fixture ${i}\nsummary: A new article written by a CMS\npublishedAt: 2026-01-01\nimage: ../../assets/uploads/cms-fixture.png\ncategories: [programming]\n---\nNew Markdown image:\n\n![CMS upload](../../assets/uploads/cms-fixture.png)\n`,
+            `---\ntitle: CMS fixture ${i}\nsummary: A new article written by a CMS\npublishedAt: 2026-01-01\nimage:\n    url: ../../assets/uploads/cms-fixture.png\ncategories: [programming]\n---\nNew Markdown image:\n\n![CMS upload](../../assets/uploads/cms-fixture.png)\n`,
         );
     const themed = "src/content/articles/cms-fixture-0.md";
     writeFileSync(
         themed,
         readFileSync(themed, "utf8").replace(
             "categories: [programming]",
-            'categories: [programming]\nexperience:\n    headingExperiment: terrain\n    stylesheet: terrain\n    accent: "#006b65"\n    imagePosition: 60% 35%\n    imageCredit: CMS image attribution',
+            'categories: [programming]\nexperience:\n    headingExperiment: terrain\n    stylesheet: terrain\n    accent: "#006b65"\n',
         ),
     );
+    writeFileSync(themed, updateFrontmatter(readFileSync(themed, 'utf8'), data => {
+        Object.assign(data.image, { credit: 'CMS image attribution', alt: 'CMS article photo', position: '60% 35%' });
+    }));
     const aboutPath = "src/content/pages/about.md";
     originals.set(aboutPath, readFileSync(aboutPath, "utf8"));
     const [, aboutFrontmatter, ...aboutBody] = originals.get(aboutPath).split("---");
     const aboutData = parse(aboutFrontmatter);
-    aboutData.image = "../../assets/uploads/cms-fixture.png";
+    aboutData.image = { url: "../../assets/uploads/cms-fixture.png", alt: "CMS About portrait" };
     aboutData.homepageHero = {
         roles: "Engineer · Writer",
         introduction: "An introduction edited in About content.",
@@ -108,18 +117,17 @@ try {
     homeData.hero = {
         firstLine: "CMS",
         secondLine: "Author.",
-        imageAlt: "CMS portrait",
         footnote: "CMS hero footnote",
     };
     homeData.ticker = ["CMS ticker one", "CMS ticker two"];
     homeData.writing = { title: "CMS writing heading" };
+    homeData.image = { url: "../../assets/uploads/cms-fixture.png", alt: "CMS portrait" };
     homeData.gallery = {
         title: "CMS gallery",
         credit: "CMS photographer",
         photos: [
             {
-                image: "../../assets/uploads/cms-fixture.png",
-                alt: "CMS gallery photo",
+                image: { url: "../../assets/uploads/cms-fixture.png", alt: "CMS gallery photo", credit: "CMS gallery credit" },
                 caption: "CMS caption",
             },
         ],
@@ -171,7 +179,12 @@ try {
     assert.equal(html("")(".visuals-section h2").text(), "CMS gallery");
     assert.equal(html("")(".visuals-grid img").attr("alt"), "CMS gallery photo");
     assert.match(html("")(".visuals-grid img").attr("src"), /cms-fixture/);
-    assert.equal(html("")(".visuals-grid figcaption").text(), "CMS caption");
+    assert.match(html("")(".visuals-grid figcaption").text(), /CMS caption/);
+    assert.match(html("")(".visuals-grid figcaption").text(), /CMS gallery credit/);
+    assert.equal(html("")(".home-photo img").attr("alt"), "CMS portrait");
+    assert.equal(html("about")(".about-portrait").attr("alt"), "CMS About portrait");
+    assert.equal(html("cms-fixture-0")(".hero-photo").attr("alt"), "CMS article photo");
+    assert.match(html("cms-fixture-0")(".article-hero").attr("style"), /60% 35%/);
     for (const route of ["", "about", "cms-fixture-0"]) {
         const $ = html(route);
         assert.equal($("footer .eyebrow").text(), "CMS footer eyebrow");
@@ -211,6 +224,8 @@ try {
     for (const route of ["category/cms-fixture", "series/cms-fixture"]) {
         const $ = html(route);
         assert.match($(".collection-cover img").attr("src"), /cms-fixture/);
+        assert.equal($(".collection-cover img").attr("alt"), "CMS header photo");
+        assert.match($(".collection-cover img").attr("style"), /60% 35%/);
         assert.match($(".collection-cover .photo-credit").text(), /CMS header attribution/);
         assert.equal($(".collection-cover .photo-palette span").length, 4);
     }
@@ -250,11 +265,11 @@ try {
     ]) {
         const path = `src/content/pages/${name}.md`;
         if (!originals.has(path)) originals.set(path, readFileSync(path, "utf8"));
-        writeFileSync(path, originals.get(path).replace(/^image:.*\n/m, ""));
+        writeFileSync(path, updateFrontmatter(originals.get(path), data => { delete data.image; }));
     }
     for (const path of [category, "src/content/series/cms-fixture.md"]) {
         originals.set(path, readFileSync(path, "utf8"));
-        writeFileSync(path, originals.get(path).replace(/^image:.*\n/m, ""));
+        writeFileSync(path, updateFrontmatter(originals.get(path), data => { delete data.image; }));
     }
     build();
     assert.equal(
@@ -298,7 +313,7 @@ try {
     created.splice(created.indexOf(bad), 1);
     write(
         bad,
-        "---\ntitle: Missing media\nsummary: Broken upload\npublishedAt: 2026-01-01\nimage: ../../assets/uploads/missing-upload.png\n---\nInvalid\n",
+        "---\ntitle: Missing media\nsummary: Broken upload\npublishedAt: 2026-01-01\nimage:\n    url: ../../assets/uploads/missing-upload.png\n---\nInvalid\n",
     );
     assert.match(build(false), /missing-upload/);
     unlinkSync(bad);
@@ -319,7 +334,6 @@ try {
     created.splice(created.indexOf(bad), 1);
     for (const [setting, expected] of [
         ["accent: red", /six-digit hex/],
-        ["imagePosition: 200% 45%", /coordinates/],
         ["headingExperiment: unknown", /headingExperiment/],
         ["stylesheet: missing-style", /unknown experience stylesheet/],
     ]) {
@@ -327,6 +341,15 @@ try {
             bad,
             `---\ntitle: Invalid article experience\nsummary: Reject invalid author settings\npublishedAt: 2026-01-01\nexperience:\n    ${setting}\n---\nInvalid\n`,
         );
+        assert.match(build(false), expected);
+        unlinkSync(bad);
+        created.splice(created.indexOf(bad), 1);
+    }
+    for (const [metadata, expected] of [
+        [{ url: '../../assets/uploads/cms-fixture.png', position: '200% 45%' }, /coordinates/],
+        [{ credit: 'A credit without a file' }, /image.url/],
+    ]) {
+        write(bad, `---\n${stringify({ title: 'Invalid image', summary: 'Reject incomplete image metadata', publishedAt: '2026-01-01', image: metadata })}---\n`);
         assert.match(build(false), expected);
         unlinkSync(bad);
         created.splice(created.indexOf(bad), 1);

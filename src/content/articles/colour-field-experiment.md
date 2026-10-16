@@ -1,15 +1,18 @@
 ---
 title: A little light. A world of possibility.
-summary: A draft demonstration of an article with a photographic palette, wide visuals and an interactive heading experiment.
+summary: A draft demonstration of an article with a photographic palette, wide visuals and an
+    interactive heading experiment.
 publishedAt: 2026-10-16
 draft: true
-image: ../../assets/uploads/teambuilding.jpeg
-categories: [engineering]
+image:
+    url: ../../assets/uploads/teambuilding.jpeg
+    credit: Photograph by Dalibor Karlović
+    position: 50% 45%
+categories:
+    - engineering
 experience:
     headingExperiment: terrain
     stylesheet: terrain
-    imagePosition: 50% 45%
-    imageCredit: Photograph by Dalibor Karlović
 ---
 
 This draft demonstrates the optional article experience. It is visible in development and excluded from the published site.

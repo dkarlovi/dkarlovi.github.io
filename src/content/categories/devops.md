@@ -1,8 +1,9 @@
 ---
 title: Devops
 slug: devops
-image: ../../assets/uploads/self.jpeg
-imageCredit: Photograph by Dalibor Karlović
+image:
+    url: ../../assets/uploads/self.jpeg
+    credit: Photograph by Dalibor Karlović
 summary: On devops and related topics.
 ---
 

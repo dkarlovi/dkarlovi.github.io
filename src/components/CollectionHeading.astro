@@ -15,8 +15,8 @@ const { Content } = await render(intro);
 ---
 <section class={intro.data.image ? 'collection-hero' : 'collection-heading'}>
     {intro.data.image && <figure class="collection-cover">
-        <Image src={intro.data.image} width={1920} alt={intro.data.title} loading="eager" fetchpriority="high" />
-        <PhotoPalette palette={palette} credit={intro.data.imageCredit} />
+        <Image src={intro.data.image.url} width={1920} style={intro.data.image.position ? `object-position:${intro.data.image.position}` : undefined} alt={intro.data.image.alt ?? intro.data.title} loading="eager" fetchpriority="high" />
+        <PhotoPalette palette={palette} credit={intro.data.image.credit} />
     </figure>}
     <div>{eyebrow && <p class="eyebrow">{eyebrow}</p>}<h1>{title}</h1><div class="content"><Content /></div></div>
 </section>

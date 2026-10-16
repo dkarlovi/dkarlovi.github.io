@@ -11,6 +11,6 @@ import { sitePath } from '../lib/urls';
 interface Props { page: Page<CollectionEntry<'categories'> | CollectionEntry<'series'>>; intro: CollectionEntry<'pages'>; kind: 'categories' | 'series' }
 const { page, intro, kind } = Astro.props;
 const articles = await getArticles();
-const palette = await imagePalette(intro.data.image);
+const palette = await imagePalette(intro.data.image?.url);
 ---
 <SiteLayout {...intro.data} pageClass={intro.data.image?'has-hero':''} palette={paletteStyle(palette)}><CollectionHeading intro={intro} palette={palette} /><section class="page-section"><div class="taxonomy-grid">{page.data.map(item=><a class="button-link taxonomy-card" href={sitePath(`/${kind==='categories'?'category':'series'}/${item.id}`)}><span>{item.data.title} ({articles.filter(article=>article.data[kind].some(ref=>ref.id===item.id)).length})</span><span aria-hidden="true">↗</span></a>)}</div><Pagination page={page} /></section></SiteLayout>

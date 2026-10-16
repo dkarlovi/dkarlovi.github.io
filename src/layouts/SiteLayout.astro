@@ -1,6 +1,6 @@
 ---
 import { getEntry } from 'astro:content';
-import type { ImageMetadata } from 'astro';
+import type { ContentImage } from '../lib/content-image';
 import { getImage } from 'astro:assets';
 import portrait from '../assets/uploads/self.jpeg';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -15,12 +15,12 @@ import '@fontsource/manrope/latin-600.css';
 import '../styles/global.css';
 import '../styles/article.css';
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
-interface Props { title?: string; summary?: string; image?: ImageMetadata; keywords?: string[]; pageClass?: string; palette?: string; stylesheet?: string; articleId?: string }
+interface Props { title?: string; summary?: string; image?: ContentImage; keywords?: string[]; pageClass?: string; palette?: string; stylesheet?: string; articleId?: string }
 const home = (await getEntry('pages', 'home'))!;
-const { title = home.data.title, summary = home.data.summary, image = home.data.image ?? portrait, keywords = [], pageClass = '', palette, stylesheet, articleId } = Astro.props;
+const { title = home.data.title, summary = home.data.summary, image = home.data.image ?? { url: portrait }, keywords = [], pageClass = '', palette, stylesheet, articleId } = Astro.props;
 const fullTitle = title === home.data.title ? title : `${title} - ${home.data.title}`;
 const canonical = new URL(Astro.url.pathname.endsWith('/404') ? sitePath('/404.html') : Astro.url.pathname, Astro.site);
-const ogImage = await getImage({ src: image, width: 1200, height: 600, fit: 'cover' });
+const ogImage = await getImage({ src: image.url, width: 1200, height: 600, fit: 'cover' });
 const socialImage = new URL(ogImage.src, Astro.site);
 ---
 <!doctype html>

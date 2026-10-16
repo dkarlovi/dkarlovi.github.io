@@ -1,25 +1,16 @@
 import { defineCollection, reference } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { contentImage } from "./lib/content-image";
 // Keep native entry IDs tied to filenames; URL overrides remain separate data.
 const generateId = ({ entry }: { entry: string }) => entry.replace(/\.md$/, "");
 const copy = z.object({ title: z.string(), summary: z.string() });
-const headerCopy = copy.extend({ imageCredit: z.string().optional() });
 const experience = z
     .object({
         accent: z
             .string()
             .regex(/^#[a-fA-F0-9]{6}$/, "Use a six-digit hex colour")
             .optional(),
-        imagePosition: z
-            .string()
-            .regex(/^\d{1,3}% \d{1,3}%$/, "Use two percentage coordinates")
-            .refine(
-                (value) => value.split(" ").every((v) => parseInt(v) <= 100),
-                "Image coordinates must be between 0% and 100%",
-            )
-            .default("50% 45%"),
-        imageCredit: z.string().optional(),
         stylesheet: z
             .string()
             .regex(
@@ -29,7 +20,7 @@ const experience = z
             .optional(),
         headingExperiment: z.enum(["none", "terrain"]).default("none"),
     })
-    .default({ imagePosition: "50% 45%", headingExperiment: "none" });
+    .default({ headingExperiment: "none" });
 const articles = defineCollection({
     loader: glob({
         pattern: "*.md",
@@ -38,7 +29,7 @@ const articles = defineCollection({
     }),
     schema: ({ image }) =>
         copy.extend({
-            image: image().optional(),
+            image: contentImage(image).optional(),
             slug: z.string().optional(),
             publishedAt: z.coerce.date(),
             draft: z.boolean().default(false),
@@ -53,8 +44,8 @@ const articles = defineCollection({
 const pages = defineCollection({
     loader: glob({ pattern: "*.md", generateId, base: "./src/content/pages" }),
     schema: ({ image }) =>
-        headerCopy.extend({
-            image: image().optional(),
+        copy.extend({
+            image: contentImage(image).optional(),
             brandTagline: z.string().optional(),
             eyebrow: z.string().optional(),
             heading: z.string().optional(),
@@ -64,7 +55,6 @@ const pages = defineCollection({
                 .object({
                     firstLine: z.string(),
                     secondLine: z.string(),
-                    imageAlt: z.string(),
                     footnote: z.string(),
                 })
                 .optional(),
@@ -75,7 +65,7 @@ const pages = defineCollection({
                     title: z.string(),
                     credit: z.string(),
                     photos: z
-                        .array(z.object({ image: image(), alt: z.string(), caption: z.string() }))
+                        .array(z.object({ image: contentImage(image), caption: z.string() }))
                         .default([]),
                 })
                 .optional(),
@@ -108,10 +98,10 @@ const categories = defineCollection({
         generateId,
         base: "./src/content/categories",
     }),
-    schema: ({ image }) => headerCopy.extend({ slug: z.string(), image: image().optional() }),
+    schema: ({ image }) => copy.extend({ slug: z.string(), image: contentImage(image).optional() }),
 });
 const series = defineCollection({
     loader: glob({ pattern: "*.md", generateId, base: "./src/content/series" }),
-    schema: ({ image }) => headerCopy.extend({ slug: z.string(), image: image().optional() }),
+    schema: ({ image }) => copy.extend({ slug: z.string(), image: contentImage(image).optional() }),
 });
 export const collections = { articles, pages, categories, series };

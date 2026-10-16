@@ -2,8 +2,9 @@
 title: All articles
 linkLabel: Explore my writing
 discussionHeading: Continue the conversation
-image: ../../assets/uploads/puzzle.jpeg
-imageCredit: Photograph by Dalibor Karlović
+image:
+    url: ../../assets/uploads/puzzle.jpeg
+    credit: Photograph by Dalibor Karlović
 summary: A collection of articles in chronological order.
 ---
 

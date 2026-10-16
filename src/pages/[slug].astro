@@ -19,7 +19,7 @@ const stylesheets = import.meta.glob<string>('/src/styles/experiences/*.css', { 
 const styleName = article.data.experience.stylesheet;
 const stylesheet = styleName ? stylesheets[`/src/styles/experiences/${styleName}.css`] : undefined;
 if (styleName && !stylesheet) throw new Error(`Article ${article.id}: unknown experience stylesheet "${styleName}"`);
-const palette = await imagePalette(article.data.image, article.data.experience.accent);
+const palette = await imagePalette(article.data.image?.url, article.data.experience.accent);
 ---
 <SiteLayout {...article.data} pageClass={`article-page ${article.data.image ? 'has-hero' : ''}`} palette={paletteStyle(palette)} stylesheet={stylesheet} articleId={article.id}>
 <ArticleHero article={article} palette={palette} />

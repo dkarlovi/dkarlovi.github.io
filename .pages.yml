@@ -24,7 +24,22 @@ content:
             required: true
           - &id003
             name: image
-            type: image
+            type: object
+            fields: &imageFields
+                - name: url
+                  label: Image
+                  type: image
+                  required: true
+                - name: credit
+                  label: Attribution
+                  type: string
+                - name: alt
+                  label: Alternative text
+                  type: text
+                - name: position
+                  label: Focal position
+                  type: string
+                  description: Two percentages from 0% to 100%, for example 50% 45%.
           - name: slug
             type: string
             description: Optional public URL override; otherwise the filename is used.
@@ -62,13 +77,6 @@ content:
                 - name: accent
                   type: string
                   description: Optional six-digit hex accent, for example "#006b65".
-                - name: imagePosition
-                  type: string
-                  default: 50% 45%
-                  description: Photo focal position as two percentages, from 0% to 100%.
-                - name: imageCredit
-                  type: string
-                  label: Image attribution
                 - name: stylesheet
                   type: string
                   description: Optional stylesheet name in src/styles/experiences, without .css.
@@ -98,10 +106,6 @@ content:
             description: Canonical ID; must match the filename without .md.
           - *id002
           - *id003
-          - &headerCredit
-            name: imageCredit
-            type: string
-            label: Header image attribution
           - *id004
     - name: series
       type: collection
@@ -118,7 +122,6 @@ content:
             description: Canonical ID; must match the filename without .md.
           - *id002
           - *id003
-          - *headerCredit
           - *id004
     - name: home
       label: Homepage
@@ -128,7 +131,6 @@ content:
           - *id001
           - *id002
           - *id003
-          - *headerCredit
           - name: brandTagline
             label: Site logo tagline
             type: string
@@ -142,10 +144,6 @@ content:
                   required: true
                 - name: secondLine
                   label: Name, second line
-                  type: string
-                  required: true
-                - name: imageAlt
-                  label: Portrait alternative text
                   type: string
                   required: true
                 - name: footnote
@@ -182,12 +180,9 @@ content:
                   list: true
                   fields:
                       - name: image
-                        type: image
+                        type: object
                         required: true
-                      - name: alt
-                        label: Alternative text
-                        type: string
-                        required: true
+                        fields: *imageFields
                       - name: caption
                         type: string
                         required: true
@@ -222,7 +217,6 @@ content:
           - *id001
           - *id002
           - *id003
-          - *headerCredit
           - name: eyebrow
             label: About section label
             type: string
@@ -263,7 +257,6 @@ content:
           - *id001
           - *id002
           - *id003
-          - *headerCredit
           - name: linkLabel
             label: Writing call to action
             description: Shared by the homepage hero, collection headings, and article archive button.
@@ -280,7 +273,6 @@ content:
           - *id001
           - *id002
           - *id003
-          - *headerCredit
           - *id004
     - name: series-collection
       label: Series listing

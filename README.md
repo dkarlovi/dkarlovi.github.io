@@ -28,7 +28,9 @@ title: An example article
 summary: A short description.
 publishedAt: 2026-10-16
 draft: false
-image: ../../assets/uploads/example.webp
+image:
+    url: ../../assets/uploads/example.webp
+    alt: A useful description
 categories: [engineering]
 series: []
 keywords: [engineering]
@@ -43,20 +45,23 @@ Ordinary Markdown, including images:
 
 The filename supplies the article ID and URL (`an-example-article.md` → `/an-example-article`). An optional `slug` frontmatter field overrides its URL. Categories and series contain native collection IDs: `engineering` refers to `src/content/categories/engineering.md`. New articles and images need no generated imports or template changes.
 
-Listing headers use the `image` and optional `imageCredit` frontmatter fields. Set them in `src/content/pages/article-collection.md`, `category-collection.md`, or `series-collection.md` for the main listings, and in each category or series file for its own article listing. For example:
+Articles, pages, categories, series and gallery photos share one `image` object. Its `url` is required; `credit`, `alt` and `position` are optional. Listing headers read that same object. Set them in `src/content/pages/article-collection.md`, `category-collection.md`, or `series-collection.md` for the main listings, and in each category or series file for its own article listing. For example:
 
 ```yaml
-image: ../../assets/uploads/puzzle.jpeg
-imageCredit: Photograph by Dalibor Karlović
+image:
+    url: ../../assets/uploads/puzzle.jpeg
+    credit: Photograph by Dalibor Karlović
+    alt: Golden puzzle pieces against a dark background
+    position: 50% 45%
 ```
 
-The photo supplies the page’s light/dark palette. Omit `image` for a plain heading. Both fields are available in Pages CMS.
+The photo supplies the page’s light/dark palette. Omit the whole `image` object for a plain heading. All image fields are available together in Pages CMS; `url` retains Astro’s native local-image validation and optimization. A supplied `alt` is used where the photo conveys content; decorative avatars keep empty alt text because the linked author name already identifies them. `position` accepts two percentages from 0% to 100%; omitted positions preserve each placement’s existing crop.
 
 The About entry also supplies the homepage’s introduction card through `homepageTeaser`: `title` and `summary` control its heading and paragraph. About’s top-level `eyebrow` supplies the label on the About page and homepage card; its `linkLabel` supplies both homepage About buttons. The card shares the About image. Edit the card under **About → Homepage introduction** in Pages CMS, or omit the group to hide it. Edit the shared label and button text directly under **About**.
 
 About’s `homepageHero.roles` and `homepageHero.introduction` supply the hero’s role line and introduction paragraph, editable under **About → Homepage hero**. The site-wide logo tagline comes from `brandTagline` in the Homepage entry.
 
-Homepage also owns the remaining homepage and footer content: `hero` (display name, portrait alt text and footnote), `ticker`, `writing` (section heading), `gallery` (heading, credit, images, alt text and captions), and `footer` (eyebrow, multiline heading, description and copyright name/location). The footer adds the current year automatically. Homepage’s `title` supplies the shared brand and article author name. All groups are exposed in Pages CMS.
+Homepage also owns the remaining homepage and footer content: `hero` (display name and footnote), `ticker`, `writing` (section heading), `gallery` (heading, credit, images, alt text and captions), and `footer` (eyebrow, multiline heading, description and copyright name/location). The footer adds the current year automatically. Homepage’s `title` supplies the shared brand and article author name. All groups are exposed in Pages CMS.
 
 The 404 page’s copy lives in `src/content/pages/not-found.md`, also editable in Pages CMS. Standard interface text remains in the theme: navigation and article controls, pagination, empty states, consent controls, image-palette labels and the optional interactive terrain demo. Social-profile URLs remain in `src/data/site.ts`.
 
@@ -114,10 +119,13 @@ Every article with an image gets a palette extracted by Sharp at build time. The
 Optional frontmatter:
 
 ```yaml
+image:
+    url: ../../assets/uploads/teambuilding.jpeg
+    credit: Photograph by Dalibor Karlović
+    alt: Sunlit meadow grasses
+    position: 50% 45% # focal point, each coordinate 0–100%
 experience:
     accent: "#006b65" # optional; adjusted if needed for legibility
-    imagePosition: 50% 45% # focal point, each coordinate 0–100%
-    imageCredit: Photograph by Dalibor Karlović
     headingExperiment: terrain # none (default) or terrain
     stylesheet: terrain # optional src/styles/experiences/terrain.css
 ```

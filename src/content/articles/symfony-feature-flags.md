@@ -1,10 +1,11 @@
 ---
 title: Adding feature flags to your Symfony app
 slug: symfony-feature-flags
-summary: Adding feature flags to your Symfony app was never easier than with Gitlab
-    and Unleash Symfony bundle
-publishedAt: "2024-01-08"
-image: ../../assets/uploads/feature-flags-checkmark.jpeg
+summary: Adding feature flags to your Symfony app was never easier than with Gitlab and Unleash
+    Symfony bundle
+publishedAt: 2024-01-08
+image:
+    url: ../../assets/uploads/feature-flags-checkmark.jpeg
 discussReddit: 192j9s9
 discussHackerNews: 38965854
 categories:

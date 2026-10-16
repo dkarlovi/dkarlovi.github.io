@@ -1,10 +1,11 @@
 ---
 title: Choose boring and flexible, not malleable
 slug: choose-boring
-summary: Using simple and flexible tools doesn't make your work boring. In fact, it
-    can lead to more exciting results.
-publishedAt: "2024-01-22"
-image: ../../assets/uploads/boring-production-melting.jpeg
+summary: Using simple and flexible tools doesn't make your work boring. In fact, it can lead to more
+    exciting results.
+publishedAt: 2024-01-22
+image:
+    url: ../../assets/uploads/boring-production-melting.jpeg
 discussReddit: 19dlzl0
 discussHackerNews: 39101887
 categories:
