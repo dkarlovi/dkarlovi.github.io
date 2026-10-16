@@ -3,8 +3,7 @@ import { run } from "vanilla-cookieconsent";
 function initialize() {
     const dateContainers = document.querySelectorAll<HTMLElement>(".date-container");
     dateContainers.forEach(function (container) {
-        const days =
-            (Date.now() - new Date(container.title).getTime()) / 86400000;
+        const days = (Date.now() - new Date(container.title).getTime()) / 86400000;
         const unit = [
             { unit: "year", threshold: 365 },
             { unit: "month", threshold: 30 },

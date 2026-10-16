@@ -2,35 +2,34 @@
 title: Choose boring and flexible, not malleable
 slug: choose-boring
 summary: Using simple and flexible tools doesn't make your work boring. In fact, it
-  can lead to more exciting results.
-publishedAt: '2024-01-22'
+    can lead to more exciting results.
+publishedAt: "2024-01-22"
 image: ../../assets/uploads/boring-production-melting.jpeg
 discussReddit: 19dlzl0
 discussHackerNews: 39101887
 categories:
-- devops
-- engineering
-- programming
+    - devops
+    - engineering
+    - programming
 series: []
 keywords:
-- predictability
-- production
-- reliability
-- boring
+    - predictability
+    - production
+    - reliability
+    - boring
 draft: false
 ---
-
 
 Have you ever imagined what would happen if the bridge you were crossing suddenly disappeared?
 You're suspended in midair, and you're trying to imagine what would happen if the bridge was not there.
 
 You'd fall, of course.
 
-But you don't. The bridge is there, it was there yesterday, and it will almost 100% be there tomorrow, with cars, trucks and trains crossing it safely, even in the worst weather conditions. 
+But you don't. The bridge is there, it was there yesterday, and it will almost 100% be there tomorrow, with cars, trucks and trains crossing it safely, even in the worst weather conditions.
 That's so impressive it should make you want to get out as soon as you cross any bridge, turn around and applaud your palms off to the majesty of its existence.
 
 It takes a lot of effort to keep a bridge standing!
-It wants to fall down all by itself, and it **especially** wants to fall down when you use it, doubly so after the holiday season. 
+It wants to fall down all by itself, and it **especially** wants to fall down when you use it, doubly so after the holiday season.
 
 Yet, there it stands, we just use it and move on like it's nothing, except we basically levitated across a river. Bridges are magic.
 
@@ -47,7 +46,6 @@ This is a stainless steel bolt.
 <figcaption>Image: A stainless steel bolt</figcaption>
 </figure>
 
-
 It has one job: when you tighten it, it stays tight. It doesn't do anything else, it doesn't want to do anything else.
 We use them to build bridges which cross vast distances, submarines which go into deep water, spaceships which go into space, and roller coasters which go into your stomach.
 All those things are amazing, without the bolt being anything more than a bolt.
@@ -60,7 +58,6 @@ Here's a bolt made of gummy bear.
 
 <figcaption>Image: A gummy bear bolt, yummy!</figcaption>
 </figure>
-
 
 It's kind of fun how it's a gummy bear, you can also bend it any way you like and make interesting shapes. But you can't put your weight on it and know what will happen. It only somewhat looks as a bolt.
 Would you ride in a submarine using them? Would you cross a bridge made with them?
@@ -87,7 +84,6 @@ Malleable means we can change the constraints. For example, to make a 6x6 LEGO p
 
 <figcaption>Image: Making a 6x6 LEGO plate the malleable way</figcaption>
 </figure>
-
 
 > The boring is (what) we need to reach for a software equivalent of blasting a person into outer space
 

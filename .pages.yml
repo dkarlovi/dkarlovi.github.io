@@ -1,124 +1,124 @@
 # Optional Git-backed editor configuration; no CMS runtime is needed.
 media:
-  input: src/assets/uploads
-  output: ../../assets/uploads
+    input: src/assets/uploads
+    output: ../../assets/uploads
 content:
-- name: articles
-  label: Articles
-  type: collection
-  path: src/content/articles
-  filename: '{primary}.md'
-  format: yaml-frontmatter
-  view:
-    primary: title
-    sort: publishedAt
-    order: desc
-  fields:
-  - &id001
-    name: title
-    type: string
-    required: true
-  - &id002
-    name: summary
-    type: text
-    required: true
-  - &id003
-    name: image
-    type: image
-  - name: slug
-    type: string
-    description: Optional public URL override; otherwise the filename is used.
-  - name: publishedAt
-    type: date
-    required: true
-  - name: draft
-    type: boolean
-    default: false
-  - name: categories
-    type: reference
-    options:
-      collection: categories
-      multiple: true
-      value: '{fields.slug}'
-      label: '{fields.title}'
-  - name: series
-    type: reference
-    options:
-      collection: series
-      multiple: true
-      value: '{fields.slug}'
-      label: '{fields.title}'
-  - name: keywords
-    type: string
-    list: true
-  - name: discussReddit
-    type: string
-  - name: discussHackerNews
-    type: number
-  - &id004
-    name: body
-    type: rich-text
-    options:
-      format: markdown
-      switcher: true
-- name: categories
-  type: collection
-  path: src/content/categories
-  filename: '{fields.slug}.md'
-  format: yaml-frontmatter
-  view:
-    primary: title
-  fields:
-  - *id001
-  - name: slug
-    type: string
-    required: true
-    description: Canonical ID; must match the filename without .md.
-  - *id002
-  - *id003
-  - *id004
-- name: series
-  type: collection
-  path: src/content/series
-  filename: '{fields.slug}.md'
-  format: yaml-frontmatter
-  view:
-    primary: title
-  fields:
-  - *id001
-  - name: slug
-    type: string
-    required: true
-    description: Canonical ID; must match the filename without .md.
-  - *id002
-  - *id003
-  - *id004
-- name: home
-  label: Homepage
-  type: file
-  path: src/content/pages/home.md
-  fields: &id005
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-- name: about
-  label: About
-  type: file
-  path: src/content/pages/about.md
-  fields: *id005
-- name: article-collection
-  label: Article listing
-  type: file
-  path: src/content/pages/article-collection.md
-  fields: *id005
-- name: category-collection
-  label: Category listing
-  type: file
-  path: src/content/pages/category-collection.md
-  fields: *id005
-- name: series-collection
-  label: Series listing
-  type: file
-  path: src/content/pages/series-collection.md
-  fields: *id005
+    - name: articles
+      label: Articles
+      type: collection
+      path: src/content/articles
+      filename: "{primary}.md"
+      format: yaml-frontmatter
+      view:
+          primary: title
+          sort: publishedAt
+          order: desc
+      fields:
+          - &id001
+            name: title
+            type: string
+            required: true
+          - &id002
+            name: summary
+            type: text
+            required: true
+          - &id003
+            name: image
+            type: image
+          - name: slug
+            type: string
+            description: Optional public URL override; otherwise the filename is used.
+          - name: publishedAt
+            type: date
+            required: true
+          - name: draft
+            type: boolean
+            default: false
+          - name: categories
+            type: reference
+            options:
+                collection: categories
+                multiple: true
+                value: "{fields.slug}"
+                label: "{fields.title}"
+          - name: series
+            type: reference
+            options:
+                collection: series
+                multiple: true
+                value: "{fields.slug}"
+                label: "{fields.title}"
+          - name: keywords
+            type: string
+            list: true
+          - name: discussReddit
+            type: string
+          - name: discussHackerNews
+            type: number
+          - &id004
+            name: body
+            type: rich-text
+            options:
+                format: markdown
+                switcher: true
+    - name: categories
+      type: collection
+      path: src/content/categories
+      filename: "{fields.slug}.md"
+      format: yaml-frontmatter
+      view:
+          primary: title
+      fields:
+          - *id001
+          - name: slug
+            type: string
+            required: true
+            description: Canonical ID; must match the filename without .md.
+          - *id002
+          - *id003
+          - *id004
+    - name: series
+      type: collection
+      path: src/content/series
+      filename: "{fields.slug}.md"
+      format: yaml-frontmatter
+      view:
+          primary: title
+      fields:
+          - *id001
+          - name: slug
+            type: string
+            required: true
+            description: Canonical ID; must match the filename without .md.
+          - *id002
+          - *id003
+          - *id004
+    - name: home
+      label: Homepage
+      type: file
+      path: src/content/pages/home.md
+      fields: &id005
+          - *id001
+          - *id002
+          - *id003
+          - *id004
+    - name: about
+      label: About
+      type: file
+      path: src/content/pages/about.md
+      fields: *id005
+    - name: article-collection
+      label: Article listing
+      type: file
+      path: src/content/pages/article-collection.md
+      fields: *id005
+    - name: category-collection
+      label: Category listing
+      type: file
+      path: src/content/pages/category-collection.md
+      fields: *id005
+    - name: series-collection
+      label: Series listing
+      type: file
+      path: src/content/pages/series-collection.md
+      fields: *id005

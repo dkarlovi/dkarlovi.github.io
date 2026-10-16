@@ -2,24 +2,23 @@
 title: Your code coverage is lying
 slug: lying-coverage
 summary: Code coverage is a metric which does NOT represent how much or how well our
-  code is tested.
-publishedAt: '2024-04-26'
+    code is tested.
+publishedAt: "2024-04-26"
 image: ../../assets/uploads/lying-coverage-greenwashing.jpeg
 discussReddit: 1cg0fbz
 categories:
-- engineering
-- programming
-- quality
+    - engineering
+    - programming
+    - quality
 series: []
 keywords:
-- quality
-- testing
-- qa
-- code coverage
-- mutation testing
+    - quality
+    - testing
+    - qa
+    - code coverage
+    - mutation testing
 draft: false
 ---
-
 
 <div class="embedded-content"><iframe src="https://www.youtube-nocookie.com/embed/oGcLClv_IFU" title="YouTube video" loading="lazy" allowfullscreen></iframe></div>
 
@@ -36,7 +35,6 @@ In fact, misusing code coverage can lead to a false sense of security where deve
 <figcaption>Image: Greenwashing</figcaption>
 </figure>
 
-
 <div id="content-what-is-code-coverage-then"></div>
 
 ## What is code coverage then?
@@ -48,12 +46,11 @@ In fact, misusing code coverage can lead to a false sense of security where deve
 <figcaption>Quote: <a href="https://en.wikipedia.org/wiki/Code_coverage">Wikipedia: Code coverage</a> (emphasis added)</figcaption>
 </figure>
 
-
 The part "is executed" is key, the code which is marked as "covered" is the code that was executed during the test run. It doesn't mean that the code was tested, it just means that it was executed.
 
 What's the difference? If it's executed while the tests run, it's tested, right? No.
 
-**Consider a following example:** I'm testing a firecracker in my backyard. I light it up and, while it's burning, there's a sudden earthquake, the firecracker explodes. I log: *Causes violent city-wide tremors and a tiny explosion, appropriate for all ages.* 
+**Consider a following example:** I'm testing a firecracker in my backyard. I light it up and, while it's burning, there's a sudden earthquake, the firecracker explodes. I log: _Causes violent city-wide tremors and a tiny explosion, appropriate for all ages._
 
 Code coverage is exactly like that: it writes down what happened while the tests were running, but it cannot differentiate were the tests the direct or indirect cause of the code being executed nor was the code execution properly tested or not.
 
@@ -96,7 +93,7 @@ class EagerFormatterTest extends TestCase
 
         $formatter = new Formatter();
         $formatted = $formatter->format($result);
-        
+
         $this->assertEquals('2.00', $formatted);
     }
 }
@@ -104,7 +101,6 @@ class EagerFormatterTest extends TestCase
 
 <figcaption>Example: Contrived example where we <strong>use</strong> the <code>Calculator</code>, but code coverage will show it as tested</figcaption>
 </figure>
-
 
 If we run the test suite, we get the output:
 
@@ -119,7 +115,6 @@ Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
 
 <figcaption>Example: code coverage output showing <code>Calculator</code> is 100% covered even though it's not tested</figcaption>
 </figure>
-
 
 In this example, the code coverage tool would report a high percentage of coverage, but in reality, the `Calculator` code is basically not tested at all.
 
@@ -153,7 +148,6 @@ class CoversFormatterTest extends TestCase
 <figcaption>Example: Same test as before, but we're making it clear that we're testing the <code>Formatter</code> only</figcaption>
 </figure>
 
-
 Now, when we run the test suite, we get the output:
 
 <figure>
@@ -166,7 +160,6 @@ App\Formatter
 <figcaption>Example: code coverage output showing <code>Formatter</code> is 100% covered, but <code>Calculator</code> is not mentioned anymore</figcaption>
 </figure>
 
-
 A keen reader will notice this will actually **decrease** the overall code coverage percentage, but it's a more accurate representation of what's actually tested.
 This decrease is actually a good thing, as we'll see in [Mutation testing](#mutation-testing).
 
@@ -177,13 +170,13 @@ This decrease is actually a good thing, as we'll see in [Mutation testing](#muta
 We can enforce this by enabling two separate configuration options (both of which are enabled by default when generating config from scratch):
 
 1. [`requireCoverageMetadata`](https://docs.phpunit.de/en/11.1/configuration.html#the-requirecoveragemetadata-attribute)  
-    forces the test to explicitly declare what code it's covering, without it, we'll can get an error like
+   forces the test to explicitly declare what code it's covering, without it, we'll can get an error like
     ```
     1) EagerFormatterTest::testExample
        This test does not define a code coverage target but is expected to do so
     ```
-2. [`beStrictAboutCoverageMetadata`](https://docs.phpunit.de/en/11.1/configuration.html#the-bestrictaboutcoveragemetadata-attribute)   
-    disallows any code which is not marked as covered or used to be executed during the execution of the test:
+2. [`beStrictAboutCoverageMetadata`](https://docs.phpunit.de/en/11.1/configuration.html#the-bestrictaboutcoveragemetadata-attribute)  
+   disallows any code which is not marked as covered or used to be executed during the execution of the test:
     ```
     1) CoversFormatterTest::testExample
     This test executed code that is not listed as code to be covered or used:
@@ -213,7 +206,6 @@ Let's test this hypothesis by breaking the `Calculator` on purpose and rerunning
 <figcaption>Example: Breaking the <code>Calculator</code> on purpose</figcaption>
 </figure>
 
-
 We now know this shouldn't work, but when we run the test suite, it still passes (?) and the code coverage is still 100%?!
 We've managed to break our "fully tested and 100% covered code" without any test noticing and failing, how is that even possible?
 
@@ -232,7 +224,7 @@ Glossary:
 - an "escaped mutant" is a mutant which no test caught
 - a "killed mutant" is a mutant which was caught by a test
 
-In our case, we can use the excellent [Infection](https://infection.github.io/) tool to run mutation testing on our codebase, it will show us our exact found mutant: 
+In our case, we can use the excellent [Infection](https://infection.github.io/) tool to run mutation testing on our codebase, it will show us our exact found mutant:
 
 <figure>
 
@@ -272,7 +264,6 @@ Metrics:
 
 <figcaption>Example: Output of Infection showing the escaped mutant</figcaption>
 </figure>
-
 
 In the output, we can see several interesting things:
 
@@ -316,7 +307,6 @@ Metrics:
 <figcaption>Example: Output of Infection when running only on covered code</figcaption>
 </figure>
 
-
 Our `Calculator` was not mutated here because we've explicitly said our tests are not testing it, meaning we can now judge the code coverage percentage as a more accurate representation of what's actually tested.
 
 <div id="content-conclusion"></div>
@@ -325,6 +315,6 @@ Our `Calculator` was not mutated here because we've explicitly said our tests ar
 
 Testing is hard. Judging how well we test is harder.
 
-When we start using a metric like the code coverage percentage as our ultimate quality goal, we're optimizing for lying to ourselves about the state of our codebase quality instead of actually measuring it. 
+When we start using a metric like the code coverage percentage as our ultimate quality goal, we're optimizing for lying to ourselves about the state of our codebase quality instead of actually measuring it.
 
 We should strive to make the code coverage more accurate (not just as high as possible), we can keep ourselves honest about it by using mutation testing as an unbiased second opinion on how well our tests are actually testing the code.

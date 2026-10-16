@@ -2,8 +2,6 @@ $fa-font-display: swap;
 
 @import "bootstrap/scss/bootstrap";
 
-
-
 @import "@fontsource/raleway/latin.css";
 @import "@fontsource/merriweather-sans/latin.css";
 
@@ -178,16 +176,64 @@ figure p img {
 }
 
 // Native Astro/HTML presentation of the existing theme.
-.article-card-image { aspect-ratio: 1; object-fit: cover; }
-.article-banner { aspect-ratio: 855 / 150; object-fit: cover; }
-.about-image { aspect-ratio: 3 / 2; object-fit: cover; }
-.portrait { aspect-ratio: 1; object-fit: cover; }
-.content img { max-width: 100%; height: auto; }
-.content pre { padding: 1rem; border-radius: .25rem; overflow-x: auto; }
-.content figure { margin: 0 0 2rem; }
-.content figcaption { text-align: center; font-size: .875rem; color: $text-color; margin-top: .5rem; }
-.content details { margin-bottom: 1.5rem; border: 1px solid $border-color; }
-.content details > summary { padding: 1rem; font-weight: bold; cursor: pointer; }
-.content details[open] > :not(summary) { margin-left: 1rem; margin-right: 1rem; }
-.taxonomy-banner { background-size: cover; background-repeat: no-repeat; background-position: center; color: white; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; }
-.taxonomy-banner h1 { color: white; }
+.article-card-image {
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+.article-banner {
+    aspect-ratio: 855 / 150;
+    object-fit: cover;
+}
+.about-image {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+}
+.portrait {
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+.content img {
+    max-width: 100%;
+    height: auto;
+}
+.content pre {
+    padding: 1rem;
+    border-radius: 0.25rem;
+    overflow-x: auto;
+}
+.content figure {
+    margin: 0 0 2rem;
+}
+.content figcaption {
+    text-align: center;
+    font-size: 0.875rem;
+    color: $text-color;
+    margin-top: 0.5rem;
+}
+.content details {
+    margin-bottom: 1.5rem;
+    border: 1px solid $border-color;
+}
+.content details > summary {
+    padding: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.content details[open] > :not(summary) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.taxonomy-banner {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    text-shadow:
+        -1px -1px 0 black,
+        1px -1px 0 black,
+        -1px 1px 0 black,
+        1px 1px 0 black;
+}
+.taxonomy-banner h1 {
+    color: white;
+}
