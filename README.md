@@ -1,6 +1,6 @@
 # dkarlovi.github.io
 
-Static site built with Astro 7, TypeScript, standard Markdown content collections, and Sass/Bootstrap. The layout was ported from [Geeky Hugo](https://github.com/statichunt/geeky-hugo); theme copyright belongs to its original authors.
+Static site built with Astro 7, TypeScript, Tailwind CSS 4, and standard Markdown content collections. The custom Colour Field design replaces the Bootstrap/Geeky Hugo theme; the historical theme attribution is retained in the migration documentation. Fonts are bundled locally.
 
 Use Node 22.22.2 (see `.node-version`) or a compatible newer release.
 
@@ -18,7 +18,7 @@ npm run dev
 - `src/content/categories/*.md` and `src/content/series/*.md`: taxonomy records. Their filename and `slug` must match.
 - `src/content.config.ts`: native Astro collection schemas, including `reference()` and `image()`. The built-in loader uses filenames as stable entry IDs, keeping optional public URL overrides separate.
 - `src/assets/uploads/`: editable images, processed by Astro in both frontmatter and Markdown.
-- `src/assets/`: template artwork; `public/`: stable favicon/manifest files.
+- `src/assets/`: source assets; `public/`: brand/favicon/manifest files.
 
 Example article:
 
@@ -87,3 +87,26 @@ BASE_URL=https://example.com/blog/ npm run check:output
 ```
 
 The sitemap uses the official Astro integration at `/sitemap-index.xml`. Site pages advertise it with `rel="sitemap"`; legacy YASSG gzip/partition URLs are not recreated. See `docs/migration/validation.md` for migration checks and any known limitations.
+
+## Article experiences
+
+Every article with an image gets a palette extracted by Sharp at build time. The generated light/dark roles colour the article, navigation and footer, with visible swatches beside the photo attribution. Neutral/absent images have a warm fallback. The site honors system theme changes live, without a switcher. No client-side colour extraction or external font requests are needed.
+
+Optional frontmatter:
+
+```yaml
+experience:
+    accent: "#006b65" # optional; adjusted if needed for legibility
+    imagePosition: 50% 45% # focal point, each coordinate 0–100%
+    imageCredit: Photograph by Dalibor Karlović
+    headingExperiment: terrain # none (default) or terrain
+    stylesheet: terrain # optional src/styles/experiences/terrain.css
+```
+
+A named experience stylesheet loads only on articles that request it. Scope rules with `body[data-article="article-filename"]` or `body.article-page`; the entire shared header/footer can consume the article’s `--paper`, `--ink`, `--accent`, `--panel`, and other semantic roles. The root `--*-light`/`--*-dark` values define the extracted palette. Avoid fixed colours in shared components. For a new interactive header, add an Astro component and extend the explicit `headingExperiment` registry in the collection schema and `ArticleHero.astro`.
+
+`colour-field-experiment.md` is a draft authoring example: view `/colour-field-experiment` in development. It is excluded from production routes, counts and sitemap. Its optional 16:9 canvas supports keyboard light controls, pause, visibility gating, and live reduced-motion changes.
+
+Markdown prose stays readable while images, figures, code, tables and videos can use the wider article canvas. Shiki highlighting is static. Add a code caption using a standard HTML figure around the fenced block, as the existing articles already do. Captions are centred; code and wide tables scroll within their own surfaces on small screens. Keep descriptive image alt text and add captions/transcripts to authored videos.
+
+Run browser checks against a built preview with `BROWSER_URL=http://127.0.0.1:4321 node scripts/check-browser.mjs`. Set `CHROMIUM_PATH` if using a downloaded Chromium rather than installed Google Chrome. These checks cover four viewport widths, both themes, mobile menu/Escape, consent, captions, palette visibility and local media. They intentionally do not contact the deployed site.

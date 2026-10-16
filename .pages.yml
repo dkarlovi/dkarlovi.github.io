@@ -55,6 +55,28 @@ content:
             type: string
           - name: discussHackerNews
             type: number
+          - name: experience
+            type: object
+            label: Article experience
+            fields:
+                - name: accent
+                  type: string
+                  description: Optional six-digit hex accent, for example "#006b65".
+                - name: imagePosition
+                  type: string
+                  default: 50% 45%
+                  description: Photo focal position as two percentages, from 0% to 100%.
+                - name: imageCredit
+                  type: string
+                  label: Image attribution
+                - name: stylesheet
+                  type: string
+                  description: Optional stylesheet name in src/styles/experiences, without .css.
+                - name: headingExperiment
+                  type: select
+                  default: none
+                  options:
+                      values: [none, terrain]
           - &id004
             name: body
             type: rich-text

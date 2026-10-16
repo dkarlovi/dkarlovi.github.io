@@ -9,10 +9,4 @@ interface Props { page: Page<CollectionEntry<'articles'>>; intro: CollectionEntr
 const { page, intro, parentTitle } = Astro.props;
 const { Content } = await render(intro);
 ---
-<SiteLayout {...intro.data} title={parentTitle ? `${intro.data.title} - ${parentTitle}` : intro.data.title}>
-<section class="mt-5"><div class="container"><div class="section-title">{parentTitle && <div>{parentTitle}</div>}<h1 class="h4">{parentTitle ? <>Articles in <span class="title-border">{intro.data.title}</span></> : intro.data.title}</h1><Content /></div>
-<div class="row"><div class="col-lg-8 mb-5 mb-lg-0">
-  {page.data.length ? <div class="border mb-5 pt-4 rounded"><div class="row mx-0 g-5">{page.data.map((article, i) => <div class="col-sm-6 mb-4"><ArticleCard article={article} priority={i === 0} loading={i < 2 ? 'eager' : 'lazy'} /></div>)}</div></div> : <div class="alert alert-warning">No articles found here.</div>}
-  <Pagination page={page} />
-</div><aside class="col-lg-4"><CategorySidebar /></aside></div></div></section>
-</SiteLayout>
+<SiteLayout {...intro.data} title={parentTitle ? `${intro.data.title} - ${parentTitle}` : intro.data.title}><section class="collection-heading">{parentTitle && <p class="eyebrow">{parentTitle}</p>}<h1>{parentTitle ? <>Articles in {intro.data.title}</> : intro.data.title}</h1><div class="content"><Content /></div></section><div class="listing-layout"><section aria-label="Articles">{page.data.length ? <div class="article-grid">{page.data.map((article,i)=><ArticleCard article={article} priority={i===0} loading={i<2?'eager':'lazy'} />)}</div>:<p class="empty-state">No articles found here.</p>}<Pagination page={page} /></section><CategorySidebar /></div></SiteLayout>

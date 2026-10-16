@@ -5,6 +5,4 @@ import { sitePath } from '../lib/urls';
 const categories = await getCollection('categories');
 const articles = await getArticles();
 ---
-<div class="widget category-widget"><div class="widget-title"><h3 class="h5 title-border">Categories</h3></div>
-  <ul class="list-group list-unstyled">{categories.sort((a,b) => a.data.title.localeCompare(b.data.title)).map(category => <li><a href={sitePath(`/category/${category.id}`)} class="d-flex">{category.data.title}<small class="ms-auto">{articles.filter(article => article.data.categories.some(ref => ref.id === category.id)).length}</small></a></li>)}</ul>
-</div>
+<aside class="category-widget"><h2>Browse by subject</h2><ul role="list">{categories.sort((a,b) => a.data.title.localeCompare(b.data.title)).map(category => <li><a href={sitePath(`/category/${category.id}`)}><span>{category.data.title}</span><span>{articles.filter(article => article.data.categories.some(ref => ref.id === category.id)).length}</span></a></li>)}</ul></aside>

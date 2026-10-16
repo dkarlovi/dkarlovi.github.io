@@ -1,84 +1,42 @@
 ---
 import { getEntry } from 'astro:content';
 import type { ImageMetadata } from 'astro';
-import { Image, getImage } from 'astro:assets';
-import logo from '../assets/logo.png';
-import footer from '../assets/footer-bg-shape.svg';
-import Navigation from '../components/Navigation.astro';
-import SocialLinks from '../components/SocialLinks.astro';
-import { navigation } from '../data/site';
+import { getImage } from 'astro:assets';
+import portrait from '../assets/uploads/self.jpeg';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import { sitePath } from '../lib/urls';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import '../styles/app.scss';
-interface Props { title?: string; summary?: string; image?: ImageMetadata; keywords?: string[] }
+import '@fontsource/dm-sans/latin-400.css';
+import '@fontsource/dm-sans/latin-500.css';
+import '@fontsource/dm-sans/latin-600.css';
+import '@fontsource/dm-sans/latin-700.css';
+import '@fontsource/manrope/latin-500.css';
+import '@fontsource/manrope/latin-600.css';
+import '../styles/global.css';
+import '../styles/article.css';
+import 'vanilla-cookieconsent/dist/cookieconsent.css';
+interface Props { title?: string; summary?: string; image?: ImageMetadata; keywords?: string[]; pageClass?: string; palette?: string; stylesheet?: string; articleId?: string }
 const home = (await getEntry('pages', 'home'))!;
-const { title = home.data.title, summary = home.data.summary, image = home.data.image ?? logo, keywords = [] } = Astro.props;
+const { title = home.data.title, summary = home.data.summary, image = home.data.image ?? portrait, keywords = [], pageClass = '', palette, stylesheet, articleId } = Astro.props;
 const fullTitle = title === home.data.title ? title : `${title} - ${home.data.title}`;
 const canonical = new URL(Astro.url.pathname.endsWith('/404') ? sitePath('/404.html') : Astro.url.pathname, Astro.site);
 const ogImage = await getImage({ src: image, width: 1200, height: 600, fit: 'cover' });
 const socialImage = new URL(ogImage.src, Astro.site);
 ---
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{fullTitle}</title>
-  <meta name="title" content={fullTitle} />
-  <meta name="description" content={summary} />
-  {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
-  <link rel="canonical" href={canonical} />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={fullTitle} />
-  <meta property="og:description" content={summary} />
-  <meta property="og:image" content={socialImage} />
-  <meta property="og:url" content={canonical} />
-  <meta name="google-site-verification" content="soyKXJT1zDtOEO_En0NAjPTu58_HXX5stvmF5MnVrEA" />
-  <link rel="apple-touch-icon" sizes="180x180" href={sitePath('/apple-touch-icon.png')} />
-  <link rel="icon" type="image/png" sizes="32x32" href={sitePath('/favicon-32x32.png')} />
-  <link rel="icon" type="image/png" sizes="16x16" href={sitePath('/favicon-16x16.png')} />
-  <link rel="manifest" href={sitePath('/site.webmanifest')} />
-  <link rel="mask-icon" href={sitePath('/safari-pinned-tab.svg')} color="#5bbad5" />
-  <link rel="shortcut icon" href={sitePath('/favicon.ico')} />
-  <meta name="msapplication-TileColor" content="#da532c" />
-  <meta name="msapplication-config" content={sitePath('/browserconfig.xml')} />
-  <meta name="theme-color" content="#ffffff" />
-  <link rel="sitemap" href={sitePath('/sitemap-index.xml')} />
-</head>
-<body>
-<div class="site-wrapper d-flex flex-column min-vh-100">
-  <header class="header bg-white border-bottom position-relative pt-1 pb-1">
-    <div class="container"><div class="row"><div class="col-12">
-      <nav class="navbar navbar-expand-lg navbar-light p-0" aria-label="Main navigation">
-        <a class="navbar-brand" href={sitePath('/')}><Image src={logo} width={150} alt="Dalibor Karlović — home" class="img-fluid" loading="eager" /></a>
-        <button class="d-lg-none btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Open navigation menu overlay"><i class="fas fa-bars" aria-hidden="true"></i></button>
-        <div class="collapse navbar-collapse justify-content-end"><Navigation id="desktop" /><SocialLinks /></div>
-      </nav>
-      <div class="side-nav offcanvas offcanvas-end p-4" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <h2 class="visually-hidden" id="offcanvasRightLabel" aria-label="Navigation">Navigation</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close navigation"><i class="fas fa-times" aria-hidden="true"></i></button>
-        <nav class="navbar mt-3 flex-column align-items-start" aria-label="Mobile navigation"><Navigation id="mobile" /><SocialLinks /></nav>
-      </div>
-    </div></div></div>
-  </header>
-  <main><slot /></main>
-  <footer class="footer" style={`background-image: url('${footer.src}');`}>
-    <div class="container"><div class="row justify-content-center"><div class="col-xl-6 text-center">
-      <a class="footer-brand mb-4 d-block" href={sitePath('/')}><Image src={logo} width={120} alt="Dalibor Karlović — home" class="img-fluid" loading="lazy" /></a>
-      <p class="text-light mb-4"><code>// TODO 2012-03-14: put smart quote here</code></p>
-      <ul class="list-unstyled mb-5 footer-menu">{navigation.map(item => <li class="list-inline-item"><a href={sitePath(item.path)}>{item.title}</a></li>)}</ul>
-      <SocialLinks />
-      <p>&copy; {home.data.title} | Theme by <a target="_blank" rel="noopener noreferrer" href="https://statichunt.com/" class="text-muted text-decoration-underline">statichunt</a></p>
-    </div></div></div>
-  </footer>
-</div>
+<html lang="en"><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="color-scheme" content="light dark" />
+<title>{fullTitle}</title><meta name="title" content={fullTitle} /><meta name="description" content={summary} />
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+<link rel="canonical" href={canonical} /><meta property="og:type" content={pageClass.includes('article-page') ? 'article' : 'website'} /><meta property="og:title" content={fullTitle} /><meta property="og:description" content={summary} /><meta property="og:image" content={socialImage} /><meta property="og:url" content={canonical} />
+<meta name="google-site-verification" content="soyKXJT1zDtOEO_En0NAjPTu58_HXX5stvmF5MnVrEA" />
+<link rel="apple-touch-icon" sizes="180x180" href={sitePath('/apple-touch-icon.png')} /><link rel="icon" href={sitePath('/favicon.svg')} type="image/svg+xml" />
+<link rel="icon" type="image/png" sizes="32x32" href={sitePath('/favicon-32x32.png')} /><link rel="manifest" href={sitePath('/site.webmanifest')} />
+<meta name="theme-color" content="#f7eddd" /><link rel="sitemap" href={sitePath('/sitemap-index.xml')} />
+{stylesheet && <link rel="stylesheet" href={stylesheet} />}
+</head><body class={pageClass} style={palette} data-article={articleId}>
+<a class="skip-link" href="#main">Skip to content</a><SiteHeader /><main id="main"><slot /></main><SiteFooter />
 <script>import '../scripts/app';</script>
 <script is:inline type="text/plain" data-category="analytics" data-src="https://www.googletagmanager.com/gtag/js?id=G-ZYF0F5VGJR" async></script>
-<script is:inline type="text/plain" data-category="analytics">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-ZYF0F5VGJR');
-</script>
-</body>
-</html>
+<script is:inline type="text/plain" data-category="analytics">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-ZYF0F5VGJR');</script>
+</body></html>

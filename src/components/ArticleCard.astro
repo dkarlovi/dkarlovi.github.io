@@ -1,17 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import ArticleMeta from './ArticleMeta.astro';
 import CategoryBadges from './CategoryBadges.astro';
 import { sitePath } from '../lib/urls';
 interface Props { article: CollectionEntry<'articles'>; priority?: boolean; loading?: 'eager' | 'lazy' }
 const { article, priority = false, loading = priority ? 'eager' : 'lazy' } = Astro.props;
 const href = sitePath(`/${article.data.slug ?? article.id}`);
+const date = article.data.publishedAt.toISOString().slice(0,10);
 ---
-<div class="card">
-  {article.data.image ? <div class="mb-4 position-relative">
-    <a class="title-linked" href={href}><Image src={article.data.image} width={377} height={377} fit="cover" class="img-fluid w-100 rounded-4 article-card-image" alt={article.data.title} loading={loading} fetchpriority={priority ? 'high' : undefined} decoding="async" /></a>
-    <CategoryBadges references={article.data.categories} overlay />
-  </div> : <CategoryBadges references={article.data.categories} />}
-  <div class="card-body"><h3 class="h4"><a class="title-linked" href={href}>{article.data.title}</a></h3><ArticleMeta article={article} loading={loading} /><p class="card-text mb-4">{article.data.summary}</p><a href={href} class="btn btn-outline-primary btn-sm float-end">Read more <span class="visually-hidden">about {article.data.title}</span></a></div>
-</div>
+<article class="card">
+<a href={href} aria-label={article.data.title}>{article.data.image ? <Image src={article.data.image} width={720} height={460} fit="cover" class="article-card-image" alt={article.data.title} loading={loading} fetchpriority={priority ? 'high' : undefined} /> : <div class="article-card-placeholder" aria-hidden="true">Aa↗</div>}</a>
+<CategoryBadges references={article.data.categories} /><h3><a href={href}>{article.data.title}</a></h3><time class="meta date-container" datetime={date} title={date}>{date}</time><p class="card-text">{article.data.summary}</p><a href={href} class="text-link read-more">Read the article <span class="sr-only">about {article.data.title}</span><span aria-hidden="true" class="arrow">↗</span></a>
+</article>

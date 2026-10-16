@@ -3,11 +3,12 @@ import { Image } from 'astro:assets';
 import portrait from '../assets/uploads/self.jpeg';
 import type { CollectionEntry } from 'astro:content';
 import { sitePath } from '../lib/urls';
-interface Props { article: CollectionEntry<'articles'>; loading?: 'eager' | 'lazy' }
-const { article, loading = 'lazy' } = Astro.props;
+interface Props { article: CollectionEntry<'articles'>; loading?: 'eager' | 'lazy'; prominent?: boolean }
+const { article, loading = 'lazy', prominent = false } = Astro.props;
 const date = article.data.publishedAt.toISOString().slice(0, 10);
+const minutes = Math.max(1, Math.ceil((article.body ?? '').split(/\s+/).length / 220));
 ---
-<ul class="list-inline card-meta d-flex align-items-center mb-3">
-  <li class="list-inline-item me-3"><a href={sitePath('/about')} class="d-flex align-items-center text-decoration-none"><Image src={portrait} width={40} height={40} fit="cover" class="img-fluid rounded-circle me-2" style="object-fit: cover" alt="About Dalibor" loading={loading} /><span>dkarlovi</span></a></li>
-  <li class="list-inline-item d-flex align-items-center"><i class="fas fa-calendar me-2" aria-hidden="true"></i><time class="date-container" datetime={date} title={date}>{date}</time></li>
+<ul class:list={['card-meta', { 'hero-author': prominent }]}>
+<li><a href={sitePath('/about')} class="author"><Image src={portrait} width={prominent ? 44 : 36} height={prominent ? 44 : 36} fit="cover" alt="" loading={loading} /><span><strong>Dalibor Karlović</strong>{prominent && <span>{minutes} min read</span>}</span></a></li>
+<li><time class="date-container" datetime={date} title={date}>{date}</time></li>
 </ul>

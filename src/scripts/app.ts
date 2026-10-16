@@ -91,8 +91,29 @@ function initialize() {
 }
 initialize();
 
-import "bootstrap/js/dist/collapse";
-import "bootstrap/js/dist/dropdown";
-// import Modal from "bootstrap/js/src/modal";
-import "bootstrap/js/dist/offcanvas";
-// import Tab from "bootstrap/js/src/tab";
+const scheme = window.matchMedia("(prefers-color-scheme: dark)");
+function syncScheme() {
+    document.documentElement.dataset.scheme = scheme.matches ? "dark" : "light";
+    const colour = getComputedStyle(document.body).getPropertyValue("--paper").trim();
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", colour);
+}
+syncScheme();
+scheme.addEventListener("change", syncScheme);
+
+const menu = document.querySelector<HTMLDetailsElement>(".mobile-navigation");
+const summary = menu?.querySelector<HTMLElement>("summary");
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && menu?.open) {
+        menu.open = false;
+        summary?.focus();
+    }
+});
+document.addEventListener("click", (event) => {
+    if (menu?.open && event.target instanceof Node && !menu.contains(event.target))
+        menu.open = false;
+});
+menu?.querySelectorAll("a").forEach((link) =>
+    link.addEventListener("click", () => {
+        menu.open = false;
+    }),
+);

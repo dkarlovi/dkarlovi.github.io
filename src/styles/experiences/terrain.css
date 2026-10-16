@@ -1,0 +1,10 @@
+/* An opt-in article experience. The shared shell inherits the article palette. */
+body[data-article] .heading-experiment {
+    border-radius: 0;
+}
+body[data-article] .article-heading .category-badges {
+    letter-spacing: 0.18em;
+}
+body[data-article] .site-footer {
+    border-top-style: dashed;
+}

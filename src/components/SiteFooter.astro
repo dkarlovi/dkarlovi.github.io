@@ -1,0 +1,5 @@
+---
+import SocialLinks from './SocialLinks.astro';
+import { sitePath } from '../lib/urls';
+---
+<footer class="site-footer"><div class="footer-top"><div><p class="eyebrow">Always a work in progress</p><h2>Stay curious.<br />Make good things.</h2></div><SocialLinks /></div><div class="footer-bottom"><span>© {new Date().getFullYear()} Dalibor Karlović · Croatia</span><nav class="flex flex-wrap gap-5" aria-label="Footer navigation"><a href={sitePath('/articles')}>Writing</a><a href={sitePath('/categories')}>Categories</a><a href={sitePath('/series-collection')}>Series</a><a href={sitePath('/about')}>About</a><button type="button" data-cc="show-preferencesModal">Cookie preferences</button></nav><span>Software, photography, and the space in between.</span></div></footer>

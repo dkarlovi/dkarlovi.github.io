@@ -1,29 +1,54 @@
 import { chromium } from "@playwright/test";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
-const output = process.env.BROWSER_OUTPUT || "/tmp/astro-migration-browser";
+const base = (process.env.BROWSER_URL || "http://127.0.0.1:4321").replace(/\/$/, "");
+const output = process.env.BROWSER_OUTPUT || "/tmp/colour-field-browser";
 await mkdir(output, { recursive: true });
-const browser = await chromium.launch({ channel: "chrome", headless: true });
+const browser = await chromium.launch(
+    process.env.CHROMIUM_PATH
+        ? { executablePath: process.env.CHROMIUM_PATH }
+        : { channel: "chrome", headless: true },
+);
+const paths = [
+    "/",
+    "/about",
+    "/articles",
+    "/categories",
+    "/series-collection",
+    "/category/programming",
+    "/series/a-specific-series",
+    "/testing-speech-recognition",
+    "/symfony-feature-flags",
+    "/lying-coverage",
+    "/choose-boring",
+    "/hello-world-again",
+    "/testing-commonmark-features",
+    "/404.html",
+];
 const results = [];
 try {
     for (const viewport of [
         { width: 1440, height: 1000 },
+        { width: 768, height: 1024 },
         { width: 390, height: 844 },
+        { width: 320, height: 740 },
     ]) {
-        const context = await browser.newContext({ viewport });
-        // CookieConsent intentionally hides from webdriver; exercise the human UI in this test.
+        const context = await browser.newContext({ viewport, reducedMotion: "reduce" });
         await context.addInitScript(() =>
             Object.defineProperty(navigator, "webdriver", { get: () => false }),
         );
-        const page = await context.newPage();
-        const errors = [];
-        const missing = [];
-        page.on("pageerror", (error) => errors.push(error.message));
-        page.on("response", (response) => {
-            if (response.url().startsWith("http://127.0.0.1:4321") && response.status() >= 400)
-                missing.push(`${response.status()} ${response.url()}`);
+        const page = await context.newPage(),
+            errors = [],
+            missing = [];
+        page.on("pageerror", (e) => errors.push(e.message));
+        page.on("response", (r) => {
+            if (r.url().startsWith(base) && r.status() >= 400 && !r.url().endsWith("/404.html"))
+                missing.push(`${r.status()} ${r.url()}`);
         });
-        await page.goto("http://127.0.0.1:4321/", { waitUntil: "networkidle" });
+        await page.route(/https:\/\/(?:octodex\.github\.com|github\.com\/adam-p)/, (route) =>
+            route.abort(),
+        );
+        await page.goto(base + "/", { waitUntil: "networkidle" });
         await page.getByRole("button", { name: "Manage preferences", exact: true }).click();
         await page
             .getByRole("heading", { name: "Consent Preferences Center", exact: true })
@@ -32,97 +57,105 @@ try {
         await page
             .getByRole("heading", { name: "Consent Preferences Center", exact: true })
             .waitFor({ state: "hidden" });
-        assert.equal(await page.locator(".card").count(), 4);
         assert.equal(
             await page.locator('script[src*="googletagmanager"]').count(),
             0,
-            "Analytics remains disabled after rejection",
+            "analytics stays gated after rejection",
         );
-        if (viewport.width < 500) {
-            await page.getByRole("button", { name: "Open navigation menu overlay" }).click();
-            await page.waitForSelector("#offcanvasRight.show");
-            await page.locator("#mobile-articles").click();
+        if (viewport.width <= 800) {
+            await page.locator(".mobile-navigation > summary").click();
             await page
-                .locator("#offcanvasRight")
-                .getByRole("link", { name: "All articles", exact: true })
-                .waitFor({ state: "visible" });
-            await page.getByRole("button", { name: "Close navigation" }).click();
-            await page.waitForSelector("#offcanvasRight.show", { state: "hidden" });
-        } else {
-            await page.locator("#desktop-articles").focus();
-            await page.keyboard.press("Enter");
-            await page
-                .locator(".collapse.navbar-collapse")
-                .getByRole("link", { name: "All articles", exact: true })
+                .locator(".mobile-navigation")
+                .getByRole("link", { name: "Categories", exact: true })
                 .waitFor({ state: "visible" });
             await page.keyboard.press("Escape");
+            assert.equal(await page.locator(".mobile-navigation").getAttribute("open"), null);
+            await page.locator(".mobile-navigation > summary").click();
+            await page
+                .locator(".mobile-navigation")
+                .getByRole("link", { name: "About", exact: true })
+                .click();
+            assert.ok(page.url().endsWith("/about"));
         }
-        for (const path of [
-            "/",
-            "/about",
-            "/articles",
-            "/categories",
-            "/series-collection",
-            "/category/programming",
-            "/series/a-specific-series",
-            "/testing-speech-recognition",
-            "/symfony-feature-flags",
-            "/lying-coverage",
-            "/testing-commonmark-features",
-        ]) {
-            await page.goto(`http://127.0.0.1:4321${path}`, { waitUntil: "networkidle" });
-            const overflow = await page.evaluate(
-                () => document.documentElement.scrollWidth > window.innerWidth + 1,
-            );
-            assert.equal(overflow, false, `Horizontal overflow at ${viewport.width} ${path}`);
-            const broken = await page.locator("img").evaluateAll(async (images) => {
-                const local = images.filter((img) => img.src.startsWith(location.origin));
-                for (const img of local) img.loading = "eager";
-                await Promise.all(local.map((img) => img.decode().catch(() => {})));
-                return local
-                    .filter((img) => !img.complete || img.naturalWidth === 0)
-                    .map((img) => img.src);
-            });
-            assert.deepEqual(
-                broken.filter((src) => src.startsWith("http://127.0.0.1")),
-                [],
-                `Broken local images at ${path}`,
-            );
-            if (path === "/testing-speech-recognition") {
-                await page.locator("details > summary").click();
-                assert.equal(await page.locator("details").getAttribute("open"), "");
-                assert.ok(await page.locator("details pre").isVisible());
-                await page.locator("details > summary").click();
+        let views = 0;
+        for (const scheme of ["light", "dark"]) {
+            await page.emulateMedia({ colorScheme: scheme, reducedMotion: "reduce" });
+            for (const path of paths) {
+                await page.goto(base + path, { waitUntil: "networkidle" });
+                await page.waitForFunction(
+                    (wanted) => document.documentElement.dataset.scheme === wanted,
+                    scheme,
+                );
+                assert.equal(
+                    await page.evaluate(
+                        () => document.documentElement.scrollWidth > innerWidth + 1,
+                    ),
+                    false,
+                    `overflow ${viewport.width} ${scheme} ${path}`,
+                );
+                const broken = await page.locator("img").evaluateAll(async (images) => {
+                    const local = images.filter((img) => img.src.startsWith(location.origin));
+                    await Promise.all(
+                        local.map(async (img) => {
+                            img.loading = "eager";
+                            try {
+                                await img.decode();
+                            } catch {}
+                        }),
+                    );
+                    return local
+                        .filter((img) => !img.complete || !img.naturalWidth)
+                        .map((img) => img.src);
+                });
+                assert.deepEqual(broken, [], `local images ${path}`);
+                if (path === "/testing-speech-recognition") {
+                    assert.equal(await page.locator(".photo-palette span").count(), 4);
+                    await page.locator(".article-content details>summary").first().click();
+                    assert.ok(
+                        await page.locator(".article-content details pre").first().isVisible(),
+                    );
+                    for (const pre of await page.locator(".article-content pre").all())
+                        assert.ok(await pre.evaluate((el) => el.scrollWidth >= el.clientWidth));
+                    for (const caption of await page.locator(".article-content figcaption").all())
+                        assert.equal(
+                            await caption.evaluate((el) => getComputedStyle(el).textAlign),
+                            "center",
+                        );
+                    await page.locator(".article-content details>summary").first().click();
+                }
+                if (viewport.width === 1440 || viewport.width === 390)
+                    await page.screenshot({
+                        path: `${output}/${viewport.width}-${scheme}-${path.replaceAll("/", "_") || "home"}.png`,
+                        fullPage: path === "/" || path === "/testing-speech-recognition",
+                    });
+                views++;
             }
-            await page.screenshot({
-                path: `${output}/${viewport.width}-${path.replaceAll("/", "_") || "home"}.png`,
-                fullPage: path === "/",
-            });
         }
-        assert.deepEqual(errors, [], "Browser JavaScript errors");
-        assert.deepEqual(missing, [], "Local HTTP errors");
+        await page.goto(base + "/", { waitUntil: "networkidle" });
+        await page.emulateMedia({ colorScheme: "light" });
+        await page.waitForFunction(() => document.documentElement.dataset.scheme === "light");
+        await page.emulateMedia({ colorScheme: "dark" });
+        await page.waitForFunction(() => document.documentElement.dataset.scheme === "dark");
+        assert.deepEqual(errors, []);
+        assert.deepEqual(missing, []);
         results.push({
             viewport,
-            checkedPages: 11,
+            views,
             errors,
             missing,
             interactions: [
-                "cookie preferences/rejection",
-                "navigation dropdown",
-                ...(viewport.width < 500 ? ["mobile offcanvas"] : []),
-                "native details",
+                "consent rejection",
+                "native menu and Escape",
+                "local images",
+                "wide code/details/captions",
+                "visible palette",
+                "live system theme",
             ],
         });
         await context.close();
     }
-    // Capture the deployed homepage in the same browser for direct visual comparison.
-    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
-    await page.goto("https://dkarlovi.github.io/", { waitUntil: "networkidle" });
-    const reject = page.getByRole("button", { name: "Reject all", exact: true });
-    if (await reject.isVisible()) await reject.click();
-    await page.screenshot({ path: `${output}/baseline-home-desktop.png`, fullPage: true });
-    await writeFile(`${output}/results.json`, JSON.stringify(results, null, 2) + "\n");
-    console.log(JSON.stringify(results));
+    await writeFile(output + "/results.json", JSON.stringify(results, null, 2) + "\n");
+    console.log(JSON.stringify(results, null, 2));
 } finally {
     await browser.close();
 }

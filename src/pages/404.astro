@@ -2,4 +2,4 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { sitePath } from '../lib/urls';
 ---
-<SiteLayout title="Page not found"><section class="section text-center"><div class="container"><h1>Page not found</h1><p>The page you're looking for isn't here.</p><a href={sitePath('/')} class="btn btn-outline-primary">Return home</a></div></section></SiteLayout>
+<SiteLayout title="Page not found"><section class="error-page page-section"><p class="eyebrow">404 / A different kind of dead end</p><h1>Nothing to see<br />here. Yet.</h1><p>The page you're looking for isn't here.</p><a class="text-link" href={sitePath('/')}>Return home <span class="arrow" aria-hidden="true">↗</span></a></section></SiteLayout>
