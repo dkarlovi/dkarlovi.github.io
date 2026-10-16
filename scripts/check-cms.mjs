@@ -86,11 +86,11 @@ try {
         roles: "Engineer · Writer",
         introduction: "An introduction edited in About content.",
     };
+    aboutData.linkLabel = 'Meet Dalibor';
+    aboutData.eyebrow = 'Meet the author';
     aboutData.homepageTeaser = {
-        eyebrow: "Meet the author",
         title: "A CMS-edited introduction",
         summary: "This introduction comes from the About entry.",
-        linkLabel: "Meet Dalibor",
     };
     writeFileSync(aboutPath, `---\n${stringify(aboutData)}---${aboutBody.join("---")}`);
     const homePath = "src/content/pages/home.md";
@@ -109,12 +109,10 @@ try {
         firstLine: "CMS",
         secondLine: "Author.",
         imageAlt: "CMS portrait",
-        writingLabel: "Browse posts",
-        aboutLabel: "Meet the author",
         footnote: "CMS hero footnote",
     };
     homeData.ticker = ["CMS ticker one", "CMS ticker two"];
-    homeData.writing = { title: "CMS writing heading", linkLabel: "Browse the archive" };
+    homeData.writing = { title: "CMS writing heading" };
     homeData.gallery = {
         title: "CMS gallery",
         credit: "CMS photographer",
@@ -147,6 +145,11 @@ try {
     archiveData.discussionHeading = "CMS discussion heading";
     writeFileSync(archivePath, `---\n${stringify(archiveData)}---${archiveBody.join("---")}`);
     build();
+    assert.match(html('')('.home-actions a').first().text(), /CMS archive button/);
+    assert.match(html('')('.home-actions a').last().text(), /Meet Dalibor/);
+    assert.ok(html('')('.home-writing .section-heading a').text().includes(archiveData.title));
+    assert.equal(html('articles')('.collection-hero .eyebrow').text(), 'CMS archive button');
+    assert.equal(html('categories')('.collection-hero .eyebrow').text(), 'CMS archive button');
     assert.match(html("cms-fixture-0")(".article-end > .button-link").text(), /CMS archive button/);
     assert.equal(
         html("choose-boring")(".discussion-links .eyebrow").text(),

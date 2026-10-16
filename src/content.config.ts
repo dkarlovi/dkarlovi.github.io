@@ -65,13 +65,11 @@ const pages = defineCollection({
                     firstLine: z.string(),
                     secondLine: z.string(),
                     imageAlt: z.string(),
-                    writingLabel: z.string(),
-                    aboutLabel: z.string(),
                     footnote: z.string(),
                 })
                 .optional(),
             ticker: z.array(z.string()).default([]),
-            writing: z.object({ title: z.string(), linkLabel: z.string() }).optional(),
+            writing: z.object({ title: z.string() }).optional(),
             gallery: z
                 .object({
                     title: z.string(),
@@ -97,10 +95,8 @@ const pages = defineCollection({
                 .optional(),
             homepageTeaser: z
                 .object({
-                    eyebrow: z.string(),
                     title: z.string(),
                     summary: z.string(),
-                    linkLabel: z.string(),
                 })
                 .optional(),
         }),

@@ -5,8 +5,6 @@ hero:
     firstLine: Dalibor
     secondLine: Karlović.
     imageAlt: Dalibor Karlović
-    writingLabel: Explore my writing
-    aboutLabel: More about me
     footnote: Based in Croatia. Curious about everywhere. ↓
 ticker:
     - Engineering with perspective
@@ -14,7 +12,6 @@ ticker:
     - Words / Images / Experiments
 writing:
     title: Worth thinking about.
-    linkLabel: All writing
 gallery:
     title: Through my lens.
     credit: Photographs by Dalibor Karlović

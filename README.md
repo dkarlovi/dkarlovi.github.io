@@ -52,15 +52,15 @@ imageCredit: Photograph by Dalibor Karlović
 
 The photo supplies the page’s light/dark palette. Omit `image` for a plain heading. Both fields are available in Pages CMS.
 
-The About entry also supplies the homepage’s introduction card through `homepageTeaser`: `eyebrow`, `title`, `summary`, and `linkLabel` control its label, heading, paragraph, and button text. The card shares the About image. Edit these fields under **About → Homepage introduction** in Pages CMS, or omit the group to hide the card.
+The About entry also supplies the homepage’s introduction card through `homepageTeaser`: `title` and `summary` control its heading and paragraph. About’s top-level `eyebrow` supplies the label on the About page and homepage card; its `linkLabel` supplies both homepage About buttons. The card shares the About image. Edit the card under **About → Homepage introduction** in Pages CMS, or omit the group to hide it. Edit the shared label and button text directly under **About**.
 
 About’s `homepageHero.roles` and `homepageHero.introduction` supply the hero’s role line and introduction paragraph, editable under **About → Homepage hero**. The site-wide logo tagline comes from `brandTagline` in the Homepage entry.
 
-Homepage also owns the remaining homepage and footer content: `hero` (display name, portrait alt text, buttons and footnote), `ticker`, `writing` (heading and archive button), `gallery` (heading, credit, images, alt text and captions), and `footer` (eyebrow, multiline heading, description and copyright name/location). The footer adds the current year automatically. Homepage’s `title` supplies the shared brand and article author name. All groups are exposed in Pages CMS.
+Homepage also owns the remaining homepage and footer content: `hero` (display name, portrait alt text and footnote), `ticker`, `writing` (section heading), `gallery` (heading, credit, images, alt text and captions), and `footer` (eyebrow, multiline heading, description and copyright name/location). The footer adds the current year automatically. Homepage’s `title` supplies the shared brand and article author name. All groups are exposed in Pages CMS.
 
 The 404 page’s copy lives in `src/content/pages/not-found.md`, also editable in Pages CMS. Standard interface text remains in the theme: navigation and article controls, pagination, empty states, consent controls, image-palette labels and the optional interactive terrain demo. Social-profile URLs remain in `src/data/site.ts`.
 
-The Articles entry’s `linkLabel` sets the article-footer archive button, and `discussionHeading` sets the discussion prompt. Both are editable under **Article listing** in Pages CMS. Article headings and footers share the same author link; Reddit and Hacker News discussions use branded icon buttons.
+The Articles entry’s `linkLabel` supplies “Explore my writing” in the homepage hero, collection eyebrows and article-footer archive button. Its `title` supplies the homepage archive button (“All articles”), and `discussionHeading` sets the discussion prompt. These are editable under **Article listing** in Pages CMS. Article headings and footers share the same author link; Reddit and Hacker News discussions use branded icon buttons.
 
 Drafts appear in `npm run dev` and are excluded from production article routes, listings, counts, and sitemap. Articles are sorted newest first; series contents are oldest first. Listings use Astro's native pagination with 20 records per page.
 

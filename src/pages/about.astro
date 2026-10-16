@@ -7,4 +7,4 @@ const page = (await getEntry('pages','about'))!;
 const home = (await getEntry('pages', 'home'))!;
 const { Content } = await render(page);
 ---
-<SiteLayout {...page.data} pageClass="about-page"><section class="page-section">{page.data.homepageTeaser && <p class="eyebrow">{page.data.homepageTeaser.eyebrow}</p>}<h1>{page.data.title}</h1>{page.data.image&&<Image src={page.data.image} width={1600} height={1000} fit="cover" class="about-portrait" alt={home.data.title} loading="eager" fetchpriority="high" />}<div class="content simple-content"><Content /><SocialLinks /></div></section></SiteLayout>
+<SiteLayout {...page.data} pageClass="about-page"><section class="page-section">{page.data.eyebrow && <p class="eyebrow">{page.data.eyebrow}</p>}<h1>{page.data.title}</h1>{page.data.image&&<Image src={page.data.image} width={1600} height={1000} fit="cover" class="about-portrait" alt={home.data.title} loading="eager" fetchpriority="high" />}<div class="content simple-content"><Content /><SocialLinks /></div></section></SiteLayout>

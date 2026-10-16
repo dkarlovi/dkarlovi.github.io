@@ -1,6 +1,6 @@
 ---
 title: All articles
-linkLabel: More to think about
+linkLabel: Explore my writing
 discussionHeading: Continue the conversation
 image: ../../assets/uploads/puzzle.jpeg
 imageCredit: Photograph by Dalibor Karlović

@@ -133,7 +133,7 @@ content:
             label: Site logo tagline
             type: string
           - name: hero
-            label: Hero display and buttons
+            label: Hero display
             type: object
             fields:
                 - name: firstLine
@@ -146,14 +146,6 @@ content:
                   required: true
                 - name: imageAlt
                   label: Portrait alternative text
-                  type: string
-                  required: true
-                - name: writingLabel
-                  label: Writing button
-                  type: string
-                  required: true
-                - name: aboutLabel
-                  label: About button
                   type: string
                   required: true
                 - name: footnote
@@ -170,10 +162,6 @@ content:
             fields:
                 - name: title
                   label: Heading
-                  type: string
-                  required: true
-                - name: linkLabel
-                  label: Button text
                   type: string
                   required: true
           - name: gallery
@@ -235,6 +223,13 @@ content:
           - *id002
           - *id003
           - *headerCredit
+          - name: eyebrow
+            label: About section label
+            type: string
+          - name: linkLabel
+            label: About button label
+            description: Shared by the homepage hero and About introduction card.
+            type: string
           - name: homepageHero
             label: Homepage hero
             type: object
@@ -251,10 +246,6 @@ content:
             label: Homepage introduction
             type: object
             fields:
-                - name: eyebrow
-                  label: Section label
-                  type: string
-                  required: true
                 - name: title
                   label: Heading
                   type: string
@@ -262,10 +253,6 @@ content:
                 - name: summary
                   label: Introduction
                   type: text
-                  required: true
-                - name: linkLabel
-                  label: Button text
-                  type: string
                   required: true
           - *id004
     - name: article-collection
@@ -278,7 +265,8 @@ content:
           - *id003
           - *headerCredit
           - name: linkLabel
-            label: Article archive button
+            label: Writing call to action
+            description: Shared by the homepage hero, collection headings, and article archive button.
             type: string
           - name: discussionHeading
             label: Article discussion heading

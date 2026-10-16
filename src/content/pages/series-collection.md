@@ -5,4 +5,4 @@ image: ../../assets/uploads/teambuilding.jpeg
 imageCredit: Photograph by Dalibor Karlović
 ---
 
-Article series, with the number of articles in each category.
+Article series, with the number of articles in each series.
