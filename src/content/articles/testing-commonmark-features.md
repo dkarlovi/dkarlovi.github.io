@@ -276,15 +276,15 @@ With a reference later in the document defining the URL location:
 
 Original image:
 
-![image](../../assets/uploads/testing-commonmark-features-ar-sofa.webp)
+![A person wearing a headset while seated on a virtual sofa](../../assets/uploads/testing-commonmark-features-ar-sofa.webp)
 
 Another standard Markdown image:
 
-![image](../../assets/uploads/testing-commonmark-features-ar-sofa.webp)
+![A person wearing a headset while seated on a virtual sofa](../../assets/uploads/testing-commonmark-features-ar-sofa.webp)
 
 Images adapt to the available content width:
 
-![image](../../assets/uploads/testing-commonmark-features-ar-sofa.webp)
+![A person wearing a headset while seated on a virtual sofa](../../assets/uploads/testing-commonmark-features-ar-sofa.webp)
 
 <div id="content-footnotes"></div>
 

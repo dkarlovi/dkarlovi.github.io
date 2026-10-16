@@ -67,6 +67,14 @@ npm run test:integration
 
 The integration check temporarily creates CMS-style content/media, exercises native image processing, empty taxonomies, drafts, invalid references and the 20/21-record pagination boundary, then removes its fixtures and rebuilds. Run it separately from development/build processes. `check:output` checks the migrated site's baseline content, local links/assets/anchors, taxonomy counts, metadata, and sitemap. The CommonMark demonstration's illustrative repository link is explicitly exempted.
 
+To read Astro's own dev-toolbar Audit panel across every page at desktop and mobile sizes, start `npm run dev` and run:
+
+```sh
+ASTRO_DEV_URL=http://localhost:4322 node scripts/check-dev-audit.mjs
+```
+
+Set the URL to the port printed by your dev server (normally 4321). This check requires Google Chrome, fails on accessibility warnings, and records all findings in `/tmp/astro-dev-audit.json`. Add `--strict` to also fail on performance hints, including viewport-dependent image-loading advice. External demonstration images are blocked during this local audit so their availability cannot stall Astro's auditor.
+
 ## Deployment
 
 Pushes to `main` run the GitHub Pages workflow: Git LFS checkout, Node/npm installation, checks, static build, and `dist/` deployment. Pull requests targeting `main` run the same checks and build without publishing. You can also select **Build and deploy Astro → Run workflow** in GitHub Actions; selecting `main` deploys, while other branches only validate the build. The repository's **Settings → Pages → Source** must be **GitHub Actions** (already configured for this repository). No deployment is performed by local migration commands.
