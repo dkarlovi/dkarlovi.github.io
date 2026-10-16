@@ -393,6 +393,9 @@ main {
     gap: 4rem;
     padding: 2rem var(--space) 5rem;
 }
+.listing-layout.without-sidebar {
+    grid-template-columns: minmax(0, 1fr);
+}
 .category-widget {
     padding-top: 1rem;
 }

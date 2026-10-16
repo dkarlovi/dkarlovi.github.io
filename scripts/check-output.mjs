@@ -190,6 +190,11 @@ for (const article of content.articles) {
 }
 for (const kind of ["categories", "series"]) {
     for (const taxonomy of content[kind]) {
+        assert.equal(
+            get(`/${kind === 'categories' ? 'category' : 'series'}/${taxonomy.slug}`)('.category-widget').length,
+            kind === 'categories' ? 1 : 0,
+            `${kind}: subject navigation belongs only on category listings`,
+        );
         const members = content.articles.filter(
             (a) => !a.draft && (a[kind] ?? []).includes(taxonomy.id),
         );
