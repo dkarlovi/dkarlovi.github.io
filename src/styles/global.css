@@ -226,7 +226,7 @@ main {
     margin: 0;
     list-style: none;
 }
-.site-nav a:hover,
+.site-nav a:not(.icon-link):hover,
 .site-nav a[aria-current="page"] {
     text-decoration: underline;
     text-underline-offset: 6px;
@@ -239,10 +239,6 @@ main {
     padding: 0;
     margin: 0;
     font-size: 0.8125rem;
-}
-.social-links a:hover {
-    text-decoration: underline;
-    text-underline-offset: 5px;
 }
 .site-footer {
     padding: 3.5rem var(--space) 1.875rem;
@@ -404,12 +400,12 @@ main {
     padding: 0;
     list-style: none;
 }
-.category-widget a {
+.category-widget .subject-link {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    border-top: 1px solid var(--line);
-    padding: 0.8rem 0;
+    margin-bottom: 0.625rem;
+    padding: 0.8rem 1rem;
     font-size: 0.8125rem;
 }
 .pagination {
@@ -657,17 +653,6 @@ main {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem;
 }
-.taxonomy-card {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 2rem;
-    background: var(--panel);
-    font-size: 1.125rem;
-}
-.taxonomy-card:hover {
-    text-decoration: underline;
-}
 .about-page .about-portrait {
     width: 100%;
     max-height: 42rem;
@@ -773,7 +758,7 @@ main {
         position: absolute;
         top: 3.3rem;
         right: 0;
-        min-width: 15rem;
+        min-width: 15.25rem;
         background: var(--paper);
         color: var(--ink);
         border: 1px solid var(--line);
@@ -1064,4 +1049,125 @@ main {
 }
 .home-page.without-portrait .home-hero-copy {
     padding-top: 10rem;
+}
+
+/* Navigation actions share one button language; prose retains normal link styling. */
+.button-link,
+.icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.75rem 1.125rem;
+    border: 1px solid var(--line);
+    border-radius: 0.25rem;
+    background: var(--panel);
+    color: var(--ink);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
+    transition:
+        background-color 160ms,
+        color 160ms,
+        border-color 160ms;
+}
+.icon-link,
+.content a.icon-link,
+.mobile-navigation .site-nav a.icon-link {
+    width: 2.75rem;
+    min-width: 2.75rem;
+    height: 2.75rem;
+    display: inline-flex;
+    padding: 0;
+    text-decoration: none;
+}
+.icon-link svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+}
+.button-link:hover,
+.button-link:focus-visible,
+.icon-link:hover,
+.icon-link:focus-visible,
+.content a.icon-link:hover,
+.content a.icon-link:focus-visible {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+    text-decoration: none;
+}
+.button-link:active,
+.icon-link:active,
+.content a.icon-link:active {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+}
+.taxonomy-card {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    font-size: 1.125rem;
+}
+.category-widget .subject-link {
+    display: flex;
+    justify-content: space-between;
+}
+@media (max-width: 540px) {
+    .taxonomy-card {
+        padding: 1.5rem;
+    }
+}
+
+.content a.icon-link {
+    color: var(--ink);
+}
+
+/* Recognizable brand colour on hover/focus, with a neutral contrasting surface. */
+:root {
+    --brand-github: #181717;
+    --brand-twitter: #1da1f2;
+    --brand-youtube: #ff0033;
+    --brand-linkedin: #0a66c2;
+    --brand-surface-light: #ffffff;
+    --brand-surface-dark: #181717;
+}
+.icon-link[data-brand] {
+    --brand-surface: var(--brand-surface-light);
+}
+.icon-link[data-brand="github"] {
+    --brand-color: var(--brand-github);
+}
+.icon-link[data-brand="twitter"] {
+    --brand-color: var(--brand-twitter);
+    --brand-surface: var(--brand-surface-dark);
+}
+.icon-link[data-brand="youtube"] {
+    --brand-color: var(--brand-youtube);
+}
+.icon-link[data-brand="linkedin"] {
+    --brand-color: var(--brand-linkedin);
+}
+a.icon-link[data-brand]:is(:hover, :focus-visible) {
+    background: var(--brand-surface);
+    border-color: var(--brand-color);
+}
+a.icon-link[data-brand]:is(:hover, :focus-visible) svg {
+    color: var(--brand-color);
+}
+a.icon-link[data-brand]:active {
+    box-shadow: inset 0 0 0 1px var(--brand-color);
+}
+
+.site-nav .social-links {
+    column-gap: 0.5rem;
+    row-gap: 0.5rem;
+    flex-wrap: nowrap;
+}
+.mobile-navigation .site-nav .social-links {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
 }

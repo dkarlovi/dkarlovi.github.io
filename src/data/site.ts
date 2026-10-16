@@ -1,9 +1,14 @@
 export const socials = [
-    { title: "GitHub", url: "https://github.com/dkarlovi" },
+    { icon: "github", title: "GitHub", url: "https://github.com/dkarlovi" },
     {
+        icon: "youtube",
         title: "YouTube",
         url: "https://www.youtube.com/@QuickPonderingRocks",
     },
-    { title: "Twitter", url: "https://twitter.com/dkarlovi" },
-    { title: "LinkedIn", url: "https://www.linkedin.com/in/dkarlovi/" },
-];
+    { icon: "twitter", title: "Twitter", url: "https://twitter.com/dkarlovi" },
+    {
+        icon: "linkedin",
+        title: "LinkedIn",
+        url: "https://www.linkedin.com/in/dkarlovi/",
+    },
+] as const;
