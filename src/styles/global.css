@@ -53,6 +53,10 @@ body {
     }
 }
 html {
+    /* Keep rem-based proportions at least as large as a 2560px-wide layout on 4K.
+       The percentage base preserves browser font preferences; scaling eases off
+       as browser/OS zoom reduces the CSS viewport. */
+    font-size: clamp(100%, calc(100% + 0.625vw - 16px), 150%);
     scroll-behavior: smooth;
 }
 * {
