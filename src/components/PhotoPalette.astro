@@ -1,7 +1,8 @@
 ---
 import type { ArticlePalette } from '../lib/palette';
-interface Props { palette: ArticlePalette; credit?: string }
-const { palette, credit } = Astro.props;
+interface Props { palette: ArticlePalette; credit?: string; publishedAt?: Date }
+const { palette, credit, publishedAt } = Astro.props;
+const date = publishedAt?.toISOString().slice(0, 10);
 const roles = ['paper', 'ink', 'accent', 'panel'] as const;
 ---
-<figcaption class="photo-credit"><ul class="photo-palette" role="list" aria-label="Palette inspired by this image">{roles.map(role => <li><span style={`background:var(--${role})`} role="img" aria-label={`${role}: light ${palette.light[role]}, dark ${palette.dark[role]}`} title={`${role} · Light ${palette.light[role]} / Dark ${palette.dark[role]}`}></span></li>)}</ul><span>{credit ?? 'Image palette'}</span></figcaption>
+<figcaption class="photo-credit">{date && <time class="photo-date date-container" datetime={date} title={date}>{date}</time>}<ul class="photo-palette" role="list" aria-label="Palette inspired by this image">{roles.map(role => <li><span style={`background:var(--${role})`} role="img" aria-label={`${role}: light ${palette.light[role]}, dark ${palette.dark[role]}`} title={`${role} · Light ${palette.light[role]} / Dark ${palette.dark[role]}`}></span></li>)}</ul><span class:list={{ 'palette-label': !credit }}>{credit ?? 'Image palette'}</span></figcaption>

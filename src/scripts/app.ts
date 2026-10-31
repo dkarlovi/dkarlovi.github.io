@@ -1,4 +1,7 @@
 import { run } from "vanilla-cookieconsent";
+import { initializeAsides } from "./asides";
+
+initializeAsides();
 
 function initialize() {
     const dateContainers = document.querySelectorAll<HTMLElement>(".date-container");

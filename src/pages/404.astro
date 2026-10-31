@@ -5,4 +5,4 @@ import { sitePath } from '../lib/urls';
 import { getEntry } from 'astro:content';
 const page = (await getEntry('pages', 'not-found'))!;
 ---
-<SiteLayout {...page.data}><section class="error-page page-section"><p class="eyebrow">{page.data.eyebrow}</p><h1>{page.data.heading ?? page.data.title}</h1><p>{page.data.summary}</p><DestinationLink class="text-link" href={sitePath('/')}>{page.data.linkLabel} <span class="arrow" aria-hidden="true">↗</span></DestinationLink></section></SiteLayout>
+<SiteLayout {...page.data}><section class="error-page page-section"><p class="eyebrow">{page.data.eyebrow}</p><h1>{page.data.heading ?? page.data.title}</h1><p>{page.data.summary}</p><DestinationLink class="button-link" href={sitePath('/')}>{page.data.linkLabel} <span class="arrow" aria-hidden="true">↗</span></DestinationLink></section></SiteLayout>

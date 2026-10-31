@@ -34,6 +34,7 @@ body {
     --accent-ink: var(--accent-ink-light);
     --panel: var(--panel-light);
     --line: var(--line-light);
+    --control-line: color-mix(in srgb, var(--line) 75%, var(--ink));
     margin: 0;
     background: var(--paper);
     color: var(--ink);
@@ -235,6 +236,11 @@ main {
     text-decoration: underline;
     text-underline-offset: 6px;
 }
+.site-nav a:not(.icon-link) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+}
 .mobile-navigation {
     display: none;
 }
@@ -273,8 +279,16 @@ main {
     margin-top: 2.75rem;
     padding-top: 1.25rem;
     border-top: 1px solid var(--line);
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     color: var(--muted);
+}
+.footer-bottom nav {
+    row-gap: 0.25rem;
+}
+.footer-bottom nav :is(a, button) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
 }
 .footer-bottom button:hover {
     text-decoration: underline;
@@ -288,6 +302,7 @@ main {
 }
 .section-heading h2 {
     font-size: clamp(2rem, 3vw, 2.5rem);
+    letter-spacing: -0.04em;
 }
 .article-grid {
     display: grid;
@@ -317,6 +332,8 @@ main {
 .card h3 {
     font-size: clamp(1.5rem, 2.4vw, 2.25rem);
     margin: 0.8rem 0 1rem;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
 }
 .card h3 a:hover {
     text-decoration: underline;
@@ -324,7 +341,8 @@ main {
     text-decoration-thickness: 1px;
 }
 .card .card-text {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
+    line-height: 1.75;
     color: var(--muted);
     margin: 1rem 0;
 }
@@ -364,10 +382,23 @@ main {
     display: flex;
     gap: 0.6rem;
     flex-wrap: wrap;
-    font-size: 0.625rem;
+    font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+}
+.category-badges li,
+.category-badges a {
+    display: inline-flex;
+    align-items: center;
+}
+.category-badges a {
+    min-height: 1.5rem;
+}
+.meta,
+.card-meta,
+.pagination {
+    font-variant-numeric: tabular-nums;
 }
 .category-badges a:hover {
     text-decoration: underline;
@@ -594,6 +625,7 @@ main {
 .about-note h2 {
     font-size: 1.875rem;
     margin: 0.4rem 0 0.75rem;
+    letter-spacing: -0.04em;
 }
 .about-note p {
     font-size: 0.875rem;
@@ -785,6 +817,9 @@ main {
         display: block;
         padding: 0.35rem;
     }
+    .mobile-navigation .site-nav a:not(.icon-link) {
+        display: flex;
+    }
     .article-card-image,
     .article-card-placeholder {
         height: 15rem;
@@ -878,13 +913,13 @@ main {
         right: 0;
         top: 0;
         bottom: auto;
-        height: 65%;
+        height: 29rem;
     }
     .home-photo img {
         object-position: 50% 25%;
     }
     .home-hero::after {
-        background: linear-gradient(0deg, var(--paper) 0%, var(--paper) 36%, transparent 65%);
+        background: linear-gradient(180deg, transparent 16rem, var(--paper) 26rem);
     }
     .home-hero-copy {
         padding: 26.875rem var(--space) 6.25rem;
@@ -942,6 +977,11 @@ main {
     .visuals-section {
         padding-bottom: 3rem;
     }
+    .visuals-section .section-heading {
+        flex-direction: column;
+        align-items: start;
+        gap: 0.75rem;
+    }
     .visuals-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -961,6 +1001,13 @@ main {
     }
     .taxonomy-card {
         padding: 1.5rem;
+    }
+}
+@media (max-width: 380px) {
+    .home-writing .section-heading {
+        flex-direction: column;
+        align-items: start;
+        gap: 1rem;
     }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1067,7 +1114,7 @@ main {
     justify-content: center;
     gap: 1rem;
     padding: 0.75rem 1.125rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--control-line);
     border-radius: 0.25rem;
     background: var(--panel);
     color: var(--ink);
