@@ -1,584 +1,584 @@
 {
-  "schemaVersion": 2,
-  "generatedAt": "2026-10-31T16:53:44.262Z",
-  "title": "Design System: Colour Field",
-  "extensions": {
-    "colorMeta": {
-      "paper-light": {
-        "role": "neutral",
-        "displayName": "Warm paper",
-        "tonalRamp": [
-          "oklch(15.00% 0.0077 79.74)",
-          "oklch(26.43% 0.0155 79.74)",
-          "oklch(37.86% 0.0211 79.74)",
-          "oklch(49.29% 0.0237 79.74)",
-          "oklch(60.71% 0.0229 79.74)",
-          "oklch(72.14% 0.0190 79.74)",
-          "oklch(83.57% 0.0123 79.74)",
-          "oklch(95.00% 0.0039 79.74)"
+    "schemaVersion": 2,
+    "generatedAt": "2026-10-31T16:53:44.262Z",
+    "title": "Design System: Colour Field",
+    "extensions": {
+        "colorMeta": {
+            "paper-light": {
+                "role": "neutral",
+                "displayName": "Warm paper",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0077 79.74)",
+                    "oklch(26.43% 0.0155 79.74)",
+                    "oklch(37.86% 0.0211 79.74)",
+                    "oklch(49.29% 0.0237 79.74)",
+                    "oklch(60.71% 0.0229 79.74)",
+                    "oklch(72.14% 0.0190 79.74)",
+                    "oklch(83.57% 0.0123 79.74)",
+                    "oklch(95.00% 0.0039 79.74)"
+                ]
+            },
+            "ink-light": {
+                "role": "neutral",
+                "displayName": "Brown ink",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0112 31.35)",
+                    "oklch(26.43% 0.0224 31.35)",
+                    "oklch(37.86% 0.0304 31.35)",
+                    "oklch(49.29% 0.0342 31.35)",
+                    "oklch(60.71% 0.0331 31.35)",
+                    "oklch(72.14% 0.0274 31.35)",
+                    "oklch(83.57% 0.0178 31.35)",
+                    "oklch(95.00% 0.0057 31.35)"
+                ]
+            },
+            "muted-light": {
+                "role": "neutral",
+                "displayName": "Muted brown",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0112 50.16)",
+                    "oklch(26.43% 0.0224 50.16)",
+                    "oklch(37.86% 0.0305 50.16)",
+                    "oklch(49.29% 0.0342 50.16)",
+                    "oklch(60.71% 0.0332 50.16)",
+                    "oklch(72.14% 0.0274 50.16)",
+                    "oklch(83.57% 0.0178 50.16)",
+                    "oklch(95.00% 0.0057 50.16)"
+                ]
+            },
+            "accent-light": {
+                "role": "primary",
+                "displayName": "Vermilion",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0545 27.95)",
+                    "oklch(26.43% 0.1093 27.95)",
+                    "oklch(37.86% 0.1487 27.95)",
+                    "oklch(49.29% 0.1670 27.95)",
+                    "oklch(60.71% 0.1618 27.95)",
+                    "oklch(72.14% 0.1338 27.95)",
+                    "oklch(83.57% 0.0868 27.95)",
+                    "oklch(95.00% 0.0276 27.95)"
+                ]
+            },
+            "accent-ink-light": {
+                "role": "neutral",
+                "displayName": "accent ink light",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0057 81.33)",
+                    "oklch(26.43% 0.0114 81.33)",
+                    "oklch(37.86% 0.0155 81.33)",
+                    "oklch(49.29% 0.0174 81.33)",
+                    "oklch(60.71% 0.0169 81.33)",
+                    "oklch(72.14% 0.0139 81.33)",
+                    "oklch(83.57% 0.0091 81.33)",
+                    "oklch(95.00% 0.0029 81.33)"
+                ]
+            },
+            "panel-light": {
+                "role": "neutral",
+                "displayName": "Sand panel",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0119 82.17)",
+                    "oklch(26.43% 0.0238 82.17)",
+                    "oklch(37.86% 0.0324 82.17)",
+                    "oklch(49.29% 0.0364 82.17)",
+                    "oklch(60.71% 0.0352 82.17)",
+                    "oklch(72.14% 0.0291 82.17)",
+                    "oklch(83.57% 0.0189 82.17)",
+                    "oklch(95.00% 0.0060 82.17)"
+                ]
+            },
+            "line-light": {
+                "role": "neutral",
+                "displayName": "Warm rule",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0150 66.95)",
+                    "oklch(26.43% 0.0300 66.95)",
+                    "oklch(37.86% 0.0407 66.95)",
+                    "oklch(49.29% 0.0458 66.95)",
+                    "oklch(60.71% 0.0444 66.95)",
+                    "oklch(72.14% 0.0367 66.95)",
+                    "oklch(83.57% 0.0238 66.95)",
+                    "oklch(95.00% 0.0076 66.95)"
+                ]
+            },
+            "paper-dark": {
+                "role": "neutral",
+                "displayName": "Brown paper",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0112 31.35)",
+                    "oklch(26.43% 0.0224 31.35)",
+                    "oklch(37.86% 0.0304 31.35)",
+                    "oklch(49.29% 0.0342 31.35)",
+                    "oklch(60.71% 0.0331 31.35)",
+                    "oklch(72.14% 0.0274 31.35)",
+                    "oklch(83.57% 0.0178 31.35)",
+                    "oklch(95.00% 0.0057 31.35)"
+                ]
+            },
+            "ink-dark": {
+                "role": "neutral",
+                "displayName": "Warm light ink",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0077 79.74)",
+                    "oklch(26.43% 0.0155 79.74)",
+                    "oklch(37.86% 0.0211 79.74)",
+                    "oklch(49.29% 0.0237 79.74)",
+                    "oklch(60.71% 0.0229 79.74)",
+                    "oklch(72.14% 0.0190 79.74)",
+                    "oklch(83.57% 0.0123 79.74)",
+                    "oklch(95.00% 0.0039 79.74)"
+                ]
+            },
+            "muted-dark": {
+                "role": "neutral",
+                "displayName": "Light clay",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0137 53.72)",
+                    "oklch(26.43% 0.0275 53.72)",
+                    "oklch(37.86% 0.0375 53.72)",
+                    "oklch(49.29% 0.0421 53.72)",
+                    "oklch(60.71% 0.0408 53.72)",
+                    "oklch(72.14% 0.0337 53.72)",
+                    "oklch(83.57% 0.0219 53.72)",
+                    "oklch(95.00% 0.0070 53.72)"
+                ]
+            },
+            "accent-dark": {
+                "role": "primary",
+                "displayName": "Peach",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0393 35.93)",
+                    "oklch(26.43% 0.0787 35.93)",
+                    "oklch(37.86% 0.1070 35.93)",
+                    "oklch(49.29% 0.1203 35.93)",
+                    "oklch(60.71% 0.1165 35.93)",
+                    "oklch(72.14% 0.0963 35.93)",
+                    "oklch(83.57% 0.0625 35.93)",
+                    "oklch(95.00% 0.0199 35.93)"
+                ]
+            },
+            "accent-ink-dark": {
+                "role": "neutral",
+                "displayName": "accent ink dark",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0112 31.35)",
+                    "oklch(26.43% 0.0224 31.35)",
+                    "oklch(37.86% 0.0304 31.35)",
+                    "oklch(49.29% 0.0342 31.35)",
+                    "oklch(60.71% 0.0331 31.35)",
+                    "oklch(72.14% 0.0274 31.35)",
+                    "oklch(83.57% 0.0178 31.35)",
+                    "oklch(95.00% 0.0057 31.35)"
+                ]
+            },
+            "panel-dark": {
+                "role": "neutral",
+                "displayName": "Dark brown panel",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0131 38.50)",
+                    "oklch(26.43% 0.0262 38.50)",
+                    "oklch(37.86% 0.0356 38.50)",
+                    "oklch(49.29% 0.0400 38.50)",
+                    "oklch(60.71% 0.0388 38.50)",
+                    "oklch(72.14% 0.0320 38.50)",
+                    "oklch(83.57% 0.0208 38.50)",
+                    "oklch(95.00% 0.0066 38.50)"
+                ]
+            },
+            "line-dark": {
+                "role": "neutral",
+                "displayName": "Dark-theme rule",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0168 48.49)",
+                    "oklch(26.43% 0.0337 48.49)",
+                    "oklch(37.86% 0.0459 48.49)",
+                    "oklch(49.29% 0.0515 48.49)",
+                    "oklch(60.71% 0.0499 48.49)",
+                    "oklch(72.14% 0.0413 48.49)",
+                    "oklch(83.57% 0.0268 48.49)",
+                    "oklch(95.00% 0.0085 48.49)"
+                ]
+            },
+            "brand-github": {
+                "role": "neutral",
+                "displayName": "brand github",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0005 17.29)",
+                    "oklch(26.43% 0.0010 17.29)",
+                    "oklch(37.86% 0.0014 17.29)",
+                    "oklch(49.29% 0.0016 17.29)",
+                    "oklch(60.71% 0.0015 17.29)",
+                    "oklch(72.14% 0.0013 17.29)",
+                    "oklch(83.57% 0.0008 17.29)",
+                    "oklch(95.00% 0.0003 17.29)"
+                ]
+            },
+            "brand-twitter": {
+                "role": "neutral",
+                "displayName": "brand twitter",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0514 243.35)",
+                    "oklch(26.43% 0.1031 243.35)",
+                    "oklch(37.86% 0.1402 243.35)",
+                    "oklch(49.29% 0.1575 243.35)",
+                    "oklch(60.71% 0.1526 243.35)",
+                    "oklch(72.14% 0.1262 243.35)",
+                    "oklch(83.57% 0.0819 243.35)",
+                    "oklch(95.00% 0.0261 243.35)"
+                ]
+            },
+            "brand-youtube": {
+                "role": "neutral",
+                "displayName": "brand youtube",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0828 23.61)",
+                    "oklch(26.43% 0.1659 23.61)",
+                    "oklch(37.86% 0.2256 23.61)",
+                    "oklch(49.29% 0.2534 23.61)",
+                    "oklch(60.71% 0.2455 23.61)",
+                    "oklch(72.14% 0.2030 23.61)",
+                    "oklch(83.57% 0.1318 23.61)",
+                    "oklch(95.00% 0.0420 23.61)"
+                ]
+            },
+            "brand-linkedin": {
+                "role": "neutral",
+                "displayName": "brand linkedin",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0530 254.73)",
+                    "oklch(26.43% 0.1062 254.73)",
+                    "oklch(37.86% 0.1444 254.73)",
+                    "oklch(49.29% 0.1623 254.73)",
+                    "oklch(60.71% 0.1572 254.73)",
+                    "oklch(72.14% 0.1300 254.73)",
+                    "oklch(83.57% 0.0844 254.73)",
+                    "oklch(95.00% 0.0269 254.73)"
+                ]
+            },
+            "brand-reddit": {
+                "role": "neutral",
+                "displayName": "brand reddit",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0745 35.40)",
+                    "oklch(26.43% 0.1493 35.40)",
+                    "oklch(37.86% 0.2030 35.40)",
+                    "oklch(49.29% 0.2281 35.40)",
+                    "oklch(60.71% 0.2209 35.40)",
+                    "oklch(72.14% 0.1826 35.40)",
+                    "oklch(83.57% 0.1186 35.40)",
+                    "oklch(95.00% 0.0378 35.40)"
+                ]
+            },
+            "brand-hacker-news": {
+                "role": "neutral",
+                "displayName": "brand hacker news",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0663 43.49)",
+                    "oklch(26.43% 0.1329 43.49)",
+                    "oklch(37.86% 0.1808 43.49)",
+                    "oklch(49.29% 0.2031 43.49)",
+                    "oklch(60.71% 0.1968 43.49)",
+                    "oklch(72.14% 0.1627 43.49)",
+                    "oklch(83.57% 0.1056 43.49)",
+                    "oklch(95.00% 0.0336 43.49)"
+                ]
+            },
+            "brand-surface-light": {
+                "role": "neutral",
+                "displayName": "brand surface light",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0000 89.88)",
+                    "oklch(26.43% 0.0000 89.88)",
+                    "oklch(37.86% 0.0000 89.88)",
+                    "oklch(49.29% 0.0000 89.88)",
+                    "oklch(60.71% 0.0000 89.88)",
+                    "oklch(72.14% 0.0000 89.88)",
+                    "oklch(83.57% 0.0000 89.88)",
+                    "oklch(95.00% 0.0000 89.88)"
+                ]
+            },
+            "brand-surface-dark": {
+                "role": "neutral",
+                "displayName": "brand surface dark",
+                "tonalRamp": [
+                    "oklch(15.00% 0.0005 17.29)",
+                    "oklch(26.43% 0.0010 17.29)",
+                    "oklch(37.86% 0.0014 17.29)",
+                    "oklch(49.29% 0.0016 17.29)",
+                    "oklch(60.71% 0.0015 17.29)",
+                    "oklch(72.14% 0.0013 17.29)",
+                    "oklch(83.57% 0.0008 17.29)",
+                    "oklch(95.00% 0.0003 17.29)"
+                ]
+            },
+            "control-line": {
+                "role": "neutral",
+                "displayName": "Control outline",
+                "canonical": "color-mix(in srgb, var(--line) 75%, var(--ink))"
+            },
+            "aside-header": {
+                "role": "neutral",
+                "displayName": "Aside header"
+            },
+            "code-surface": {
+                "role": "neutral",
+                "displayName": "GitHub Dark code surface"
+            },
+            "code-ink": {
+                "role": "neutral",
+                "displayName": "GitHub Dark code text"
+            },
+            "code-line": {
+                "role": "neutral",
+                "displayName": "GitHub Dark code outline"
+            }
+        },
+        "typographyMeta": {
+            "display": {
+                "displayName": "Fluid display",
+                "purpose": "Home and article headings; exact fluid sizes are documented in DESIGN.md."
+            },
+            "article-body": {
+                "displayName": "Reading text",
+                "purpose": "Long-form paragraphs and lists."
+            },
+            "card-title": {
+                "displayName": "Card title",
+                "purpose": "Small and medium editorial headings with more open tracking."
+            },
+            "reading-heading": {
+                "displayName": "Reading heading",
+                "purpose": "Prose h1–h3, preserving the separate display-heading identity."
+            },
+            "aside-heading": {
+                "displayName": "Aside heading",
+                "purpose": "Reusable collapsible-aside summary, preserving authored wording."
+            },
+            "aside-heading-mobile": {
+                "displayName": "Mobile aside heading",
+                "purpose": "Aside summaries at 540px and below."
+            }
+        },
+        "shadows": [
+            {
+                "name": "mobile-menu",
+                "value": "0 1rem 2rem #0002",
+                "purpose": "Raised native navigation disclosure."
+            },
+            {
+                "name": "heading-experiment",
+                "value": "0 1.5rem 4rem #0002",
+                "purpose": "Optional interactive canvas frame."
+            },
+            {
+                "name": "article-title-text",
+                "value": "0 3px 25px #0002",
+                "purpose": "Text shadow for photo-backed article titles."
+            },
+            {
+                "name": "photo-credit-text",
+                "value": "0 1px 8px #0008",
+                "purpose": "Text shadow for image attribution."
+            }
+        ],
+        "motion": [
+            {
+                "name": "control-color-transition",
+                "value": "160ms ease",
+                "purpose": "Background, foreground, and border state changes."
+            },
+            {
+                "name": "link-arrow",
+                "value": "transform 0.2s ease",
+                "purpose": "Small diagonal arrow response on text-link hover."
+            },
+            {
+                "name": "read-animation-lead",
+                "value": "1000ms",
+                "purpose": "Dwell before the optional silent read-button animation; full timing remains in src/scripts/read-more.ts."
+            },
+            {
+                "name": "aside-button-open",
+                "value": "450ms cubic-bezier(0.16, 1, 0.3, 1)",
+                "purpose": "Compress, spring outward, settle on opening."
+            },
+            {
+                "name": "aside-button-close",
+                "value": "300ms cubic-bezier(0.16, 1, 0.3, 1)",
+                "purpose": "Same bounce on closing, with a shorter duration."
+            },
+            {
+                "name": "aside-sweep",
+                "value": "500–1500ms linear",
+                "purpose": "Two 50px bands, 50px apart and skewed 45deg. Duration is 500 + clamp((travel - 600) / 750, 0, 1) × 1000 milliseconds; emitted at 12% of the bounce, peak opacity 0.09, invisible by 55% of travel."
+            },
+            {
+                "name": "aside-symbol",
+                "value": "150ms ease",
+                "purpose": "Plus becomes minus immediately with the disclosure state; reduced motion suppresses the transition."
+            }
+        ],
+        "breakpoints": [
+            {
+                "name": "small-mobile-heading",
+                "value": "380px"
+            },
+            {
+                "name": "mobile",
+                "value": "540px"
+            },
+            {
+                "name": "navigation",
+                "value": "800px"
+            },
+            {
+                "name": "experiment-layout",
+                "value": "1000px"
+            },
+            {
+                "name": "sidebar",
+                "value": "1100px"
+            },
+            {
+                "name": "large-home",
+                "value": "1700px"
+            },
+            {
+                "name": "rem-scaling-start",
+                "value": "2560px"
+            },
+            {
+                "name": "rem-scaling-cap",
+                "value": "3840px"
+            }
         ]
-      },
-      "ink-light": {
-        "role": "neutral",
-        "displayName": "Brown ink",
-        "tonalRamp": [
-          "oklch(15.00% 0.0112 31.35)",
-          "oklch(26.43% 0.0224 31.35)",
-          "oklch(37.86% 0.0304 31.35)",
-          "oklch(49.29% 0.0342 31.35)",
-          "oklch(60.71% 0.0331 31.35)",
-          "oklch(72.14% 0.0274 31.35)",
-          "oklch(83.57% 0.0178 31.35)",
-          "oklch(95.00% 0.0057 31.35)"
-        ]
-      },
-      "muted-light": {
-        "role": "neutral",
-        "displayName": "Muted brown",
-        "tonalRamp": [
-          "oklch(15.00% 0.0112 50.16)",
-          "oklch(26.43% 0.0224 50.16)",
-          "oklch(37.86% 0.0305 50.16)",
-          "oklch(49.29% 0.0342 50.16)",
-          "oklch(60.71% 0.0332 50.16)",
-          "oklch(72.14% 0.0274 50.16)",
-          "oklch(83.57% 0.0178 50.16)",
-          "oklch(95.00% 0.0057 50.16)"
-        ]
-      },
-      "accent-light": {
-        "role": "primary",
-        "displayName": "Vermilion",
-        "tonalRamp": [
-          "oklch(15.00% 0.0545 27.95)",
-          "oklch(26.43% 0.1093 27.95)",
-          "oklch(37.86% 0.1487 27.95)",
-          "oklch(49.29% 0.1670 27.95)",
-          "oklch(60.71% 0.1618 27.95)",
-          "oklch(72.14% 0.1338 27.95)",
-          "oklch(83.57% 0.0868 27.95)",
-          "oklch(95.00% 0.0276 27.95)"
-        ]
-      },
-      "accent-ink-light": {
-        "role": "neutral",
-        "displayName": "accent ink light",
-        "tonalRamp": [
-          "oklch(15.00% 0.0057 81.33)",
-          "oklch(26.43% 0.0114 81.33)",
-          "oklch(37.86% 0.0155 81.33)",
-          "oklch(49.29% 0.0174 81.33)",
-          "oklch(60.71% 0.0169 81.33)",
-          "oklch(72.14% 0.0139 81.33)",
-          "oklch(83.57% 0.0091 81.33)",
-          "oklch(95.00% 0.0029 81.33)"
-        ]
-      },
-      "panel-light": {
-        "role": "neutral",
-        "displayName": "Sand panel",
-        "tonalRamp": [
-          "oklch(15.00% 0.0119 82.17)",
-          "oklch(26.43% 0.0238 82.17)",
-          "oklch(37.86% 0.0324 82.17)",
-          "oklch(49.29% 0.0364 82.17)",
-          "oklch(60.71% 0.0352 82.17)",
-          "oklch(72.14% 0.0291 82.17)",
-          "oklch(83.57% 0.0189 82.17)",
-          "oklch(95.00% 0.0060 82.17)"
-        ]
-      },
-      "line-light": {
-        "role": "neutral",
-        "displayName": "Warm rule",
-        "tonalRamp": [
-          "oklch(15.00% 0.0150 66.95)",
-          "oklch(26.43% 0.0300 66.95)",
-          "oklch(37.86% 0.0407 66.95)",
-          "oklch(49.29% 0.0458 66.95)",
-          "oklch(60.71% 0.0444 66.95)",
-          "oklch(72.14% 0.0367 66.95)",
-          "oklch(83.57% 0.0238 66.95)",
-          "oklch(95.00% 0.0076 66.95)"
-        ]
-      },
-      "paper-dark": {
-        "role": "neutral",
-        "displayName": "Brown paper",
-        "tonalRamp": [
-          "oklch(15.00% 0.0112 31.35)",
-          "oklch(26.43% 0.0224 31.35)",
-          "oklch(37.86% 0.0304 31.35)",
-          "oklch(49.29% 0.0342 31.35)",
-          "oklch(60.71% 0.0331 31.35)",
-          "oklch(72.14% 0.0274 31.35)",
-          "oklch(83.57% 0.0178 31.35)",
-          "oklch(95.00% 0.0057 31.35)"
-        ]
-      },
-      "ink-dark": {
-        "role": "neutral",
-        "displayName": "Warm light ink",
-        "tonalRamp": [
-          "oklch(15.00% 0.0077 79.74)",
-          "oklch(26.43% 0.0155 79.74)",
-          "oklch(37.86% 0.0211 79.74)",
-          "oklch(49.29% 0.0237 79.74)",
-          "oklch(60.71% 0.0229 79.74)",
-          "oklch(72.14% 0.0190 79.74)",
-          "oklch(83.57% 0.0123 79.74)",
-          "oklch(95.00% 0.0039 79.74)"
-        ]
-      },
-      "muted-dark": {
-        "role": "neutral",
-        "displayName": "Light clay",
-        "tonalRamp": [
-          "oklch(15.00% 0.0137 53.72)",
-          "oklch(26.43% 0.0275 53.72)",
-          "oklch(37.86% 0.0375 53.72)",
-          "oklch(49.29% 0.0421 53.72)",
-          "oklch(60.71% 0.0408 53.72)",
-          "oklch(72.14% 0.0337 53.72)",
-          "oklch(83.57% 0.0219 53.72)",
-          "oklch(95.00% 0.0070 53.72)"
-        ]
-      },
-      "accent-dark": {
-        "role": "primary",
-        "displayName": "Peach",
-        "tonalRamp": [
-          "oklch(15.00% 0.0393 35.93)",
-          "oklch(26.43% 0.0787 35.93)",
-          "oklch(37.86% 0.1070 35.93)",
-          "oklch(49.29% 0.1203 35.93)",
-          "oklch(60.71% 0.1165 35.93)",
-          "oklch(72.14% 0.0963 35.93)",
-          "oklch(83.57% 0.0625 35.93)",
-          "oklch(95.00% 0.0199 35.93)"
-        ]
-      },
-      "accent-ink-dark": {
-        "role": "neutral",
-        "displayName": "accent ink dark",
-        "tonalRamp": [
-          "oklch(15.00% 0.0112 31.35)",
-          "oklch(26.43% 0.0224 31.35)",
-          "oklch(37.86% 0.0304 31.35)",
-          "oklch(49.29% 0.0342 31.35)",
-          "oklch(60.71% 0.0331 31.35)",
-          "oklch(72.14% 0.0274 31.35)",
-          "oklch(83.57% 0.0178 31.35)",
-          "oklch(95.00% 0.0057 31.35)"
-        ]
-      },
-      "panel-dark": {
-        "role": "neutral",
-        "displayName": "Dark brown panel",
-        "tonalRamp": [
-          "oklch(15.00% 0.0131 38.50)",
-          "oklch(26.43% 0.0262 38.50)",
-          "oklch(37.86% 0.0356 38.50)",
-          "oklch(49.29% 0.0400 38.50)",
-          "oklch(60.71% 0.0388 38.50)",
-          "oklch(72.14% 0.0320 38.50)",
-          "oklch(83.57% 0.0208 38.50)",
-          "oklch(95.00% 0.0066 38.50)"
-        ]
-      },
-      "line-dark": {
-        "role": "neutral",
-        "displayName": "Dark-theme rule",
-        "tonalRamp": [
-          "oklch(15.00% 0.0168 48.49)",
-          "oklch(26.43% 0.0337 48.49)",
-          "oklch(37.86% 0.0459 48.49)",
-          "oklch(49.29% 0.0515 48.49)",
-          "oklch(60.71% 0.0499 48.49)",
-          "oklch(72.14% 0.0413 48.49)",
-          "oklch(83.57% 0.0268 48.49)",
-          "oklch(95.00% 0.0085 48.49)"
-        ]
-      },
-      "brand-github": {
-        "role": "neutral",
-        "displayName": "brand github",
-        "tonalRamp": [
-          "oklch(15.00% 0.0005 17.29)",
-          "oklch(26.43% 0.0010 17.29)",
-          "oklch(37.86% 0.0014 17.29)",
-          "oklch(49.29% 0.0016 17.29)",
-          "oklch(60.71% 0.0015 17.29)",
-          "oklch(72.14% 0.0013 17.29)",
-          "oklch(83.57% 0.0008 17.29)",
-          "oklch(95.00% 0.0003 17.29)"
-        ]
-      },
-      "brand-twitter": {
-        "role": "neutral",
-        "displayName": "brand twitter",
-        "tonalRamp": [
-          "oklch(15.00% 0.0514 243.35)",
-          "oklch(26.43% 0.1031 243.35)",
-          "oklch(37.86% 0.1402 243.35)",
-          "oklch(49.29% 0.1575 243.35)",
-          "oklch(60.71% 0.1526 243.35)",
-          "oklch(72.14% 0.1262 243.35)",
-          "oklch(83.57% 0.0819 243.35)",
-          "oklch(95.00% 0.0261 243.35)"
-        ]
-      },
-      "brand-youtube": {
-        "role": "neutral",
-        "displayName": "brand youtube",
-        "tonalRamp": [
-          "oklch(15.00% 0.0828 23.61)",
-          "oklch(26.43% 0.1659 23.61)",
-          "oklch(37.86% 0.2256 23.61)",
-          "oklch(49.29% 0.2534 23.61)",
-          "oklch(60.71% 0.2455 23.61)",
-          "oklch(72.14% 0.2030 23.61)",
-          "oklch(83.57% 0.1318 23.61)",
-          "oklch(95.00% 0.0420 23.61)"
-        ]
-      },
-      "brand-linkedin": {
-        "role": "neutral",
-        "displayName": "brand linkedin",
-        "tonalRamp": [
-          "oklch(15.00% 0.0530 254.73)",
-          "oklch(26.43% 0.1062 254.73)",
-          "oklch(37.86% 0.1444 254.73)",
-          "oklch(49.29% 0.1623 254.73)",
-          "oklch(60.71% 0.1572 254.73)",
-          "oklch(72.14% 0.1300 254.73)",
-          "oklch(83.57% 0.0844 254.73)",
-          "oklch(95.00% 0.0269 254.73)"
-        ]
-      },
-      "brand-reddit": {
-        "role": "neutral",
-        "displayName": "brand reddit",
-        "tonalRamp": [
-          "oklch(15.00% 0.0745 35.40)",
-          "oklch(26.43% 0.1493 35.40)",
-          "oklch(37.86% 0.2030 35.40)",
-          "oklch(49.29% 0.2281 35.40)",
-          "oklch(60.71% 0.2209 35.40)",
-          "oklch(72.14% 0.1826 35.40)",
-          "oklch(83.57% 0.1186 35.40)",
-          "oklch(95.00% 0.0378 35.40)"
-        ]
-      },
-      "brand-hacker-news": {
-        "role": "neutral",
-        "displayName": "brand hacker news",
-        "tonalRamp": [
-          "oklch(15.00% 0.0663 43.49)",
-          "oklch(26.43% 0.1329 43.49)",
-          "oklch(37.86% 0.1808 43.49)",
-          "oklch(49.29% 0.2031 43.49)",
-          "oklch(60.71% 0.1968 43.49)",
-          "oklch(72.14% 0.1627 43.49)",
-          "oklch(83.57% 0.1056 43.49)",
-          "oklch(95.00% 0.0336 43.49)"
-        ]
-      },
-      "brand-surface-light": {
-        "role": "neutral",
-        "displayName": "brand surface light",
-        "tonalRamp": [
-          "oklch(15.00% 0.0000 89.88)",
-          "oklch(26.43% 0.0000 89.88)",
-          "oklch(37.86% 0.0000 89.88)",
-          "oklch(49.29% 0.0000 89.88)",
-          "oklch(60.71% 0.0000 89.88)",
-          "oklch(72.14% 0.0000 89.88)",
-          "oklch(83.57% 0.0000 89.88)",
-          "oklch(95.00% 0.0000 89.88)"
-        ]
-      },
-      "brand-surface-dark": {
-        "role": "neutral",
-        "displayName": "brand surface dark",
-        "tonalRamp": [
-          "oklch(15.00% 0.0005 17.29)",
-          "oklch(26.43% 0.0010 17.29)",
-          "oklch(37.86% 0.0014 17.29)",
-          "oklch(49.29% 0.0016 17.29)",
-          "oklch(60.71% 0.0015 17.29)",
-          "oklch(72.14% 0.0013 17.29)",
-          "oklch(83.57% 0.0008 17.29)",
-          "oklch(95.00% 0.0003 17.29)"
-        ]
-      },
-      "control-line": {
-        "role": "neutral",
-        "displayName": "Control outline",
-        "canonical": "color-mix(in srgb, var(--line) 75%, var(--ink))"
-      },
-      "aside-header": {
-        "role": "neutral",
-        "displayName": "Aside header"
-      },
-      "code-surface": {
-        "role": "neutral",
-        "displayName": "GitHub Dark code surface"
-      },
-      "code-ink": {
-        "role": "neutral",
-        "displayName": "GitHub Dark code text"
-      },
-      "code-line": {
-        "role": "neutral",
-        "displayName": "GitHub Dark code outline"
-      }
     },
-    "typographyMeta": {
-      "display": {
-        "displayName": "Fluid display",
-        "purpose": "Home and article headings; exact fluid sizes are documented in DESIGN.md."
-      },
-      "article-body": {
-        "displayName": "Reading text",
-        "purpose": "Long-form paragraphs and lists."
-      },
-      "card-title": {
-        "displayName": "Card title",
-        "purpose": "Small and medium editorial headings with more open tracking."
-      },
-      "reading-heading": {
-        "displayName": "Reading heading",
-        "purpose": "Prose h1–h3, preserving the separate display-heading identity."
-      },
-      "aside-heading": {
-        "displayName": "Aside heading",
-        "purpose": "Reusable collapsible-aside summary, preserving authored wording."
-      },
-      "aside-heading-mobile": {
-        "displayName": "Mobile aside heading",
-        "purpose": "Aside summaries at 540px and below."
-      }
-    },
-    "shadows": [
-      {
-        "name": "mobile-menu",
-        "value": "0 1rem 2rem #0002",
-        "purpose": "Raised native navigation disclosure."
-      },
-      {
-        "name": "heading-experiment",
-        "value": "0 1.5rem 4rem #0002",
-        "purpose": "Optional interactive canvas frame."
-      },
-      {
-        "name": "article-title-text",
-        "value": "0 3px 25px #0002",
-        "purpose": "Text shadow for photo-backed article titles."
-      },
-      {
-        "name": "photo-credit-text",
-        "value": "0 1px 8px #0008",
-        "purpose": "Text shadow for image attribution."
-      }
+    "components": [
+        {
+            "name": "Default action",
+            "kind": "button",
+            "refersTo": "button-default",
+            "description": "Panel-filled navigation action; hover/focus reverses its foreground and surface.",
+            "html": "<a class=\"ds-action\" href=\"#preview\">More about me <span aria-hidden=\"true\">↗</span></a>",
+            "css": ".ds-action{display:inline-flex;align-items:center;justify-content:center;gap:1rem;padding:.75rem 1.125rem;border:1px solid var(--control-line,color-mix(in srgb,var(--line,#b29980) 75%,var(--ink,#311c18)));border-radius:.25rem;background:var(--panel,#eddfc6);color:var(--ink,#311c18);text-decoration:none;transition:background-color 160ms,color 160ms,border-color 160ms;font-family:\"DM Sans\",sans-serif;font-size:.8125rem;font-weight:500;line-height:1.5;}.ds-action:hover,.ds-action:focus-visible{background:var(--ink,#311c18);color:var(--paper,#f7eddd);border-color:var(--ink,#311c18)}.ds-action:active{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}"
+        },
+        {
+            "name": "External icon link",
+            "kind": "button",
+            "refersTo": "icon-link",
+            "description": "Square social/discussion action; this example shows the existing YouTube brand behavior.",
+            "html": "<a class=\"ds-action ds-icon\" href=\"#preview\" aria-label=\"YouTube\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6Z\"/></svg></a>",
+            "css": ".ds-action{display:inline-flex;align-items:center;justify-content:center;gap:1rem;padding:.75rem 1.125rem;border:1px solid var(--control-line,color-mix(in srgb,var(--line,#b29980) 75%,var(--ink,#311c18)));border-radius:.25rem;background:var(--panel,#eddfc6);color:var(--ink,#311c18);text-decoration:none;transition:background-color 160ms,color 160ms,border-color 160ms;font-family:\"DM Sans\",sans-serif;font-size:.8125rem;font-weight:500;line-height:1.5;}.ds-action:hover,.ds-action:focus-visible{background:var(--ink,#311c18);color:var(--paper,#f7eddd);border-color:var(--ink,#311c18)}.ds-action:active{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}.ds-icon{width:2.75rem;height:2.75rem;padding:0}.ds-icon:hover,.ds-icon:focus-visible{background:var(--brand-surface-light,#fff);color:var(--brand-youtube,#ff0033);border-color:var(--brand-youtube,#ff0033)}"
+        },
+        {
+            "name": "Read action",
+            "kind": "button",
+            "refersTo": "read-more",
+            "description": "Idle read-link appearance. The timed Pocket disco requires the site script and is documented in DESIGN.md.",
+            "html": "<a class=\"ds-action ds-read\" href=\"#preview\">Just read it! <span aria-hidden=\"true\">↗</span></a>",
+            "css": ".ds-action{display:inline-flex;align-items:center;justify-content:center;gap:1rem;padding:.75rem 1.125rem;border:1px solid var(--control-line,color-mix(in srgb,var(--line,#b29980) 75%,var(--ink,#311c18)));border-radius:.25rem;background:var(--panel,#eddfc6);color:var(--ink,#311c18);text-decoration:none;transition:background-color 160ms,color 160ms,border-color 160ms;font-family:\"DM Sans\",sans-serif;font-size:.8125rem;font-weight:500;line-height:1.5;}.ds-action:hover,.ds-action:focus-visible{background:var(--ink,#311c18);color:var(--paper,#f7eddd);border-color:var(--ink,#311c18)}.ds-action:active{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}.ds-read{width:12rem;max-width:100%;height:4rem;padding:0}"
+        },
+        {
+            "name": "Navigation",
+            "kind": "nav",
+            "description": "Small text links with an underlined current location.",
+            "html": "<nav class=\"ds-nav\" aria-label=\"Example navigation\"><a href=\"#preview\" aria-current=\"page\">Writing</a><a href=\"#preview\">Categories</a><a href=\"#preview\">About</a></nav>",
+            "css": ".ds-nav{display:flex;align-items:center;flex-wrap:wrap;gap:1.5rem;font:.8125rem/1.65 \"DM Sans\",sans-serif;color:var(--ink,#311c18)}.ds-nav a{display:inline-flex;align-items:center;min-height:2.75rem;color:inherit;text-decoration:none}.ds-nav a:hover,.ds-nav a[aria-current]{text-decoration:underline;text-underline-offset:6px}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}"
+        },
+        {
+            "name": "Category links",
+            "kind": "custom",
+            "refersTo": "category-link",
+            "description": "Uppercase text categories with dot separators; no chip container.",
+            "html": "<ul class=\"ds-category\"><li><a href=\"#preview\">Engineering</a></li><li><a href=\"#preview\">Quality</a></li></ul>",
+            "css": ".ds-category{display:flex;gap:.6rem;flex-wrap:wrap;padding:0;list-style:none;color:var(--ink,#311c18);font:600 .6875rem/1.65 \"DM Sans\",sans-serif;letter-spacing:.08em;text-transform:uppercase}.ds-category a{display:inline-flex;align-items:center;min-height:1.5rem;color:inherit;text-decoration:none}.ds-category a:hover{text-decoration:underline}.ds-category li+li:before{content:\"·\";margin-right:.6rem}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}"
+        },
+        {
+            "name": "Open article card",
+            "kind": "card",
+            "refersTo": "article-card",
+            "description": "Open stack using the existing no-image typographic placeholder; example copy comes from an existing article.",
+            "html": "<article class=\"ds-card\"><a class=\"ds-placeholder\" href=\"#preview\" aria-label=\"Hello World Again!\">Aa↗</a><h3><a href=\"#preview\">Hello World Again!</a></h3><time>2023-12-18</time><p>This is another summary</p><a class=\"ds-action ds-read\" href=\"#preview\">Just read it! <span aria-hidden=\"true\">↗</span></a></article>",
+            "css": ".ds-action{display:inline-flex;align-items:center;justify-content:center;gap:1rem;padding:.75rem 1.125rem;border:1px solid var(--control-line,color-mix(in srgb,var(--line,#b29980) 75%,var(--ink,#311c18)));border-radius:.25rem;background:var(--panel,#eddfc6);color:var(--ink,#311c18);text-decoration:none;transition:background-color 160ms,color 160ms,border-color 160ms;font-family:\"DM Sans\",sans-serif;font-size:.8125rem;font-weight:500;line-height:1.5;}.ds-action:hover,.ds-action:focus-visible{background:var(--ink,#311c18);color:var(--paper,#f7eddd);border-color:var(--ink,#311c18)}.ds-action:active{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}.ds-card{display:flex;flex-direction:column;min-width:0;color:var(--ink,#311c18);font-family:\"DM Sans\",sans-serif}.ds-placeholder{display:grid;place-items:center;height:17rem;background:var(--panel,#eddfc6);color:var(--accent,#b7352d);font:500 7rem/1 Georgia,serif;text-decoration:none}.ds-card h3{font:600 clamp(1.5rem,2.4vw,2.25rem)/1.15 Manrope,sans-serif;letter-spacing:-.04em;margin:.8rem 0 1rem}.ds-card h3 a{color:inherit;text-decoration:none}.ds-card h3 a:hover{text-decoration:underline;text-underline-offset:5px}.ds-card time{font-size:.6875rem;color:var(--muted,#725c50)}.ds-card p{font-size:.9375rem;line-height:1.75;color:var(--muted,#725c50);margin:1rem 0}.ds-read{width:12rem;max-width:100%;height:4rem;padding:0;align-self:start}"
+        },
+        {
+            "name": "Taxonomy action",
+            "kind": "button",
+            "refersTo": "taxonomy-card",
+            "description": "Subject and count arranged across a bordered action.",
+            "html": "<a class=\"ds-action ds-taxonomy\" href=\"#preview\"><span>Engineering</span><span>↗</span></a>",
+            "css": ".ds-action{display:inline-flex;align-items:center;justify-content:center;gap:1rem;padding:.75rem 1.125rem;border:1px solid var(--control-line,color-mix(in srgb,var(--line,#b29980) 75%,var(--ink,#311c18)));border-radius:.25rem;background:var(--panel,#eddfc6);color:var(--ink,#311c18);text-decoration:none;transition:background-color 160ms,color 160ms,border-color 160ms;font-family:\"DM Sans\",sans-serif;font-size:.8125rem;font-weight:500;line-height:1.5;}.ds-action:hover,.ds-action:focus-visible{background:var(--ink,#311c18);color:var(--paper,#f7eddd);border-color:var(--ink,#311c18)}.ds-action:active{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}.ds-taxonomy{display:flex;justify-content:space-between;padding:2rem;font-size:1.125rem}@media(max-width:540px){.ds-taxonomy{padding:1.5rem}}"
+        },
+        {
+            "name": "Experiment range",
+            "kind": "input",
+            "refersTo": "experiment-range",
+            "description": "Native light-direction input from the optional terrain experiment; not a general form field.",
+            "html": "<label class=\"ds-range-label\">Light direction <input class=\"ds-range\" type=\"range\" min=\"0\" max=\"360\" value=\"220\"></label>",
+            "css": ".ds-range-label{display:flex;align-items:center;gap:.6rem;color:var(--ink-dark,#f7eddd);background:var(--paper-dark,#311c18);padding:1rem;font:.625rem/1.65 \"DM Sans\",sans-serif}.ds-range{width:5.625rem;accent-color:var(--accent-dark,#ff9f85);cursor:pointer}.ds-range:focus-visible{outline:3px solid currentColor;outline-offset:4px}"
+        },
+        {
+            "name": "Collapsible aside",
+            "kind": "custom",
+            "refersTo": "aside-body",
+            "description": "Final disclosure surfaces and controls. The panel preview uses native details; the runtime bounce and distance-based sweep are implemented in src/scripts/asides.ts.",
+            "html": "<details class=\"ds-aside\"><summary><span class=\"ds-aside-alert\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M12 5.5v8\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"18\" r=\"1.2\" fill=\"currentColor\"/></svg></span><span>Don't actually store WAV files in your repo</span><span class=\"ds-aside-toggle\" aria-hidden=\"true\"><svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 8h10\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"/><path class=\"ds-vertical\" d=\"M8 3v10\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"/></svg></span></summary><p>Since WAV files are basically raw audio data with a mustache, we don't want to keep them as is in our repo since we'll be adding a lot of them and the repo size would balloon, but annoyingly Chrome needs a WAV file specifically so we MUST have it once it runs, even though it supports playback of other formats.</p></details>",
+            "css": ".ds-aside{background:var(--panel,#eddfc6);color:var(--ink,#311c18);border:1px solid var(--control-line,#927a66);font-family:\"DM Sans\",sans-serif}.ds-aside summary{position:relative;list-style:none;padding:1.5rem 5.5rem 1.5rem max(2.5rem,calc((100% - 43rem)/2));background:color-mix(in srgb,var(--panel,#eddfc6) 55%,var(--paper,#f7eddd));border-bottom:1px solid var(--control-line,#927a66);font:600 1.375rem/1.35 Manrope,sans-serif;letter-spacing:-.03em;cursor:pointer}.ds-aside summary::-webkit-details-marker{display:none}.ds-aside[open]{padding-bottom:1.5rem}.ds-aside[open] summary{margin-bottom:1.75rem}.ds-aside p{max-width:min(43rem,calc(100% - 3rem));margin:1.25rem auto;font-size:1.125rem;line-height:1.85}.ds-aside-alert{position:absolute;left:-.875rem;top:calc(50% - 1rem);width:2rem;height:2rem;display:grid;place-items:center;background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-radius:50%;pointer-events:none}.ds-aside-alert svg{width:1.375rem;height:1.375rem}.ds-aside-toggle{position:absolute;right:1.5rem;top:calc(50% - 1.25rem);width:2.5rem;height:2.5rem;display:grid;place-items:center;border:1px solid var(--control-line,#927a66);border-radius:.25rem;background:var(--paper,#f7eddd);color:var(--ink,#311c18);pointer-events:none}.ds-aside-toggle svg{width:1rem;height:1rem}.ds-vertical{transform-origin:center}.ds-aside[open] .ds-aside-toggle{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-aside[open] .ds-vertical{transform:scaleY(0)}.ds-aside summary:hover .ds-aside-toggle{background:var(--ink,#311c18);color:var(--paper,#f7eddd)}.ds-aside:has(summary:focus-visible){outline:3px solid var(--accent,#b7352d);outline-offset:5px}.ds-aside summary:focus-visible{outline:none}@media(max-width:540px){.ds-aside summary{padding:1.25rem 4.75rem 1.25rem 2rem;font-size:1.125rem}.ds-aside-toggle{right:1rem;top:calc(50% - 1.125rem);width:2.25rem;height:2.25rem}.ds-aside p{font-size:1rem;line-height:1.8;max-width:calc(100% - 2.5rem)}}"
+        },
+        {
+            "name": "Code block",
+            "kind": "custom",
+            "refersTo": "code-mobile",
+            "description": "Static code surface. In articles, list blocks share the normal canvas and portrait-mobile code reaches both viewport edges.",
+            "html": "<pre class=\"ds-code\"><code>console.log(`Decoding FLAC to WAV: ${flacPath} -&gt; ${wavPath}`);</code></pre>",
+            "css": ".ds-code{font:.875rem/1.9 \"SFMono-Regular\",Consolas,\"Liberation Mono\",monospace;tab-size:2;white-space:pre;overflow:auto;padding:1.75rem 2rem;border:1px solid #59636e;border-radius:3px;background:#24292e;color:#e1e4e8;color-scheme:dark;scrollbar-color:#59636e #24292e}.ds-code code{font:inherit}@media(max-width:540px) and (orientation:portrait){.ds-code{font-size:.75rem;padding:1.375rem .75rem;border-inline:0;border-radius:0}}"
+        }
     ],
-    "motion": [
-      {
-        "name": "control-color-transition",
-        "value": "160ms ease",
-        "purpose": "Background, foreground, and border state changes."
-      },
-      {
-        "name": "link-arrow",
-        "value": "transform 0.2s ease",
-        "purpose": "Small diagonal arrow response on text-link hover."
-      },
-      {
-        "name": "read-animation-lead",
-        "value": "1000ms",
-        "purpose": "Dwell before the optional silent read-button animation; full timing remains in src/scripts/read-more.ts."
-      },
-      {
-        "name": "aside-button-open",
-        "value": "450ms cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Compress, spring outward, settle on opening."
-      },
-      {
-        "name": "aside-button-close",
-        "value": "300ms cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Same bounce on closing, with a shorter duration."
-      },
-      {
-        "name": "aside-sweep",
-        "value": "500–1500ms linear",
-        "purpose": "Two 50px bands, 50px apart and skewed 45deg. Duration is 500 + clamp((travel - 600) / 750, 0, 1) × 1000 milliseconds; emitted at 12% of the bounce, peak opacity 0.09, invisible by 55% of travel."
-      },
-      {
-        "name": "aside-symbol",
-        "value": "150ms ease",
-        "purpose": "Plus becomes minus immediately with the disclosure state; reduced motion suppresses the transition."
-      }
-    ],
-    "breakpoints": [
-      {
-        "name": "small-mobile-heading",
-        "value": "380px"
-      },
-      {
-        "name": "mobile",
-        "value": "540px"
-      },
-      {
-        "name": "navigation",
-        "value": "800px"
-      },
-      {
-        "name": "experiment-layout",
-        "value": "1000px"
-      },
-      {
-        "name": "sidebar",
-        "value": "1100px"
-      },
-      {
-        "name": "large-home",
-        "value": "1700px"
-      },
-      {
-        "name": "rem-scaling-start",
-        "value": "2560px"
-      },
-      {
-        "name": "rem-scaling-cap",
-        "value": "3840px"
-      }
-    ]
-  },
-  "components": [
-    {
-      "name": "Default action",
-      "kind": "button",
-      "refersTo": "button-default",
-      "description": "Panel-filled navigation action; hover/focus reverses its foreground and surface.",
-      "html": "<a class=\"ds-action\" href=\"#preview\">More about me <span aria-hidden=\"true\">↗</span></a>",
-      "css": ".ds-action{display:inline-flex;align-items:center;justify-content:center;gap:1rem;padding:.75rem 1.125rem;border:1px solid var(--control-line,color-mix(in srgb,var(--line,#b29980) 75%,var(--ink,#311c18)));border-radius:.25rem;background:var(--panel,#eddfc6);color:var(--ink,#311c18);text-decoration:none;transition:background-color 160ms,color 160ms,border-color 160ms;font-family:\"DM Sans\",sans-serif;font-size:.8125rem;font-weight:500;line-height:1.5;}.ds-action:hover,.ds-action:focus-visible{background:var(--ink,#311c18);color:var(--paper,#f7eddd);border-color:var(--ink,#311c18)}.ds-action:active{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}"
-    },
-    {
-      "name": "External icon link",
-      "kind": "button",
-      "refersTo": "icon-link",
-      "description": "Square social/discussion action; this example shows the existing YouTube brand behavior.",
-      "html": "<a class=\"ds-action ds-icon\" href=\"#preview\" aria-label=\"YouTube\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6Z\"/></svg></a>",
-      "css": ".ds-action{display:inline-flex;align-items:center;justify-content:center;gap:1rem;padding:.75rem 1.125rem;border:1px solid var(--control-line,color-mix(in srgb,var(--line,#b29980) 75%,var(--ink,#311c18)));border-radius:.25rem;background:var(--panel,#eddfc6);color:var(--ink,#311c18);text-decoration:none;transition:background-color 160ms,color 160ms,border-color 160ms;font-family:\"DM Sans\",sans-serif;font-size:.8125rem;font-weight:500;line-height:1.5;}.ds-action:hover,.ds-action:focus-visible{background:var(--ink,#311c18);color:var(--paper,#f7eddd);border-color:var(--ink,#311c18)}.ds-action:active{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}.ds-icon{width:2.75rem;height:2.75rem;padding:0}.ds-icon:hover,.ds-icon:focus-visible{background:var(--brand-surface-light,#fff);color:var(--brand-youtube,#ff0033);border-color:var(--brand-youtube,#ff0033)}"
-    },
-    {
-      "name": "Read action",
-      "kind": "button",
-      "refersTo": "read-more",
-      "description": "Idle read-link appearance. The timed Pocket disco requires the site script and is documented in DESIGN.md.",
-      "html": "<a class=\"ds-action ds-read\" href=\"#preview\">Just read it! <span aria-hidden=\"true\">↗</span></a>",
-      "css": ".ds-action{display:inline-flex;align-items:center;justify-content:center;gap:1rem;padding:.75rem 1.125rem;border:1px solid var(--control-line,color-mix(in srgb,var(--line,#b29980) 75%,var(--ink,#311c18)));border-radius:.25rem;background:var(--panel,#eddfc6);color:var(--ink,#311c18);text-decoration:none;transition:background-color 160ms,color 160ms,border-color 160ms;font-family:\"DM Sans\",sans-serif;font-size:.8125rem;font-weight:500;line-height:1.5;}.ds-action:hover,.ds-action:focus-visible{background:var(--ink,#311c18);color:var(--paper,#f7eddd);border-color:var(--ink,#311c18)}.ds-action:active{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}.ds-read{width:12rem;max-width:100%;height:4rem;padding:0}"
-    },
-    {
-      "name": "Navigation",
-      "kind": "nav",
-      "description": "Small text links with an underlined current location.",
-      "html": "<nav class=\"ds-nav\" aria-label=\"Example navigation\"><a href=\"#preview\" aria-current=\"page\">Writing</a><a href=\"#preview\">Categories</a><a href=\"#preview\">About</a></nav>",
-      "css": ".ds-nav{display:flex;align-items:center;flex-wrap:wrap;gap:1.5rem;font:.8125rem/1.65 \"DM Sans\",sans-serif;color:var(--ink,#311c18)}.ds-nav a{display:inline-flex;align-items:center;min-height:2.75rem;color:inherit;text-decoration:none}.ds-nav a:hover,.ds-nav a[aria-current]{text-decoration:underline;text-underline-offset:6px}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}"
-    },
-    {
-      "name": "Category links",
-      "kind": "custom",
-      "refersTo": "category-link",
-      "description": "Uppercase text categories with dot separators; no chip container.",
-      "html": "<ul class=\"ds-category\"><li><a href=\"#preview\">Engineering</a></li><li><a href=\"#preview\">Quality</a></li></ul>",
-      "css": ".ds-category{display:flex;gap:.6rem;flex-wrap:wrap;padding:0;list-style:none;color:var(--ink,#311c18);font:600 .6875rem/1.65 \"DM Sans\",sans-serif;letter-spacing:.08em;text-transform:uppercase}.ds-category a{display:inline-flex;align-items:center;min-height:1.5rem;color:inherit;text-decoration:none}.ds-category a:hover{text-decoration:underline}.ds-category li+li:before{content:\"·\";margin-right:.6rem}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}"
-    },
-    {
-      "name": "Open article card",
-      "kind": "card",
-      "refersTo": "article-card",
-      "description": "Open stack using the existing no-image typographic placeholder; example copy comes from an existing article.",
-      "html": "<article class=\"ds-card\"><a class=\"ds-placeholder\" href=\"#preview\" aria-label=\"Hello World Again!\">Aa↗</a><h3><a href=\"#preview\">Hello World Again!</a></h3><time>2023-12-18</time><p>This is another summary</p><a class=\"ds-action ds-read\" href=\"#preview\">Just read it! <span aria-hidden=\"true\">↗</span></a></article>",
-      "css": ".ds-action{display:inline-flex;align-items:center;justify-content:center;gap:1rem;padding:.75rem 1.125rem;border:1px solid var(--control-line,color-mix(in srgb,var(--line,#b29980) 75%,var(--ink,#311c18)));border-radius:.25rem;background:var(--panel,#eddfc6);color:var(--ink,#311c18);text-decoration:none;transition:background-color 160ms,color 160ms,border-color 160ms;font-family:\"DM Sans\",sans-serif;font-size:.8125rem;font-weight:500;line-height:1.5;}.ds-action:hover,.ds-action:focus-visible{background:var(--ink,#311c18);color:var(--paper,#f7eddd);border-color:var(--ink,#311c18)}.ds-action:active{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}.ds-card{display:flex;flex-direction:column;min-width:0;color:var(--ink,#311c18);font-family:\"DM Sans\",sans-serif}.ds-placeholder{display:grid;place-items:center;height:17rem;background:var(--panel,#eddfc6);color:var(--accent,#b7352d);font:500 7rem/1 Georgia,serif;text-decoration:none}.ds-card h3{font:600 clamp(1.5rem,2.4vw,2.25rem)/1.15 Manrope,sans-serif;letter-spacing:-.04em;margin:.8rem 0 1rem}.ds-card h3 a{color:inherit;text-decoration:none}.ds-card h3 a:hover{text-decoration:underline;text-underline-offset:5px}.ds-card time{font-size:.6875rem;color:var(--muted,#725c50)}.ds-card p{font-size:.9375rem;line-height:1.75;color:var(--muted,#725c50);margin:1rem 0}.ds-read{width:12rem;max-width:100%;height:4rem;padding:0;align-self:start}"
-    },
-    {
-      "name": "Taxonomy action",
-      "kind": "button",
-      "refersTo": "taxonomy-card",
-      "description": "Subject and count arranged across a bordered action.",
-      "html": "<a class=\"ds-action ds-taxonomy\" href=\"#preview\"><span>Engineering</span><span>↗</span></a>",
-      "css": ".ds-action{display:inline-flex;align-items:center;justify-content:center;gap:1rem;padding:.75rem 1.125rem;border:1px solid var(--control-line,color-mix(in srgb,var(--line,#b29980) 75%,var(--ink,#311c18)));border-radius:.25rem;background:var(--panel,#eddfc6);color:var(--ink,#311c18);text-decoration:none;transition:background-color 160ms,color 160ms,border-color 160ms;font-family:\"DM Sans\",sans-serif;font-size:.8125rem;font-weight:500;line-height:1.5;}.ds-action:hover,.ds-action:focus-visible{background:var(--ink,#311c18);color:var(--paper,#f7eddd);border-color:var(--ink,#311c18)}.ds-action:active{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-action:focus-visible,.ds-nav a:focus-visible,.ds-category a:focus-visible,.ds-card a:focus-visible,.ds-range:focus-visible{outline:3px solid var(--accent,#b7352d);outline-offset:5px;}.ds-taxonomy{display:flex;justify-content:space-between;padding:2rem;font-size:1.125rem}@media(max-width:540px){.ds-taxonomy{padding:1.5rem}}"
-    },
-    {
-      "name": "Experiment range",
-      "kind": "input",
-      "refersTo": "experiment-range",
-      "description": "Native light-direction input from the optional terrain experiment; not a general form field.",
-      "html": "<label class=\"ds-range-label\">Light direction <input class=\"ds-range\" type=\"range\" min=\"0\" max=\"360\" value=\"220\"></label>",
-      "css": ".ds-range-label{display:flex;align-items:center;gap:.6rem;color:var(--ink-dark,#f7eddd);background:var(--paper-dark,#311c18);padding:1rem;font:.625rem/1.65 \"DM Sans\",sans-serif}.ds-range{width:5.625rem;accent-color:var(--accent-dark,#ff9f85);cursor:pointer}.ds-range:focus-visible{outline:3px solid currentColor;outline-offset:4px}"
-    },
-    {
-      "name": "Collapsible aside",
-      "kind": "custom",
-      "refersTo": "aside-body",
-      "description": "Final disclosure surfaces and controls. The panel preview uses native details; the runtime bounce and distance-based sweep are implemented in src/scripts/asides.ts.",
-      "html": "<details class=\"ds-aside\"><summary><span class=\"ds-aside-alert\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M12 5.5v8\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"18\" r=\"1.2\" fill=\"currentColor\"/></svg></span><span>Don't actually store WAV files in your repo</span><span class=\"ds-aside-toggle\" aria-hidden=\"true\"><svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 8h10\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"/><path class=\"ds-vertical\" d=\"M8 3v10\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"/></svg></span></summary><p>Since WAV files are basically raw audio data with a mustache, we don't want to keep them as is in our repo since we'll be adding a lot of them and the repo size would balloon, but annoyingly Chrome needs a WAV file specifically so we MUST have it once it runs, even though it supports playback of other formats.</p></details>",
-      "css": ".ds-aside{background:var(--panel,#eddfc6);color:var(--ink,#311c18);border:1px solid var(--control-line,#927a66);font-family:\"DM Sans\",sans-serif}.ds-aside summary{position:relative;list-style:none;padding:1.5rem 5.5rem 1.5rem max(2.5rem,calc((100% - 43rem)/2));background:color-mix(in srgb,var(--panel,#eddfc6) 55%,var(--paper,#f7eddd));border-bottom:1px solid var(--control-line,#927a66);font:600 1.375rem/1.35 Manrope,sans-serif;letter-spacing:-.03em;cursor:pointer}.ds-aside summary::-webkit-details-marker{display:none}.ds-aside[open]{padding-bottom:1.5rem}.ds-aside[open] summary{margin-bottom:1.75rem}.ds-aside p{max-width:min(43rem,calc(100% - 3rem));margin:1.25rem auto;font-size:1.125rem;line-height:1.85}.ds-aside-alert{position:absolute;left:-.875rem;top:calc(50% - 1rem);width:2rem;height:2rem;display:grid;place-items:center;background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-radius:50%;pointer-events:none}.ds-aside-alert svg{width:1.375rem;height:1.375rem}.ds-aside-toggle{position:absolute;right:1.5rem;top:calc(50% - 1.25rem);width:2.5rem;height:2.5rem;display:grid;place-items:center;border:1px solid var(--control-line,#927a66);border-radius:.25rem;background:var(--paper,#f7eddd);color:var(--ink,#311c18);pointer-events:none}.ds-aside-toggle svg{width:1rem;height:1rem}.ds-vertical{transform-origin:center}.ds-aside[open] .ds-aside-toggle{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-aside[open] .ds-vertical{transform:scaleY(0)}.ds-aside summary:hover .ds-aside-toggle{background:var(--ink,#311c18);color:var(--paper,#f7eddd)}.ds-aside:has(summary:focus-visible){outline:3px solid var(--accent,#b7352d);outline-offset:5px}.ds-aside summary:focus-visible{outline:none}@media(max-width:540px){.ds-aside summary{padding:1.25rem 4.75rem 1.25rem 2rem;font-size:1.125rem}.ds-aside-toggle{right:1rem;top:calc(50% - 1.125rem);width:2.25rem;height:2.25rem}.ds-aside p{font-size:1rem;line-height:1.8;max-width:calc(100% - 2.5rem)}}"
-    },
-    {
-      "name": "Code block",
-      "kind": "custom",
-      "refersTo": "code-mobile",
-      "description": "Static code surface. In articles, list blocks share the normal canvas and portrait-mobile code reaches both viewport edges.",
-      "html": "<pre class=\"ds-code\"><code>console.log(`Decoding FLAC to WAV: ${flacPath} -&gt; ${wavPath}`);</code></pre>",
-      "css": ".ds-code{font:.875rem/1.9 \"SFMono-Regular\",Consolas,\"Liberation Mono\",monospace;tab-size:2;white-space:pre;overflow:auto;padding:1.75rem 2rem;border:1px solid #59636e;border-radius:3px;background:#24292e;color:#e1e4e8;color-scheme:dark;scrollbar-color:#59636e #24292e}.ds-code code{font:inherit}@media(max-width:540px) and (orientation:portrait){.ds-code{font-size:.75rem;padding:1.375rem .75rem;border-inline:0;border-radius:0}}"
+    "narrative": {
+        "northStar": "Colour Field",
+        "overview": "Colour Field is warm, photographic, editorial, and lightly playful. Large photographs and tightly tracked headings give the site its presence; generous open space, small labels, and compact controls support reading and exploration. The current, recently approved design is the baseline for future refinement.\n\nHome and About retain the original warm palette. Other content can supply its own photographic color field while preserving the same semantic roles, typography, and component language. Components are compact and understated, with playful details; depth belongs mainly to photographic overlays, the mobile menu, and opt-in experiments.",
+        "keyCharacteristics": [
+            "Photography supplies both imagery and page color.",
+            "Large Manrope headings, DM Sans reading text, and selective Georgia italics.",
+            "Open article cards, thin borders, tonal panels, and small-radius controls.",
+            "System-driven light/dark themes and destination-color link previews.",
+            "Playful motion stays local and honors reduced-motion preferences."
+        ],
+        "rules": [
+            {
+                "name": "Semantic Palette",
+                "body": "Shared surfaces use paper, ink, muted, accent, accent-ink, panel, and line roles. Home and About keep the original palette; image-derived pages may change every role together.",
+                "section": "colors"
+            },
+            {
+                "name": "Readable Center",
+                "body": "Prose stays within the reading measure; rich media can occupy the wider canvas without widening ordinary paragraphs.",
+                "section": "typography"
+            },
+            {
+                "name": "Flat Editorial Surface",
+                "body": "Article cards stay open and flat. Tonal panels and thin borders organize content; shadows remain local to overlays and experiments.",
+                "section": "elevation"
+            }
+        ],
+        "dos": [
+            "Do preserve the approved Colour Field identity when polishing.",
+            "Do use semantic palette roles in shared components and inspect both system themes.",
+            "Do use DestinationLink for internal theme links so destination previews stay consistent.",
+            "Do preserve image focal positions, credits, descriptive alternatives, and centered captions.",
+            "Do keep keyboard focus visible and honor reduced-motion and forced-color behavior.",
+            "Do give expanded asides a distinct background across their entire content and keep their interaction generic to all articles.",
+            "Do give list and non-list code the same available width; preserve edge-to-edge code on portrait mobile.",
+            "Do treat current code as the source for exact rendered behavior; refresh this record when that behavior deliberately changes."
+        ],
+        "donts": [
+            "Don’t hardcode the home palette into article or collection components.",
+            "Don’t turn open article cards into raised, rounded panels.",
+            "Don’t replace the selective Georgia emphasis with a site-wide serif heading system.",
+            "Don’t add a manual theme switcher as part of routine polish; the incumbent follows system preference.",
+            "Don’t apply destination background fills to ordinary text or image links.",
+            "Don’t introduce new factual copy or rewrite article bodies as part of visual refinement."
+        ]
     }
-  ],
-  "narrative": {
-    "northStar": "Colour Field",
-    "overview": "Colour Field is warm, photographic, editorial, and lightly playful. Large photographs and tightly tracked headings give the site its presence; generous open space, small labels, and compact controls support reading and exploration. The current, recently approved design is the baseline for future refinement.\n\nHome and About retain the original warm palette. Other content can supply its own photographic color field while preserving the same semantic roles, typography, and component language. Components are compact and understated, with playful details; depth belongs mainly to photographic overlays, the mobile menu, and opt-in experiments.",
-    "keyCharacteristics": [
-      "Photography supplies both imagery and page color.",
-      "Large Manrope headings, DM Sans reading text, and selective Georgia italics.",
-      "Open article cards, thin borders, tonal panels, and small-radius controls.",
-      "System-driven light/dark themes and destination-color link previews.",
-      "Playful motion stays local and honors reduced-motion preferences."
-    ],
-    "rules": [
-      {
-        "name": "Semantic Palette",
-        "body": "Shared surfaces use paper, ink, muted, accent, accent-ink, panel, and line roles. Home and About keep the original palette; image-derived pages may change every role together.",
-        "section": "colors"
-      },
-      {
-        "name": "Readable Center",
-        "body": "Prose stays within the reading measure; rich media can occupy the wider canvas without widening ordinary paragraphs.",
-        "section": "typography"
-      },
-      {
-        "name": "Flat Editorial Surface",
-        "body": "Article cards stay open and flat. Tonal panels and thin borders organize content; shadows remain local to overlays and experiments.",
-        "section": "elevation"
-      }
-    ],
-    "dos": [
-      "Do preserve the approved Colour Field identity when polishing.",
-      "Do use semantic palette roles in shared components and inspect both system themes.",
-      "Do use DestinationLink for internal theme links so destination previews stay consistent.",
-      "Do preserve image focal positions, credits, descriptive alternatives, and centered captions.",
-      "Do keep keyboard focus visible and honor reduced-motion and forced-color behavior.",
-      "Do give expanded asides a distinct background across their entire content and keep their interaction generic to all articles.",
-      "Do give list and non-list code the same available width; preserve edge-to-edge code on portrait mobile.",
-      "Do treat current code as the source for exact rendered behavior; refresh this record when that behavior deliberately changes."
-    ],
-    "donts": [
-      "Don’t hardcode the home palette into article or collection components.",
-      "Don’t turn open article cards into raised, rounded panels.",
-      "Don’t replace the selective Georgia emphasis with a site-wide serif heading system.",
-      "Don’t add a manual theme switcher as part of routine polish; the incumbent follows system preference.",
-      "Don’t apply destination background fills to ordinary text or image links.",
-      "Don’t introduce new factual copy or rewrite article bodies as part of visual refinement."
-    ]
-  }
 }

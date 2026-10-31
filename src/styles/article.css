@@ -880,7 +880,9 @@
         border-radius: 0;
     }
     .article-content li pre {
-        margin-inline-start: calc((100% - 100cqi - var(--code-list-indent, 0px)) / 2 - var(--space));
+        margin-inline-start: calc(
+            (100% - 100cqi - var(--code-list-indent, 0px)) / 2 - var(--space)
+        );
     }
     .article-content li > figure > pre {
         margin-inline-start: calc((100% - 100cqi) / 2 - var(--space));

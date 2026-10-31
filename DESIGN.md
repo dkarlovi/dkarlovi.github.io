@@ -2,167 +2,167 @@
 name: Colour Field — Dalibor Karlović
 description: Warm, photographic, editorial, and lightly playful.
 colors:
-  paper-light: "#f7eddd"
-  ink-light: "#311c18"
-  muted-light: "#725c50"
-  accent-light: "#b7352d"
-  accent-ink-light: "#fff8ec"
-  panel-light: "#eddfc6"
-  line-light: "#b29980"
-  paper-dark: "#311c18"
-  ink-dark: "#f7eddd"
-  muted-dark: "#c7aa98"
-  accent-dark: "#ff9f85"
-  accent-ink-dark: "#311c18"
-  panel-dark: "#432a22"
-  line-dark: "#967361"
-  control-line: color-mix(in srgb, var(--line) 75%, var(--ink))
-  brand-github: "#181717"
-  brand-twitter: "#1da1f2"
-  brand-youtube: "#ff0033"
-  brand-linkedin: "#0a66c2"
-  brand-reddit: "#ff4500"
-  brand-hacker-news: "#ff6600"
-  brand-surface-light: "#ffffff"
-  brand-surface-dark: "#181717"
-  aside-header: color-mix(in srgb, var(--panel) 55%, var(--paper))
-  code-surface: "#24292e"
-  code-ink: "#e1e4e8"
-  code-line: "#59636e"
+    paper-light: "#f7eddd"
+    ink-light: "#311c18"
+    muted-light: "#725c50"
+    accent-light: "#b7352d"
+    accent-ink-light: "#fff8ec"
+    panel-light: "#eddfc6"
+    line-light: "#b29980"
+    paper-dark: "#311c18"
+    ink-dark: "#f7eddd"
+    muted-dark: "#c7aa98"
+    accent-dark: "#ff9f85"
+    accent-ink-dark: "#311c18"
+    panel-dark: "#432a22"
+    line-dark: "#967361"
+    control-line: color-mix(in srgb, var(--line) 75%, var(--ink))
+    brand-github: "#181717"
+    brand-twitter: "#1da1f2"
+    brand-youtube: "#ff0033"
+    brand-linkedin: "#0a66c2"
+    brand-reddit: "#ff4500"
+    brand-hacker-news: "#ff6600"
+    brand-surface-light: "#ffffff"
+    brand-surface-dark: "#181717"
+    aside-header: color-mix(in srgb, var(--panel) 55%, var(--paper))
+    code-surface: "#24292e"
+    code-ink: "#e1e4e8"
+    code-line: "#59636e"
 typography:
-  display:
-    fontFamily: Manrope, sans-serif
-    fontWeight: 600
-    letterSpacing: -0.055em
-  display-emphasis:
-    fontFamily: Georgia, serif
-    fontWeight: 400
-  headline:
-    fontFamily: Manrope, sans-serif
-    fontWeight: 600
-    lineHeight: 1.08
-    letterSpacing: -0.055em
-  card-title:
-    fontFamily: Manrope, sans-serif
-    fontWeight: 600
-    lineHeight: 1.15
-    letterSpacing: -0.04em
-  reading-heading:
-    fontFamily: Manrope, sans-serif
-    fontWeight: 600
-    lineHeight: 1.15
-    letterSpacing: -0.035em
-  body:
-    fontFamily: '"DM Sans", sans-serif'
-    fontSize: 1rem
-    fontWeight: 400
-    lineHeight: 1.65
-  article-body:
-    fontFamily: '"DM Sans", sans-serif'
-    fontSize: 1.125rem
-    fontWeight: 400
-    lineHeight: 1.85
-  label:
-    fontFamily: '"DM Sans", sans-serif'
-    fontSize: 0.6875rem
-    fontWeight: 600
-    lineHeight: 1.5
-    letterSpacing: 0.13em
-  button:
-    fontFamily: '"DM Sans", sans-serif'
-    fontSize: 0.8125rem
-    fontWeight: 500
-    lineHeight: 1.5
-  code:
-    fontFamily: '"SFMono-Regular", Consolas, "Liberation Mono", monospace'
-    fontSize: 0.875rem
-    lineHeight: 1.9
-  aside-heading:
-    fontFamily: Manrope, sans-serif
-    fontSize: 1.375rem
-    fontWeight: 600
-    lineHeight: 1.35
-    letterSpacing: -0.03em
-  aside-heading-mobile:
-    fontFamily: Manrope, sans-serif
-    fontSize: 1.125rem
-    fontWeight: 600
-    lineHeight: 1.35
-    letterSpacing: -0.03em
+    display:
+        fontFamily: Manrope, sans-serif
+        fontWeight: 600
+        letterSpacing: -0.055em
+    display-emphasis:
+        fontFamily: Georgia, serif
+        fontWeight: 400
+    headline:
+        fontFamily: Manrope, sans-serif
+        fontWeight: 600
+        lineHeight: 1.08
+        letterSpacing: -0.055em
+    card-title:
+        fontFamily: Manrope, sans-serif
+        fontWeight: 600
+        lineHeight: 1.15
+        letterSpacing: -0.04em
+    reading-heading:
+        fontFamily: Manrope, sans-serif
+        fontWeight: 600
+        lineHeight: 1.15
+        letterSpacing: -0.035em
+    body:
+        fontFamily: '"DM Sans", sans-serif'
+        fontSize: 1rem
+        fontWeight: 400
+        lineHeight: 1.65
+    article-body:
+        fontFamily: '"DM Sans", sans-serif'
+        fontSize: 1.125rem
+        fontWeight: 400
+        lineHeight: 1.85
+    label:
+        fontFamily: '"DM Sans", sans-serif'
+        fontSize: 0.6875rem
+        fontWeight: 600
+        lineHeight: 1.5
+        letterSpacing: 0.13em
+    button:
+        fontFamily: '"DM Sans", sans-serif'
+        fontSize: 0.8125rem
+        fontWeight: 500
+        lineHeight: 1.5
+    code:
+        fontFamily: '"SFMono-Regular", Consolas, "Liberation Mono", monospace'
+        fontSize: 0.875rem
+        lineHeight: 1.9
+    aside-heading:
+        fontFamily: Manrope, sans-serif
+        fontSize: 1.375rem
+        fontWeight: 600
+        lineHeight: 1.35
+        letterSpacing: -0.03em
+    aside-heading-mobile:
+        fontFamily: Manrope, sans-serif
+        fontSize: 1.125rem
+        fontWeight: 600
+        lineHeight: 1.35
+        letterSpacing: -0.03em
 rounded:
-  control: 0.25rem
-  code: 3px
-  swatch: 1px
-  pill: 3rem
+    control: 0.25rem
+    code: 3px
+    swatch: 1px
+    pill: 3rem
 spacing:
-  gutter-min: 1.375rem
-  gutter-max: 5.25rem
-  section: 5rem
-  section-mobile: 3rem
-  grid-column: 2.25rem
-  grid-row: 3rem
-  button-inline: 1.125rem
-  button-block: 0.75rem
+    gutter-min: 1.375rem
+    gutter-max: 5.25rem
+    section: 5rem
+    section-mobile: 3rem
+    grid-column: 2.25rem
+    grid-row: 3rem
+    button-inline: 1.125rem
+    button-block: 0.75rem
 components:
-  button-default:
-    backgroundColor: "{colors.panel-light}"
-    textColor: "{colors.ink-light}"
-    rounded: "{rounded.control}"
-    padding: 0.75rem 1.125rem
-    typography: "{typography.button}"
-  button-hover:
-    backgroundColor: "{colors.ink-light}"
-    textColor: "{colors.paper-light}"
-  button-active:
-    backgroundColor: "{colors.accent-light}"
-    textColor: "{colors.accent-ink-light}"
-  icon-link:
-    width: 2.75rem
-    height: 2.75rem
-    padding: "0"
-    rounded: "{rounded.control}"
-  read-more:
-    width: 12rem
-    height: 4rem
-    padding: "0"
-    rounded: "{rounded.control}"
-  article-card:
-    backgroundColor: transparent
-    padding: "0"
-    rounded: 0px
-  taxonomy-card:
-    padding: 2rem
-    rounded: "{rounded.control}"
-  category-link:
-    backgroundColor: transparent
-    textColor: inherit
-  experiment-range:
-    width: 5.625rem
-  aside-body:
-    backgroundColor: "{colors.panel-light}"
-    textColor: "{colors.ink-light}"
-    padding: 0 0 1.5rem
-  aside-summary:
-    backgroundColor: "{colors.aside-header}"
-    textColor: "{colors.ink-light}"
-    typography: "{typography.aside-heading}"
-    padding: 1.5rem 5.5rem 1.5rem max(2.5rem, calc((100% - 43rem) / 2))
-  aside-toggle:
-    backgroundColor: "{colors.paper-light}"
-    textColor: "{colors.ink-light}"
-    rounded: "{rounded.control}"
-    width: 2.5rem
-    height: 2.5rem
-  aside-alert:
-    backgroundColor: "{colors.accent-light}"
-    textColor: "{colors.accent-ink-light}"
-    width: 2rem
-    height: 2rem
-  code-mobile:
-    backgroundColor: "{colors.code-surface}"
-    textColor: "{colors.code-ink}"
-    rounded: 0px
-    padding: 1.375rem 0.75rem
+    button-default:
+        backgroundColor: "{colors.panel-light}"
+        textColor: "{colors.ink-light}"
+        rounded: "{rounded.control}"
+        padding: 0.75rem 1.125rem
+        typography: "{typography.button}"
+    button-hover:
+        backgroundColor: "{colors.ink-light}"
+        textColor: "{colors.paper-light}"
+    button-active:
+        backgroundColor: "{colors.accent-light}"
+        textColor: "{colors.accent-ink-light}"
+    icon-link:
+        width: 2.75rem
+        height: 2.75rem
+        padding: "0"
+        rounded: "{rounded.control}"
+    read-more:
+        width: 12rem
+        height: 4rem
+        padding: "0"
+        rounded: "{rounded.control}"
+    article-card:
+        backgroundColor: transparent
+        padding: "0"
+        rounded: 0px
+    taxonomy-card:
+        padding: 2rem
+        rounded: "{rounded.control}"
+    category-link:
+        backgroundColor: transparent
+        textColor: inherit
+    experiment-range:
+        width: 5.625rem
+    aside-body:
+        backgroundColor: "{colors.panel-light}"
+        textColor: "{colors.ink-light}"
+        padding: 0 0 1.5rem
+    aside-summary:
+        backgroundColor: "{colors.aside-header}"
+        textColor: "{colors.ink-light}"
+        typography: "{typography.aside-heading}"
+        padding: 1.5rem 5.5rem 1.5rem max(2.5rem, calc((100% - 43rem) / 2))
+    aside-toggle:
+        backgroundColor: "{colors.paper-light}"
+        textColor: "{colors.ink-light}"
+        rounded: "{rounded.control}"
+        width: 2.5rem
+        height: 2.5rem
+    aside-alert:
+        backgroundColor: "{colors.accent-light}"
+        textColor: "{colors.accent-ink-light}"
+        width: 2rem
+        height: 2rem
+    code-mobile:
+        backgroundColor: "{colors.code-surface}"
+        textColor: "{colors.code-ink}"
+        rounded: 0px
+        padding: 1.375rem 0.75rem
 ---
 
 # Design System: Colour Field
