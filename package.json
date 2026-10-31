@@ -16,16 +16,16 @@
         "@fontsource/dm-sans": "^5.3.0",
         "@fontsource/manrope": "^5.3.0",
         "@tailwindcss/vite": "^4.3.3",
-        "astro": "^7.4.0",
+        "astro": "^7.4.3",
         "sharp": "^0.35.5",
         "tailwindcss": "^4.3.3",
         "vanilla-cookieconsent": "^3.1.0"
     },
     "devDependencies": {
-        "@astrojs/check": "^0.9.10",
+        "@astrojs/check": "^0.9.12",
         "@playwright/test": "^1.56.0",
         "cheerio": "^1.1.0",
-        "typescript": "^5.3.3",
+        "typescript": "^7.0.2",
         "yaml": "^2.8.0"
     },
     "engines": {
