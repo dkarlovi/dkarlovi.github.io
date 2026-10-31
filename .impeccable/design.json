@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-31T15:38:23.021941+00:00",
+  "generatedAt": "2026-10-31T16:53:44.262Z",
   "title": "Design System: Colour Field",
   "extensions": {
     "colorMeta": {
@@ -316,6 +316,22 @@
         "role": "neutral",
         "displayName": "Control outline",
         "canonical": "color-mix(in srgb, var(--line) 75%, var(--ink))"
+      },
+      "aside-header": {
+        "role": "neutral",
+        "displayName": "Aside header"
+      },
+      "code-surface": {
+        "role": "neutral",
+        "displayName": "GitHub Dark code surface"
+      },
+      "code-ink": {
+        "role": "neutral",
+        "displayName": "GitHub Dark code text"
+      },
+      "code-line": {
+        "role": "neutral",
+        "displayName": "GitHub Dark code outline"
       }
     },
     "typographyMeta": {
@@ -334,6 +350,14 @@
       "reading-heading": {
         "displayName": "Reading heading",
         "purpose": "Prose h1–h3, preserving the separate display-heading identity."
+      },
+      "aside-heading": {
+        "displayName": "Aside heading",
+        "purpose": "Reusable collapsible-aside summary, preserving authored wording."
+      },
+      "aside-heading-mobile": {
+        "displayName": "Mobile aside heading",
+        "purpose": "Aside summaries at 540px and below."
       }
     },
     "shadows": [
@@ -373,6 +397,26 @@
         "name": "read-animation-lead",
         "value": "1000ms",
         "purpose": "Dwell before the optional silent read-button animation; full timing remains in src/scripts/read-more.ts."
+      },
+      {
+        "name": "aside-button-open",
+        "value": "450ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Compress, spring outward, settle on opening."
+      },
+      {
+        "name": "aside-button-close",
+        "value": "300ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Same bounce on closing, with a shorter duration."
+      },
+      {
+        "name": "aside-sweep",
+        "value": "500–1500ms linear",
+        "purpose": "Two 50px bands, 50px apart and skewed 45deg. Duration is 500 + clamp((travel - 600) / 750, 0, 1) × 1000 milliseconds; emitted at 12% of the bounce, peak opacity 0.09, invisible by 55% of travel."
+      },
+      {
+        "name": "aside-symbol",
+        "value": "150ms ease",
+        "purpose": "Plus becomes minus immediately with the disclosure state; reduced motion suppresses the transition."
       }
     ],
     "breakpoints": [
@@ -473,6 +517,22 @@
       "description": "Native light-direction input from the optional terrain experiment; not a general form field.",
       "html": "<label class=\"ds-range-label\">Light direction <input class=\"ds-range\" type=\"range\" min=\"0\" max=\"360\" value=\"220\"></label>",
       "css": ".ds-range-label{display:flex;align-items:center;gap:.6rem;color:var(--ink-dark,#f7eddd);background:var(--paper-dark,#311c18);padding:1rem;font:.625rem/1.65 \"DM Sans\",sans-serif}.ds-range{width:5.625rem;accent-color:var(--accent-dark,#ff9f85);cursor:pointer}.ds-range:focus-visible{outline:3px solid currentColor;outline-offset:4px}"
+    },
+    {
+      "name": "Collapsible aside",
+      "kind": "custom",
+      "refersTo": "aside-body",
+      "description": "Final disclosure surfaces and controls. The panel preview uses native details; the runtime bounce and distance-based sweep are implemented in src/scripts/asides.ts.",
+      "html": "<details class=\"ds-aside\"><summary><span class=\"ds-aside-alert\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M12 5.5v8\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"18\" r=\"1.2\" fill=\"currentColor\"/></svg></span><span>Don't actually store WAV files in your repo</span><span class=\"ds-aside-toggle\" aria-hidden=\"true\"><svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 8h10\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"/><path class=\"ds-vertical\" d=\"M8 3v10\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"/></svg></span></summary><p>Since WAV files are basically raw audio data with a mustache, we don't want to keep them as is in our repo since we'll be adding a lot of them and the repo size would balloon, but annoyingly Chrome needs a WAV file specifically so we MUST have it once it runs, even though it supports playback of other formats.</p></details>",
+      "css": ".ds-aside{background:var(--panel,#eddfc6);color:var(--ink,#311c18);border:1px solid var(--control-line,#927a66);font-family:\"DM Sans\",sans-serif}.ds-aside summary{position:relative;list-style:none;padding:1.5rem 5.5rem 1.5rem max(2.5rem,calc((100% - 43rem)/2));background:color-mix(in srgb,var(--panel,#eddfc6) 55%,var(--paper,#f7eddd));border-bottom:1px solid var(--control-line,#927a66);font:600 1.375rem/1.35 Manrope,sans-serif;letter-spacing:-.03em;cursor:pointer}.ds-aside summary::-webkit-details-marker{display:none}.ds-aside[open]{padding-bottom:1.5rem}.ds-aside[open] summary{margin-bottom:1.75rem}.ds-aside p{max-width:min(43rem,calc(100% - 3rem));margin:1.25rem auto;font-size:1.125rem;line-height:1.85}.ds-aside-alert{position:absolute;left:-.875rem;top:calc(50% - 1rem);width:2rem;height:2rem;display:grid;place-items:center;background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-radius:50%;pointer-events:none}.ds-aside-alert svg{width:1.375rem;height:1.375rem}.ds-aside-toggle{position:absolute;right:1.5rem;top:calc(50% - 1.25rem);width:2.5rem;height:2.5rem;display:grid;place-items:center;border:1px solid var(--control-line,#927a66);border-radius:.25rem;background:var(--paper,#f7eddd);color:var(--ink,#311c18);pointer-events:none}.ds-aside-toggle svg{width:1rem;height:1rem}.ds-vertical{transform-origin:center}.ds-aside[open] .ds-aside-toggle{background:var(--accent,#b7352d);color:var(--accent-ink,#fff8ec);border-color:var(--accent,#b7352d)}.ds-aside[open] .ds-vertical{transform:scaleY(0)}.ds-aside summary:hover .ds-aside-toggle{background:var(--ink,#311c18);color:var(--paper,#f7eddd)}.ds-aside:has(summary:focus-visible){outline:3px solid var(--accent,#b7352d);outline-offset:5px}.ds-aside summary:focus-visible{outline:none}@media(max-width:540px){.ds-aside summary{padding:1.25rem 4.75rem 1.25rem 2rem;font-size:1.125rem}.ds-aside-toggle{right:1rem;top:calc(50% - 1.125rem);width:2.25rem;height:2.25rem}.ds-aside p{font-size:1rem;line-height:1.8;max-width:calc(100% - 2.5rem)}}"
+    },
+    {
+      "name": "Code block",
+      "kind": "custom",
+      "refersTo": "code-mobile",
+      "description": "Static code surface. In articles, list blocks share the normal canvas and portrait-mobile code reaches both viewport edges.",
+      "html": "<pre class=\"ds-code\"><code>console.log(`Decoding FLAC to WAV: ${flacPath} -&gt; ${wavPath}`);</code></pre>",
+      "css": ".ds-code{font:.875rem/1.9 \"SFMono-Regular\",Consolas,\"Liberation Mono\",monospace;tab-size:2;white-space:pre;overflow:auto;padding:1.75rem 2rem;border:1px solid #59636e;border-radius:3px;background:#24292e;color:#e1e4e8;color-scheme:dark;scrollbar-color:#59636e #24292e}.ds-code code{font:inherit}@media(max-width:540px) and (orientation:portrait){.ds-code{font-size:.75rem;padding:1.375rem .75rem;border-inline:0;border-radius:0}}"
     }
   ],
   "narrative": {
@@ -508,6 +568,8 @@
       "Do use DestinationLink for internal theme links so destination previews stay consistent.",
       "Do preserve image focal positions, credits, descriptive alternatives, and centered captions.",
       "Do keep keyboard focus visible and honor reduced-motion and forced-color behavior.",
+      "Do give expanded asides a distinct background across their entire content and keep their interaction generic to all articles.",
+      "Do give list and non-list code the same available width; preserve edge-to-edge code on portrait mobile.",
       "Do treat current code as the source for exact rendered behavior; refresh this record when that behavior deliberately changes."
     ],
     "donts": [

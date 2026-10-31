@@ -16,7 +16,7 @@ colors:
   accent-ink-dark: "#311c18"
   panel-dark: "#432a22"
   line-dark: "#967361"
-  control-line: "color-mix(in srgb, var(--line) 75%, var(--ink))"
+  control-line: color-mix(in srgb, var(--line) 75%, var(--ink))
   brand-github: "#181717"
   brand-twitter: "#1da1f2"
   brand-youtube: "#ff0033"
@@ -25,6 +25,10 @@ colors:
   brand-hacker-news: "#ff6600"
   brand-surface-light: "#ffffff"
   brand-surface-dark: "#181717"
+  aside-header: color-mix(in srgb, var(--panel) 55%, var(--paper))
+  code-surface: "#24292e"
+  code-ink: "#e1e4e8"
+  code-line: "#59636e"
 typography:
   display:
     fontFamily: Manrope, sans-serif
@@ -73,6 +77,18 @@ typography:
     fontFamily: '"SFMono-Regular", Consolas, "Liberation Mono", monospace'
     fontSize: 0.875rem
     lineHeight: 1.9
+  aside-heading:
+    fontFamily: Manrope, sans-serif
+    fontSize: 1.375rem
+    fontWeight: 600
+    lineHeight: 1.35
+    letterSpacing: -0.03em
+  aside-heading-mobile:
+    fontFamily: Manrope, sans-serif
+    fontSize: 1.125rem
+    fontWeight: 600
+    lineHeight: 1.35
+    letterSpacing: -0.03em
 rounded:
   control: 0.25rem
   code: 3px
@@ -122,6 +138,31 @@ components:
     textColor: inherit
   experiment-range:
     width: 5.625rem
+  aside-body:
+    backgroundColor: "{colors.panel-light}"
+    textColor: "{colors.ink-light}"
+    padding: 0 0 1.5rem
+  aside-summary:
+    backgroundColor: "{colors.aside-header}"
+    textColor: "{colors.ink-light}"
+    typography: "{typography.aside-heading}"
+    padding: 1.5rem 5.5rem 1.5rem max(2.5rem, calc((100% - 43rem) / 2))
+  aside-toggle:
+    backgroundColor: "{colors.paper-light}"
+    textColor: "{colors.ink-light}"
+    rounded: "{rounded.control}"
+    width: 2.5rem
+    height: 2.5rem
+  aside-alert:
+    backgroundColor: "{colors.accent-light}"
+    textColor: "{colors.accent-ink-light}"
+    width: 2rem
+    height: 2rem
+  code-mobile:
+    backgroundColor: "{colors.code-surface}"
+    textColor: "{colors.code-ink}"
+    rounded: 0px
+    padding: 1.375rem 0.75rem
 ---
 
 # Design System: Colour Field
@@ -165,7 +206,7 @@ Control outlines use the derived `control-line` role: the page’s line color mi
 
 ### Photographic and external colors
 
-The owner compared the current palettes with standard Material and custom warm HCT mappings in `prototypes/theme-comparison/` and preferred the current output wherever they differed. Standard Material felt sterile and harsh; the warm mapping offered no compelling improvement. Preserve the current palette character and generator during polish. This decision concerns the candidates reviewed, not every possible use of Material Color Utilities. Fix demonstrated contrast defects locally without replacing the overall palette.
+The owner compared the current palettes with standard Material and custom warm HCT mappings and preferred the current output wherever they differed. Standard Material felt sterile and harsh; the warm mapping offered no compelling improvement. Preserve the current palette character and generator during polish. This decision concerns the candidates reviewed, not every possible use of Material Color Utilities. Fix demonstrated contrast defects locally without replacing the overall palette. The temporary comparison previews were removed after review.
 
 `src/lib/image-palette.ts` samples images at build time; `createPalette` derives light/dark semantic roles in CIELAB/LCH, maps chroma into the sRGB gamut, and checks explicit accent overrides for contrast. Pages without usable image colors receive the generator’s fallback; do not assume it equals the original home palette. Home and About explicitly use `defaultPalette`. The article/collection palette also reaches shared navigation, footer, and consent UI. System-theme changes apply live, without a manual switcher or client-side image sampling.
 
@@ -191,7 +232,7 @@ The hierarchy uses fluid sizes rather than a fixed modular ratio. Frontmatter re
 
 ## Layout
 
-The page gutter is fluid (`--space: clamp(1.375rem, 5vw, 5.25rem)`). Prose has a 43rem maximum reading measure; wide figures, code, tables, video, iframes, and disclosures can reach 74rem. Article content uses a three-column grid that centers paragraphs and lets rich blocks span the canvas. Wide code and tables scroll within their own surfaces. Code blocks inside lists use the same canvas width as other code blocks, accounting for list indentation rather than reducing their width. At 540px and below in portrait orientation, code blocks extend to both viewport edges with minimal internal padding. The 404 recovery link uses the shared button treatment.
+The page gutter is fluid (`--space: clamp(1.375rem, 5vw, 5.25rem)`). Prose has a 43rem maximum reading measure; wide figures, code, tables, video, iframes, and disclosures can reach 74rem. Article content uses a three-column grid that centers paragraphs and lets rich blocks span the canvas. Wide code and tables scroll within their own surfaces. Code blocks inside lists use the same canvas width as other code blocks, accounting for list indentation rather than reducing their width. At 540px and below in portrait orientation, code blocks extend to both viewport edges with minimal internal padding; see Code blocks below for the shared treatment.
 
 Sections generally use the recorded section spacing, reduced on small screens. Article grids have two equal columns with the recorded column/row gaps; at 540px they become one column with a 2.5rem gap. Archive layouts include a 13rem category sidebar and 4rem gap; at 1100px the sidebar stacks. Taxonomy collections use three columns, two at 800px, and one at 540px.
 
@@ -209,7 +250,7 @@ The mobile menu uses `0 1rem 2rem #0002`; the optional heading experiment uses `
 
 ## Shapes
 
-Photography and open article cards are rectangular. Buttons, icon links, taxonomy actions, and the mobile menu have restrained control corners. Portraits and the circular “dk” mark use a circular crop (50% radius); code blocks and palette swatches have their own smaller corners. Pill shapes exist for the small pill control and experiment pause button; they do not define the main button language. Borders are generally one pixel; keyboard focus is a visible accent outline (3px with 5px offset), with light foreground focus over photo-backed headers.
+Photography and open article cards are rectangular. Buttons, icon links, taxonomy actions, and the mobile menu have restrained control corners. Portraits and the circular “dk” mark use a circular crop (50% radius); code blocks and palette swatches have their own smaller corners. Aside headers are rectangular, with a circular exclamation badge overlapping the left edge and a square control using the control radius. Portrait-mobile code removes corner rounding at the screen edges. Pill shapes exist for the small pill control and experiment pause button; they do not define the main button language. Borders are generally one pixel; keyboard focus is a visible accent outline (3px with 5px offset), with light foreground focus over photo-backed headers.
 
 ## Components
 
@@ -231,7 +272,39 @@ The header pairs a circular “dk” identity with text navigation and external 
 
 ### Reading and media
 
-Prose links are accented and underlined. Georgia blockquotes use an accent rule. Disclosures use a panel background, thin border, and native summary. Code always uses its static dark palette, horizontal scrolling, small corners, and a bordered surface; code and table scrollbars inherit their surrounding surface colors. Images retain authored focal positions; captions are centered. The author attribution combines a circular portrait and compact name/date/reading-time metadata. Photo palette swatches remain alongside attribution. In mobile article heroes with photographs, the publication date sits above the palette on the right, while the author on the left aligns with the palette’s bottom edge. At 380px and below, hide the generic “Image palette” label while preserving actual photo credits. Desktop retains the date beside the author. At 540px and below, article-end author and discussion controls stack and align left as one group.
+Prose links are accented and underlined. Georgia blockquotes use an accent rule. Images retain authored focal positions; captions are centered. Generic disclosures use a panel background, thin border, and native summary. The authored collapsible-aside pattern has the distinct treatment below.
+
+### Code blocks
+
+Code retains its GitHub Dark surface in both system themes. Desktop blocks use the code typography token, a fine border, small corners, and horizontal scrolling. Tables and code use scrollbars matched to their own surfaces.
+
+Code inside a list must occupy the same canvas as equivalent code outside a list. Account for accumulated list indentation when centering direct code blocks and code figures; do not reserve a narrower canvas for list content. This is particularly visible at tablet and mobile widths, where the desktop maximum no longer masks the difference.
+
+At 540px and below in portrait orientation, all article code blocks are edge-to-edge, including standalone blocks, blocks in figures, and blocks in lists or disclosures. Their width is the article container plus both page gutters; horizontal margins offset the containing layout. Remove side borders and corner rounding, retain 0.75rem internal horizontal padding, and use 0.75rem code text. Captions and surrounding prose keep their reading gutters. Preserve horizontal scrolling rather than wrapping or clipping code.
+
+### Article attribution
+
+The author attribution combines a circular portrait with compact name and reading-time metadata. Desktop keeps the publication date beside the author and the image palette at the opposite edge.
+
+At 540px and below, photographed article heroes place the publication date above the palette on the right. The author on the left and the swatches align along their bottom edge, 1.5rem above the hero’s bottom. Allow the credit text to wrap in the right-hand column without overlapping the author. At 380px and below, hide only the generic “Image palette” label; retain actual photo credits and the accessible palette description. Articles without a photograph retain their original date attribution.
+
+At 540px and below, article-end author and discussion controls stack and align left as one group.
+
+### Collapsible asides
+
+Use the generic treatment for every `details.collapsible-aside`, rather than an illustration tied to one article. The final appearance follows the selected Signal surfaces and Button bounce interaction; it has no waveform or folded corner.
+
+- **Closed:** a Manrope heading on the derived aside-header surface, a small circular exclamation badge protruding 0.875rem beyond the left edge, and a square plus control on the right. The header is 1.375rem/1.35 with -0.03em tracking; it reduces to 1.125rem on mobile. The badge is 2rem square; the control is 2.5rem square, reducing to 2.25rem on mobile.
+- **Open:** the same header with a minus control, followed by a reading area whose panel background extends through the entire aside. Keep the thin control-line perimeter and a visible header/body division. The background must make the open state apparent even when the heading has scrolled out of view. Paragraphs keep a readable measure; code retains the code-block behavior above.
+- **Both directions:** the control compresses, springs outward, and settles (450ms opening, 300ms closing). As it springs out, it emits two full-height diagonal bands from its center toward the exclamation badge. Each band is 50px wide with a 50px gap, skewed 45 degrees to the right. Keep the effect behind the heading text and clipped to the header, while the badge can protrude beyond the header.
+- **Sweep timing:** use actual horizontal travel to scale the sweep from 500ms on mobile to about 1500ms on desktop, with intermediate durations at intermediate sizes. The current mapping is `500 + clamp((travel - 600) / 750, 0, 1) × 1000` milliseconds. Emit after the first 12% of the button bounce. Peak band opacity is 0.09; fade to zero by 55% of the sweep. The bands use the existing ink role so they remain only subtly different from the header surface in either theme.
+- **Behavior:** keep native details/summary semantics and all original wording. JavaScript adds only decorative, aria-hidden controls; without it, the native disclosure remains usable. Reduced motion preserves immediate open/closed feedback and suppresses the bounce and sweep. Repeat interaction, hiding the page, or changing the motion preference cancels running effects. No sound or continuous animation.
+
+The implementation is `src/scripts/asides.ts`, initialized from `src/scripts/app.ts`, with presentation in `src/styles/article.css`. This is the final shared component behavior; earlier prototype alternatives do not override it.
+
+### Recovery action
+
+The 404 “Go back” action uses the shared button-link treatment, including its panel fill, control outline, and destination-palette interaction. It remains a navigation link semantically.
 
 ### Read-link animation
 
@@ -250,6 +323,8 @@ The opt-in 16:9 terrain canvas includes pause and light-direction range controls
 - Do use DestinationLink for internal theme links so destination previews stay consistent.
 - Do preserve image focal positions, credits, descriptive alternatives, and centered captions.
 - Do keep keyboard focus visible and honor reduced-motion and forced-color behavior.
+- Do give expanded asides a distinct background across their entire content and keep their interaction generic to all articles.
+- Do give list and non-list code the same available width; preserve edge-to-edge code on portrait mobile.
 - Do treat current code as the source for exact rendered behavior; refresh this record when that behavior deliberately changes.
 
 ### Don't:

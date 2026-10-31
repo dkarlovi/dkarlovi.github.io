@@ -69,7 +69,7 @@ The Articles entry’s `linkLabel` supplies “Explore my writing” in the home
 
 Drafts appear in `npm run dev` and are excluded from production article routes, listings, counts, and sitemap. Articles are sorted newest first; series contents are oldest first. Listings use Astro's native pagination with 20 records per page.
 
-Content uses Astro's normal Markdown rendering, GFM, footnotes, and Shiki highlighting. Native heading IDs are the default. Explicit HTML aliases in migrated articles keep old `#content-...` links working. Captions use standard `<figure>`/`<figcaption>` HTML; expandable notes use `<details>`/`<summary>`. Put blank lines around Markdown inside HTML blocks. No custom YASSG syntax or compatibility parser remains.
+Content uses Astro's normal Markdown rendering, GFM, footnotes, and Shiki highlighting. Native heading IDs are the default. Explicit HTML aliases in migrated articles keep old `#content-...` links working. Captions use standard `<figure>`/`<figcaption>` HTML; expandable notes use `<details>`/`<summary>`. Add `class="collapsible-aside"` to a details element for the shared editorial aside: tinted expanded background, protruding exclamation badge, and a bouncing plus/minus control that emits a subtle diagonal sweep on both open and close. Its timing scales with travel distance, and it respects reduced motion. The native disclosure works without JavaScript. Put blank lines around Markdown inside HTML blocks. No custom YASSG syntax or compatibility parser remains.
 
 ## Optional Pages CMS
 

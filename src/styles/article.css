@@ -390,6 +390,133 @@
 .content details pre {
     margin-block: 1.5rem;
 }
+.content .collapsible-aside {
+    padding: 0;
+    border: 1px solid var(--control-line);
+    background: var(--panel);
+}
+.content .collapsible-aside > summary {
+    position: relative;
+    isolation: isolate;
+    padding: 1.5rem 5.5rem 1.5rem max(2.5rem, calc((100% - var(--reading)) / 2));
+    border-bottom: 1px solid var(--control-line);
+    background: color-mix(in srgb, var(--panel) 55%, var(--paper));
+    color: var(--ink);
+    font-family: "Manrope", sans-serif;
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.03em;
+}
+.content .collapsible-aside.is-enhanced > summary {
+    list-style: none;
+}
+.content .collapsible-aside.is-enhanced > summary::-webkit-details-marker {
+    display: none;
+}
+.content .collapsible-aside[open] {
+    padding-bottom: 1.5rem;
+}
+.content .collapsible-aside[open] > summary {
+    margin-bottom: 1.75rem;
+}
+.content .collapsible-aside > :not(summary):not(pre):not(figure) {
+    max-width: min(var(--reading), calc(100% - 3rem));
+}
+.content .collapsible-aside > summary:focus-visible {
+    outline: none;
+}
+.content .collapsible-aside:has(> summary:focus-visible) {
+    outline: 3px solid var(--accent);
+    outline-offset: 5px;
+}
+.content .collapsible-aside > summary + * {
+    margin-top: 0;
+}
+.aside-label {
+    position: relative;
+    z-index: 1;
+}
+.aside-alert {
+    position: absolute;
+    z-index: 2;
+    left: -0.875rem;
+    top: calc(50% - 1rem);
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--accent-ink);
+    pointer-events: none;
+}
+.aside-alert svg {
+    width: 1.375rem;
+    height: 1.375rem;
+}
+.aside-toggle {
+    position: absolute;
+    z-index: 2;
+    right: 1.5rem;
+    top: calc(50% - 1.25rem);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--control-line);
+    border-radius: 0.25rem;
+    background: var(--paper);
+    color: var(--ink);
+    pointer-events: none;
+}
+.aside-toggle svg {
+    width: 1rem;
+    height: 1rem;
+}
+.aside-toggle .vertical {
+    transform-origin: center;
+    transition: transform 150ms ease;
+}
+.collapsible-aside[open] .aside-toggle {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-ink);
+}
+.collapsible-aside[open] .aside-toggle .vertical {
+    transform: scaleY(0);
+}
+.collapsible-aside > summary:hover .aside-toggle {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+}
+.aside-sweep {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+.aside-sweep-bands {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 150px;
+    opacity: 0;
+}
+.aside-sweep-band {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 50px;
+    height: 300%;
+    transform: skewX(45deg);
+    background: var(--ink);
+}
+.aside-sweep-band + .aside-sweep-band {
+    left: 100px;
+}
 .content .footnotes {
     font-size: 0.875rem;
     border-top: 1px solid var(--line);
@@ -665,6 +792,19 @@
     }
     .content details {
         padding: 1.25rem;
+    }
+    .content .collapsible-aside > summary {
+        padding: 1.25rem 4.75rem 1.25rem 2rem;
+        font-size: 1.125rem;
+    }
+    .aside-toggle {
+        right: 1rem;
+        top: calc(50% - 1.125rem);
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+    .content .collapsible-aside > :not(summary):not(pre):not(figure) {
+        max-width: calc(100% - 2.5rem);
     }
     .series-notice,
     .article-end {
