@@ -14,6 +14,6 @@ const { image, experience } = article.data;
 const experiment = experience.headingExperiment === 'terrain';
 ---
 <section class:list={['article-hero', { 'with-experiment':experiment, 'without-photo': !image }]} style={`--photo-position:${image?.position ?? '50% 45%'}`}>
-{image && <figure class="article-cover"><Image src={image.url} width={1920} class="hero-photo" alt={image.alt ?? article.data.title} loading="eager" fetchpriority="high" /><PhotoPalette palette={palette} credit={image.credit} /></figure>}
+{image && <figure class="article-cover"><Image src={image.url} width={1920} class="hero-photo" alt={image.alt ?? article.data.title} loading="eager" fetchpriority="high" /><PhotoPalette palette={palette} credit={image.credit} publishedAt={article.data.publishedAt} /></figure>}
 <div class="article-heading"><DestinationLink class="back-link" href={sitePath('/articles')}>← Back to writing</DestinationLink>{experiment && <HeadingExperiment />}<div class="article-heading-copy"><CategoryBadges references={article.data.categories} /><h1>{article.data.title}</h1><p class="article-summary">{article.data.summary}</p></div></div><ArticleMeta article={article} loading="eager" prominent />
 </section>

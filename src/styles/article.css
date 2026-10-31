@@ -71,6 +71,9 @@
     padding: 10rem var(--space) 8.5rem;
 }
 .back-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
     font-size: 0.6875rem;
     border-bottom: 1px solid currentColor;
     padding-bottom: 0.4rem;
@@ -79,7 +82,7 @@
     width: 100%;
 }
 .article-heading .category-badges {
-    font-size: 0.625rem;
+    font-size: 0.6875rem;
     letter-spacing: 0.12em;
 }
 .article-heading h1 {
@@ -149,6 +152,9 @@
     list-style: none;
     flex-shrink: 0;
 }
+.photo-date {
+    display: none;
+}
 .photo-palette span {
     display: block;
     width: 1.0625rem;
@@ -206,6 +212,10 @@
     font-size: 1.5rem;
     margin-top: 1.5rem;
 }
+.content :is(h1, h2, h3) {
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+}
 .content h4,
 .content h5,
 .content h6 {
@@ -261,6 +271,7 @@
     background: #24292e !important;
     color: #e1e4e8;
     color-scheme: dark;
+    scrollbar-color: #59636e #24292e;
     tab-size: 2;
 }
 .content pre code {
@@ -302,6 +313,23 @@
     max-width: none;
     margin-inline: calc((100% - min(var(--wide), calc(100cqi - 3rem))) / 2);
 }
+.article-content :is(ul, ol) {
+    --code-list-indent: calc(var(--code-parent-indent, 0px) + 1.6rem);
+}
+.article-content li {
+    --code-parent-indent: var(--code-list-indent);
+}
+.article-content li pre,
+.article-content li > figure:has(> pre) {
+    width: min(var(--wide), 100cqi);
+    max-width: none;
+    margin-inline: calc((100% - min(var(--wide), 100cqi)) / 2);
+    margin-inline-start: calc((100% - min(var(--wide), 100cqi) - var(--code-list-indent, 0px)) / 2);
+}
+.article-content li > figure > pre {
+    width: 100%;
+    margin-inline: 0;
+}
 .content video {
     width: 100%;
     aspect-ratio: 16/9;
@@ -322,6 +350,7 @@
     overflow: auto;
     border-collapse: collapse;
     font-size: 0.9375rem;
+    scrollbar-color: var(--line) var(--panel);
 }
 .content th,
 .content td {
@@ -512,6 +541,14 @@
     outline-color: currentColor;
     outline-offset: 4px;
 }
+@media (max-width: 380px) {
+    .article-hero .palette-label {
+        display: none;
+    }
+    .article-hero .photo-credit:has(.palette-label) {
+        grid-template-columns: auto;
+    }
+}
 @media (max-width: 1000px) {
     .with-experiment .back-link {
         position: static;
@@ -553,7 +590,7 @@
         line-height: 1.65;
     }
     .article-heading .category-badges {
-        font-size: 0.5625rem;
+        font-size: 0.6875rem;
     }
     .hero-author {
         bottom: 4.25rem;
@@ -574,13 +611,33 @@
     }
     .photo-credit {
         bottom: 1.5rem;
-        font-size: 0.5625rem;
+        font-size: 0.625rem;
         max-width: calc(100% - 2 * var(--space));
         gap: 0.6rem;
     }
     .photo-palette span {
         width: 0.875rem;
         height: 0.875rem;
+    }
+    .article-hero:not(.without-photo) .hero-author {
+        bottom: 1.5rem;
+        max-width: calc(50% - var(--space));
+    }
+    .article-hero:not(.without-photo) .hero-author .article-date {
+        display: none;
+    }
+    .article-hero .photo-credit {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        max-width: calc(50% - var(--space) - 0.5rem);
+        row-gap: 0.375rem;
+    }
+    .article-hero .photo-date {
+        display: block;
+        grid-column: 1 / -1;
+        font-size: 0.5625rem;
+        line-height: 1.5;
     }
     .article-content {
         padding-block: 3rem;
@@ -616,6 +673,15 @@
     }
     .series-notice {
         padding: 1.25rem;
+    }
+    .article-end-row {
+        flex-direction: column;
+        align-items: start;
+    }
+    .discussion-links {
+        align-items: start;
+        margin-inline-start: 0;
+        text-align: left;
     }
     .with-experiment .article-heading {
         padding-top: 7rem;
@@ -659,5 +725,24 @@
     }
     .without-photo .article-heading {
         padding-top: 3rem;
+    }
+}
+@media (max-width: 540px) and (orientation: portrait) {
+    .article-content pre,
+    .article-content figure > pre,
+    .article-content li pre,
+    .article-content li > figure > pre {
+        width: calc(100cqi + 2 * var(--space));
+        max-width: none;
+        margin-inline: calc((100% - 100cqi) / 2 - var(--space));
+        padding-inline: 0.75rem;
+        border-inline: 0;
+        border-radius: 0;
+    }
+    .article-content li pre {
+        margin-inline-start: calc((100% - 100cqi - var(--code-list-indent, 0px)) / 2 - var(--space));
+    }
+    .article-content li > figure > pre {
+        margin-inline-start: calc((100% - 100cqi) / 2 - var(--space));
     }
 }

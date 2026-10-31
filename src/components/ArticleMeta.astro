@@ -8,5 +8,5 @@ const minutes = Math.max(1, Math.ceil((article.body ?? '').split(/\s+/).length /
 ---
 <ul class:list={['card-meta', { 'hero-author': prominent }]}>
 <li><AuthorLink loading={loading} size={prominent ? 44 : 36} minutes={prominent ? minutes : undefined} /></li>
-<li><time class="date-container" datetime={date} title={date}>{date}</time></li>
+<li class="article-date"><time class="date-container" datetime={date} title={date}>{date}</time></li>
 </ul>

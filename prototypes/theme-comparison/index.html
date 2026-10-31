@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Colour Field — palette study</title><link rel="stylesheet" href="/study.css"></head>
+<body>
+<header class="study-header"><div><a class="identity" href="/">Colour Field <span>Palette study</span></a><h1>The same site. A different color engine.</h1><p>Compare the current palette with two seed-based Material candidates on the real pages.</p></div><span class="prototype-label">Local prototype</span></header>
+<main>
+<form class="controls" aria-label="Comparison settings">
+<label>Page<select id="page"></select></label>
+<label>Candidate<select id="candidate"><option value="warm">Material · warm mapping</option><option value="material">Material · standard mapping</option></select></label>
+<fieldset><legend>Theme</legend><div class="segmented"><button type="button" data-scheme="light" aria-pressed="true">Light</button><button type="button" data-scheme="dark" aria-pressed="false">Dark</button></div></fieldset>
+<fieldset><legend>Viewport</legend><div class="segmented"><button type="button" data-viewport="1440" aria-pressed="true">Desktop</button><button type="button" data-viewport="390" aria-pressed="false">Mobile</button></div></fieldset>
+<label>View<select id="layout"><option value="split">Side by side</option><option value="candidate">Candidate only</option><option value="current">Current only</option></select></label>
+</form>
+<div class="context"><p id="method"></p><div class="seeds" id="seeds" aria-label="Candidate seed colors"></div></div>
+<div class="comparison" id="comparison">
+<section class="preview current"><div class="preview-heading"><h2>Current</h2><span>Custom CIELAB generator</span></div><div class="viewport"><iframe id="current" title="Current site palette"></iframe></div><div class="swatches" id="current-swatches"></div></section>
+<section class="preview candidate"><div class="preview-heading"><h2 id="candidate-title">Material · warm</h2><span>HCT tonal palettes</span></div><div class="viewport"><iframe id="proposed" title="Candidate site palette"></iframe></div><div class="swatches" id="candidate-swatches"></div></section>
+</div>
+<details class="checks"><summary>Inspect role contrast <span id="check-summary"></span></summary><p>Measured solid role pairs. Photographic overlays, destination states, and full accessibility still need separate review.</p><div class="table-scroll"><table><thead><tr><th>Color pairing</th><th>Current</th><th>Candidate</th><th>Minimum</th></tr></thead><tbody id="contrast"></tbody></table></div></details>
+<footer><p>The page layout, typography, imagery, and content come from the current Astro site. Scroll either preview to compare the same part of the page; internal links update both previews.</p><p>Standard uses Material’s resolved surface roles. Warm uses custom HCT tones and more neutral chroma to stay closer to Colour Field. Both share the same seeds. Photo candidates also use Material quantization and scoring, so this compares the complete palette pipeline.</p><p>For a closer look, switch to “Candidate only.” Nothing here changes the published site.</p></footer>
+</main>
+<script type="module" src="/study.js"></script>
+</body></html>
