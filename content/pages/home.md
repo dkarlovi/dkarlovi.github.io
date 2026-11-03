@@ -16,11 +16,11 @@ gallery:
     credit: Photographs by Dalibor Karlović
     photos:
         - image:
-              url: ../../assets/uploads/teambuilding.jpeg
+              url: ../assets/teambuilding.jpeg
               alt: Sunlight catching golden meadow grasses, with people softly out of focus beyond
           caption: A little light. A different perspective.
         - image:
-              url: ../../assets/uploads/puzzle.jpeg
+              url: ../assets/puzzle.jpeg
               alt: Golden puzzle pieces against a dark background, photographed with a shallow depth of field
           caption: Look a little closer.
 footer:
@@ -31,7 +31,7 @@ footer:
     tagline: Software, photography, and the space in between.
     copyright: Dalibor Karlović · Croatia
 image:
-    url: ../../assets/uploads/self.jpeg
+    url: ../assets/self.jpeg
     alt: Dalibor Karlović
 summary: A web site for Dalibor Karlović, a software engineer and consultant from Croatia.
 ---

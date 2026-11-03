@@ -1,11 +1,12 @@
 ---
 title: A little light. A world of possibility.
+slug: colour-field-experiment
 summary: A draft demonstration of an article with a photographic palette, wide visuals and an
     interactive heading experiment.
 publishedAt: 2026-10-16
 draft: true
 image:
-    url: ../../assets/uploads/teambuilding.jpeg
+    url: ../../../assets/teambuilding.jpeg
     credit: Photograph by Dalibor Karlović
     position: 50% 45%
 categories:
@@ -23,7 +24,7 @@ The photograph sets the atmosphere. The reading column stays comfortable while i
 
 <figure>
 
-![Sunlit golden meadow grasses with a group of people beyond](../../assets/uploads/teambuilding.jpeg)
+![Sunlit golden meadow grasses with a group of people beyond](../../../assets/teambuilding.jpeg)
 
 <figcaption>A summer photograph by Dalibor Karlović.</figcaption>
 </figure>

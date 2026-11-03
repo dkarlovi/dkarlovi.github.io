@@ -5,7 +5,7 @@ summary: How to automate testing in-browser speech recognition, so you can stop 
     computer and go back mumbling to yourself.
 publishedAt: 2025-11-10
 image:
-    url: ../../assets/uploads/testing-speech-recognition-robot.png
+    url: ./testing-speech-recognition-robot.png
 discussReddit: 1ou4q0b
 categories:
     - engineering

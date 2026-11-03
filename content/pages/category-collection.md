@@ -2,7 +2,7 @@
 title: Categories
 summary: A collection of articles organized into categories.
 image:
-    url: ../../assets/uploads/puzzle.jpeg
+    url: ../assets/puzzle.jpeg
     credit: Photograph by Dalibor Karlović
 ---
 

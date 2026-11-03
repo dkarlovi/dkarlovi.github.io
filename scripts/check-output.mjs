@@ -3,17 +3,17 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, extname } from "node:path";
 import { load } from "cheerio";
 import { parse } from "yaml";
+import { contentFiles } from "./content-files.mjs";
 const site = new URL(process.env.BASE_URL || "https://dkarlovi.github.io");
 const base = site.pathname.replace(/\/$/, "");
-const homeData = parse(readFileSync("src/content/pages/home.md", "utf8").split("---")[1]);
+const homeData = parse(readFileSync("content/pages/home.md", "utf8").split("---")[1]);
 const content = {};
 for (const kind of ["articles", "categories", "series"]) {
-    content[kind] = readdirSync(`src/content/${kind}`)
-        .filter((name) => name.endsWith(".md"))
-        .map((name) => ({
-            id: name.slice(0, -3),
-            ...parse(readFileSync(`src/content/${kind}/${name}`, "utf8").split("---")[1]),
-        }));
+    content[kind] = contentFiles(kind).map(({ id, path }) => ({
+        id,
+        path,
+        ...parse(readFileSync(path, "utf8").split("---")[1]),
+    }));
 }
 content.articles = content.articles.filter((article) => !article.draft);
 const pages = new Map();
@@ -185,7 +185,7 @@ assert.deepEqual(
 );
 assert.equal(get("/articles")(".card").length, Math.min(content.articles.length, 20));
 for (const article of content.articles) {
-    const $ = get(`/${article.slug ?? article.id}`);
+    const $ = get(`/${article.slug}`);
     assert.equal($(".article-end .author").attr("href"), base + "/about");
     assert.equal($(".article-end .author strong").text(), homeData.title);
     assert.equal(
@@ -202,7 +202,7 @@ for (const article of content.articles) {
         );
     }
     const archiveData = parse(
-        readFileSync("src/content/pages/article-collection.md", "utf8").split("---")[1],
+        readFileSync("content/pages/article-collection.md", "utf8").split("---")[1],
     );
     assert.ok($(".article-end > .button-link").text().includes(archiveData.linkLabel));
     assert.equal($(".article-end > .button-link").attr("href"), base + "/articles");
@@ -212,8 +212,8 @@ for (const article of content.articles) {
         "eager",
         `${article.id}: author avatar loading`,
     );
-    assert.ok($("main").text().includes(article.summary), article.slug ?? article.id);
-    assert.ok($(".content").text().trim().length > 0, article.slug ?? article.id);
+    assert.ok($("main").text().includes(article.summary), article.slug);
+    assert.ok($(".content").text().trim().length > 0, article.slug);
     if (article.image) {
         assert.equal($(".photo-palette span").length, 4, "visible image-derived palette");
         assert.match($("body").attr("style"), /--paper-dark:#[a-f0-9]{6}/);
@@ -248,8 +248,8 @@ get("/about");
 get("/404");
 // Validate semantic blocks against editable source instead of freezing sample articles.
 for (const article of content.articles) {
-    const source = readFileSync(`src/content/articles/${article.id}.md`, "utf8");
-    const $ = get(`/${article.slug ?? article.id}`);
+    const source = readFileSync(article.path, "utf8");
+    const $ = get(`/${article.slug}`);
     assert.equal(
         $(".content figure").length,
         [...source.matchAll(/^\s*<figure>/gm)].length,
@@ -269,7 +269,7 @@ for (const article of content.articles) {
 const sitemap = readFileSync("dist/sitemap-0.xml", "utf8");
 assert.ok(existsSync("dist/sitemap-index.xml"));
 for (const article of content.articles.filter((a) => !a.draft))
-    assert.ok(sitemap.includes(`${site.origin}${base}/${article.slug ?? article.id}`));
+    assert.ok(sitemap.includes(`${site.origin}${base}/${article.slug}`));
 for (const icon of JSON.parse(readFileSync("dist/site.webmanifest", "utf8")).icons)
     assert.ok(existsSync(join("dist", icon.src)), icon.src);
 assert.ok(readFileSync("dist/browserconfig.xml", "utf8").includes("mstile-150x150.png"));

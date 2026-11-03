@@ -2,7 +2,7 @@
 title: A specific series
 slug: a-specific-series
 image:
-    url: ../../assets/uploads/self.jpeg
+    url: ../assets/self.jpeg
     credit: Photograph by Dalibor Karlović
 summary: About this specific series.
 ---

@@ -9,7 +9,7 @@ import { getArticles } from '../lib/articles';
 import { imagePalette } from '../lib/image-palette';
 import { paletteStyle } from '../lib/palette';
 import { sitePath } from '../lib/urls';
-export async function getStaticPaths() { return (await getArticles()).map(article => ({ params:{slug:article.data.slug??article.id},props:{article} })); }
+export async function getStaticPaths() { return (await getArticles()).map(article => ({ params:{slug:article.data.slug},props:{article} })); }
 interface Props { article: CollectionEntry<'articles'> }
 const { article } = Astro.props;
 const archive = (await getEntry('pages', 'article-collection'))!;
@@ -22,9 +22,9 @@ const stylesheet = styleName ? stylesheets[`/src/styles/experiences/${styleName}
 if (styleName && !stylesheet) throw new Error(`Article ${article.id}: unknown experience stylesheet "${styleName}"`);
 const palette = await imagePalette(article.data.image?.url, article.data.experience.accent);
 ---
-<SiteLayout {...article.data} pageClass={`article-page ${article.data.image ? 'has-hero' : ''}`} palette={paletteStyle(palette)} stylesheet={stylesheet} articleId={article.id}>
+<SiteLayout {...article.data} pageClass={`article-page ${article.data.image ? 'has-hero' : ''}`} palette={paletteStyle(palette)} stylesheet={stylesheet} articleId={article.data.slug}>
 <ArticleHero article={article} palette={palette} />
-{series.length>0 && <aside class="series-notice"><p class="eyebrow">Part of a series</p>{series.map(entry => <div><h2><DestinationLink href={sitePath(`/series/${entry.id}`)}>{entry.data.title}</DestinationLink></h2><p>{entry.data.summary}</p><ol>{articles.filter(a=>a.data.series.some(ref=>ref.id===entry.id)).reverse().map(sibling=><li>{sibling.id===article.id?<span aria-current="page">{sibling.data.title}</span>:<DestinationLink href={sitePath(`/${sibling.data.slug??sibling.id}`)}>{sibling.data.title}</DestinationLink>}</li>)}</ol></div>)}</aside>}
+{series.length>0 && <aside class="series-notice"><p class="eyebrow">Part of a series</p>{series.map(entry => <div><h2><DestinationLink href={sitePath(`/series/${entry.id}`)}>{entry.data.title}</DestinationLink></h2><p>{entry.data.summary}</p><ol>{articles.filter(a=>a.data.series.some(ref=>ref.id===entry.id)).reverse().map(sibling=><li>{sibling.id===article.id?<span aria-current="page">{sibling.data.title}</span>:<DestinationLink href={sitePath(`/${sibling.data.slug}`)}>{sibling.data.title}</DestinationLink>}</li>)}</ol></div>)}</aside>}
 <div class="content article-content"><Content /></div>
 <div class="article-end"><div class="article-end-row"><AuthorLink /><DiscussionLinks article={article} /></div>{archive.data.linkLabel && <DestinationLink class="button-link" href={sitePath('/articles')}>{archive.data.linkLabel} <span class="arrow" aria-hidden="true">↗</span></DestinationLink>}</div>
 </SiteLayout>

@@ -5,7 +5,7 @@ summary: Adding feature flags to your Symfony app was never easier than with Git
     Symfony bundle
 publishedAt: 2024-01-08
 image:
-    url: ../../assets/uploads/feature-flags-checkmark.jpeg
+    url: ./feature-flags-checkmark.jpeg
 discussReddit: 192j9s9
 discussHackerNews: 38965854
 categories:
@@ -79,7 +79,7 @@ In our Gitlab project, we use **Deploy / Feature flags** to create a new feature
 
 <figure>
 
-![The feature flag from within Gitlab](../../assets/uploads/feature-flags-screenshot1.png)
+![The feature flag from within Gitlab](./feature-flags-screenshot1.png)
 
 <figcaption>Image: The feature flag from within Gitlab</figcaption>
 </figure>
@@ -106,7 +106,7 @@ Until Symfony introduces native [feature](https://github.com/symfony/symfony/pul
 2. collect the server API URL and instance ID from Gitlab UI:
    <figure>
 
-    ![The feature flag configuration button](../../assets/uploads/feature-flags-screenshot2.png)
+    ![The feature flag configuration button](./feature-flags-screenshot2.png)
 
    <figcaption>Image: The feature flag configuration button</figcaption>
    </figure>

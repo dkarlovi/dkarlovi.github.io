@@ -9,7 +9,8 @@
         "check": "astro check",
         "test": "node --experimental-strip-types scripts/test.mjs",
         "check:output": "node scripts/check-output.mjs",
-        "test:integration": "node scripts/check-cms.mjs"
+        "test:integration": "node scripts/check-cms.mjs",
+        "new": "node scripts/new-article.mjs"
     },
     "dependencies": {
         "@astrojs/sitemap": "^3.7.4",

@@ -1,7 +1,7 @@
 ---
 title: About Dalibor
 image:
-    url: ../../assets/uploads/self.jpeg
+    url: ../assets/self.jpeg
 summary: A little about Dalibor
 eyebrow: A little about me
 linkLabel: More about me
