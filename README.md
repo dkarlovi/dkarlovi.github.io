@@ -139,13 +139,24 @@ image:
     position: 50% 45% # focal point, each coordinate 0–100%
 experience:
     accent: "#006b65" # optional; adjusted if needed for legibility
-    headingExperiment: terrain # none (default) or terrain
-    stylesheet: terrain # optional src/styles/experiences/terrain.css
+    layout: box # heading experiment layout; "box" (default) is the only one so far
+    aspect: 16/9 # heading experiment frame ratio (default 16/9)
 ```
 
-A named experience stylesheet loads only on articles that request it. Scope rules with `body[data-article="article-slug"]` or `body.article-page`; the entire shared header/footer can consume the article’s `--paper`, `--ink`, `--accent`, `--panel`, and other semantic roles. The root `--*-light`/`--*-dark` values define the extracted palette. Avoid fixed colours in shared components. For a new interactive header, add an Astro component and extend the explicit `headingExperiment` registry in the collection schema and `ArticleHero.astro`.
+### Heading experiments
 
-`content/articles/2026/2026-10-16-colour-field-experiment/` is a draft authoring example: view `/colour-field-experiment` in development. It is excluded from production routes, counts and sitemap. Its optional 16:9 canvas supports keyboard light controls, pause, visibility gating, and live reduced-motion changes.
+An article gets an interactive heading by placing an `experiment.astro` next to its `index.md`; no registry or frontmatter switch is needed. The site supplies the frame (the `layout`, currently a bordered `box` at the chosen `aspect`, with a taller minimum on phones) and the experiment just fills it edge to edge. The component receives `article` and its resolved `palette` as props, so it can match the article's colours, for example when building an embed URL at build time.
+
+```text
+content/articles/2026/2026-11-03-introducing-diapason/
+    index.md
+    experiment.astro   # markup and an optional <script>; may import sibling files
+    experiment.css     # optional styles, linked only on this article
+```
+
+Put styles in `experiment.css`, not in a `<style>` block: Astro bundles component styles by module graph, so they would load on every article. The build rejects `<style>` in an experiment. Scripts are fine; they load only where the experiment renders. Global touches can be scoped with `body[data-article]` because the file only loads on its own article; the shared header/footer can consume `--paper`, `--ink`, `--accent`, `--panel` and the root `--*-light`/`--*-dark` values. Avoid fixed colours. A new layout is a component in `src/components/experiments/` plus a value in the `layout` enum.
+
+Two drafts show the range: `/colour-field-experiment` (a canvas terrain study with keyboard light controls, pause, visibility gating and live reduced-motion changes) and `/introducing-diapason` (an embedded Diapason tune editor themed from the article palette). Drafts are visible in development only and excluded from production routes, counts and sitemap.
 
 Markdown prose stays readable while images, figures, code, tables and videos can use the wider article canvas. Shiki highlighting is static. Add a code caption using a standard HTML figure around the fenced block, as the existing articles already do. Captions are centred; code and wide tables scroll within their own surfaces on small screens. Keep descriptive image alt text and add captions/transcripts to authored videos.
 

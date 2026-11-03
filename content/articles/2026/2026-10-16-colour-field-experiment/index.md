@@ -11,9 +11,6 @@ image:
     position: 50% 45%
 categories:
     - engineering
-experience:
-    headingExperiment: terrain
-    stylesheet: terrain
 ---
 
 This draft demonstrates the optional article experience. It is visible in development and excluded from the published site.

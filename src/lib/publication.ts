@@ -49,6 +49,8 @@ export function validateArticleDates(entries: { id: string; data: { publishedAt:
     for (const entry of entries) {
         const date = entry.data.publishedAt.toISOString().slice(0, 10);
         if (!entry.id.startsWith(`${date}-`))
-            throw new Error(`Article folder ${entry.id} must start with its publishedAt date ${date}`);
+            throw new Error(
+                `Article folder ${entry.id} must start with its publishedAt date ${date}`,
+            );
     }
 }

@@ -58,12 +58,18 @@ try {
     );
     const media = "content/assets/cms-fixture.png";
     assert.ok(!existsSync(media));
-    await sharp({ create: { width: 4096, height: 3072, channels: 3, background: "#2679a1" } })
+    await sharp({
+        create: {
+            width: 4096,
+            height: 3072,
+            channels: 3,
+            background: "#2679a1",
+        },
+    })
         .png()
         .toFile(media);
     created.push(media);
-    const headerFields =
-        `image:\n    url: ${sharedMedia}\n    credit: CMS header attribution\n    alt: CMS header photo\n    position: 60% 35%\n`;
+    const headerFields = `image:\n    url: ${sharedMedia}\n    credit: CMS header attribution\n    alt: CMS header photo\n    position: 60% 35%\n`;
     writeFileSync(
         category,
         readFileSync(category, "utf8").replace("summary:", headerFields + "summary:"),
@@ -89,7 +95,9 @@ try {
         );
     const themed = article("cms-fixture-0");
     const localMedia = `${dirname(themed)}/local.png`;
-    await sharp({ create: { width: 800, height: 600, channels: 3, background: "#a12679" } })
+    await sharp({
+        create: { width: 800, height: 600, channels: 3, background: "#a12679" },
+    })
         .png()
         .toFile(localMedia);
     created.push(localMedia);
@@ -97,9 +105,15 @@ try {
         themed,
         readFileSync(themed, "utf8").replace(
             "categories: [programming]",
-            'categories: [programming]\nexperience:\n    headingExperiment: terrain\n    stylesheet: terrain\n    accent: "#006b65"\n',
+            'categories: [programming]\nexperience:\n    aspect: 4/3\n    accent: "#006b65"\n',
         ),
     );
+    // A co-located experiment fills the heading layout without any registry or stylesheet name.
+    write(
+        `${dirname(themed)}/experiment.astro`,
+        "<p data-cms-experiment>CMS experiment</p>\n<script>document.body.dataset.cmsExperimentScript = '1';</script>\n",
+    );
+    write(`${dirname(themed)}/experiment.css`, "[data-cms-experiment] { color: #c0ffee; }\n");
     writeFileSync(
         themed,
         updateFrontmatter(readFileSync(themed, "utf8"), (data) => {
@@ -270,12 +284,44 @@ try {
         /cms-fixture/,
         "Author avatar follows the About image",
     );
-    assert.equal(html("cms-fixture-0")("[data-heading-experiment]").length, 1);
-    assert.equal(html("cms-fixture-0")('link[href*="terrain"]').length, 1);
     assert.equal(
-        html("cms-fixture-plain")('[data-heading-experiment], link[href*="terrain"]').length,
+        html("cms-fixture-0")('[data-heading-experiment][data-layout="box"] [data-cms-experiment]')
+            .length,
+        1,
+    );
+    assert.match(
+        html("cms-fixture-0")("[data-heading-experiment]").attr("style"),
+        /--experiment-aspect:4\/3/,
+    );
+    assert.equal(
+        html("cms-fixture-plain")("[data-heading-experiment], .with-experiment").length,
         0,
     );
+    // Inline and linked CSS: an experiment's styles must load only on its own article.
+    const pageCss = (page) => {
+        const $ = html(page);
+        return (
+            $("style").text() +
+            $('link[rel="stylesheet"]')
+                .map((_, link) =>
+                    readFileSync(
+                        `dist${$(link).attr("href").slice($(link).attr("href").indexOf("/_astro/"))}`,
+                        "utf8",
+                    ),
+                )
+                .get()
+                .join("")
+        );
+    };
+    assert.match(pageCss("cms-fixture-0"), /c0ffee/);
+    for (const page of ["cms-fixture-plain", "cms-fixture-1"]) {
+        assert.doesNotMatch(pageCss(page), /c0ffee/, `Experiment styles leaked onto ${page}`);
+        assert.doesNotMatch(
+            readFileSync(`dist/${page}/index.html`, "utf8"),
+            /cmsExperimentScript/,
+            `Experiment script leaked onto ${page}`,
+        );
+    }
     assert.equal(html("cms-fixture-0")(".photo-palette span").length, 4);
     assert.match(html("cms-fixture-0")(".photo-credit").text(), /CMS image attribution/);
     assert.ok(!existsSync("dist/cms-fixture-draft/index.html"), "No draft route");
@@ -403,7 +449,10 @@ try {
     unlinkSync(bad);
     created.splice(created.indexOf(bad), 1);
     for (const [text, expected] of [
-        ["---\ntitle: No slug\nsummary: URL must be explicit\npublishedAt: 2026-01-01\n---\n", /slug/],
+        [
+            "---\ntitle: No slug\nsummary: URL must be explicit\npublishedAt: 2026-01-01\n---\n",
+            /slug/,
+        ],
         [
             "---\ntitle: Wrong date\nslug: cms-fixture-invalid\nsummary: Folder date differs\npublishedAt: 2026-02-02\n---\n",
             /2026-01-01-cms-fixture-invalid.*2026-02-02/,
@@ -424,8 +473,8 @@ try {
     created.splice(created.indexOf(misplaced), 1);
     for (const [setting, expected] of [
         ["accent: red", /six-digit hex/],
-        ["headingExperiment: unknown", /headingExperiment/],
-        ["stylesheet: missing-style", /unknown experience stylesheet/],
+        ["layout: unknown", /layout/],
+        ["aspect: wide", /aspect ratio/],
     ]) {
         write(
             bad,
@@ -434,6 +483,17 @@ try {
         assert.match(build(false), expected);
         unlinkSync(bad);
         created.splice(created.indexOf(bad), 1);
+    }
+    const styled = `${dirname(bad)}/experiment.astro`;
+    write(
+        bad,
+        "---\ntitle: Styled experiment\nslug: cms-fixture-invalid\nsummary: Reject leaking styles\npublishedAt: 2026-01-01\n---\n",
+    );
+    write(styled, "<p>Leaky</p>\n<style>p { color: red; }</style>\n");
+    assert.match(build(false), /move <style> into experiment\.css/);
+    for (const path of [styled, bad]) {
+        unlinkSync(path);
+        created.splice(created.indexOf(path), 1);
     }
     for (const [metadata, expected] of [
         [{ url: articleMedia, position: "200% 45%" }, /coordinates/],
@@ -453,7 +513,7 @@ try {
     );
     assert.match(build(false), /cms-fixture.*wrong-id/);
     console.log(
-        "CMS fixture builds passed: native pagination boundary, optional fields/page images, image upload, draft exclusion, empty taxonomy, source tests, optional article experiences/palettes/stylesheets, co-located article media, and invalid reference/media/slug/layout/date/experience rejection.",
+        "CMS fixture builds passed: native pagination boundary, optional fields/page images, image upload, draft exclusion, empty taxonomy, source tests, co-located heading experiments/layouts/palettes, co-located article media, and invalid reference/media/slug/layout/date/experience rejection.",
     );
 } finally {
     for (const [path, source] of originals) writeFileSync(path, source);

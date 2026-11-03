@@ -603,9 +603,10 @@
     font-size: 1rem;
     max-width: 58ch;
 }
-.heading-experiment {
+/* Heading experiment layouts. Experiments live next to their article and fill the frame. */
+.heading-experiment[data-layout="box"] {
     width: min(100%, 40rem);
-    aspect-ratio: 16/9;
+    aspect-ratio: var(--experiment-aspect, 16/9);
     position: relative;
     align-self: center;
     isolation: isolate;
@@ -616,57 +617,13 @@
     color: var(--ink-dark);
     box-shadow: 0 1.5rem 4rem #0002;
 }
-.heading-experiment canvas {
+.heading-experiment[data-layout="box"] > * {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-}
-.experiment-topbar {
-    position: absolute;
-    top: 0.9375rem;
-    left: 1.25rem;
-    right: 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-}
-.experiment-topbar .eyebrow {
-    font-size: 0.5625rem;
-}
-.experiment-topbar button {
-    border: 1px solid currentColor;
-    border-radius: 2rem;
-    padding: 0.3rem 0.8rem;
-    background: var(--paper-dark);
-    font-size: 0.625rem;
-}
-.heading-experiment figcaption {
-    position: absolute;
-    bottom: 0.875rem;
-    left: 1.25rem;
-    right: 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    font-size: 0.5625rem;
-}
-.heading-experiment label {
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    font-size: 0.625rem;
-}
-.heading-experiment input {
-    width: 5.625rem;
-    accent-color: var(--accent-dark);
-    cursor: pointer;
-}
-.heading-experiment :focus-visible {
-    outline-color: currentColor;
-    outline-offset: 4px;
+    margin: 0;
+    border: 0;
 }
 @media (max-width: 380px) {
     .article-hero .palette-label {
@@ -680,7 +637,7 @@
     .with-experiment .back-link {
         position: static;
     }
-    .heading-experiment {
+    .heading-experiment[data-layout="box"] {
         width: min(100%, 37.5rem);
     }
     .with-experiment .article-heading {
@@ -838,27 +795,9 @@
     .with-experiment .article-summary {
         font-size: 0.9375rem;
     }
-    .heading-experiment figcaption > span {
-        display: none;
-    }
-    .heading-experiment figcaption {
-        left: 0.75rem;
-        right: 0.75rem;
-        bottom: 0.5rem;
-    }
-    .heading-experiment label {
-        font-size: 0.5625rem;
-    }
-    .heading-experiment input {
-        width: 6rem;
-    }
-    .experiment-topbar {
-        top: 0.625rem;
-        left: 0.75rem;
-        right: 0.75rem;
-    }
-    .experiment-topbar button {
-        font-size: 0.5625rem;
+    /* Keep a usable stage on phones even for wide aspect ratios. */
+    .heading-experiment[data-layout="box"] {
+        min-height: min(26rem, 70svh);
     }
     .without-photo {
         min-height: 35rem;

@@ -61,4 +61,6 @@ writeFileSync(
     file,
     `---\n${frontmatter}# categories: ${categories.join(", ")}\n# image:\n#     url: ./cover.jpeg\n#     alt: Describe the photo\n---\n\nStart writing here. Put this article's images next to this file and reference them as ./name.jpeg.\n`,
 );
-console.log(`Created ${file}\nPreview with npm run dev at /${slug} (drafts only appear in dev; remove draft: true to publish).`);
+console.log(
+    `Created ${file}\nPreview with npm run dev at /${slug} (drafts only appear in dev; remove draft: true to publish).`,
+);

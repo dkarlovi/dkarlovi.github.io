@@ -1,6 +1,6 @@
 "use strict";
 (() => {
-    const canvas = document.querySelector("[data-heading-experiment] canvas");
+    const canvas = document.querySelector("[data-terrain] canvas");
     if (!canvas) return;
     const ctx = canvas.getContext("2d"),
         button = document.querySelector("[data-experiment-motion]"),

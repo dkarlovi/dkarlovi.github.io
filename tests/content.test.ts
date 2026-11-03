@@ -35,6 +35,9 @@ test("articles live in dated folders and declare their public slug", () => {
         const id = articleIdFromPath(path.replace(/^content\/articles\//, ""));
         const data = parse(readFileSync(path, "utf8").split("---")[1]);
         assert.equal(typeof data.slug, "string", `${path}: slug is required`);
-        assert.ok(id.startsWith(`${data.publishedAt}-`), `${path}: folder date matches publishedAt`);
+        assert.ok(
+            id.startsWith(`${data.publishedAt}-`),
+            `${path}: folder date matches publishedAt`,
+        );
     }
 });
