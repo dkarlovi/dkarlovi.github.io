@@ -3,7 +3,6 @@ title: Introducing Diapason
 slug: introducing-diapason
 summary: If you're as confused by musical cutlery as I am, Diapason is the right fork to get the tune out of your head and into a MIDI file.
 publishedAt: 2026-11-03
-draft: true
 categories: [engineering]
 series: []
 keywords: [MIDI, pitch detection, Web Audio, Web MIDI, agentic coding, Claude Code, Codex]

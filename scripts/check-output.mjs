@@ -59,6 +59,10 @@ for (const [path, title] of [
     assert.equal(get("/articles")(".subject-link[aria-current]").length, 0);
 }
 const knownIllustrativeLinks = new Set(["/blob/master/LICENSE"]);
+// Other GitHub Pages project sites share this origin but are deployed from their own repos.
+const externalProjectSites = ["/diapason"];
+const isExternalProjectSite = (pathname) =>
+    externalProjectSites.some((path) => pathname === path || pathname.startsWith(path + "/"));
 let checkedLinks = 0;
 for (const [file, $] of pages) {
     if ($('meta[http-equiv="refresh"]').length) continue;
@@ -148,6 +152,7 @@ for (const [file, $] of pages) {
         const target = new URL(raw, canonical);
         if (target.origin !== site.origin) continue;
         if (knownIllustrativeLinks.has(target.pathname)) continue;
+        if (isExternalProjectSite(target.pathname)) continue;
         assert.ok(
             target.pathname === base || target.pathname.startsWith(base + "/"),
             `Missing base in ${file}: ${raw}`,
