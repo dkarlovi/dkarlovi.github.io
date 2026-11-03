@@ -7,7 +7,7 @@ import CategoryBadges from './CategoryBadges.astro';
 import { sitePath } from '../lib/urls';
 interface Props { article: CollectionEntry<'articles'>; priority?: boolean; loading?: 'eager' | 'lazy' }
 const { article, priority = false, loading = priority ? 'eager' : 'lazy' } = Astro.props;
-const href = sitePath(`/${article.data.slug ?? article.id}`);
+const href = sitePath(`/${article.data.slug}`);
 const date = article.data.publishedAt.toISOString().slice(0,10);
 ---
 <article class="card">

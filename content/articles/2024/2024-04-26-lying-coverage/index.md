@@ -4,7 +4,7 @@ slug: lying-coverage
 summary: Code coverage is a metric which does NOT represent how much or how well our code is tested.
 publishedAt: 2024-04-26
 image:
-    url: ../../assets/uploads/lying-coverage-greenwashing.jpeg
+    url: ./lying-coverage-greenwashing.jpeg
 discussReddit: 1cg0fbz
 categories:
     - engineering
@@ -30,7 +30,7 @@ In fact, misusing code coverage can lead to a false sense of security where deve
 
 <figure>
 
-![Greenwashing](../../assets/uploads/lying-coverage-greenwashing.jpeg)
+![Greenwashing](./lying-coverage-greenwashing.jpeg)
 
 <figcaption>Image: Greenwashing</figcaption>
 </figure>

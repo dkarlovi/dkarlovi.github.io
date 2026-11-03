@@ -1,7 +1,8 @@
 // Read Astro's actual dev-toolbar Audit panel, including its own visibility filtering.
 import { chromium } from "@playwright/test";
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { parse } from "yaml";
+import { contentFiles } from "./content-files.mjs";
 const origin = process.env.ASTRO_DEV_URL || "http://localhost:4321";
 const paths = ["/", "/about", "/articles", "/categories", "/series-collection", "/404"];
 for (const [kind, prefix] of [
@@ -9,13 +10,9 @@ for (const [kind, prefix] of [
     ["categories", "/category"],
     ["series", "/series"],
 ]) {
-    for (const name of (await readdir(`src/content/${kind}`)).filter((name) =>
-        name.endsWith(".md"),
-    )) {
-        const data = parse((await readFile(`src/content/${kind}/${name}`, "utf8")).split("---")[1]);
-        paths.push(
-            `${prefix}/${kind === "articles" ? (data.slug ?? name.slice(0, -3)) : name.slice(0, -3)}`,
-        );
+    for (const { id, path } of contentFiles(kind)) {
+        const data = parse((await readFile(path, "utf8")).split("---")[1]);
+        paths.push(`${prefix}/${kind === "articles" ? data.slug : id}`);
     }
 }
 const browser = await chromium.launch({ channel: "chrome", headless: true });

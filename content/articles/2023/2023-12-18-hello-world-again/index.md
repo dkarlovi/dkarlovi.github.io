@@ -3,7 +3,7 @@ title: Hello World Again!
 slug: hello-world-again
 summary: This is another summary
 image:
-    url: ../../assets/uploads/self.jpeg
+    url: ../../../assets/self.jpeg
 publishedAt: 2023-12-18
 draft: false
 categories:

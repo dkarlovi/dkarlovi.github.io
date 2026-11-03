@@ -2,6 +2,7 @@ import { defineCollection, reference } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { contentImage } from "./lib/content-image";
+import { articleIdFromPath } from "./lib/publication";
 // Keep native entry IDs tied to filenames; URL overrides remain separate data.
 const generateId = ({ entry }: { entry: string }) => entry.replace(/\.md$/, "");
 const copy = z.object({ title: z.string(), summary: z.string() });
@@ -23,14 +24,14 @@ const experience = z
     .default({ headingExperiment: "none" });
 const articles = defineCollection({
     loader: glob({
-        pattern: "*.md",
-        generateId,
-        base: "./src/content/articles",
+        pattern: "**/*.md",
+        generateId: ({ entry }) => articleIdFromPath(entry),
+        base: "./content/articles",
     }),
     schema: ({ image }) =>
         copy.extend({
             image: contentImage(image).optional(),
-            slug: z.string().optional(),
+            slug: z.string(),
             publishedAt: z.coerce.date(),
             draft: z.boolean().default(false),
             categories: z.array(reference("categories")).default([]),
@@ -42,7 +43,7 @@ const articles = defineCollection({
         }),
 });
 const pages = defineCollection({
-    loader: glob({ pattern: "*.md", generateId, base: "./src/content/pages" }),
+    loader: glob({ pattern: "*.md", generateId, base: "./content/pages" }),
     schema: ({ image }) =>
         copy.extend({
             image: contentImage(image).optional(),
@@ -96,12 +97,12 @@ const categories = defineCollection({
     loader: glob({
         pattern: "*.md",
         generateId,
-        base: "./src/content/categories",
+        base: "./content/categories",
     }),
     schema: ({ image }) => copy.extend({ slug: z.string(), image: contentImage(image).optional() }),
 });
 const series = defineCollection({
-    loader: glob({ pattern: "*.md", generateId, base: "./src/content/series" }),
+    loader: glob({ pattern: "*.md", generateId, base: "./content/series" }),
     schema: ({ image }) => copy.extend({ slug: z.string(), image: contentImage(image).optional() }),
 });
 export const collections = { articles, pages, categories, series };

@@ -3,7 +3,7 @@ title: Testing Commonmark features
 slug: testing-commonmark-features
 summary: We are testing the Commonmark features
 image:
-    url: ../../assets/uploads/testing-commonmark-features-ar-sofa.webp
+    url: ./testing-commonmark-features-ar-sofa.webp
 publishedAt: 2023-12-12
 draft: false
 categories:
@@ -285,15 +285,15 @@ With a reference later in the document defining the URL location:
 
 Original image:
 
-![A person wearing a headset while seated on a virtual sofa](../../assets/uploads/testing-commonmark-features-ar-sofa.webp)
+![A person wearing a headset while seated on a virtual sofa](./testing-commonmark-features-ar-sofa.webp)
 
 Another standard Markdown image:
 
-![A person wearing a headset while seated on a virtual sofa](../../assets/uploads/testing-commonmark-features-ar-sofa.webp)
+![A person wearing a headset while seated on a virtual sofa](./testing-commonmark-features-ar-sofa.webp)
 
 Images adapt to the available content width:
 
-![A person wearing a headset while seated on a virtual sofa](../../assets/uploads/testing-commonmark-features-ar-sofa.webp)
+![A person wearing a headset while seated on a virtual sofa](./testing-commonmark-features-ar-sofa.webp)
 
 <div id="content-footnotes"></div>
 

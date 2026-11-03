@@ -39,7 +39,7 @@ jobs:
               run: npm run check
             - name: Run tests
               run: npm test
-            - name: Verify CMS authoring and native pagination
+            - name: Verify content authoring and native pagination
               run: npm run test:integration
             - name: Build Astro
               env:

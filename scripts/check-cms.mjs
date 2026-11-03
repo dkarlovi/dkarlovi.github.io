@@ -1,15 +1,26 @@
 // Build real CMS-style files through Astro: no mocked collections or image resolver.
 import assert from "node:assert/strict";
-import { writeFileSync, readFileSync, existsSync, unlinkSync } from "node:fs";
+import { writeFileSync, readFileSync, existsSync, unlinkSync, mkdirSync, rmSync } from "node:fs";
+import { dirname } from "node:path";
 import { spawnSync } from "node:child_process";
 import { load } from "cheerio";
 import { parse, stringify } from "yaml";
-import { readdirSync } from "node:fs";
+import { contentFiles } from "./content-files.mjs";
 import sharp from "sharp";
 const created = [];
+const createdDirs = [];
 const originals = new Map();
+// Article fixtures use the real layout: content/articles/YYYY/YYYY-MM-DD-name/index.md
+const article = (name, date = "2026-01-01") =>
+    `content/articles/${date.slice(0, 4)}/${date}-${name}/index.md`;
+const sharedMedia = "../assets/cms-fixture.png";
+const articleMedia = "../../../assets/cms-fixture.png";
 function write(path, text) {
     assert.ok(!existsSync(path), `Refuse to overwrite ${path}`);
+    if (path.startsWith("content/articles/") && !existsSync(dirname(path))) {
+        mkdirSync(dirname(path), { recursive: true });
+        createdDirs.push(dirname(path));
+    }
     writeFileSync(path, text);
     created.push(path);
 }
@@ -34,8 +45,8 @@ function updateFrontmatter(source, update) {
 function html(path) {
     return load(readFileSync(`dist/${path ? path + "/" : ""}index.html`, "utf8"));
 }
-const category = "src/content/categories/cms-fixture.md";
-const draft = "src/content/articles/cms-fixture-draft.md";
+const category = "content/categories/cms-fixture.md";
+const draft = article("cms-fixture-draft", "2030-01-01");
 try {
     write(
         category,
@@ -43,42 +54,45 @@ try {
     );
     write(
         draft,
-        "---\ntitle: Private CMS draft\nsummary: Not published\npublishedAt: 2030-01-01\ndraft: true\ncategories: [cms-fixture]\n---\nPrivate body\n",
+        "---\ntitle: Private CMS draft\nslug: cms-fixture-draft\nsummary: Not published\npublishedAt: 2030-01-01\ndraft: true\ncategories: [cms-fixture]\n---\nPrivate body\n",
     );
-    const media = "src/assets/uploads/cms-fixture.png";
+    const media = "content/assets/cms-fixture.png";
     assert.ok(!existsSync(media));
     await sharp({ create: { width: 4096, height: 3072, channels: 3, background: "#2679a1" } })
         .png()
         .toFile(media);
     created.push(media);
     const headerFields =
-        "image:\n    url: ../../assets/uploads/cms-fixture.png\n    credit: CMS header attribution\n    alt: CMS header photo\n    position: 60% 35%\n";
+        `image:\n    url: ${sharedMedia}\n    credit: CMS header attribution\n    alt: CMS header photo\n    position: 60% 35%\n`;
     writeFileSync(
         category,
         readFileSync(category, "utf8").replace("summary:", headerFields + "summary:"),
     );
     write(
-        "src/content/series/cms-fixture.md",
+        "content/series/cms-fixture.md",
         `---\ntitle: CMS series\nslug: cms-fixture\nsummary: A series with its own photograph\n${headerFields}---\n`,
     );
     write(
-        "src/content/articles/cms-fixture-plain.md",
-        "---\ntitle: Plain CMS article\nsummary: Optional fields omitted\npublishedAt: 2026-01-01\n---\nPlain article body\n",
+        article("cms-fixture-plain"),
+        "---\ntitle: Plain CMS article\nslug: cms-fixture-plain\nsummary: Optional fields omitted\npublishedAt: 2026-01-01\n---\nPlain article body\n",
     );
-    const publishedCount = readdirSync("src/content/articles")
-        .filter((name) => name.endsWith(".md"))
-        .filter(
-            (name) =>
-                !parse(readFileSync(`src/content/articles/${name}`, "utf8").split("---")[1]).draft,
-        ).length;
+    const publishedCount = contentFiles("articles").filter(
+        ({ path }) => !parse(readFileSync(path, "utf8").split("---")[1]).draft,
+    ).length;
     const fixtureCount = 20 - (publishedCount % 20) + 1;
     const lastPage = Math.ceil((publishedCount + fixtureCount) / 20);
     for (let i = 0; i < fixtureCount; i++)
         write(
-            `src/content/articles/cms-fixture-${i}.md`,
-            `---\ntitle: CMS fixture ${i}\nsummary: A new article written by a CMS\npublishedAt: 2026-01-01\nimage:\n    url: ../../assets/uploads/cms-fixture.png\ncategories: [programming]\n---\nNew Markdown image:\n\n![CMS upload](../../assets/uploads/cms-fixture.png)\n`,
+            article(`cms-fixture-${i}`),
+            // The first fixture's body image sits next to the article, like article-specific media.
+            `---\ntitle: CMS fixture ${i}\nslug: cms-fixture-${i}\nsummary: A new article written by a CMS\npublishedAt: 2026-01-01\nimage:\n    url: ${articleMedia}\ncategories: [programming]\n---\nNew Markdown image:\n\n![CMS upload](${i === 0 ? "./local.png" : articleMedia})\n`,
         );
-    const themed = "src/content/articles/cms-fixture-0.md";
+    const themed = article("cms-fixture-0");
+    const localMedia = `${dirname(themed)}/local.png`;
+    await sharp({ create: { width: 800, height: 600, channels: 3, background: "#a12679" } })
+        .png()
+        .toFile(localMedia);
+    created.push(localMedia);
     writeFileSync(
         themed,
         readFileSync(themed, "utf8").replace(
@@ -96,11 +110,11 @@ try {
             });
         }),
     );
-    const aboutPath = "src/content/pages/about.md";
+    const aboutPath = "content/pages/about.md";
     originals.set(aboutPath, readFileSync(aboutPath, "utf8"));
     const [, aboutFrontmatter, ...aboutBody] = originals.get(aboutPath).split("---");
     const aboutData = parse(aboutFrontmatter);
-    aboutData.image = { url: "../../assets/uploads/cms-fixture.png", alt: "CMS About portrait" };
+    aboutData.image = { url: sharedMedia, alt: "CMS About portrait" };
     aboutData.homepageHero = {
         roles: "Engineer · Writer",
         introduction: "An introduction edited in About content.",
@@ -112,7 +126,7 @@ try {
         summary: "This introduction comes from the About entry.",
     };
     writeFileSync(aboutPath, `---\n${stringify(aboutData)}---${aboutBody.join("---")}`);
-    const homePath = "src/content/pages/home.md";
+    const homePath = "content/pages/home.md";
     originals.set(homePath, readFileSync(homePath, "utf8"));
     const [, homeFrontmatter, ...homeBody] = originals.get(homePath).split("---");
     const homeData = parse(homeFrontmatter);
@@ -131,14 +145,14 @@ try {
     };
     homeData.ticker = ["CMS ticker one", "CMS ticker two"];
     homeData.writing = { title: "CMS writing heading" };
-    homeData.image = { url: "../../assets/uploads/cms-fixture.png", alt: "CMS portrait" };
+    homeData.image = { url: sharedMedia, alt: "CMS portrait" };
     homeData.gallery = {
         title: "CMS gallery",
         credit: "CMS photographer",
         photos: [
             {
                 image: {
-                    url: "../../assets/uploads/cms-fixture.png",
+                    url: sharedMedia,
                     alt: "CMS gallery photo",
                     credit: "CMS gallery credit",
                 },
@@ -147,7 +161,7 @@ try {
         ],
     };
     writeFileSync(homePath, `---\n${stringify(homeData)}---${homeBody.join("---")}`);
-    const notFoundPath = "src/content/pages/not-found.md";
+    const notFoundPath = "content/pages/not-found.md";
     originals.set(notFoundPath, readFileSync(notFoundPath, "utf8"));
     writeFileSync(
         notFoundPath,
@@ -159,7 +173,7 @@ try {
             linkLabel: "CMS home link",
         })}---\n`,
     );
-    const archivePath = "src/content/pages/article-collection.md";
+    const archivePath = "content/pages/article-collection.md";
     originals.set(archivePath, readFileSync(archivePath, "utf8"));
     const [, archiveFrontmatter, ...archiveBody] = originals.get(archivePath).split("---");
     const archiveData = parse(archiveFrontmatter);
@@ -314,7 +328,7 @@ try {
         "category-collection",
         "series-collection",
     ]) {
-        const path = `src/content/pages/${name}.md`;
+        const path = `content/pages/${name}.md`;
         if (!originals.has(path)) originals.set(path, readFileSync(path, "utf8"));
         writeFileSync(
             path,
@@ -323,7 +337,7 @@ try {
             }),
         );
     }
-    for (const path of [category, "src/content/series/cms-fixture.md"]) {
+    for (const path of [category, "content/series/cms-fixture.md"]) {
         originals.set(path, readFileSync(path, "utf8"));
         writeFileSync(
             path,
@@ -340,7 +354,7 @@ try {
     );
     assert.equal(
         html("cms-fixture-0")(".hero-author .author strong").text(),
-        parse(readFileSync("src/content/pages/home.md", "utf8").split("---")[1]).title,
+        parse(readFileSync("content/pages/home.md", "utf8").split("---")[1]).title,
     );
     for (const route of [
         "articles",
@@ -360,32 +374,27 @@ try {
     );
     assert.equal(
         html("about")("main h1").text(),
-        parse(originals.get("src/content/pages/about.md").split("---")[1]).title,
+        parse(originals.get("content/pages/about.md").split("---")[1]).title,
     );
     for (const [path, source] of originals) writeFileSync(path, source);
     originals.clear();
-    const bad = "src/content/articles/cms-fixture-invalid.md";
+    const bad = article("cms-fixture-invalid");
     write(
         bad,
-        "---\ntitle: Invalid\nsummary: Invalid native reference\npublishedAt: 2026-01-01\ncategories: [missing-category]\n---\nInvalid\n",
+        "---\ntitle: Invalid\nslug: cms-fixture-invalid\nsummary: Invalid native reference\npublishedAt: 2026-01-01\ncategories: [missing-category]\n---\nInvalid\n",
     );
     assert.match(build(false), /missing-category/);
     unlinkSync(bad);
     created.splice(created.indexOf(bad), 1);
     write(
         bad,
-        "---\ntitle: Missing media\nsummary: Broken upload\npublishedAt: 2026-01-01\nimage:\n    url: ../../assets/uploads/missing-upload.png\n---\nInvalid\n",
+        "---\ntitle: Missing media\nslug: cms-fixture-invalid\nsummary: Broken upload\npublishedAt: 2026-01-01\nimage:\n    url: ./missing-upload.png\n---\nInvalid\n",
     );
     assert.match(build(false), /missing-upload/);
     unlinkSync(bad);
     created.splice(created.indexOf(bad), 1);
-    const existingFilename = readdirSync("src/content/articles")
-        .filter((name) => name.endsWith(".md") && !name.startsWith("cms-fixture"))
-        .sort()[0];
-    const existing = parse(
-        readFileSync(`src/content/articles/${existingFilename}`, "utf8").split("---")[1],
-    );
-    const duplicateSlug = existing.slug ?? existingFilename.slice(0, -3);
+    const existingFile = contentFiles("articles").find(({ id }) => !id.includes("cms-fixture"));
+    const duplicateSlug = parse(readFileSync(existingFile.path, "utf8").split("---")[1]).slug;
     write(
         bad,
         `---\ntitle: Duplicate URL\nsummary: Duplicate URL override\npublishedAt: 2026-01-01\nslug: ${duplicateSlug}\n---\nInvalid\n`,
@@ -393,6 +402,26 @@ try {
     assert.ok(build(false).includes(duplicateSlug));
     unlinkSync(bad);
     created.splice(created.indexOf(bad), 1);
+    for (const [text, expected] of [
+        ["---\ntitle: No slug\nsummary: URL must be explicit\npublishedAt: 2026-01-01\n---\n", /slug/],
+        [
+            "---\ntitle: Wrong date\nslug: cms-fixture-invalid\nsummary: Folder date differs\npublishedAt: 2026-02-02\n---\n",
+            /2026-01-01-cms-fixture-invalid.*2026-02-02/,
+        ],
+    ]) {
+        write(bad, text);
+        assert.match(build(false), expected);
+        unlinkSync(bad);
+        created.splice(created.indexOf(bad), 1);
+    }
+    const misplaced = "content/articles/2026/2025-01-01-cms-fixture-misplaced/index.md";
+    write(
+        misplaced,
+        "---\ntitle: Misplaced\nslug: cms-fixture-misplaced\nsummary: Year folder differs\npublishedAt: 2025-01-01\n---\n",
+    );
+    assert.match(build(false), /YYYY\/YYYY-MM-DD-name/);
+    unlinkSync(misplaced);
+    created.splice(created.indexOf(misplaced), 1);
     for (const [setting, expected] of [
         ["accent: red", /six-digit hex/],
         ["headingExperiment: unknown", /headingExperiment/],
@@ -400,19 +429,19 @@ try {
     ]) {
         write(
             bad,
-            `---\ntitle: Invalid article experience\nsummary: Reject invalid author settings\npublishedAt: 2026-01-01\nexperience:\n    ${setting}\n---\nInvalid\n`,
+            `---\ntitle: Invalid article experience\nslug: cms-fixture-invalid\nsummary: Reject invalid author settings\npublishedAt: 2026-01-01\nexperience:\n    ${setting}\n---\nInvalid\n`,
         );
         assert.match(build(false), expected);
         unlinkSync(bad);
         created.splice(created.indexOf(bad), 1);
     }
     for (const [metadata, expected] of [
-        [{ url: "../../assets/uploads/cms-fixture.png", position: "200% 45%" }, /coordinates/],
+        [{ url: articleMedia, position: "200% 45%" }, /coordinates/],
         [{ credit: "A credit without a file" }, /image.url/],
     ]) {
         write(
             bad,
-            `---\n${stringify({ title: "Invalid image", summary: "Reject incomplete image metadata", publishedAt: "2026-01-01", image: metadata })}---\n`,
+            `---\n${stringify({ title: "Invalid image", slug: "cms-fixture-invalid", summary: "Reject incomplete image metadata", publishedAt: "2026-01-01", image: metadata })}---\n`,
         );
         assert.match(build(false), expected);
         unlinkSync(bad);
@@ -424,10 +453,11 @@ try {
     );
     assert.match(build(false), /cms-fixture.*wrong-id/);
     console.log(
-        "CMS fixture builds passed: native pagination boundary, optional fields/page images, image upload, draft exclusion, empty taxonomy, source tests, optional article experiences/palettes/stylesheets, and invalid reference/media/slug/experience rejection.",
+        "CMS fixture builds passed: native pagination boundary, optional fields/page images, image upload, draft exclusion, empty taxonomy, source tests, optional article experiences/palettes/stylesheets, co-located article media, and invalid reference/media/slug/layout/date/experience rejection.",
     );
 } finally {
     for (const [path, source] of originals) writeFileSync(path, source);
-    for (const path of created.reverse()) unlinkSync(path);
+    for (const path of created.reverse()) if (existsSync(path)) unlinkSync(path);
+    for (const dir of createdDirs.reverse()) rmSync(dir, { recursive: true, force: true });
     build();
 }

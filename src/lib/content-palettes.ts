@@ -29,7 +29,7 @@ async function buildRegistry() {
             entries.flatMap((entry) => {
                 const path =
                     entry.collection === "articles"
-                        ? `/${entry.data.slug ?? entry.id}`
+                        ? `/${entry.data.slug}`
                         : entry.collection === "categories"
                           ? `/category/${entry.id}`
                           : entry.collection === "series"

@@ -13,23 +13,34 @@ npm run dev
 
 ## Content
 
-- `src/content/articles/*.md`: one article per file, named for its public slug.
-- `src/content/pages/*.md`: homepage, About, and listing introduction copy.
-- `src/content/categories/*.md` and `src/content/series/*.md`: taxonomy records. Their filename and `slug` must match.
-- `src/content.config.ts`: native Astro collection schemas, including `reference()` and `image()`. The built-in loader uses filenames as stable entry IDs, keeping optional public URL overrides separate.
-- `src/assets/uploads/`: editable images, processed by Astro in both frontmatter and Markdown.
-- `src/assets/`: source assets; `public/`: brand/favicon/manifest files.
+Content lives in `content/`, separate from the code in `src/` that renders it:
+
+```
+content/
+  articles/2026/2026-11-03-my-article/
+    index.md          # the article
+    cover.jpeg        # images used only by this article sit next to it
+  pages/*.md          # homepage, About, and listing introduction copy
+  categories/*.md     # taxonomy records; filename and `slug` must match
+  series/*.md
+  assets/             # images shared by several entries (portrait, listing headers)
+```
+
+- Each article is a folder `content/articles/YYYY/YYYY-MM-DD-name/index.md`. The folder name is the entry ID; the year folder and date prefix must match `publishedAt`, and the build fails otherwise. Any other `.md` file under `content/articles/` also fails the build.
+- `src/content.config.ts`: native Astro collection schemas, including `reference()` and `image()`.
+- `src/assets/`: theme assets such as icons; `public/`: brand/favicon/manifest files.
 
 Example article:
 
 ```markdown
 ---
 title: An example article
+slug: an-example-article
 summary: A short description.
 publishedAt: 2026-10-16
 draft: false
 image:
-    url: ../../assets/uploads/example.webp
+    url: ./example.webp
     alt: A useful description
 categories: [engineering]
 series: []
@@ -40,44 +51,38 @@ keywords: [engineering]
 
 Ordinary Markdown, including images:
 
-![A useful description](../../assets/uploads/example.webp)
+![A useful description](./example.webp)
 ```
 
-The filename supplies the article ID and URL (`an-example-article.md` → `/an-example-article`). An optional `slug` frontmatter field overrides its URL. Categories and series contain native collection IDs: `engineering` refers to `src/content/categories/engineering.md`. New articles and images need no generated imports or template changes.
+Saved as `content/articles/2026/2026-10-16-an-example-article/index.md` with `example.webp` beside it. Shared images are referenced relative to the file, e.g. `../../../assets/self.jpeg` from an article or `../assets/self.jpeg` from a page or taxonomy entry.
 
-Articles, pages, categories, series and gallery photos share one `image` object. Its `url` is required; `credit`, `alt` and `position` are optional. Listing headers read that same object. Set them in `src/content/pages/article-collection.md`, `category-collection.md`, or `series-collection.md` for the main listings, and in each category or series file for its own article listing. For example:
+The required `slug` frontmatter field is the public URL (`slug: an-example-article` → `/an-example-article`); the folder name never affects URLs, so files can be reorganised freely. Categories and series contain native collection IDs: `engineering` refers to `content/categories/engineering.md`. New articles and images need no generated imports or template changes.
+
+Articles, pages, categories, series and gallery photos share one `image` object. Its `url` is required; `credit`, `alt` and `position` are optional. Listing headers read that same object. Set them in `content/pages/article-collection.md`, `category-collection.md`, or `series-collection.md` for the main listings, and in each category or series file for its own article listing. For example:
 
 ```yaml
 image:
-    url: ../../assets/uploads/puzzle.jpeg
+    url: ../assets/puzzle.jpeg
     credit: Photograph by Dalibor Karlović
     alt: Golden puzzle pieces against a dark background
     position: 50% 45%
 ```
 
-The photo supplies the page’s light/dark palette. Omit the whole `image` object for a plain heading. All image fields are available together in Pages CMS; `url` retains Astro’s native local-image validation and optimization. A supplied `alt` is used where the photo conveys content; decorative avatars keep empty alt text because the linked author name already identifies them. `position` accepts two percentages from 0% to 100%; omitted positions preserve each placement’s existing crop.
+The photo supplies the page’s light/dark palette. Omit the whole `image` object for a plain heading. `url` uses Astro’s native local-image validation and optimization. A supplied `alt` is used where the photo conveys content; decorative avatars keep empty alt text because the linked author name already identifies them. `position` accepts two percentages from 0% to 100%; omitted positions preserve each placement’s existing crop.
 
-The About entry also supplies the homepage’s introduction card through `homepageTeaser`: `title` and `summary` control its heading and paragraph. About’s top-level `eyebrow` supplies the label on the About page and homepage card; its `linkLabel` supplies both homepage About buttons. The card shares the About image. Edit the card under **About → Homepage introduction** in Pages CMS, or omit the group to hide it. Edit the shared label and button text directly under **About**.
+The About entry also supplies the homepage’s introduction card through `homepageTeaser`: `title` and `summary` control its heading and paragraph. About’s top-level `eyebrow` supplies the label on the About page and homepage card; its `linkLabel` supplies both homepage About buttons. The card shares the About image. Omit the group to hide it.
 
-About’s `homepageHero.roles` and `homepageHero.introduction` supply the hero’s role line and introduction paragraph, editable under **About → Homepage hero**. The site-wide logo tagline comes from `brandTagline` in the Homepage entry.
+About’s `homepageHero.roles` and `homepageHero.introduction` supply the hero’s role line and introduction paragraph. The site-wide logo tagline comes from `brandTagline` in the Homepage entry.
 
-Homepage also owns the remaining homepage and footer content: `hero` (display name and footnote), `ticker`, `writing` (section heading), `gallery` (heading, credit, images, alt text and captions), and `footer` (eyebrow, multiline heading, description and copyright name/location). The footer adds the current year automatically. Homepage’s `title` supplies the shared brand and article author name. All groups are exposed in Pages CMS.
+Homepage also owns the remaining homepage and footer content: `hero` (display name and footnote), `ticker`, `writing` (section heading), `gallery` (heading, credit, images, alt text and captions), and `footer` (eyebrow, multiline heading, description and copyright name/location). The footer adds the current year automatically. Homepage’s `title` supplies the shared brand and article author name.
 
-The 404 page’s copy lives in `src/content/pages/not-found.md`, also editable in Pages CMS. Standard interface text remains in the theme: navigation and article controls, pagination, empty states, consent controls, image-palette labels and the optional interactive terrain demo. Social-profile URLs remain in `src/data/site.ts`.
+The 404 page’s copy lives in `content/pages/not-found.md`. Standard interface text remains in the theme: navigation and article controls, pagination, empty states, consent controls, image-palette labels and the optional interactive terrain demo. Social-profile URLs remain in `src/data/site.ts`.
 
-The Articles entry’s `linkLabel` supplies “Explore my writing” in the homepage hero, collection eyebrows and article-footer archive button. Its `title` supplies the homepage archive button (“All articles”), and `discussionHeading` sets the discussion prompt. These are editable under **Article listing** in Pages CMS. Article headings and footers share the same author link; Reddit and Hacker News discussions use branded icon buttons.
+The Articles entry’s `linkLabel` supplies “Explore my writing” in the homepage hero, collection eyebrows and article-footer archive button. Its `title` supplies the homepage archive button (“All articles”), and `discussionHeading` sets the discussion prompt. Article headings and footers share the same author link; Reddit and Hacker News discussions use branded icon buttons.
 
 Drafts appear in `npm run dev` and are excluded from production article routes, listings, counts, and sitemap. Articles are sorted newest first; series contents are oldest first. Listings use Astro's native pagination with 20 records per page.
 
 Content uses Astro's normal Markdown rendering, GFM, footnotes, and Shiki highlighting. Native heading IDs are the default. Explicit HTML aliases in migrated articles keep old `#content-...` links working. Captions use standard `<figure>`/`<figcaption>` HTML; expandable notes use `<details>`/`<summary>`. Add `class="collapsible-aside"` to a details element for the shared editorial aside: tinted expanded background, protruding exclamation badge, and a bouncing plus/minus control that emits a subtle diagonal sweep on both open and close. Its timing scales with travel distance, and it respects reduced motion. The native disclosure works without JavaScript. Put blank lines around Markdown inside HTML blocks. No custom YASSG syntax or compatibility parser remains.
-
-## Optional Pages CMS
-
-The repository includes `.pages.yml` for [Pages CMS](https://pagescms.org/). It defines article/page/taxonomy fields, native reference IDs, and image uploads. Nothing is connected to a CMS account, and the build has no CMS runtime dependency.
-
-Media input is `src/assets/uploads`; editor output is `../../assets/uploads`, relative to the Markdown files in each collection directory. This lets Astro's native image processing handle a CMS-uploaded file. Keep collection files at their current depth or update the media output paths accordingly. Taxonomy reference fields store `{fields.slug}`, matching Astro's collection IDs; taxonomy filenames must match that slug.
-
-The Markdown body editor offers Editor/Source switching. Use Source mode for legacy HTML figures, embedded iframes, explicit anchors, and expandable notes. Rich-text editors may normalize or discard HTML; lossless Editor/Source round-tripping of these blocks has not been verified against a live Pages CMS account. Ordinary Markdown/frontmatter and native image/reference paths are covered by local build checks. You can choose another Git-backed CMS without changing Astro's content APIs.
 
 ## Verification
 
@@ -89,7 +94,7 @@ npm run check:output
 npm run test:integration
 ```
 
-The integration check temporarily creates CMS-style content/media, exercises native image processing, empty taxonomies, drafts, invalid references and the 20/21-record pagination boundary, then removes its fixtures and rebuilds. Run it separately from development/build processes. `check:output` checks the migrated site's baseline content, local links/assets/anchors, taxonomy counts, metadata, and sitemap. The CommonMark demonstration's illustrative repository link is explicitly exempted.
+The integration check temporarily creates content/media fixtures (including an article with a co-located image), exercises native image processing, empty taxonomies, drafts, invalid references, missing slugs, misplaced or misdated article folders and the 20/21-record pagination boundary, then removes its fixtures and rebuilds. Run it separately from development/build processes. `check:output` checks the migrated site's baseline content, local links/assets/anchors, taxonomy counts, metadata, and sitemap. The CommonMark demonstration's illustrative repository link is explicitly exempted.
 
 To read Astro's own dev-toolbar Audit panel across every page at desktop and mobile sizes, start `npm run dev` and run:
 
@@ -122,13 +127,13 @@ Internal theme links use `DestinationLink.astro` to preview the destination’s 
 
 Article listing buttons hide a silent “Pocket disco” easter egg. A one-second hover or keyboard focus starts four rhythmic “Read it!” phrases, followed by a final thud and 1.4-second hold. The spotlights fade out one at a time, then the stage and text ease back to idle before five seconds of calm. Leaving the button, pressing Escape, hiding the page or enabling reduced motion cancels the animation. The normal link destination and accessible name stay unchanged. The standalone comparison is in `docs/design/just-read-it.html`.
 
-Images in `src/assets/uploads` are processed by Astro’s native image pipeline into responsive variants. Larger replacements keep the component’s intended display sizes (for example, 720 × 460 article cards and 1920-wide hero requests); the browser selects a suitable generated variant. Palette extraction samples at most 80 × 60 pixels and is cached by image and accent. Images remain optional.
+Images in `content/` are processed by Astro’s native image pipeline into responsive variants. Larger replacements keep the component’s intended display sizes (for example, 720 × 460 article cards and 1920-wide hero requests); the browser selects a suitable generated variant. Palette extraction samples at most 80 × 60 pixels and is cached by image and accent. Images remain optional.
 
 Optional frontmatter:
 
 ```yaml
 image:
-    url: ../../assets/uploads/teambuilding.jpeg
+    url: ./teambuilding.jpeg
     credit: Photograph by Dalibor Karlović
     alt: Sunlit meadow grasses
     position: 50% 45% # focal point, each coordinate 0–100%
@@ -138,9 +143,9 @@ experience:
     stylesheet: terrain # optional src/styles/experiences/terrain.css
 ```
 
-A named experience stylesheet loads only on articles that request it. Scope rules with `body[data-article="article-filename"]` or `body.article-page`; the entire shared header/footer can consume the article’s `--paper`, `--ink`, `--accent`, `--panel`, and other semantic roles. The root `--*-light`/`--*-dark` values define the extracted palette. Avoid fixed colours in shared components. For a new interactive header, add an Astro component and extend the explicit `headingExperiment` registry in the collection schema and `ArticleHero.astro`.
+A named experience stylesheet loads only on articles that request it. Scope rules with `body[data-article="article-slug"]` or `body.article-page`; the entire shared header/footer can consume the article’s `--paper`, `--ink`, `--accent`, `--panel`, and other semantic roles. The root `--*-light`/`--*-dark` values define the extracted palette. Avoid fixed colours in shared components. For a new interactive header, add an Astro component and extend the explicit `headingExperiment` registry in the collection schema and `ArticleHero.astro`.
 
-`colour-field-experiment.md` is a draft authoring example: view `/colour-field-experiment` in development. It is excluded from production routes, counts and sitemap. Its optional 16:9 canvas supports keyboard light controls, pause, visibility gating, and live reduced-motion changes.
+`content/articles/2026/2026-10-16-colour-field-experiment/` is a draft authoring example: view `/colour-field-experiment` in development. It is excluded from production routes, counts and sitemap. Its optional 16:9 canvas supports keyboard light controls, pause, visibility gating, and live reduced-motion changes.
 
 Markdown prose stays readable while images, figures, code, tables and videos can use the wider article canvas. Shiki highlighting is static. Add a code caption using a standard HTML figure around the fenced block, as the existing articles already do. Captions are centred; code and wide tables scroll within their own surfaces on small screens. Keep descriptive image alt text and add captions/transcripts to authored videos.
 

@@ -5,7 +5,7 @@ summary: Using simple and flexible tools doesn't make your work boring. In fact,
     exciting results.
 publishedAt: 2024-01-22
 image:
-    url: ../../assets/uploads/boring-production-melting.jpeg
+    url: ./boring-production-melting.jpeg
 discussReddit: 19dlzl0
 discussHackerNews: 39101887
 categories:
@@ -42,7 +42,7 @@ This is a stainless steel bolt.
 
 <figure>
 
-![A stainless steel bolt](../../assets/uploads/boring-production-bolt.jpeg)
+![A stainless steel bolt](./boring-production-bolt.jpeg)
 
 <figcaption>Image: A stainless steel bolt</figcaption>
 </figure>
@@ -55,7 +55,7 @@ Here's a bolt made of gummy bear.
 
 <figure>
 
-![A gummy bear bolt](../../assets/uploads/boring-production-gummy-bolt.jpeg)
+![A gummy bear bolt](./boring-production-gummy-bolt.jpeg)
 
 <figcaption>Image: A gummy bear bolt, yummy!</figcaption>
 </figure>
@@ -81,7 +81,7 @@ Malleable means we can change the constraints. For example, to make a 6x6 LEGO p
 
 <figure>
 
-![A lighter melting a blue LEGO plate](../../assets/uploads/boring-production-melting.jpeg)
+![A lighter melting a blue LEGO plate](./boring-production-melting.jpeg)
 
 <figcaption>Image: Making a 6x6 LEGO plate the malleable way</figcaption>
 </figure>

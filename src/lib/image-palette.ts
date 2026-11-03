@@ -4,7 +4,7 @@ import type { ImageMetadata } from "astro";
 import { createPalette, type RGB, type ArticlePalette } from "./palette";
 // Match Astro's imported original to its source, not a BASE_URL-dependent public URL.
 const sources = import.meta.glob<{ default: ImageMetadata }>(
-    "/src/assets/**/*.{jpeg,jpg,png,webp,avif,gif,tiff,svg}",
+    "/content/**/*.{jpeg,jpg,png,webp,avif,gif,tiff,svg}",
     { eager: true },
 );
 const cache = new Map<string, Promise<ArticlePalette>>();
