@@ -1,0 +1,13 @@
+---
+// Embedded Diapason tune editor, themed from this article's palette at build time.
+// Always dark: the box layout frames experiments with the dark palette roles over the hero.
+import type { ArticlePalette } from '../../../../src/lib/palette';
+import { paletteSeeds } from './diapason-theme';
+interface Props { palette: ArticlePalette }
+const { palette } = Astro.props;
+const tune = 'RFBTTgECABJGbHkgbWUgdG8gdGhlIG1vb27AhAEAAAAAAMBbQAQJABs5rzGxRptNQCDLRqfjjllAACABAOADeS95V6HJVkABiwTAAuC0-y919VZAAcAC6gE0KJxAqJ5WQAHqAasC3VzhuFscVkABlgO1Axr3u26ku1VAAdUDqwPz50GBZyNVQAGABMADdaztr3vAVUAB6wPgA0xoym-SIVZAAZUEoAQl9GrScxlXQAGgBIABYrNrs9WGVkAFgAHVBmowKiqvwFZAWgH1B8ABZ9GMrR4hVkAB4AGgAgiAKl0TulVAAesCdeibVJdKYVVAAXXrASWyqCgoIlVAAeAClgVASAJabr9UQAHgEusDJxv_AqwBVkABiwTAAugJaxAaCFZAAcAC9QHye8038ZFVQAH1AZYBSkA3qU4vVUABlgGqAe89jrQqIVVAAdUBlQN5hjcrLNZUQAHrA7UDBr22rQVAVEAB4AOqA6hrfoWFBVVAAaAEwAPqXjJQEUpVQAGVBNUFYvEfDmcjVkAB4AarA6D7lgitx1VAAZUEqwLsHlA-mr5VQAHLAusB6Px-C0ApVUAB6wGqAlSh_AxT1FRAAYAD6gLjTIrM3GpUQAHABVVuYkHihuRTQA';
+const theme = paletteSeeds(palette.light, palette.dark);
+const src = `https://dkarlovi.github.io/diapason/tune?embed=1&scheme=dark&theme=${theme}#tune=${tune}`;
+---
+<iframe src={src} title="“Fly me to the moon”, whistled and turned into MIDI in Diapason" allow="midi" loading="eager"></iframe>
+<script>import './diapason-embeds';</script>

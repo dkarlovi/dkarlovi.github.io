@@ -12,16 +12,14 @@ const experience = z
             .string()
             .regex(/^#[a-fA-F0-9]{6}$/, "Use a six-digit hex colour")
             .optional(),
-        stylesheet: z
+        // Frame for a co-located `experiment.astro`; ignored when the article has none.
+        layout: z.enum(["box"]).default("box"),
+        aspect: z
             .string()
-            .regex(
-                /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-                "Use a stylesheet name from src/styles/experiences",
-            )
-            .optional(),
-        headingExperiment: z.enum(["none", "terrain"]).default("none"),
+            .regex(/^\d+(?:\.\d+)?\s*\/\s*\d+(?:\.\d+)?$/, "Use a CSS aspect ratio such as 16/9")
+            .default("16/9"),
     })
-    .default({ headingExperiment: "none" });
+    .default({ layout: "box", aspect: "16/9" });
 const articles = defineCollection({
     loader: glob({
         pattern: "**/*.md",

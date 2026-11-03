@@ -40,7 +40,9 @@ test("rejects duplicate, reserved and unsafe public slugs", () => {
             () => validateSlugs([{ id: "one", data: { slug } }]),
             new RegExp(slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")),
         );
-    assert.doesNotThrow(() => validateSlugs([{ id: "2026-01-01-hello", data: { slug: "hello-world" } }]));
+    assert.doesNotThrow(() =>
+        validateSlugs([{ id: "2026-01-01-hello", data: { slug: "hello-world" } }]),
+    );
 });
 test("taxonomy IDs must match editable slugs", async () => {
     const { validateTaxonomyIds } = await import("../src/lib/publication.ts");

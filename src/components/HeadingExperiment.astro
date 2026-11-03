@@ -1,2 +1,16 @@
-<figure class="heading-experiment" data-heading-experiment><canvas role="img" aria-label="A terrain study with an adjustable sun. Use the light position slider to change the illumination.">An abstract landscape with an adjustable light source.</canvas><div class="experiment-topbar"><span class="eyebrow">A study in light</span><button type="button" data-experiment-motion aria-pressed="false">Pause</button></div><figcaption><label>Light <input data-experiment-light type="range" min="0" max="100" value="68" aria-label="Light position" /></label><span>Move the light. Find the atmosphere.</span></figcaption></figure>
-<script>import '../scripts/heading-experiment';</script>
+---
+/**
+ * Renders an article's co-located experiment inside the layout chosen in frontmatter.
+ * Layouts own the frame (size, ratio, border, palette); experiments only fill it.
+ * Each experiment receives the article and its resolved palette as props.
+ */
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+import type { CollectionEntry } from 'astro:content';
+import type { ArticlePalette } from '../lib/palette';
+import BoxLayout from './experiments/BoxLayout.astro';
+interface Props { article: CollectionEntry<'articles'>; palette: ArticlePalette; experiment: AstroComponentFactory }
+const { article, palette, experiment: Experiment } = Astro.props;
+const layouts = { box: BoxLayout };
+const Layout = layouts[article.data.experience.layout];
+---
+<Layout aspect={article.data.experience.aspect}><Experiment article={article} palette={palette} /></Layout>

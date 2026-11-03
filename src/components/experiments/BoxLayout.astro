@@ -1,0 +1,6 @@
+---
+/** The "box" heading layout: a framed, fixed-ratio stage the experiment fills edge to edge. */
+interface Props { aspect: string }
+const { aspect } = Astro.props;
+---
+<div class="heading-experiment" data-heading-experiment data-layout="box" style={`--experiment-aspect:${aspect}`}><slot /></div>

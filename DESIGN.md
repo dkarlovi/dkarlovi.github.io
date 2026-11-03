@@ -312,7 +312,7 @@ The 12rem by 4rem read action preserves a still hit area and accessible link nam
 
 ### Optional experiment and consent
 
-The opt-in 16:9 terrain canvas includes pause and light-direction range controls. Its frame uses dark palette roles, a fine border, small corners, and the reserved experiment shadow. It supports keyboard controls, visibility gating, and reduced motion. The range control is native, with the dark accent; there is no general text-input/form system to infer from it. Consent controls reuse the page palette and DM Sans through the existing cookie-consent integration.
+Heading experiments sit in a shared `box` layout: a fixed-ratio frame (16:9 by default, taller minimum on phones) using dark palette roles, a fine border, small corners, and the reserved experiment shadow. Experiments fill the frame edge to edge. The terrain example includes pause and light-direction range controls. It supports keyboard controls, visibility gating, and reduced motion. The range control is native, with the dark accent; there is no general text-input/form system to infer from it. Consent controls reuse the page palette and DM Sans through the existing cookie-consent integration.
 
 ## Do's and Don'ts
 
