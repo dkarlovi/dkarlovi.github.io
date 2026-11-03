@@ -195,16 +195,15 @@ try {
     archiveData.discussionHeading = "CMS discussion heading";
     writeFileSync(archivePath, `---\n${stringify(archiveData)}---${archiveBody.join("---")}`);
     build();
-    assert.match(html("articles")(".article-card-image").first().attr("src"), /cms-fixture/);
+    // Find a fixture card by its link: real articles newer than the fixtures sort ahead of them.
+    const fixtureCard = html("articles")('a[href*="/cms-fixture-"] .article-card-image').first();
+    assert.match(fixtureCard.attr("src"), /cms-fixture/);
     const optimizedCard = await sharp(
-        `dist/_astro/${html("articles")(".article-card-image").first().attr("src").split("/").pop()}`,
+        `dist/_astro/${fixtureCard.attr("src").split("/").pop()}`,
     ).metadata();
     assert.equal(optimizedCard.width, 720, "4K source is resized for cards");
     assert.equal(optimizedCard.height, 460);
-    assert.ok(
-        html("articles")(".article-card-image").first().attr("srcset"),
-        "Responsive variants retained",
-    );
+    assert.ok(fixtureCard.attr("srcset"), "Responsive variants retained");
     const targetLink = html("articles")(".subject-link").filter((_, el) =>
         html("articles")(el).attr("href").endsWith("/category/cms-fixture"),
     );
