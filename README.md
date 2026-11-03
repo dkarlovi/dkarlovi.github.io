@@ -156,6 +156,8 @@ content/articles/2026/2026-11-03-introducing-diapason/
 
 Put styles in `experiment.css`, not in a `<style>` block: Astro bundles component styles by module graph, so they would load on every article. The build rejects `<style>` in an experiment. Scripts are fine; they load only where the experiment renders. Global touches can be scoped with `body[data-article]` because the file only loads on its own article; the shared header/footer can consume `--paper`, `--ink`, `--accent`, `--panel` and the root `--*-light`/`--*-dark` values. Avoid fixed colours. A new layout is a component in `src/components/experiments/` plus a value in the `layout` enum.
 
+An experiment's `<script>` runs only on its own article, which makes it the place for article-specific behaviour beyond the heading. For example, the Diapason draft's script also themes the Diapason iframe in its Markdown body (written with `data-diapason-src` instead of `src`) from the page palette.
+
 Two drafts show the range: `/colour-field-experiment` (a canvas terrain study with keyboard light controls, pause, visibility gating and live reduced-motion changes) and `/introducing-diapason` (an embedded Diapason tune editor themed from the article palette). Drafts are visible in development only and excluded from production routes, counts and sitemap.
 
 Markdown prose stays readable while images, figures, code, tables and videos can use the wider article canvas. Shiki highlighting is static. Add a code caption using a standard HTML figure around the fenced block, as the existing articles already do. Captions are centred; code and wide tables scroll within their own surfaces on small screens. Keep descriptive image alt text and add captions/transcripts to authored videos.
