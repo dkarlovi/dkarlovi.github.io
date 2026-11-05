@@ -24,6 +24,9 @@ updates:
       labels:
           - dependencies
           - dependabot
+      ignore:
+          - dependency-name: typescript
+            versions: [">= 7.0.0"]
       groups:
           all-dependencies:
               patterns:
