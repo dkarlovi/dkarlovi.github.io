@@ -2,7 +2,7 @@
 
 Static site built with Astro 7, TypeScript, Tailwind CSS 4, and standard Markdown content collections. The custom Colour Field design replaces the Bootstrap/Geeky Hugo theme; the historical theme attribution is retained in the migration documentation. Fonts are bundled locally.
 
-Use Node 22.22.2 (see `.node-version`) or a compatible newer release.
+Use Node 24 (see `.node-version`) or a compatible newer release.
 
 ```sh
 npm ci
