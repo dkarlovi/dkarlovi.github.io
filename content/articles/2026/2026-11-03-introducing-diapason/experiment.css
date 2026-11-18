@@ -1,0 +1,24 @@
+diapason-studio {
+    --diapason-primary: var(--accent);
+    --diapason-neutral: var(--paper);
+    display: block;
+    width: 100%;
+    aspect-ratio: 12/7;
+}
+
+.heading-experiment diapason-studio {
+    --diapason-primary: var(--accent-dark);
+    --diapason-neutral: var(--paper-dark);
+    color-scheme: dark;
+}
+
+.article-content > diapason-studio {
+    grid-column: 1/-1;
+    max-width: 50rem;
+    justify-self: center;
+}
+
+.article-content diapason-studio {
+    min-height: 26rem;
+    box-shadow: 0 0.75rem 2rem #0002;
+}
